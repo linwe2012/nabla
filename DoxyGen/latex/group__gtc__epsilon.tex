@@ -1,0 +1,78 @@
+\hypertarget{group__gtc__epsilon}{}\section{G\+L\+M\+\_\+\+G\+T\+C\+\_\+epsilon}
+\label{group__gtc__epsilon}\index{GLM\_GTC\_epsilon@{GLM\_GTC\_epsilon}}
+
+
+Comparison functions for a user defined epsilon values.  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T , precision P, template$<$ typename, precision $>$ class vec\+Type$>$ }\\\mbox{\hyperlink{setup_8hpp_ab2d052de21a70539923e9bcbf6e83a51}{G\+L\+M\+\_\+\+F\+U\+N\+C\+\_\+\+D\+E\+CL}} vec\+Type$<$ bool, P $>$ \mbox{\hyperlink{group__gtc__epsilon_gaca9443f217dc36587624247245522331}{glm\+::epsilon\+Equal}} (vec\+Type$<$ T, P $>$ const \&\mbox{\hyperlink{glad_8h_a92d0386e5c19fb81ea88c9f99644ab1d}{x}}, vec\+Type$<$ T, P $>$ const \&\mbox{\hyperlink{glad_8h_a66ddd433d2cacfe27f5906b7e86faeed}{y}}, T const \&\mbox{\hyperlink{group__gtc__constants_ga2a1e57fc5592b69cfae84174cbfc9429}{epsilon}})
+\item 
+{\footnotesize template$<$typename gen\+Type $>$ }\\\mbox{\hyperlink{setup_8hpp_ab2d052de21a70539923e9bcbf6e83a51}{G\+L\+M\+\_\+\+F\+U\+N\+C\+\_\+\+D\+E\+CL}} bool \mbox{\hyperlink{group__gtc__epsilon_gaa7f227999ca09e7ca994e8b35aba47bb}{glm\+::epsilon\+Equal}} (gen\+Type const \&\mbox{\hyperlink{glad_8h_a92d0386e5c19fb81ea88c9f99644ab1d}{x}}, gen\+Type const \&\mbox{\hyperlink{glad_8h_a66ddd433d2cacfe27f5906b7e86faeed}{y}}, gen\+Type const \&\mbox{\hyperlink{group__gtc__constants_ga2a1e57fc5592b69cfae84174cbfc9429}{epsilon}})
+\item 
+{\footnotesize template$<$typename gen\+Type $>$ }\\\mbox{\hyperlink{setup_8hpp_ab2d052de21a70539923e9bcbf6e83a51}{G\+L\+M\+\_\+\+F\+U\+N\+C\+\_\+\+D\+E\+CL}} gen\+Type\+::bool\+Type \mbox{\hyperlink{group__gtc__epsilon_ga14e2888a304654ade8a3996024e2739c}{glm\+::epsilon\+Not\+Equal}} (gen\+Type const \&\mbox{\hyperlink{glad_8h_a92d0386e5c19fb81ea88c9f99644ab1d}{x}}, gen\+Type const \&\mbox{\hyperlink{glad_8h_a66ddd433d2cacfe27f5906b7e86faeed}{y}}, typename gen\+Type\+::value\+\_\+type const \&\mbox{\hyperlink{group__gtc__constants_ga2a1e57fc5592b69cfae84174cbfc9429}{epsilon}})
+\item 
+{\footnotesize template$<$typename gen\+Type $>$ }\\\mbox{\hyperlink{setup_8hpp_ab2d052de21a70539923e9bcbf6e83a51}{G\+L\+M\+\_\+\+F\+U\+N\+C\+\_\+\+D\+E\+CL}} bool \mbox{\hyperlink{group__gtc__epsilon_ga50a92103fb0cbd796908e1bf20c79aaf}{glm\+::epsilon\+Not\+Equal}} (gen\+Type const \&\mbox{\hyperlink{glad_8h_a92d0386e5c19fb81ea88c9f99644ab1d}{x}}, gen\+Type const \&\mbox{\hyperlink{glad_8h_a66ddd433d2cacfe27f5906b7e86faeed}{y}}, gen\+Type const \&\mbox{\hyperlink{group__gtc__constants_ga2a1e57fc5592b69cfae84174cbfc9429}{epsilon}})
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Comparison functions for a user defined epsilon values. 
+
+$<$\mbox{\hyperlink{epsilon_8hpp}{glm/gtc/epsilon.\+hpp}}$>$ need to be included to use these functionalities. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__gtc__epsilon_gaca9443f217dc36587624247245522331}\label{group__gtc__epsilon_gaca9443f217dc36587624247245522331}} 
+\index{GLM\_GTC\_epsilon@{GLM\_GTC\_epsilon}!epsilonEqual@{epsilonEqual}}
+\index{epsilonEqual@{epsilonEqual}!GLM\_GTC\_epsilon@{GLM\_GTC\_epsilon}}
+\subsubsection{\texorpdfstring{epsilonEqual()}{epsilonEqual()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T , precision P, template$<$ typename, precision $>$ class vec\+Type$>$ \\
+\mbox{\hyperlink{setup_8hpp_ab2d052de21a70539923e9bcbf6e83a51}{G\+L\+M\+\_\+\+F\+U\+N\+C\+\_\+\+D\+E\+CL}} vec\+Type$<$bool, P$>$ glm\+::epsilon\+Equal (\begin{DoxyParamCaption}\item[{vec\+Type$<$ T, P $>$ const \&}]{x,  }\item[{vec\+Type$<$ T, P $>$ const \&}]{y,  }\item[{T const \&}]{epsilon }\end{DoxyParamCaption})}
+
+Returns the component-\/wise comparison of $\vert$x -\/ y$\vert$ $<$ epsilon. True if this expression is satisfied.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{group__gtc__epsilon}{G\+L\+M\+\_\+\+G\+T\+C\+\_\+epsilon}} 
+\end{DoxySeeAlso}
+
+
+Definition at line 60 of file epsilon.\+inl.
+
+\mbox{\Hypertarget{group__gtc__epsilon_gaa7f227999ca09e7ca994e8b35aba47bb}\label{group__gtc__epsilon_gaa7f227999ca09e7ca994e8b35aba47bb}} 
+\index{GLM\_GTC\_epsilon@{GLM\_GTC\_epsilon}!epsilonEqual@{epsilonEqual}}
+\index{epsilonEqual@{epsilonEqual}!GLM\_GTC\_epsilon@{GLM\_GTC\_epsilon}}
+\subsubsection{\texorpdfstring{epsilonEqual()}{epsilonEqual()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename gen\+Type $>$ \\
+\mbox{\hyperlink{setup_8hpp_ab2d052de21a70539923e9bcbf6e83a51}{G\+L\+M\+\_\+\+F\+U\+N\+C\+\_\+\+D\+E\+CL}} bool glm\+::epsilon\+Equal (\begin{DoxyParamCaption}\item[{gen\+Type const \&}]{x,  }\item[{gen\+Type const \&}]{y,  }\item[{gen\+Type const \&}]{epsilon }\end{DoxyParamCaption})}
+
+Returns the component-\/wise comparison of $\vert$x -\/ y$\vert$ $<$ epsilon. True if this expression is satisfied.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{group__gtc__epsilon}{G\+L\+M\+\_\+\+G\+T\+C\+\_\+epsilon}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{group__gtc__epsilon_ga14e2888a304654ade8a3996024e2739c}\label{group__gtc__epsilon_ga14e2888a304654ade8a3996024e2739c}} 
+\index{GLM\_GTC\_epsilon@{GLM\_GTC\_epsilon}!epsilonNotEqual@{epsilonNotEqual}}
+\index{epsilonNotEqual@{epsilonNotEqual}!GLM\_GTC\_epsilon@{GLM\_GTC\_epsilon}}
+\subsubsection{\texorpdfstring{epsilonNotEqual()}{epsilonNotEqual()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename gen\+Type $>$ \\
+\mbox{\hyperlink{setup_8hpp_ab2d052de21a70539923e9bcbf6e83a51}{G\+L\+M\+\_\+\+F\+U\+N\+C\+\_\+\+D\+E\+CL}} gen\+Type\+::bool\+Type glm\+::epsilon\+Not\+Equal (\begin{DoxyParamCaption}\item[{gen\+Type const \&}]{x,  }\item[{gen\+Type const \&}]{y,  }\item[{typename gen\+Type\+::value\+\_\+type const \&}]{epsilon }\end{DoxyParamCaption})}
+
+Returns the component-\/wise comparison of $\vert$x -\/ y$\vert$ $<$ epsilon. True if this expression is not satisfied.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{group__gtc__epsilon}{G\+L\+M\+\_\+\+G\+T\+C\+\_\+epsilon}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{group__gtc__epsilon_ga50a92103fb0cbd796908e1bf20c79aaf}\label{group__gtc__epsilon_ga50a92103fb0cbd796908e1bf20c79aaf}} 
+\index{GLM\_GTC\_epsilon@{GLM\_GTC\_epsilon}!epsilonNotEqual@{epsilonNotEqual}}
+\index{epsilonNotEqual@{epsilonNotEqual}!GLM\_GTC\_epsilon@{GLM\_GTC\_epsilon}}
+\subsubsection{\texorpdfstring{epsilonNotEqual()}{epsilonNotEqual()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename gen\+Type $>$ \\
+\mbox{\hyperlink{setup_8hpp_ab2d052de21a70539923e9bcbf6e83a51}{G\+L\+M\+\_\+\+F\+U\+N\+C\+\_\+\+D\+E\+CL}} bool glm\+::epsilon\+Not\+Equal (\begin{DoxyParamCaption}\item[{gen\+Type const \&}]{x,  }\item[{gen\+Type const \&}]{y,  }\item[{gen\+Type const \&}]{epsilon }\end{DoxyParamCaption})}
+
+Returns the component-\/wise comparison of $\vert$x -\/ y$\vert$ $>$= epsilon. True if this expression is not satisfied.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{group__gtc__epsilon}{G\+L\+M\+\_\+\+G\+T\+C\+\_\+epsilon}} 
+\end{DoxySeeAlso}

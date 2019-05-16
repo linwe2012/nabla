@@ -1,0 +1,43 @@
+\hypertarget{emitterutils_8h}{}\section{D\+:/\+V\+C\+Repos/\+Open\+G\+L\+T6/\+Open\+G\+L\+T6/third-\/party/include/yaml-\/src/emitterutils.h File Reference}
+\label{emitterutils_8h}\index{D:/VCRepos/OpenGLT6/OpenGLT6/third-\/party/include/yaml-\/src/emitterutils.h@{D:/VCRepos/OpenGLT6/OpenGLT6/third-\/party/include/yaml-\/src/emitterutils.h}}
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include \char`\"{}emitterstate.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}yaml-\/cpp/emittermanip.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}yaml-\/cpp/ostream\+\_\+wrapper.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_y_a_m_l_1_1_string_format}{Y\+A\+M\+L\+::\+String\+Format}}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespace_y_a_m_l}{Y\+A\+ML}}
+\item 
+ \mbox{\hyperlink{namespace_y_a_m_l_1_1_utils}{Y\+A\+M\+L\+::\+Utils}}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{glad_8h_a03aff08f73d7fde3d1a08e0abd8e84fa}{String\+Format\+::value}} \mbox{\hyperlink{namespace_y_a_m_l_1_1_utils_a5e90407fae0bc69c37ab45c2c5ef1b75}{Y\+A\+M\+L\+::\+Utils\+::\+Compute\+String\+Format}} (const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&str, E\+M\+I\+T\+T\+E\+R\+\_\+\+M\+A\+N\+IP str\+Format, \mbox{\hyperlink{glad_8h_a03aff08f73d7fde3d1a08e0abd8e84fa}{Flow\+Type\+::value}} flow\+Type, bool escape\+Non\+Ascii)
+\item 
+bool \mbox{\hyperlink{namespace_y_a_m_l_1_1_utils_a891448c41049715579789fd852895422}{Y\+A\+M\+L\+::\+Utils\+::\+Write\+Single\+Quoted\+String}} (ostream\+\_\+wrapper \&out, const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&str)
+\item 
+bool \mbox{\hyperlink{namespace_y_a_m_l_1_1_utils_afeb4d005f93fc2d51d02cd4d658ed356}{Y\+A\+M\+L\+::\+Utils\+::\+Write\+Double\+Quoted\+String}} (ostream\+\_\+wrapper \&out, const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&str, bool escape\+Non\+Ascii)
+\item 
+bool \mbox{\hyperlink{namespace_y_a_m_l_1_1_utils_aeb118a00a60fa8cbbe613f787d8d2043}{Y\+A\+M\+L\+::\+Utils\+::\+Write\+Literal\+String}} (ostream\+\_\+wrapper \&out, const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&str, std\+::size\+\_\+t indent)
+\item 
+bool \mbox{\hyperlink{namespace_y_a_m_l_1_1_utils_a7ddff3f9bbcb646955d41bde78cf1d6d}{Y\+A\+M\+L\+::\+Utils\+::\+Write\+Char}} (ostream\+\_\+wrapper \&out, char ch)
+\item 
+bool \mbox{\hyperlink{namespace_y_a_m_l_1_1_utils_a83f522e522e5ca04f5618a03d1e49795}{Y\+A\+M\+L\+::\+Utils\+::\+Write\+Comment}} (ostream\+\_\+wrapper \&out, const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&str, std\+::size\+\_\+t post\+Comment\+Indent)
+\item 
+bool \mbox{\hyperlink{namespace_y_a_m_l_1_1_utils_a7073e23b2ae04bf248abd3c6fd26a90a}{Y\+A\+M\+L\+::\+Utils\+::\+Write\+Alias}} (ostream\+\_\+wrapper \&out, const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&str)
+\item 
+bool \mbox{\hyperlink{namespace_y_a_m_l_1_1_utils_afa8f13a74dea4476312947c484d56220}{Y\+A\+M\+L\+::\+Utils\+::\+Write\+Anchor}} (ostream\+\_\+wrapper \&out, const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&str)
+\item 
+bool \mbox{\hyperlink{namespace_y_a_m_l_1_1_utils_a7fde5352b7c504e255770937b71e9318}{Y\+A\+M\+L\+::\+Utils\+::\+Write\+Tag}} (ostream\+\_\+wrapper \&out, const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&str, bool verbatim)
+\item 
+bool \mbox{\hyperlink{namespace_y_a_m_l_1_1_utils_a18ff3f00faf332edd6ecb7d3aa968b52}{Y\+A\+M\+L\+::\+Utils\+::\+Write\+Tag\+With\+Prefix}} (ostream\+\_\+wrapper \&out, const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&prefix, const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&tag)
+\item 
+bool \mbox{\hyperlink{namespace_y_a_m_l_1_1_utils_a545fdb750b68169d5cb818cd4eedde21}{Y\+A\+M\+L\+::\+Utils\+::\+Write\+Binary}} (ostream\+\_\+wrapper \&out, const Binary \&binary)
+\end{DoxyCompactItemize}

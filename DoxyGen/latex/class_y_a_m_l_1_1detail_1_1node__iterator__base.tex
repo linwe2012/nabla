@@ -1,0 +1,260 @@
+\hypertarget{class_y_a_m_l_1_1detail_1_1node__iterator__base}{}\section{Y\+A\+ML\+::detail\+::node\+\_\+iterator\+\_\+base$<$ V $>$ Class Template Reference}
+\label{class_y_a_m_l_1_1detail_1_1node__iterator__base}\index{YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}}
+
+
+{\ttfamily \#include $<$node\+\_\+iterator.\+h$>$}
+
+Inheritance diagram for Y\+A\+ML\+::detail\+::node\+\_\+iterator\+\_\+base$<$ V $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.410579cm]{class_y_a_m_l_1_1detail_1_1node__iterator__base}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \mbox{\hyperlink{struct_y_a_m_l_1_1detail_1_1node__iterator__type}{node\+\_\+iterator\+\_\+type}}$<$ V $>$\+::seq \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_a8f7819d74588685905ebe83938c2a89b}{Seq\+Iter}}
+\item 
+typedef \mbox{\hyperlink{struct_y_a_m_l_1_1detail_1_1node__iterator__type}{node\+\_\+iterator\+\_\+type}}$<$ V $>$\+::map \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_aaa2316d6fa0080ad766fc2429f7a68ed}{Map\+Iter}}
+\item 
+typedef \mbox{\hyperlink{struct_y_a_m_l_1_1detail_1_1node__iterator__value}{node\+\_\+iterator\+\_\+value}}$<$ V $>$ \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_ac091253ed737c52668c9f9d84bdfd777}{value\+\_\+type}}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_a97f427510ecc4ca463d74d8b0df6a5d8}{node\+\_\+iterator\+\_\+base}} ()
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_ae2c5df530341a36f9c39bb59565a294e}{node\+\_\+iterator\+\_\+base}} (\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_a8f7819d74588685905ebe83938c2a89b}{Seq\+Iter}} seq\+It)
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_a2d889ebf8bb7b086680dbfed284a69f6}{node\+\_\+iterator\+\_\+base}} (\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_aaa2316d6fa0080ad766fc2429f7a68ed}{Map\+Iter}} map\+It, \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_aaa2316d6fa0080ad766fc2429f7a68ed}{Map\+Iter}} map\+End)
+\item 
+{\footnotesize template$<$typename W $>$ }\\\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_a4b0fffffde84d495e328bb55b51d547b}{node\+\_\+iterator\+\_\+base}} (const \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{node\+\_\+iterator\+\_\+base}}$<$ W $>$ \&rhs, typename std\+::enable\+\_\+if$<$ std\+::is\+\_\+convertible$<$ W $\ast$, V $\ast$ $>$\+::\mbox{\hyperlink{glad_8h_a03aff08f73d7fde3d1a08e0abd8e84fa}{value}}, enabler $>$\+::\mbox{\hyperlink{glad_8h_a890efa53b3d7deeeced6f3a0d6653ed3}{type}}=enabler())
+\item 
+{\footnotesize template$<$typename W $>$ }\\bool \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_abbf381907a9b6dcebf45c31b78b9e3b1}{operator==}} (const \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{node\+\_\+iterator\+\_\+base}}$<$ W $>$ \&rhs) const
+\item 
+{\footnotesize template$<$typename W $>$ }\\bool \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_a13d72e654af51b92c078864bddd9322d}{operator!=}} (const \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{node\+\_\+iterator\+\_\+base}}$<$ W $>$ \&rhs) const
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{node\+\_\+iterator\+\_\+base}}$<$ V $>$ \& \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_aa65eeb36a9c667f4317c3e2f0e3f132f}{operator++}} ()
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{node\+\_\+iterator\+\_\+base}}$<$ V $>$ \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_aab470f2db1a20cae06f6fd90535e5ef6}{operator++}} (int)
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_ac091253ed737c52668c9f9d84bdfd777}{value\+\_\+type}} \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_a324b02524e04bba795507717d0414cfb}{operator $\ast$}} () const
+\item 
+proxy \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_a54424b0334f6f91ffd03609516d90cc5}{operator-\/$>$}} () const
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_aaa2316d6fa0080ad766fc2429f7a68ed}{Map\+Iter}} \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_aa8afc276a387c723b8cf14e650b337a5}{increment\+\_\+until\+\_\+defined}} (\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_aaa2316d6fa0080ad766fc2429f7a68ed}{Map\+Iter}} it)
+\item 
+bool \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_a9cd060bc5fb325a54705df7dd79f6e71}{is\+\_\+defined}} (\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_aaa2316d6fa0080ad766fc2429f7a68ed}{Map\+Iter}} it) const
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename $>$ }\\class \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_af888868b67b8d48112c86fd093ebd2a1}{node\+\_\+iterator\+\_\+base}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename V$>$\newline
+class Y\+A\+M\+L\+::detail\+::node\+\_\+iterator\+\_\+base$<$ V $>$}
+
+
+
+Definition at line 55 of file node\+\_\+iterator.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\mbox{\Hypertarget{class_y_a_m_l_1_1detail_1_1node__iterator__base_aaa2316d6fa0080ad766fc2429f7a68ed}\label{class_y_a_m_l_1_1detail_1_1node__iterator__base_aaa2316d6fa0080ad766fc2429f7a68ed}} 
+\index{YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}!MapIter@{MapIter}}
+\index{MapIter@{MapIter}!YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}}
+\subsubsection{\texorpdfstring{MapIter}{MapIter}}
+{\footnotesize\ttfamily template$<$typename V$>$ \\
+typedef \mbox{\hyperlink{struct_y_a_m_l_1_1detail_1_1node__iterator__type}{node\+\_\+iterator\+\_\+type}}$<$V$>$\+::map \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{Y\+A\+M\+L\+::detail\+::node\+\_\+iterator\+\_\+base}}$<$ V $>$\+::\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_aaa2316d6fa0080ad766fc2429f7a68ed}{Map\+Iter}}}
+
+
+
+Definition at line 72 of file node\+\_\+iterator.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1detail_1_1node__iterator__base_a8f7819d74588685905ebe83938c2a89b}\label{class_y_a_m_l_1_1detail_1_1node__iterator__base_a8f7819d74588685905ebe83938c2a89b}} 
+\index{YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}!SeqIter@{SeqIter}}
+\index{SeqIter@{SeqIter}!YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}}
+\subsubsection{\texorpdfstring{SeqIter}{SeqIter}}
+{\footnotesize\ttfamily template$<$typename V$>$ \\
+typedef \mbox{\hyperlink{struct_y_a_m_l_1_1detail_1_1node__iterator__type}{node\+\_\+iterator\+\_\+type}}$<$V$>$\+::seq \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{Y\+A\+M\+L\+::detail\+::node\+\_\+iterator\+\_\+base}}$<$ V $>$\+::\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_a8f7819d74588685905ebe83938c2a89b}{Seq\+Iter}}}
+
+
+
+Definition at line 71 of file node\+\_\+iterator.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1detail_1_1node__iterator__base_ac091253ed737c52668c9f9d84bdfd777}\label{class_y_a_m_l_1_1detail_1_1node__iterator__base_ac091253ed737c52668c9f9d84bdfd777}} 
+\index{YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}!value\_type@{value\_type}}
+\index{value\_type@{value\_type}!YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}}
+\subsubsection{\texorpdfstring{value\_type}{value\_type}}
+{\footnotesize\ttfamily template$<$typename V$>$ \\
+typedef \mbox{\hyperlink{struct_y_a_m_l_1_1detail_1_1node__iterator__value}{node\+\_\+iterator\+\_\+value}}$<$V$>$ \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{Y\+A\+M\+L\+::detail\+::node\+\_\+iterator\+\_\+base}}$<$ V $>$\+::\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_ac091253ed737c52668c9f9d84bdfd777}{value\+\_\+type}}}
+
+
+
+Definition at line 73 of file node\+\_\+iterator.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_y_a_m_l_1_1detail_1_1node__iterator__base_a97f427510ecc4ca463d74d8b0df6a5d8}\label{class_y_a_m_l_1_1detail_1_1node__iterator__base_a97f427510ecc4ca463d74d8b0df6a5d8}} 
+\index{YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}!node\_iterator\_base@{node\_iterator\_base}}
+\index{node\_iterator\_base@{node\_iterator\_base}!YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}}
+\subsubsection{\texorpdfstring{node\_iterator\_base()}{node\_iterator\_base()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$typename V$>$ \\
+\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{Y\+A\+M\+L\+::detail\+::node\+\_\+iterator\+\_\+base}}$<$ V $>$\+::\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{node\+\_\+iterator\+\_\+base}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 75 of file node\+\_\+iterator.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1detail_1_1node__iterator__base_ae2c5df530341a36f9c39bb59565a294e}\label{class_y_a_m_l_1_1detail_1_1node__iterator__base_ae2c5df530341a36f9c39bb59565a294e}} 
+\index{YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}!node\_iterator\_base@{node\_iterator\_base}}
+\index{node\_iterator\_base@{node\_iterator\_base}!YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}}
+\subsubsection{\texorpdfstring{node\_iterator\_base()}{node\_iterator\_base()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$typename V$>$ \\
+\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{Y\+A\+M\+L\+::detail\+::node\+\_\+iterator\+\_\+base}}$<$ V $>$\+::\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{node\+\_\+iterator\+\_\+base}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_a8f7819d74588685905ebe83938c2a89b}{Seq\+Iter}}}]{seq\+It }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Definition at line 77 of file node\+\_\+iterator.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1detail_1_1node__iterator__base_a2d889ebf8bb7b086680dbfed284a69f6}\label{class_y_a_m_l_1_1detail_1_1node__iterator__base_a2d889ebf8bb7b086680dbfed284a69f6}} 
+\index{YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}!node\_iterator\_base@{node\_iterator\_base}}
+\index{node\_iterator\_base@{node\_iterator\_base}!YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}}
+\subsubsection{\texorpdfstring{node\_iterator\_base()}{node\_iterator\_base()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$typename V$>$ \\
+\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{Y\+A\+M\+L\+::detail\+::node\+\_\+iterator\+\_\+base}}$<$ V $>$\+::\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{node\+\_\+iterator\+\_\+base}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_aaa2316d6fa0080ad766fc2429f7a68ed}{Map\+Iter}}}]{map\+It,  }\item[{\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_aaa2316d6fa0080ad766fc2429f7a68ed}{Map\+Iter}}}]{map\+End }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Definition at line 82 of file node\+\_\+iterator.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1detail_1_1node__iterator__base_a4b0fffffde84d495e328bb55b51d547b}\label{class_y_a_m_l_1_1detail_1_1node__iterator__base_a4b0fffffde84d495e328bb55b51d547b}} 
+\index{YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}!node\_iterator\_base@{node\_iterator\_base}}
+\index{node\_iterator\_base@{node\_iterator\_base}!YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}}
+\subsubsection{\texorpdfstring{node\_iterator\_base()}{node\_iterator\_base()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename V$>$ \\
+template$<$typename W $>$ \\
+\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{Y\+A\+M\+L\+::detail\+::node\+\_\+iterator\+\_\+base}}$<$ V $>$\+::\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{node\+\_\+iterator\+\_\+base}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{node\+\_\+iterator\+\_\+base}}$<$ W $>$ \&}]{rhs,  }\item[{typename std\+::enable\+\_\+if$<$ std\+::is\+\_\+convertible$<$ W $\ast$, V $\ast$ $>$\+::\mbox{\hyperlink{glad_8h_a03aff08f73d7fde3d1a08e0abd8e84fa}{value}}, enabler $>$\+::\mbox{\hyperlink{glad_8h_a890efa53b3d7deeeced6f3a0d6653ed3}{type}}}]{ = {\ttfamily enabler()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 91 of file node\+\_\+iterator.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_y_a_m_l_1_1detail_1_1node__iterator__base_aa8afc276a387c723b8cf14e650b337a5}\label{class_y_a_m_l_1_1detail_1_1node__iterator__base_aa8afc276a387c723b8cf14e650b337a5}} 
+\index{YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}!increment\_until\_defined@{increment\_until\_defined}}
+\index{increment\_until\_defined@{increment\_until\_defined}!YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}}
+\subsubsection{\texorpdfstring{increment\_until\_defined()}{increment\_until\_defined()}}
+{\footnotesize\ttfamily template$<$typename V$>$ \\
+\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_aaa2316d6fa0080ad766fc2429f7a68ed}{Map\+Iter}} \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{Y\+A\+M\+L\+::detail\+::node\+\_\+iterator\+\_\+base}}$<$ V $>$\+::increment\+\_\+until\+\_\+defined (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_aaa2316d6fa0080ad766fc2429f7a68ed}{Map\+Iter}}}]{it }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 158 of file node\+\_\+iterator.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1detail_1_1node__iterator__base_a9cd060bc5fb325a54705df7dd79f6e71}\label{class_y_a_m_l_1_1detail_1_1node__iterator__base_a9cd060bc5fb325a54705df7dd79f6e71}} 
+\index{YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}!is\_defined@{is\_defined}}
+\index{is\_defined@{is\_defined}!YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}}
+\subsubsection{\texorpdfstring{is\_defined()}{is\_defined()}}
+{\footnotesize\ttfamily template$<$typename V$>$ \\
+bool \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{Y\+A\+M\+L\+::detail\+::node\+\_\+iterator\+\_\+base}}$<$ V $>$\+::is\+\_\+defined (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_aaa2316d6fa0080ad766fc2429f7a68ed}{Map\+Iter}}}]{it }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 164 of file node\+\_\+iterator.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1detail_1_1node__iterator__base_a324b02524e04bba795507717d0414cfb}\label{class_y_a_m_l_1_1detail_1_1node__iterator__base_a324b02524e04bba795507717d0414cfb}} 
+\index{YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}!operator $\ast$@{operator $\ast$}}
+\index{operator $\ast$@{operator $\ast$}!YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}}
+\subsubsection{\texorpdfstring{operator $\ast$()}{operator *()}}
+{\footnotesize\ttfamily template$<$typename V$>$ \\
+\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base_ac091253ed737c52668c9f9d84bdfd777}{value\+\_\+type}} \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{Y\+A\+M\+L\+::detail\+::node\+\_\+iterator\+\_\+base}}$<$ V $>$\+::operator $\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 144 of file node\+\_\+iterator.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1detail_1_1node__iterator__base_a13d72e654af51b92c078864bddd9322d}\label{class_y_a_m_l_1_1detail_1_1node__iterator__base_a13d72e654af51b92c078864bddd9322d}} 
+\index{YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}}
+\subsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily template$<$typename V$>$ \\
+template$<$typename W $>$ \\
+bool \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{Y\+A\+M\+L\+::detail\+::node\+\_\+iterator\+\_\+base}}$<$ V $>$\+::\mbox{\hyperlink{namespace_y_a_m_l_a1e1f522940ab0016a28e1969ba4846c2}{operator!}}= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{node\+\_\+iterator\+\_\+base}}$<$ W $>$ \&}]{rhs }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 119 of file node\+\_\+iterator.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1detail_1_1node__iterator__base_aa65eeb36a9c667f4317c3e2f0e3f132f}\label{class_y_a_m_l_1_1detail_1_1node__iterator__base_aa65eeb36a9c667f4317c3e2f0e3f132f}} 
+\index{YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}!operator++@{operator++}}
+\index{operator++@{operator++}!YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}}
+\subsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename V$>$ \\
+\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{node\+\_\+iterator\+\_\+base}}$<$V$>$\& \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{Y\+A\+M\+L\+::detail\+::node\+\_\+iterator\+\_\+base}}$<$ V $>$\+::operator++ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 123 of file node\+\_\+iterator.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1detail_1_1node__iterator__base_aab470f2db1a20cae06f6fd90535e5ef6}\label{class_y_a_m_l_1_1detail_1_1node__iterator__base_aab470f2db1a20cae06f6fd90535e5ef6}} 
+\index{YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}!operator++@{operator++}}
+\index{operator++@{operator++}!YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}}
+\subsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename V$>$ \\
+\mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{node\+\_\+iterator\+\_\+base}}$<$V$>$ \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{Y\+A\+M\+L\+::detail\+::node\+\_\+iterator\+\_\+base}}$<$ V $>$\+::operator++ (\begin{DoxyParamCaption}\item[{int}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 138 of file node\+\_\+iterator.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1detail_1_1node__iterator__base_a54424b0334f6f91ffd03609516d90cc5}\label{class_y_a_m_l_1_1detail_1_1node__iterator__base_a54424b0334f6f91ffd03609516d90cc5}} 
+\index{YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}}
+\subsubsection{\texorpdfstring{operator-\/$>$()}{operator->()}}
+{\footnotesize\ttfamily template$<$typename V$>$ \\
+proxy \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{Y\+A\+M\+L\+::detail\+::node\+\_\+iterator\+\_\+base}}$<$ V $>$\+::operator-\/$>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 156 of file node\+\_\+iterator.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1detail_1_1node__iterator__base_abbf381907a9b6dcebf45c31b78b9e3b1}\label{class_y_a_m_l_1_1detail_1_1node__iterator__base_abbf381907a9b6dcebf45c31b78b9e3b1}} 
+\index{YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}!operator==@{operator==}}
+\index{operator==@{operator==}!YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily template$<$typename V$>$ \\
+template$<$typename W $>$ \\
+bool \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{Y\+A\+M\+L\+::detail\+::node\+\_\+iterator\+\_\+base}}$<$ V $>$\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{node\+\_\+iterator\+\_\+base}}$<$ W $>$ \&}]{rhs }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 103 of file node\+\_\+iterator.\+h.
+
+
+
+\subsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_y_a_m_l_1_1detail_1_1node__iterator__base_af888868b67b8d48112c86fd093ebd2a1}\label{class_y_a_m_l_1_1detail_1_1node__iterator__base_af888868b67b8d48112c86fd093ebd2a1}} 
+\index{YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}!node\_iterator\_base@{node\_iterator\_base}}
+\index{node\_iterator\_base@{node\_iterator\_base}!YAML::detail::node\_iterator\_base$<$ V $>$@{YAML::detail::node\_iterator\_base$<$ V $>$}}
+\subsubsection{\texorpdfstring{node\_iterator\_base}{node\_iterator\_base}}
+{\footnotesize\ttfamily template$<$typename V$>$ \\
+template$<$typename $>$ \\
+friend class \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__iterator__base}{node\+\_\+iterator\+\_\+base}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 100 of file node\+\_\+iterator.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+V\+C\+Repos/\+Open\+G\+L\+T6/\+Open\+G\+L\+T6/third-\/party/include/yaml-\/cpp/node/detail/\mbox{\hyperlink{node__iterator_8h}{node\+\_\+iterator.\+h}}\end{DoxyCompactItemize}

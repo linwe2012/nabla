@@ -1,0 +1,234 @@
+\hypertarget{class_y_a_m_l_1_1_graph_builder_adapter}{}\section{Y\+A\+ML\+::Graph\+Builder\+Adapter Class Reference}
+\label{class_y_a_m_l_1_1_graph_builder_adapter}\index{YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}}
+
+
+{\ttfamily \#include $<$graphbuilderadapter.\+h$>$}
+
+Inheritance diagram for Y\+A\+ML\+::Graph\+Builder\+Adapter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_y_a_m_l_1_1_graph_builder_adapter}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter_ab6065da602dd256c9664dbcf9bbcd4bb}{Graph\+Builder\+Adapter}} (\mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_interface}{Graph\+Builder\+Interface}} \&builder)
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter_acb3a292b07fe50875a2ce8199e4ca80f}{Graph\+Builder\+Adapter}} (const \mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter}{Graph\+Builder\+Adapter}} \&)=delete
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter_a6440bb972418238961eff8c70c67a748}{Graph\+Builder\+Adapter}} (\mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter}{Graph\+Builder\+Adapter}} \&\&)=delete
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter}{Graph\+Builder\+Adapter}} \& \mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter_ac9d68c3570b038036e6fc80e1da5aded}{operator=}} (const \mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter}{Graph\+Builder\+Adapter}} \&)=delete
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter}{Graph\+Builder\+Adapter}} \& \mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter_ae89b1f7cd4c08bf981ba61f85c9885a0}{operator=}} (\mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter}{Graph\+Builder\+Adapter}} \&\&)=delete
+\item 
+virtual \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} \mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter_aae52d2e2c6d73fd4df9b7979cdee8de6}{On\+Document\+Start}} (const \mbox{\hyperlink{struct_y_a_m_l_1_1_mark}{Mark}} \&mark)
+\item 
+virtual \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} \mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter_a9f0b8ba153afc80ba449dea7a17d2f1f}{On\+Document\+End}} ()
+\item 
+virtual \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} \mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter_adeacb6c59aabf0622af8ed3808de9ab9}{On\+Null}} (const \mbox{\hyperlink{struct_y_a_m_l_1_1_mark}{Mark}} \&mark, \mbox{\hyperlink{namespace_y_a_m_l_abeff1798814ae3402fc5665fdcad1de6}{anchor\+\_\+t}} anchor)
+\item 
+virtual \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} \mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter_aa1563479f8a72f7182f0319637050eb5}{On\+Alias}} (const \mbox{\hyperlink{struct_y_a_m_l_1_1_mark}{Mark}} \&mark, \mbox{\hyperlink{namespace_y_a_m_l_abeff1798814ae3402fc5665fdcad1de6}{anchor\+\_\+t}} anchor)
+\item 
+virtual \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} \mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter_a74fffb942e64a1b6576368a49089c5a4}{On\+Scalar}} (const \mbox{\hyperlink{struct_y_a_m_l_1_1_mark}{Mark}} \&mark, const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&tag, \mbox{\hyperlink{namespace_y_a_m_l_abeff1798814ae3402fc5665fdcad1de6}{anchor\+\_\+t}} anchor, const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&\mbox{\hyperlink{glad_8h_a03aff08f73d7fde3d1a08e0abd8e84fa}{value}})
+\item 
+virtual \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} \mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter_a97a9fdfd83c8a8a52f848a561116b24f}{On\+Sequence\+Start}} (const \mbox{\hyperlink{struct_y_a_m_l_1_1_mark}{Mark}} \&mark, const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&tag, \mbox{\hyperlink{namespace_y_a_m_l_abeff1798814ae3402fc5665fdcad1de6}{anchor\+\_\+t}} anchor, \mbox{\hyperlink{struct_y_a_m_l_1_1_emitter_style_ae86640662c85ce6062a37f9636b6959f}{Emitter\+Style\+::value}} style)
+\item 
+virtual \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} \mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter_a69cada9fc86a780dc7d78c55a9b064cd}{On\+Sequence\+End}} ()
+\item 
+virtual \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} \mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter_ae4fff97022af791cad7e9ef834756db6}{On\+Map\+Start}} (const \mbox{\hyperlink{struct_y_a_m_l_1_1_mark}{Mark}} \&mark, const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&tag, \mbox{\hyperlink{namespace_y_a_m_l_abeff1798814ae3402fc5665fdcad1de6}{anchor\+\_\+t}} anchor, \mbox{\hyperlink{struct_y_a_m_l_1_1_emitter_style_ae86640662c85ce6062a37f9636b6959f}{Emitter\+Style\+::value}} style)
+\item 
+virtual \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} \mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter_ad117ea7f74cdef8b2bb2243e5e399f49}{On\+Map\+End}} ()
+\item 
+\mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} $\ast$ \mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter_a69626cdd468a5b907e13cb405ed08565}{Root\+Node}} () const
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 26 of file graphbuilderadapter.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_y_a_m_l_1_1_graph_builder_adapter_ab6065da602dd256c9664dbcf9bbcd4bb}\label{class_y_a_m_l_1_1_graph_builder_adapter_ab6065da602dd256c9664dbcf9bbcd4bb}} 
+\index{YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}!GraphBuilderAdapter@{GraphBuilderAdapter}}
+\index{GraphBuilderAdapter@{GraphBuilderAdapter}!YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}}
+\subsubsection{\texorpdfstring{GraphBuilderAdapter()}{GraphBuilderAdapter()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Y\+A\+M\+L\+::\+Graph\+Builder\+Adapter\+::\+Graph\+Builder\+Adapter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_interface}{Graph\+Builder\+Interface}} \&}]{builder }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 28 of file graphbuilderadapter.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_graph_builder_adapter_acb3a292b07fe50875a2ce8199e4ca80f}\label{class_y_a_m_l_1_1_graph_builder_adapter_acb3a292b07fe50875a2ce8199e4ca80f}} 
+\index{YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}!GraphBuilderAdapter@{GraphBuilderAdapter}}
+\index{GraphBuilderAdapter@{GraphBuilderAdapter}!YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}}
+\subsubsection{\texorpdfstring{GraphBuilderAdapter()}{GraphBuilderAdapter()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Y\+A\+M\+L\+::\+Graph\+Builder\+Adapter\+::\+Graph\+Builder\+Adapter (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter}{Graph\+Builder\+Adapter}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_graph_builder_adapter_a6440bb972418238961eff8c70c67a748}\label{class_y_a_m_l_1_1_graph_builder_adapter_a6440bb972418238961eff8c70c67a748}} 
+\index{YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}!GraphBuilderAdapter@{GraphBuilderAdapter}}
+\index{GraphBuilderAdapter@{GraphBuilderAdapter}!YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}}
+\subsubsection{\texorpdfstring{GraphBuilderAdapter()}{GraphBuilderAdapter()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Y\+A\+M\+L\+::\+Graph\+Builder\+Adapter\+::\+Graph\+Builder\+Adapter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter}{Graph\+Builder\+Adapter}} \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_y_a_m_l_1_1_graph_builder_adapter_aa1563479f8a72f7182f0319637050eb5}\label{class_y_a_m_l_1_1_graph_builder_adapter_aa1563479f8a72f7182f0319637050eb5}} 
+\index{YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}!OnAlias@{OnAlias}}
+\index{OnAlias@{OnAlias}!YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}}
+\subsubsection{\texorpdfstring{OnAlias()}{OnAlias()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} Y\+A\+M\+L\+::\+Graph\+Builder\+Adapter\+::\+On\+Alias (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_y_a_m_l_1_1_mark}{Mark}} \&}]{mark,  }\item[{\mbox{\hyperlink{namespace_y_a_m_l_abeff1798814ae3402fc5665fdcad1de6}{anchor\+\_\+t}}}]{anchor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_y_a_m_l_1_1_event_handler_a3459009c2aad49b3226e009fc06d33b6}{Y\+A\+M\+L\+::\+Event\+Handler}}.
+
+
+
+Definition at line 17 of file graphbuilderadapter.\+cpp.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_graph_builder_adapter_a9f0b8ba153afc80ba449dea7a17d2f1f}\label{class_y_a_m_l_1_1_graph_builder_adapter_a9f0b8ba153afc80ba449dea7a17d2f1f}} 
+\index{YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}!OnDocumentEnd@{OnDocumentEnd}}
+\index{OnDocumentEnd@{OnDocumentEnd}!YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}}
+\subsubsection{\texorpdfstring{OnDocumentEnd()}{OnDocumentEnd()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} Y\+A\+M\+L\+::\+Graph\+Builder\+Adapter\+::\+On\+Document\+End (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_y_a_m_l_1_1_event_handler_afc0d547e87f9c1f63ba8087aabd7e34a}{Y\+A\+M\+L\+::\+Event\+Handler}}.
+
+
+
+Definition at line 40 of file graphbuilderadapter.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_graph_builder_adapter_aae52d2e2c6d73fd4df9b7979cdee8de6}\label{class_y_a_m_l_1_1_graph_builder_adapter_aae52d2e2c6d73fd4df9b7979cdee8de6}} 
+\index{YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}!OnDocumentStart@{OnDocumentStart}}
+\index{OnDocumentStart@{OnDocumentStart}!YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}}
+\subsubsection{\texorpdfstring{OnDocumentStart()}{OnDocumentStart()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} Y\+A\+M\+L\+::\+Graph\+Builder\+Adapter\+::\+On\+Document\+Start (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_y_a_m_l_1_1_mark}{Mark}} \&}]{mark }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_y_a_m_l_1_1_event_handler_adb739beb59e227bd320aab1e61bf42e4}{Y\+A\+M\+L\+::\+Event\+Handler}}.
+
+
+
+Definition at line 39 of file graphbuilderadapter.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_graph_builder_adapter_ad117ea7f74cdef8b2bb2243e5e399f49}\label{class_y_a_m_l_1_1_graph_builder_adapter_ad117ea7f74cdef8b2bb2243e5e399f49}} 
+\index{YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}!OnMapEnd@{OnMapEnd}}
+\index{OnMapEnd@{OnMapEnd}!YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}}
+\subsubsection{\texorpdfstring{OnMapEnd()}{OnMapEnd()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} Y\+A\+M\+L\+::\+Graph\+Builder\+Adapter\+::\+On\+Map\+End (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_y_a_m_l_1_1_event_handler_a6b8821803de4ecca96a05c3296fb565f}{Y\+A\+M\+L\+::\+Event\+Handler}}.
+
+
+
+Definition at line 56 of file graphbuilderadapter.\+cpp.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_graph_builder_adapter_ae4fff97022af791cad7e9ef834756db6}\label{class_y_a_m_l_1_1_graph_builder_adapter_ae4fff97022af791cad7e9ef834756db6}} 
+\index{YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}!OnMapStart@{OnMapStart}}
+\index{OnMapStart@{OnMapStart}!YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}}
+\subsubsection{\texorpdfstring{OnMapStart()}{OnMapStart()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} Y\+A\+M\+L\+::\+Graph\+Builder\+Adapter\+::\+On\+Map\+Start (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_y_a_m_l_1_1_mark}{Mark}} \&}]{mark,  }\item[{const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&}]{tag,  }\item[{\mbox{\hyperlink{namespace_y_a_m_l_abeff1798814ae3402fc5665fdcad1de6}{anchor\+\_\+t}}}]{anchor,  }\item[{\mbox{\hyperlink{struct_y_a_m_l_1_1_emitter_style_ae86640662c85ce6062a37f9636b6959f}{Emitter\+Style\+::value}}}]{style }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_y_a_m_l_1_1_event_handler_a57fc2477cb1f4fd3a650e41180e6f9b6}{Y\+A\+M\+L\+::\+Event\+Handler}}.
+
+
+
+Definition at line 47 of file graphbuilderadapter.\+cpp.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_graph_builder_adapter_adeacb6c59aabf0622af8ed3808de9ab9}\label{class_y_a_m_l_1_1_graph_builder_adapter_adeacb6c59aabf0622af8ed3808de9ab9}} 
+\index{YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}!OnNull@{OnNull}}
+\index{OnNull@{OnNull}!YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}}
+\subsubsection{\texorpdfstring{OnNull()}{OnNull()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} Y\+A\+M\+L\+::\+Graph\+Builder\+Adapter\+::\+On\+Null (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_y_a_m_l_1_1_mark}{Mark}} \&}]{mark,  }\item[{\mbox{\hyperlink{namespace_y_a_m_l_abeff1798814ae3402fc5665fdcad1de6}{anchor\+\_\+t}}}]{anchor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_y_a_m_l_1_1_event_handler_aca632ae43f71b6c4f13252d15191f380}{Y\+A\+M\+L\+::\+Event\+Handler}}.
+
+
+
+Definition at line 9 of file graphbuilderadapter.\+cpp.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_graph_builder_adapter_a74fffb942e64a1b6576368a49089c5a4}\label{class_y_a_m_l_1_1_graph_builder_adapter_a74fffb942e64a1b6576368a49089c5a4}} 
+\index{YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}!OnScalar@{OnScalar}}
+\index{OnScalar@{OnScalar}!YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}}
+\subsubsection{\texorpdfstring{OnScalar()}{OnScalar()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} Y\+A\+M\+L\+::\+Graph\+Builder\+Adapter\+::\+On\+Scalar (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_y_a_m_l_1_1_mark}{Mark}} \&}]{mark,  }\item[{const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&}]{tag,  }\item[{\mbox{\hyperlink{namespace_y_a_m_l_abeff1798814ae3402fc5665fdcad1de6}{anchor\+\_\+t}}}]{anchor,  }\item[{const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_y_a_m_l_1_1_event_handler_a1f381a132754352eee6b8dcd218e3abc}{Y\+A\+M\+L\+::\+Event\+Handler}}.
+
+
+
+Definition at line 22 of file graphbuilderadapter.\+cpp.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_graph_builder_adapter_a69cada9fc86a780dc7d78c55a9b064cd}\label{class_y_a_m_l_1_1_graph_builder_adapter_a69cada9fc86a780dc7d78c55a9b064cd}} 
+\index{YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}!OnSequenceEnd@{OnSequenceEnd}}
+\index{OnSequenceEnd@{OnSequenceEnd}!YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}}
+\subsubsection{\texorpdfstring{OnSequenceEnd()}{OnSequenceEnd()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} Y\+A\+M\+L\+::\+Graph\+Builder\+Adapter\+::\+On\+Sequence\+End (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_y_a_m_l_1_1_event_handler_a8b36cc36cd7067175b80b5d047aafaf3}{Y\+A\+M\+L\+::\+Event\+Handler}}.
+
+
+
+Definition at line 40 of file graphbuilderadapter.\+cpp.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_graph_builder_adapter_a97a9fdfd83c8a8a52f848a561116b24f}\label{class_y_a_m_l_1_1_graph_builder_adapter_a97a9fdfd83c8a8a52f848a561116b24f}} 
+\index{YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}!OnSequenceStart@{OnSequenceStart}}
+\index{OnSequenceStart@{OnSequenceStart}!YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}}
+\subsubsection{\texorpdfstring{OnSequenceStart()}{OnSequenceStart()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} Y\+A\+M\+L\+::\+Graph\+Builder\+Adapter\+::\+On\+Sequence\+Start (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_y_a_m_l_1_1_mark}{Mark}} \&}]{mark,  }\item[{const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&}]{tag,  }\item[{\mbox{\hyperlink{namespace_y_a_m_l_abeff1798814ae3402fc5665fdcad1de6}{anchor\+\_\+t}}}]{anchor,  }\item[{\mbox{\hyperlink{struct_y_a_m_l_1_1_emitter_style_ae86640662c85ce6062a37f9636b6959f}{Emitter\+Style\+::value}}}]{style }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_y_a_m_l_1_1_event_handler_adf7a5e4ccf638b656009525556412ab5}{Y\+A\+M\+L\+::\+Event\+Handler}}.
+
+
+
+Definition at line 31 of file graphbuilderadapter.\+cpp.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_graph_builder_adapter_ac9d68c3570b038036e6fc80e1da5aded}\label{class_y_a_m_l_1_1_graph_builder_adapter_ac9d68c3570b038036e6fc80e1da5aded}} 
+\index{YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}!operator=@{operator=}}
+\index{operator=@{operator=}!YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter}{Graph\+Builder\+Adapter}}\& Y\+A\+M\+L\+::\+Graph\+Builder\+Adapter\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter}{Graph\+Builder\+Adapter}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_graph_builder_adapter_ae89b1f7cd4c08bf981ba61f85c9885a0}\label{class_y_a_m_l_1_1_graph_builder_adapter_ae89b1f7cd4c08bf981ba61f85c9885a0}} 
+\index{YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}!operator=@{operator=}}
+\index{operator=@{operator=}!YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter}{Graph\+Builder\+Adapter}}\& Y\+A\+M\+L\+::\+Graph\+Builder\+Adapter\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_y_a_m_l_1_1_graph_builder_adapter}{Graph\+Builder\+Adapter}} \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_graph_builder_adapter_a69626cdd468a5b907e13cb405ed08565}\label{class_y_a_m_l_1_1_graph_builder_adapter_a69626cdd468a5b907e13cb405ed08565}} 
+\index{YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}!RootNode@{RootNode}}
+\index{RootNode@{RootNode}!YAML::GraphBuilderAdapter@{YAML::GraphBuilderAdapter}}
+\subsubsection{\texorpdfstring{RootNode()}{RootNode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}}$\ast$ Y\+A\+M\+L\+::\+Graph\+Builder\+Adapter\+::\+Root\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 55 of file graphbuilderadapter.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+V\+C\+Repos/\+Open\+G\+L\+T6/\+Open\+G\+L\+T6/third-\/party/include/yaml-\/src/contrib/\mbox{\hyperlink{graphbuilderadapter_8h}{graphbuilderadapter.\+h}}\item 
+D\+:/\+V\+C\+Repos/\+Open\+G\+L\+T6/\+Open\+G\+L\+T6/third-\/party/include/yaml-\/src/contrib/\mbox{\hyperlink{graphbuilderadapter_8cpp}{graphbuilderadapter.\+cpp}}\end{DoxyCompactItemize}

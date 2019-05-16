@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{2467ED19-5EFF-4644-8B6A-B07A7967E005}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)/OpenGLT6;$(SolutionDir)/OpenGLT6/utils;$(SolutionDir)/OpenGLT6/third-party/include;</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)/OpenGLT6;$(SolutionDir)/OpenGLT6/utils;$(SolutionDir)/OpenGLT6/third-party/include;</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)/OpenGLT6;$(SolutionDir)/OpenGLT6/utils;$(SolutionDir)/OpenGLT6/third-party/include;</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;$(SolutionDir)/OpenGLT6/third-party/lib/win/x64</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)/OpenGLT6;$(SolutionDir)/OpenGLT6/utils;$(SolutionDir)/OpenGLT6/third-party/include;</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;$(SolutionDir)/OpenGLT6/third-party/lib/win/x64</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(SolutionDir)/OpenGLT6;$(SolutionDir)/OpenGLT6/utils;$(SolutionDir)/OpenGLT6/third-party/include;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>$(SolutionDir)/OpenGLT6;$(SolutionDir)/OpenGLT6/utils;$(SolutionDir)/OpenGLT6/third-party/include;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile />
+    <Link>
+      <AdditionalDependencies>assimp-vc140-mt.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ClCompile />
+    <ClCompile />
+    <ClCompile>
+      <AdditionalOptions>/std:c++17 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(SolutionDir)/OpenGLT6;$(SolutionDir)/OpenGLT6/utils;$(SolutionDir)/OpenGLT6/third-party/include;</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile />
+    <Link>
+      <AdditionalDependencies>assimp-vc140-mt.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ClCompile />
+    <ClCompile />
+    <ClCompile />
+    <ClCompile>
+      <AdditionalOptions>/std:c++17 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(SolutionDir)/OpenGLT6;$(SolutionDir)/OpenGLT6/utils;$(SolutionDir)/OpenGLT6/third-party/include;</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="openglt6\benchmark.cc" />
+    <ClCompile Include="OpenGLT6\core\asset\bootstrap.cc" />
+    <ClCompile Include="OpenGLT6\core\asset\model.cc" />
+    <ClCompile Include="OpenGLT6\core\asset\texture.cc" />
+    <ClCompile Include="OpenGLT6\core\config.cc" />
+    <ClCompile Include="OpenGLT6\core\renderer.cc" />
+    <ClCompile Include="OpenGLT6\core\renderer\compiled-drawcall.cc" />
+    <ClCompile Include="OpenGLT6\core\renderer\drawcall-gl.cc" />
+    <ClCompile Include="OpenGLT6\core\renderer\render-resources.cc" />
+    <ClCompile Include="OpenGLT6\core\renderer\shader.cc" />
+    <ClCompile Include="OpenGLT6\core\service-locator.cc" />
+    <ClCompile Include="OpenGLT6\editor\gui.cc" />
+    <ClCompile Include="OpenGLT6\systems\lighting.cc" />
+    <ClCompile Include="OpenGLT6\test.cc" />
+    <ClCompile Include="OpenGLT6\test2.cc" />
+    <ClCompile Include="OpenGLT6\third-party\include\imgui\imgui.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\imgui\imgui_demo.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\imgui\imgui_draw.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\imgui\impl\imgui_impl_glfw.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\imgui\impl\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\binary.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\contrib\graphbuilder.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\contrib\graphbuilderadapter.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\convert.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\directives.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\emit.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\emitfromevents.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\emitter.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\emitterstate.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\emitterutils.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\exceptions.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\exp.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\memory.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\node.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\nodebuilder.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\nodeevents.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\node_data.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\null.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\ostream_wrapper.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\parse.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\parser.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\regex_yaml.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\scanner.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\scanscalar.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\scantag.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\scantoken.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\simplekey.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\singledocparser.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\stream.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\tag.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\src\glad.c" />
+    <ClCompile Include="OpenGLT6\utils\filesystem.cc" />
+    <ClCompile Include="OpenGLT6\utils\memory\page-allocator.cc" />
+    <ClCompile Include="OpenGLT6\utils\typeid.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="OpenGLT6\components\skeleton.h" />
+    <ClInclude Include="OpenGLT6\core\asset\bootstrap.h" />
+    <ClInclude Include="OpenGLT6\core\asset\model.h" />
+    <ClInclude Include="OpenGLT6\core\asset\texture.h" />
+    <ClInclude Include="OpenGLT6\core\camera.h" />
+    <ClInclude Include="OpenGLT6\core\component-registry.h" />
+    <ClInclude Include="openglt6\core\component.h" />
+    <ClInclude Include="OpenGLT6\core\config.h" />
+    <ClInclude Include="OpenGLT6\core\data.h" />
+    <ClInclude Include="OpenGLT6\core\entity-manager.h" />
+    <ClInclude Include="openglt6\core\entity.h" />
+    <ClInclude Include="OpenGLT6\core\renderer.h" />
+    <ClInclude Include="OpenGLT6\core\renderer\compiled-drawcall.h" />
+    <ClInclude Include="OpenGLT6\core\renderer\drawcall.h" />
+    <ClInclude Include="OpenGLT6\core\renderer\render-resources.h" />
+    <ClInclude Include="OpenGLT6\core\renderer\shader.h" />
+    <ClInclude Include="OpenGLT6\core\service-locator.h" />
+    <ClInclude Include="OpenGLT6\editor\gui.h" />
+    <ClInclude Include="OpenGLT6\systems\animation.h" />
+    <ClInclude Include="OpenGLT6\systems\isystem.h" />
+    <ClInclude Include="OpenGLT6\systems\lighting.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\collectionstack.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\contrib\graphbuilderadapter.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\directives.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\emitterstate.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\emitterutils.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\exp.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\indentation.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\nodebuilder.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\nodeevents.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\ptr_vector.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\regeximpl.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\regex_yaml.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\scanner.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\scanscalar.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\scantag.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\setting.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\singledocparser.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\stream.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\streamcharsource.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\stringsource.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\tag.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\token.h" />
+    <ClInclude Include="OpenGLT6\utils\assertion.h" />
+    <ClInclude Include="OpenGLT6\utils\containers\deque.h" />
+    <ClInclude Include="OpenGLT6\utils\containers\map.h" />
+    <ClInclude Include="OpenGLT6\utils\containers\set.h" />
+    <ClInclude Include="openglt6\utils\containers\vector.h" />
+    <ClInclude Include="OpenGLT6\utils\filesystem.h" />
+    <ClInclude Include="OpenGLT6\utils\logger.h" />
+    <ClInclude Include="OpenGLT6\utils\memory\heap-allocator.h" />
+    <ClInclude Include="openglt6\utils\memory\memmanip.h" />
+    <ClInclude Include="OpenGLT6\utils\memory\page-allocator.h" />
+    <ClInclude Include="openglt6\utils\memory\slot-allocator.h" />
+    <ClInclude Include="openglt6\utils\platform-info.h" />
+    <ClInclude Include="OpenGLT6\utils\typeid.h" />
+    <ClInclude Include="OpenGLT6\utils\utils.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

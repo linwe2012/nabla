@@ -1,0 +1,72 @@
+\hypertarget{scalar__multiplication_8hpp}{}\section{D\+:/\+V\+C\+Repos/\+Open\+G\+L\+T6/\+Open\+G\+L\+T6/third-\/party/include/glm/gtx/scalar\+\_\+multiplication.hpp File Reference}
+\label{scalar__multiplication_8hpp}\index{D:/VCRepos/OpenGLT6/OpenGLT6/third-\/party/include/glm/gtx/scalar\_multiplication.hpp@{D:/VCRepos/OpenGLT6/OpenGLT6/third-\/party/include/glm/gtx/scalar\_multiplication.hpp}}
+
+
+Enables scalar multiplication for all types.  
+
+
+{\ttfamily \#include \char`\"{}../detail/setup.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../vec2.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../vec3.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../vec4.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../mat2x2.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$type\+\_\+traits$>$}\newline
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceglm}{glm}}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{scalar__multiplication_8hpp_aa1e74ac9f6e034680f02523fb962bd0c}{G\+L\+M\+\_\+\+I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+S\+C\+A\+L\+\_\+\+M\+U\+LT}}(Vec)
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T , typename Vec $>$ }\\using \mbox{\hyperlink{namespaceglm_a68a5dc6ff1dbac4fda02c3b177afa4aa}{glm\+::return\+\_\+type\+\_\+scalar\+\_\+multiplication}} = typename std\+::enable\+\_\+if$<$ !std\+::is\+\_\+same$<$ T, float $>$\+::\mbox{\hyperlink{glad_8h_a03aff08f73d7fde3d1a08e0abd8e84fa}{value}} \&\&std\+::is\+\_\+arithmetic$<$ T $>$\+::\mbox{\hyperlink{glad_8h_a03aff08f73d7fde3d1a08e0abd8e84fa}{value}}, Vec $>$\+::\mbox{\hyperlink{glad_8h_a890efa53b3d7deeeced6f3a0d6653ed3}{type}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Enables scalar multiplication for all types. 
+
+\mbox{\hyperlink{group__gtx}{G\+TX Extensions (Experimental)}}
+
+\begin{DoxyAuthor}{Author}
+Joshua Moerman
+\end{DoxyAuthor}
+Since G\+L\+SL is very strict about types, the following (often used) combinations do not work\+: double $\ast$ vec4 int $\ast$ vec4 vec4 / int So we\textquotesingle{}ll fix that! Of course \char`\"{}float $\ast$ vec4\char`\"{} should remain the same (hence the enable\+\_\+if magic) 
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{scalar__multiplication_8hpp_aa1e74ac9f6e034680f02523fb962bd0c}\label{scalar__multiplication_8hpp_aa1e74ac9f6e034680f02523fb962bd0c}} 
+\index{scalar\_multiplication.hpp@{scalar\_multiplication.hpp}!GLM\_IMPLEMENT\_SCAL\_MULT@{GLM\_IMPLEMENT\_SCAL\_MULT}}
+\index{GLM\_IMPLEMENT\_SCAL\_MULT@{GLM\_IMPLEMENT\_SCAL\_MULT}!scalar\_multiplication.hpp@{scalar\_multiplication.hpp}}
+\subsubsection{\texorpdfstring{GLM\_IMPLEMENT\_SCAL\_MULT}{GLM\_IMPLEMENT\_SCAL\_MULT}}
+{\footnotesize\ttfamily \#define G\+L\+M\+\_\+\+I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+S\+C\+A\+L\+\_\+\+M\+U\+LT(\begin{DoxyParamCaption}\item[{}]{Vec }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \(\backslash\)}
+\DoxyCodeLine{    return\_type\_scalar\_multiplication<T, Vec> \(\backslash\)}
+\DoxyCodeLine{    operator*(T \textcolor{keyword}{const} \& \mbox{\hyperlink{glad_8h_af1b1d5edfea6a34daee7389b1b5810ad}{s}}, Vec rh)\{ \(\backslash\)}
+\DoxyCodeLine{        return rh *= static\_cast<float>(\mbox{\hyperlink{glad_8h_af1b1d5edfea6a34daee7389b1b5810ad}{s}}); \(\backslash\)}
+\DoxyCodeLine{    \} \(\backslash\)}
+\DoxyCodeLine{     \(\backslash\)}
+\DoxyCodeLine{    template <typename T> \(\backslash\)}
+\DoxyCodeLine{    return\_type\_scalar\_multiplication<T, Vec> \(\backslash\)}
+\DoxyCodeLine{    operator*(Vec lh, T \textcolor{keyword}{const} \& \mbox{\hyperlink{glad_8h_af1b1d5edfea6a34daee7389b1b5810ad}{s}})\{ \(\backslash\)}
+\DoxyCodeLine{        return lh *= static\_cast<float>(\mbox{\hyperlink{glad_8h_af1b1d5edfea6a34daee7389b1b5810ad}{s}}); \(\backslash\)}
+\DoxyCodeLine{    \} \(\backslash\)}
+\DoxyCodeLine{     \(\backslash\)}
+\DoxyCodeLine{    template <typename T> \(\backslash\)}
+\DoxyCodeLine{    return\_type\_scalar\_multiplication<T, Vec> \(\backslash\)}
+\DoxyCodeLine{    operator/(Vec lh, T \textcolor{keyword}{const} \& \mbox{\hyperlink{glad_8h_af1b1d5edfea6a34daee7389b1b5810ad}{s}})\{ \(\backslash\)}
+\DoxyCodeLine{        return lh *= 1.0f / \mbox{\hyperlink{glad_8h_af1b1d5edfea6a34daee7389b1b5810ad}{s}}; \(\backslash\)}
+\DoxyCodeLine{    \}}
+
+\end{DoxyCode}
+
+
+Definition at line 35 of file scalar\+\_\+multiplication.\+hpp.
+

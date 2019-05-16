@@ -1,0 +1,424 @@
+\hypertarget{classnabla_1_1_s_t_l_vector_ex}{}\section{nabla\+::S\+T\+L\+Vector\+Ex$<$ T, Alloc $>$ Class Template Reference}
+\label{classnabla_1_1_s_t_l_vector_ex}\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+
+
+{\ttfamily \#include $<$vector.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a6af5809443fb78a0fe7321ff93e2ad4c}{value\+\_\+type}} = T
+\item 
+using \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a1a55b1145a1d99efca09cce9b2eac20f}{allocator\+\_\+type}} = Alloc
+\item 
+using \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a288a7552f71d4e0cbeb12e6a6d5e7fd3}{size\+\_\+type}} = std\+::size\+\_\+t
+\item 
+using \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a17cbfc53d4b35559911b1ef501629da4}{difference\+\_\+type}} = std\+::ptrdiff\+\_\+t
+\item 
+using \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a6adf5d87234352c139af2d48f4787ed5}{reference}} = \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a6af5809443fb78a0fe7321ff93e2ad4c}{value\+\_\+type}} \&
+\item 
+using \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a396f1267c3ea9874a98905cad4137af3}{pointer}} = T $\ast$
+\item 
+using \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a66d8e0fc1681c6b0809319057c890f1e}{const\+\_\+pointer}} = const T $\ast$
+\item 
+using \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a4bd3bc9bbe369d76e958f3180c22f40b}{iterator}} = \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a396f1267c3ea9874a98905cad4137af3}{pointer}}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a6adf5d87234352c139af2d48f4787ed5}{reference}} \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_afde528e33bdf0672764cc4047609461f}{operator\mbox{[}$\,$\mbox{]}}} (size\+\_\+t pos)
+\item 
+\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_ac83be23a58d069f67572216c27307472}{S\+T\+L\+Vector\+Ex}} ()
+\item 
+\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a271e7d8d10dd9371c08a1a0e6f7f8c27}{S\+T\+L\+Vector\+Ex}} (Alloc $\ast$alloc)
+\item 
+\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a806b14a4669228eac919caa37fcf9b75}{S\+T\+L\+Vector\+Ex}} (const \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{S\+T\+L\+Vector\+Ex}} \&rhs)
+\item 
+bool \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a4f7dc09d999e0d82fae18a2d7fb4c1e8}{empty}} () const
+\item 
+size\+\_\+t \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a1b4a4d968613137772046331b1264e1f}{size}} () const
+\item 
+size\+\_\+t \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a44ff1b69309686b9b3f1ea125982b078}{capacity}} () const
+\item 
+\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a4bd3bc9bbe369d76e958f3180c22f40b}{iterator}} \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a01d7928bf1a4aa33e6e147df5c9a2f63}{begin}} ()
+\item 
+\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a4bd3bc9bbe369d76e958f3180c22f40b}{iterator}} \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_ad7749220f425a7c8393c2896aa47e029}{end}} ()
+\item 
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a66394a10b1e5e1a5bbe0cfa6198a48f8}{emplace\+\_\+back}} (T \&\&val)
+\item 
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a8fde5302f3fc7dd24a77b24c4acb9ecb}{push\+\_\+back}} (T \&\&val)
+\item 
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a51ca7d80dcc58e01075f6d1b2eb24f81}{push\+\_\+back}} (T \&val)
+\item 
+\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a4bd3bc9bbe369d76e958f3180c22f40b}{iterator}} \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_abc8284cabd99f5a4ba0fc971e98630ab}{insert}} (\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a4bd3bc9bbe369d76e958f3180c22f40b}{iterator}} position, const \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a6af5809443fb78a0fe7321ff93e2ad4c}{value\+\_\+type}} \&val)
+\item 
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_abc4120d95527b1e5758ee5f3f37efd8d}{reserve}} (size\+\_\+t new\+\_\+size)
+\item 
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a5c67e1289e13c47ca12bfc0df7f4d746}{resize}} (size\+\_\+t count)
+\item 
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a86b60bb70244ff2cdcefb10617cc2ec7}{resize}} (size\+\_\+t count, const T \&value)
+\item 
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a262bd3464db2aff36aa6bb90dbf5e7ec}{clear}} ()
+\item 
+\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a95dda91687a64854458b42a58c011f91}{$\sim$\+S\+T\+L\+Vector\+Ex}} ()
+\item 
+\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a6adf5d87234352c139af2d48f4787ed5}{reference}} \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a4fd7e56ad9f737416be66a7556052fc7}{back}} ()
+\item 
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a8be72171d8b6128e38d0810b27b622d8}{ignore\+\_\+last}} ()
+\item 
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a6825a8f0e938ff22f851d047f362f1dd}{build\+\_\+on}} (T $\ast$data, size\+\_\+t \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a1b4a4d968613137772046331b1264e1f}{size}}, size\+\_\+t \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a44ff1b69309686b9b3f1ea125982b078}{capacity}}=\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a1b4a4d968613137772046331b1264e1f}{size}})
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$\newline
+class nabla\+::\+S\+T\+L\+Vector\+Ex$<$ T, Alloc $>$}
+
+This vector is an modified version, conforming part of S\+TL standard It must accept a pointer to allocator, and will not be responsible for destroying allocator This is N\+OT thread safe \begin{DoxyNote}{Note}
+This vector does N\+OT owns allocator and it will N\+E\+V\+ER destroy it\textquotesingle{}s allocator 
+\end{DoxyNote}
+
+
+Definition at line 20 of file vector.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a1a55b1145a1d99efca09cce9b2eac20f}\label{classnabla_1_1_s_t_l_vector_ex_a1a55b1145a1d99efca09cce9b2eac20f}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!allocator\_type@{allocator\_type}}
+\index{allocator\_type@{allocator\_type}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{allocator\_type}{allocator\_type}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+using \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a1a55b1145a1d99efca09cce9b2eac20f}{allocator\+\_\+type}} =  Alloc}
+
+
+
+Definition at line 24 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a66d8e0fc1681c6b0809319057c890f1e}\label{classnabla_1_1_s_t_l_vector_ex_a66d8e0fc1681c6b0809319057c890f1e}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!const\_pointer@{const\_pointer}}
+\index{const\_pointer@{const\_pointer}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{const\_pointer}{const\_pointer}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+using \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a66d8e0fc1681c6b0809319057c890f1e}{const\+\_\+pointer}} =  const T$\ast$}
+
+
+
+Definition at line 29 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a17cbfc53d4b35559911b1ef501629da4}\label{classnabla_1_1_s_t_l_vector_ex_a17cbfc53d4b35559911b1ef501629da4}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!difference\_type@{difference\_type}}
+\index{difference\_type@{difference\_type}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{difference\_type}{difference\_type}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+using \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a17cbfc53d4b35559911b1ef501629da4}{difference\+\_\+type}} =  std\+::ptrdiff\+\_\+t}
+
+
+
+Definition at line 26 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a4bd3bc9bbe369d76e958f3180c22f40b}\label{classnabla_1_1_s_t_l_vector_ex_a4bd3bc9bbe369d76e958f3180c22f40b}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!iterator@{iterator}}
+\index{iterator@{iterator}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{iterator}{iterator}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+using \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a4bd3bc9bbe369d76e958f3180c22f40b}{iterator}} =  \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a396f1267c3ea9874a98905cad4137af3}{pointer}}}
+
+
+
+Definition at line 30 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a396f1267c3ea9874a98905cad4137af3}\label{classnabla_1_1_s_t_l_vector_ex_a396f1267c3ea9874a98905cad4137af3}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!pointer@{pointer}}
+\index{pointer@{pointer}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{pointer}{pointer}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+using \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a396f1267c3ea9874a98905cad4137af3}{pointer}} =  T $\ast$}
+
+
+
+Definition at line 28 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a6adf5d87234352c139af2d48f4787ed5}\label{classnabla_1_1_s_t_l_vector_ex_a6adf5d87234352c139af2d48f4787ed5}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!reference@{reference}}
+\index{reference@{reference}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{reference}{reference}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+using \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a6adf5d87234352c139af2d48f4787ed5}{reference}} =  \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a6af5809443fb78a0fe7321ff93e2ad4c}{value\+\_\+type}} \&}
+
+
+
+Definition at line 27 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a288a7552f71d4e0cbeb12e6a6d5e7fd3}\label{classnabla_1_1_s_t_l_vector_ex_a288a7552f71d4e0cbeb12e6a6d5e7fd3}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!size\_type@{size\_type}}
+\index{size\_type@{size\_type}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{size\_type}{size\_type}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+using \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a288a7552f71d4e0cbeb12e6a6d5e7fd3}{size\+\_\+type}} =  std\+::size\+\_\+t}
+
+
+
+Definition at line 25 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a6af5809443fb78a0fe7321ff93e2ad4c}\label{classnabla_1_1_s_t_l_vector_ex_a6af5809443fb78a0fe7321ff93e2ad4c}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!value\_type@{value\_type}}
+\index{value\_type@{value\_type}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{value\_type}{value\_type}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+using \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a6af5809443fb78a0fe7321ff93e2ad4c}{value\+\_\+type}} =  T}
+
+
+
+Definition at line 23 of file vector.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_ac83be23a58d069f67572216c27307472}\label{classnabla_1_1_s_t_l_vector_ex_ac83be23a58d069f67572216c27307472}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!STLVectorEx@{STLVectorEx}}
+\index{STLVectorEx@{STLVectorEx}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{STLVectorEx()}{STLVectorEx()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{S\+T\+L\+Vector\+Ex}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 37 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a271e7d8d10dd9371c08a1a0e6f7f8c27}\label{classnabla_1_1_s_t_l_vector_ex_a271e7d8d10dd9371c08a1a0e6f7f8c27}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!STLVectorEx@{STLVectorEx}}
+\index{STLVectorEx@{STLVectorEx}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{STLVectorEx()}{STLVectorEx()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{S\+T\+L\+Vector\+Ex}} (\begin{DoxyParamCaption}\item[{Alloc $\ast$}]{alloc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 38 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a806b14a4669228eac919caa37fcf9b75}\label{classnabla_1_1_s_t_l_vector_ex_a806b14a4669228eac919caa37fcf9b75}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!STLVectorEx@{STLVectorEx}}
+\index{STLVectorEx@{STLVectorEx}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{STLVectorEx()}{STLVectorEx()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{S\+T\+L\+Vector\+Ex}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 39 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a95dda91687a64854458b42a58c011f91}\label{classnabla_1_1_s_t_l_vector_ex_a95dda91687a64854458b42a58c011f91}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!````~STLVectorEx@{$\sim$STLVectorEx}}
+\index{````~STLVectorEx@{$\sim$STLVectorEx}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{$\sim$STLVectorEx()}{~STLVectorEx()}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::$\sim$\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{S\+T\+L\+Vector\+Ex}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 134 of file vector.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a4fd7e56ad9f737416be66a7556052fc7}\label{classnabla_1_1_s_t_l_vector_ex_a4fd7e56ad9f737416be66a7556052fc7}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!back@{back}}
+\index{back@{back}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{back()}{back()}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a6adf5d87234352c139af2d48f4787ed5}{reference}} \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::back (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 141 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a01d7928bf1a4aa33e6e147df5c9a2f63}\label{classnabla_1_1_s_t_l_vector_ex_a01d7928bf1a4aa33e6e147df5c9a2f63}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!begin@{begin}}
+\index{begin@{begin}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a4bd3bc9bbe369d76e958f3180c22f40b}{iterator}} \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 52 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a6825a8f0e938ff22f851d047f362f1dd}\label{classnabla_1_1_s_t_l_vector_ex_a6825a8f0e938ff22f851d047f362f1dd}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!build\_on@{build\_on}}
+\index{build\_on@{build\_on}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{build\_on()}{build\_on()}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::build\+\_\+on (\begin{DoxyParamCaption}\item[{T $\ast$}]{data,  }\item[{size\+\_\+t}]{size,  }\item[{size\+\_\+t}]{capacity = {\ttfamily \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a1b4a4d968613137772046331b1264e1f}{size}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+build the vector on the specified memory 
+\begin{DoxyParams}{Parameters}
+{\em data} & pointer to the data wishing to build vector on \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+it will not manage (free/reallocate) memory! 
+\end{DoxyNote}
+
+
+Definition at line 157 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a44ff1b69309686b9b3f1ea125982b078}\label{classnabla_1_1_s_t_l_vector_ex_a44ff1b69309686b9b3f1ea125982b078}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!capacity@{capacity}}
+\index{capacity@{capacity}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{capacity()}{capacity()}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+size\+\_\+t \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::capacity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 51 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a262bd3464db2aff36aa6bb90dbf5e7ec}\label{classnabla_1_1_s_t_l_vector_ex_a262bd3464db2aff36aa6bb90dbf5e7ec}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!clear@{clear}}
+\index{clear@{clear}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 130 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a66394a10b1e5e1a5bbe0cfa6198a48f8}\label{classnabla_1_1_s_t_l_vector_ex_a66394a10b1e5e1a5bbe0cfa6198a48f8}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!emplace\_back@{emplace\_back}}
+\index{emplace\_back@{emplace\_back}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{emplace\_back()}{emplace\_back()}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::emplace\+\_\+back (\begin{DoxyParamCaption}\item[{T \&\&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 55 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a4f7dc09d999e0d82fae18a2d7fb4c1e8}\label{classnabla_1_1_s_t_l_vector_ex_a4f7dc09d999e0d82fae18a2d7fb4c1e8}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!empty@{empty}}
+\index{empty@{empty}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+bool \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 49 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_ad7749220f425a7c8393c2896aa47e029}\label{classnabla_1_1_s_t_l_vector_ex_ad7749220f425a7c8393c2896aa47e029}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!end@{end}}
+\index{end@{end}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a4bd3bc9bbe369d76e958f3180c22f40b}{iterator}} \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 53 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a8be72171d8b6128e38d0810b27b622d8}\label{classnabla_1_1_s_t_l_vector_ex_a8be72171d8b6128e38d0810b27b622d8}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!ignore\_last@{ignore\_last}}
+\index{ignore\_last@{ignore\_last}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{ignore\_last()}{ignore\_last()}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::ignore\+\_\+last (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+ignore the last element w/o destroying it 
+
+Definition at line 147 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_abc8284cabd99f5a4ba0fc971e98630ab}\label{classnabla_1_1_s_t_l_vector_ex_abc8284cabd99f5a4ba0fc971e98630ab}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!insert@{insert}}
+\index{insert@{insert}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a4bd3bc9bbe369d76e958f3180c22f40b}{iterator}} \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a4bd3bc9bbe369d76e958f3180c22f40b}{iterator}}}]{position,  }\item[{const \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a6af5809443fb78a0fe7321ff93e2ad4c}{value\+\_\+type}} \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 70 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_afde528e33bdf0672764cc4047609461f}\label{classnabla_1_1_s_t_l_vector_ex_afde528e33bdf0672764cc4047609461f}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a6adf5d87234352c139af2d48f4787ed5}{reference}} \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 32 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a8fde5302f3fc7dd24a77b24c4acb9ecb}\label{classnabla_1_1_s_t_l_vector_ex_a8fde5302f3fc7dd24a77b24c4acb9ecb}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!push\_back@{push\_back}}
+\index{push\_back@{push\_back}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{push\_back()}{push\_back()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::push\+\_\+back (\begin{DoxyParamCaption}\item[{T \&\&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 61 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a51ca7d80dcc58e01075f6d1b2eb24f81}\label{classnabla_1_1_s_t_l_vector_ex_a51ca7d80dcc58e01075f6d1b2eb24f81}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!push\_back@{push\_back}}
+\index{push\_back@{push\_back}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{push\_back()}{push\_back()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::push\+\_\+back (\begin{DoxyParamCaption}\item[{T \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 65 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_abc4120d95527b1e5758ee5f3f37efd8d}\label{classnabla_1_1_s_t_l_vector_ex_abc4120d95527b1e5758ee5f3f37efd8d}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!reserve@{reserve}}
+\index{reserve@{reserve}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{reserve()}{reserve()}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::reserve (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{new\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 94 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a5c67e1289e13c47ca12bfc0df7f4d746}\label{classnabla_1_1_s_t_l_vector_ex_a5c67e1289e13c47ca12bfc0df7f4d746}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!resize@{resize}}
+\index{resize@{resize}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{resize()}{resize()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::resize (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{count }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 115 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a86b60bb70244ff2cdcefb10617cc2ec7}\label{classnabla_1_1_s_t_l_vector_ex_a86b60bb70244ff2cdcefb10617cc2ec7}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!resize@{resize}}
+\index{resize@{resize}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{resize()}{resize()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::resize (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{count,  }\item[{const T \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 120 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a1b4a4d968613137772046331b1264e1f}\label{classnabla_1_1_s_t_l_vector_ex_a1b4a4d968613137772046331b1264e1f}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!size@{size}}
+\index{size@{size}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+size\+\_\+t \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 50 of file vector.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+V\+C\+Repos/\+Open\+G\+L\+T6/\+Open\+G\+L\+T6/utils/containers/\mbox{\hyperlink{vector_8h}{vector.\+h}}\end{DoxyCompactItemize}

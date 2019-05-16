@@ -1,0 +1,671 @@
+\hypertarget{class_y_a_m_l_1_1_node}{}\section{Y\+A\+ML\+::Node Class Reference}
+\label{class_y_a_m_l_1_1_node}\index{YAML::Node@{YAML::Node}}
+
+
+{\ttfamily \#include $<$node.\+h$>$}
+
+Inheritance diagram for Y\+A\+ML\+::Node\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_y_a_m_l_1_1_node}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \mbox{\hyperlink{namespace_y_a_m_l_a057e57e7f23a1b85ea32bbc730b94d24}{Y\+A\+M\+L\+::iterator}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_a3004302ddd5d977af0a6da29af38f7f4}{iterator}}
+\item 
+typedef \mbox{\hyperlink{namespace_y_a_m_l_a0a1f3211b4b1f42bb8e6a9fde49b5c44}{Y\+A\+M\+L\+::const\+\_\+iterator}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_a40d235ac56001961929189a33c923d6c}{const\+\_\+iterator}}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_node_a19cb097351fff40c54c7837d1f84409e}{Node}} ()
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_node_a4401629dc793878b3527637ed1cc8485}{Node}} (\mbox{\hyperlink{struct_y_a_m_l_1_1_node_type_af83cf3f3c2eca0bf0eae1bbf981e86c4}{Node\+Type\+::value}} \mbox{\hyperlink{glad_8h_a890efa53b3d7deeeced6f3a0d6653ed3}{type}})
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{class_y_a_m_l_1_1_node_a8ca3b8da61f7f85a7a3424893951bb1c}{Node}} (const T \&rhs)
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_node_a73644c0a70230a2400636e4bc0e1f061}{Node}} (const \mbox{\hyperlink{struct_y_a_m_l_1_1detail_1_1iterator__value}{detail\+::iterator\+\_\+value}} \&rhs)
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_node_af6e3fe8af7e9da72d9c6484b0370d533}{Node}} (const \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \&rhs)
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_node_a29d21a7eceac20e93028810d2c313a06}{$\sim$\+Node}} ()
+\item 
+\mbox{\hyperlink{struct_y_a_m_l_1_1_mark}{Y\+A\+M\+L\+::\+Mark}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_ade805ae8e338c7026add709e8d6c3f24}{Mark}} () const
+\item 
+\mbox{\hyperlink{struct_y_a_m_l_1_1_node_type_af83cf3f3c2eca0bf0eae1bbf981e86c4}{Node\+Type\+::value}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_a03ec765b519b11c1bdf9c050298a966d}{Type}} () const
+\item 
+bool \mbox{\hyperlink{class_y_a_m_l_1_1_node_a45f02d95f0dbbd223c36045769787897}{Is\+Defined}} () const
+\item 
+bool \mbox{\hyperlink{class_y_a_m_l_1_1_node_ae46fcc36b16c65a3ff39215bf02ca985}{Is\+Null}} () const
+\item 
+bool \mbox{\hyperlink{class_y_a_m_l_1_1_node_a66c9a35b6c47e18d5df75e946cf2acf5}{Is\+Scalar}} () const
+\item 
+bool \mbox{\hyperlink{class_y_a_m_l_1_1_node_ad550e0b444c8a2c3b9cc6342a87a2118}{Is\+Sequence}} () const
+\item 
+bool \mbox{\hyperlink{class_y_a_m_l_1_1_node_aab7e81b22940b960c141fc57f04b7d8a}{Is\+Map}} () const
+\item 
+bool \mbox{\hyperlink{class_y_a_m_l_1_1_node_acf62c3257292c6d67945835785a01497}{operator!}} () const
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{class_y_a_m_l_1_1_node_aa851b856bd5972b42b0b1976adc90606}{as}} () const
+\item 
+{\footnotesize template$<$typename T , typename S $>$ }\\T \mbox{\hyperlink{class_y_a_m_l_1_1_node_a5ea7214df4819515ef54665727fcb751}{as}} (const S \&fallback) const
+\item 
+const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \& \mbox{\hyperlink{class_y_a_m_l_1_1_node_a774e1077cccab9a72137e0634557a275}{Scalar}} () const
+\item 
+const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \& \mbox{\hyperlink{class_y_a_m_l_1_1_node_a58aaece650ba5da327f7ba3b2223d60c}{Tag}} () const
+\item 
+\mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_a8c9b93527cb12dd9b5d464adcbd8c781}{Set\+Tag}} (const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&tag)
+\item 
+\mbox{\hyperlink{struct_y_a_m_l_1_1_emitter_style_ae86640662c85ce6062a37f9636b6959f}{Emitter\+Style\+::value}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_ac1e18c6a11d984560dedbf4ca816d87e}{Style}} () const
+\item 
+\mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_a92be22e98028ac4e126ac8f036ed9e45}{Set\+Style}} (\mbox{\hyperlink{struct_y_a_m_l_1_1_emitter_style_ae86640662c85ce6062a37f9636b6959f}{Emitter\+Style\+::value}} style)
+\item 
+bool \mbox{\hyperlink{class_y_a_m_l_1_1_node_a35acb7bdd8751c583394e743f47908c7}{is}} (const \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \&rhs) const
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \& \mbox{\hyperlink{class_y_a_m_l_1_1_node_a117e05460b9d13f0954f4ea16c7c3dc9}{operator=}} (const T \&rhs)
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \& \mbox{\hyperlink{class_y_a_m_l_1_1_node_ac183724c7c53d4f96453adbc421d3e27}{operator=}} (const \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \&rhs)
+\item 
+\mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_ae9511d64500c0be6eeda5a9b969325ac}{reset}} (const \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \&rhs=\mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}}())
+\item 
+std\+::size\+\_\+t \mbox{\hyperlink{class_y_a_m_l_1_1_node_ae843efe9fc5933f7adec123661c73c16}{size}} () const
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_node_a40d235ac56001961929189a33c923d6c}{const\+\_\+iterator}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_abad00d4117dce1ce60e6c83963d74dd1}{begin}} () const
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_node_a3004302ddd5d977af0a6da29af38f7f4}{iterator}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_ac249a75c8d917a230c126ffd0585953a}{begin}} ()
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_node_a40d235ac56001961929189a33c923d6c}{const\+\_\+iterator}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_a552f8a322701be4601ff268e1c2b67e7}{end}} () const
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_node_a3004302ddd5d977af0a6da29af38f7f4}{iterator}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_a703a31bfe6f54c773c8688e6c924d9ed}{end}} ()
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_a9ba45abe5334123051997c5de5d92e5a}{push\+\_\+back}} (const T \&rhs)
+\item 
+\mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_a619341edc51fadf84fd7e9a34699c210}{push\+\_\+back}} (const \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \&rhs)
+\item 
+{\footnotesize template$<$typename Key $>$ }\\const \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_a2795774c0fe459793ea3c6b0ae2e740b}{operator\mbox{[}$\,$\mbox{]}}} (const \mbox{\hyperlink{namespace_y_a_m_l_a67c320aa50d3de7ecba1d0b8775dd684a1af533fc24b0311b8c4d5ac2870283aa}{Key}} \&key) const
+\item 
+{\footnotesize template$<$typename Key $>$ }\\\mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_af2123f5a45029366e0fa6fb75e13d1f4}{operator\mbox{[}$\,$\mbox{]}}} (const \mbox{\hyperlink{namespace_y_a_m_l_a67c320aa50d3de7ecba1d0b8775dd684a1af533fc24b0311b8c4d5ac2870283aa}{Key}} \&key)
+\item 
+{\footnotesize template$<$typename Key $>$ }\\bool \mbox{\hyperlink{class_y_a_m_l_1_1_node_ab27ee6ca788d596ed47b33d32a47708d}{remove}} (const \mbox{\hyperlink{namespace_y_a_m_l_a67c320aa50d3de7ecba1d0b8775dd684a1af533fc24b0311b8c4d5ac2870283aa}{Key}} \&key)
+\item 
+const \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_a61d3f1d940f690d6ba06df7fef53510b}{operator\mbox{[}$\,$\mbox{]}}} (const \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \&key) const
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_a9f34a4c2a061a93cb49ba81203d27f3c}{operator\mbox{[}$\,$\mbox{]}}} (const \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \&key)
+\item 
+bool \mbox{\hyperlink{class_y_a_m_l_1_1_node_ab41bdfe9cb4071e2949f2d0aaeecd00e}{remove}} (const \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \&key)
+\item 
+{\footnotesize template$<$typename Key , typename Value $>$ }\\\mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_ae5e192ad9ed22a602b1242ccae9486ce}{force\+\_\+insert}} (const \mbox{\hyperlink{namespace_y_a_m_l_a67c320aa50d3de7ecba1d0b8775dd684a1af533fc24b0311b8c4d5ac2870283aa}{Key}} \&key, const \mbox{\hyperlink{namespace_y_a_m_l_a67c320aa50d3de7ecba1d0b8775dd684a0d29a86853d6a9cfe0241ab7ea8da97c}{Value}} \&\mbox{\hyperlink{glad_8h_a03aff08f73d7fde3d1a08e0abd8e84fa}{value}})
+\item 
+{\footnotesize template$<$typename T $>$ }\\T $\ast$ \mbox{\hyperlink{class_y_a_m_l_1_1_node_a8dd1bef76169bd355c4e80e31d80f9bb}{payload}} ()
+\item 
+\mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_a7afde68585bc7a476435fde6086b4d35}{set\+\_\+payload}} (\mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} $\ast$\mbox{\hyperlink{class_y_a_m_l_1_1_node_a8dd1bef76169bd355c4e80e31d80f9bb}{payload}})
+\item 
+{\footnotesize template$<$$>$ }\\\mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_aafad8b992bf145dfa4d03df519a41439}{Assign}} (const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&rhs)
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_y_a_m_l_1_1_node_a3698ada19fa4946ec1b589a2b23e695f}{Node\+Builder}}
+\item 
+class \mbox{\hyperlink{class_y_a_m_l_1_1_node_a499f933f221a93e5f5fe7f1a18f8f25b}{Node\+Events}}
+\item 
+struct \mbox{\hyperlink{class_y_a_m_l_1_1_node_accc6b154ee40bff3b5acc6db8015a8c6}{detail\+::iterator\+\_\+value}}
+\item 
+class \mbox{\hyperlink{class_y_a_m_l_1_1_node_abb1f10f2e479de89a0809c3e7f8fac9b}{detail\+::node}}
+\item 
+class \mbox{\hyperlink{class_y_a_m_l_1_1_node_a21fe8a2c1cad43a713578f42e65878d6}{detail\+::node\+\_\+data}}
+\item 
+{\footnotesize template$<$typename $>$ }\\class \mbox{\hyperlink{class_y_a_m_l_1_1_node_a95513f553864beda7d559428085c05f9}{detail\+::iterator\+\_\+base}}
+\item 
+{\footnotesize template$<$typename T , typename S $>$ }\\struct \mbox{\hyperlink{class_y_a_m_l_1_1_node_aa5bd1397d82d2b3c48bbc0a5557de43f}{as\+\_\+if}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 29 of file node.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a40d235ac56001961929189a33c923d6c}\label{class_y_a_m_l_1_1_node_a40d235ac56001961929189a33c923d6c}} 
+\index{YAML::Node@{YAML::Node}!const\_iterator@{const\_iterator}}
+\index{const\_iterator@{const\_iterator}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{const\_iterator}{const\_iterator}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{namespace_y_a_m_l_a0a1f3211b4b1f42bb8e6a9fde49b5c44}{Y\+A\+M\+L\+::const\+\_\+iterator}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_a40d235ac56001961929189a33c923d6c}{Y\+A\+M\+L\+::\+Node\+::const\+\_\+iterator}}}
+
+
+
+Definition at line 42 of file node.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a3004302ddd5d977af0a6da29af38f7f4}\label{class_y_a_m_l_1_1_node_a3004302ddd5d977af0a6da29af38f7f4}} 
+\index{YAML::Node@{YAML::Node}!iterator@{iterator}}
+\index{iterator@{iterator}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{iterator}{iterator}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{namespace_y_a_m_l_a057e57e7f23a1b85ea32bbc730b94d24}{Y\+A\+M\+L\+::iterator}} \mbox{\hyperlink{class_y_a_m_l_1_1_node_a3004302ddd5d977af0a6da29af38f7f4}{Y\+A\+M\+L\+::\+Node\+::iterator}}}
+
+
+
+Definition at line 41 of file node.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a19cb097351fff40c54c7837d1f84409e}\label{class_y_a_m_l_1_1_node_a19cb097351fff40c54c7837d1f84409e}} 
+\index{YAML::Node@{YAML::Node}!Node@{Node}}
+\index{Node@{Node}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily Y\+A\+M\+L\+::\+Node\+::\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 18 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a4401629dc793878b3527637ed1cc8485}\label{class_y_a_m_l_1_1_node_a4401629dc793878b3527637ed1cc8485}} 
+\index{YAML::Node@{YAML::Node}!Node@{Node}}
+\index{Node@{Node}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily Y\+A\+M\+L\+::\+Node\+::\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_y_a_m_l_1_1_node_type_af83cf3f3c2eca0bf0eae1bbf981e86c4}{Node\+Type\+::value}}}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Definition at line 20 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a8ca3b8da61f7f85a7a3424893951bb1c}\label{class_y_a_m_l_1_1_node_a8ca3b8da61f7f85a7a3424893951bb1c}} 
+\index{YAML::Node@{YAML::Node}!Node@{Node}}
+\index{Node@{Node}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+Y\+A\+M\+L\+::\+Node\+::\+Node (\begin{DoxyParamCaption}\item[{const T \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Definition at line 28 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a73644c0a70230a2400636e4bc0e1f061}\label{class_y_a_m_l_1_1_node_a73644c0a70230a2400636e4bc0e1f061}} 
+\index{YAML::Node@{YAML::Node}!Node@{Node}}
+\index{Node@{Node}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily Y\+A\+M\+L\+::\+Node\+::\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_y_a_m_l_1_1detail_1_1iterator__value}{detail\+::iterator\+\_\+value}} \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Definition at line 35 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_af6e3fe8af7e9da72d9c6484b0370d533}\label{class_y_a_m_l_1_1_node_af6e3fe8af7e9da72d9c6484b0370d533}} 
+\index{YAML::Node@{YAML::Node}!Node@{Node}}
+\index{Node@{Node}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily Y\+A\+M\+L\+::\+Node\+::\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 40 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a29d21a7eceac20e93028810d2c313a06}\label{class_y_a_m_l_1_1_node_a29d21a7eceac20e93028810d2c313a06}} 
+\index{YAML::Node@{YAML::Node}!````~Node@{$\sim$Node}}
+\index{````~Node@{$\sim$Node}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{$\sim$Node()}{~Node()}}
+{\footnotesize\ttfamily Y\+A\+M\+L\+::\+Node\+::$\sim$\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 50 of file impl.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_aa851b856bd5972b42b0b1976adc90606}\label{class_y_a_m_l_1_1_node_aa851b856bd5972b42b0b1976adc90606}} 
+\index{YAML::Node@{YAML::Node}!as@{as}}
+\index{as@{as}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{as()}{as()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T Y\+A\+M\+L\+::\+Node\+::as (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 143 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a5ea7214df4819515ef54665727fcb751}\label{class_y_a_m_l_1_1_node_a5ea7214df4819515ef54665727fcb751}} 
+\index{YAML::Node@{YAML::Node}!as@{as}}
+\index{as@{as}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{as()}{as()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T , typename S $>$ \\
+T Y\+A\+M\+L\+::\+Node\+::as (\begin{DoxyParamCaption}\item[{const S \&}]{fallback }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 150 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_aafad8b992bf145dfa4d03df519a41439}\label{class_y_a_m_l_1_1_node_aafad8b992bf145dfa4d03df519a41439}} 
+\index{YAML::Node@{YAML::Node}!Assign@{Assign}}
+\index{Assign@{Assign}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{Assign()}{Assign()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+\mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} Y\+A\+M\+L\+::\+Node\+::\+Assign (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 229 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_abad00d4117dce1ce60e6c83963d74dd1}\label{class_y_a_m_l_1_1_node_abad00d4117dce1ce60e6c83963d74dd1}} 
+\index{YAML::Node@{YAML::Node}!begin@{begin}}
+\index{begin@{begin}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_y_a_m_l_1_1_node_a40d235ac56001961929189a33c923d6c}{const\+\_\+iterator}} Y\+A\+M\+L\+::\+Node\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 283 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_ac249a75c8d917a230c126ffd0585953a}\label{class_y_a_m_l_1_1_node_ac249a75c8d917a230c126ffd0585953a}} 
+\index{YAML::Node@{YAML::Node}!begin@{begin}}
+\index{begin@{begin}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_y_a_m_l_1_1_node_a3004302ddd5d977af0a6da29af38f7f4}{iterator}} Y\+A\+M\+L\+::\+Node\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 290 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a552f8a322701be4601ff268e1c2b67e7}\label{class_y_a_m_l_1_1_node_a552f8a322701be4601ff268e1c2b67e7}} 
+\index{YAML::Node@{YAML::Node}!end@{end}}
+\index{end@{end}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_y_a_m_l_1_1_node_a40d235ac56001961929189a33c923d6c}{const\+\_\+iterator}} Y\+A\+M\+L\+::\+Node\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 296 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a703a31bfe6f54c773c8688e6c924d9ed}\label{class_y_a_m_l_1_1_node_a703a31bfe6f54c773c8688e6c924d9ed}} 
+\index{YAML::Node@{YAML::Node}!end@{end}}
+\index{end@{end}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_y_a_m_l_1_1_node_a3004302ddd5d977af0a6da29af38f7f4}{iterator}} Y\+A\+M\+L\+::\+Node\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 302 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_ae5e192ad9ed22a602b1242ccae9486ce}\label{class_y_a_m_l_1_1_node_ae5e192ad9ed22a602b1242ccae9486ce}} 
+\index{YAML::Node@{YAML::Node}!force\_insert@{force\_insert}}
+\index{force\_insert@{force\_insert}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{force\_insert()}{force\_insert()}}
+{\footnotesize\ttfamily template$<$typename Key , typename Value $>$ \\
+\mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} Y\+A\+M\+L\+::\+Node\+::force\+\_\+insert (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespace_y_a_m_l_a67c320aa50d3de7ecba1d0b8775dd684a1af533fc24b0311b8c4d5ac2870283aa}{Key}} \&}]{key,  }\item[{const \mbox{\hyperlink{namespace_y_a_m_l_a67c320aa50d3de7ecba1d0b8775dd684a0d29a86853d6a9cfe0241ab7ea8da97c}{Value}} \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 436 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a35acb7bdd8751c583394e743f47908c7}\label{class_y_a_m_l_1_1_node_a35acb7bdd8751c583394e743f47908c7}} 
+\index{YAML::Node@{YAML::Node}!is@{is}}
+\index{is@{is}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{is()}{is()}}
+{\footnotesize\ttfamily bool Y\+A\+M\+L\+::\+Node\+::is (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \&}]{rhs }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 189 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a45f02d95f0dbbd223c36045769787897}\label{class_y_a_m_l_1_1_node_a45f02d95f0dbbd223c36045769787897}} 
+\index{YAML::Node@{YAML::Node}!IsDefined@{IsDefined}}
+\index{IsDefined@{IsDefined}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{IsDefined()}{IsDefined()}}
+{\footnotesize\ttfamily bool Y\+A\+M\+L\+::\+Node\+::\+Is\+Defined (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 62 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_aab7e81b22940b960c141fc57f04b7d8a}\label{class_y_a_m_l_1_1_node_aab7e81b22940b960c141fc57f04b7d8a}} 
+\index{YAML::Node@{YAML::Node}!IsMap@{IsMap}}
+\index{IsMap@{IsMap}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{IsMap()}{IsMap()}}
+{\footnotesize\ttfamily bool Y\+A\+M\+L\+::\+Node\+::\+Is\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 58 of file node.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_ae46fcc36b16c65a3ff39215bf02ca985}\label{class_y_a_m_l_1_1_node_ae46fcc36b16c65a3ff39215bf02ca985}} 
+\index{YAML::Node@{YAML::Node}!IsNull@{IsNull}}
+\index{IsNull@{IsNull}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{IsNull()}{IsNull()}}
+{\footnotesize\ttfamily bool Y\+A\+M\+L\+::\+Node\+::\+Is\+Null (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 55 of file node.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a66c9a35b6c47e18d5df75e946cf2acf5}\label{class_y_a_m_l_1_1_node_a66c9a35b6c47e18d5df75e946cf2acf5}} 
+\index{YAML::Node@{YAML::Node}!IsScalar@{IsScalar}}
+\index{IsScalar@{IsScalar}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{IsScalar()}{IsScalar()}}
+{\footnotesize\ttfamily bool Y\+A\+M\+L\+::\+Node\+::\+Is\+Scalar (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 56 of file node.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_ad550e0b444c8a2c3b9cc6342a87a2118}\label{class_y_a_m_l_1_1_node_ad550e0b444c8a2c3b9cc6342a87a2118}} 
+\index{YAML::Node@{YAML::Node}!IsSequence@{IsSequence}}
+\index{IsSequence@{IsSequence}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{IsSequence()}{IsSequence()}}
+{\footnotesize\ttfamily bool Y\+A\+M\+L\+::\+Node\+::\+Is\+Sequence (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 57 of file node.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_ade805ae8e338c7026add709e8d6c3f24}\label{class_y_a_m_l_1_1_node_ade805ae8e338c7026add709e8d6c3f24}} 
+\index{YAML::Node@{YAML::Node}!Mark@{Mark}}
+\index{Mark@{Mark}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{Mark()}{Mark()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_y_a_m_l_1_1_mark}{Mark}} Y\+A\+M\+L\+::\+Node\+::\+Mark (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 69 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_acf62c3257292c6d67945835785a01497}\label{class_y_a_m_l_1_1_node_acf62c3257292c6d67945835785a01497}} 
+\index{YAML::Node@{YAML::Node}!operator"!@{operator"!}}
+\index{operator"!@{operator"!}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{operator"!()}{operator!()}}
+{\footnotesize\ttfamily bool Y\+A\+M\+L\+::\+Node\+::operator! (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 62 of file node.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a117e05460b9d13f0954f4ea16c7c3dc9}\label{class_y_a_m_l_1_1_node_a117e05460b9d13f0954f4ea16c7c3dc9}} 
+\index{YAML::Node@{YAML::Node}!operator=@{operator=}}
+\index{operator=@{operator=}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \& Y\+A\+M\+L\+::\+Node\+::operator= (\begin{DoxyParamCaption}\item[{const T \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 198 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_ac183724c7c53d4f96453adbc421d3e27}\label{class_y_a_m_l_1_1_node_ac183724c7c53d4f96453adbc421d3e27}} 
+\index{YAML::Node@{YAML::Node}!operator=@{operator=}}
+\index{operator=@{operator=}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \& Y\+A\+M\+L\+::\+Node\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 205 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a2795774c0fe459793ea3c6b0ae2e740b}\label{class_y_a_m_l_1_1_node_a2795774c0fe459793ea3c6b0ae2e740b}} 
+\index{YAML::Node@{YAML::Node}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$typename Key $>$ \\
+const \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} Y\+A\+M\+L\+::\+Node\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespace_y_a_m_l_a67c320aa50d3de7ecba1d0b8775dd684a1af533fc24b0311b8c4d5ac2870283aa}{Key}} \&}]{key }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 373 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_af2123f5a45029366e0fa6fb75e13d1f4}\label{class_y_a_m_l_1_1_node_af2123f5a45029366e0fa6fb75e13d1f4}} 
+\index{YAML::Node@{YAML::Node}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$typename Key $>$ \\
+\mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} Y\+A\+M\+L\+::\+Node\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespace_y_a_m_l_a67c320aa50d3de7ecba1d0b8775dd684a1af533fc24b0311b8c4d5ac2870283aa}{Key}} \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 386 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a61d3f1d940f690d6ba06df7fef53510b}\label{class_y_a_m_l_1_1_node_a61d3f1d940f690d6ba06df7fef53510b}} 
+\index{YAML::Node@{YAML::Node}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} Y\+A\+M\+L\+::\+Node\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \&}]{key }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 402 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a9f34a4c2a061a93cb49ba81203d27f3c}\label{class_y_a_m_l_1_1_node_a9f34a4c2a061a93cb49ba81203d27f3c}} 
+\index{YAML::Node@{YAML::Node}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} Y\+A\+M\+L\+::\+Node\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 416 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a8dd1bef76169bd355c4e80e31d80f9bb}\label{class_y_a_m_l_1_1_node_a8dd1bef76169bd355c4e80e31d80f9bb}} 
+\index{YAML::Node@{YAML::Node}!payload@{payload}}
+\index{payload@{payload}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{payload()}{payload()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T$\ast$ Y\+A\+M\+L\+::\+Node\+::payload (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 117 of file node.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a9ba45abe5334123051997c5de5d92e5a}\label{class_y_a_m_l_1_1_node_a9ba45abe5334123051997c5de5d92e5a}} 
+\index{YAML::Node@{YAML::Node}!push\_back@{push\_back}}
+\index{push\_back@{push\_back}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{push\_back()}{push\_back()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} Y\+A\+M\+L\+::\+Node\+::push\+\_\+back (\begin{DoxyParamCaption}\item[{const T \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 310 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a619341edc51fadf84fd7e9a34699c210}\label{class_y_a_m_l_1_1_node_a619341edc51fadf84fd7e9a34699c210}} 
+\index{YAML::Node@{YAML::Node}!push\_back@{push\_back}}
+\index{push\_back@{push\_back}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{push\_back()}{push\_back()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} Y\+A\+M\+L\+::\+Node\+::push\+\_\+back (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 316 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_ab27ee6ca788d596ed47b33d32a47708d}\label{class_y_a_m_l_1_1_node_ab27ee6ca788d596ed47b33d32a47708d}} 
+\index{YAML::Node@{YAML::Node}!remove@{remove}}
+\index{remove@{remove}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{remove()}{remove()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Key $>$ \\
+bool Y\+A\+M\+L\+::\+Node\+::remove (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespace_y_a_m_l_a67c320aa50d3de7ecba1d0b8775dd684a1af533fc24b0311b8c4d5ac2870283aa}{Key}} \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 395 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_ab41bdfe9cb4071e2949f2d0aaeecd00e}\label{class_y_a_m_l_1_1_node_ab41bdfe9cb4071e2949f2d0aaeecd00e}} 
+\index{YAML::Node@{YAML::Node}!remove@{remove}}
+\index{remove@{remove}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{remove()}{remove()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool Y\+A\+M\+L\+::\+Node\+::remove (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 426 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_ae9511d64500c0be6eeda5a9b969325ac}\label{class_y_a_m_l_1_1_node_ae9511d64500c0be6eeda5a9b969325ac}} 
+\index{YAML::Node@{YAML::Node}!reset@{reset}}
+\index{reset@{reset}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} Y\+A\+M\+L\+::\+Node\+::reset (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}} \&}]{rhs = {\ttfamily \mbox{\hyperlink{class_y_a_m_l_1_1_node}{Node}}()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 214 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a774e1077cccab9a72137e0634557a275}\label{class_y_a_m_l_1_1_node_a774e1077cccab9a72137e0634557a275}} 
+\index{YAML::Node@{YAML::Node}!Scalar@{Scalar}}
+\index{Scalar@{Scalar}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{Scalar()}{Scalar()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \& Y\+A\+M\+L\+::\+Node\+::\+Scalar (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 156 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a7afde68585bc7a476435fde6086b4d35}\label{class_y_a_m_l_1_1_node_a7afde68585bc7a476435fde6086b4d35}} 
+\index{YAML::Node@{YAML::Node}!set\_payload@{set\_payload}}
+\index{set\_payload@{set\_payload}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{set\_payload()}{set\_payload()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} Y\+A\+M\+L\+::\+Node\+::set\+\_\+payload (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} $\ast$}]{payload }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 118 of file node.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a92be22e98028ac4e126ac8f036ed9e45}\label{class_y_a_m_l_1_1_node_a92be22e98028ac4e126ac8f036ed9e45}} 
+\index{YAML::Node@{YAML::Node}!SetStyle@{SetStyle}}
+\index{SetStyle@{SetStyle}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{SetStyle()}{SetStyle()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} Y\+A\+M\+L\+::\+Node\+::\+Set\+Style (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_y_a_m_l_1_1_emitter_style_ae86640662c85ce6062a37f9636b6959f}{Emitter\+Style\+::value}}}]{style }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 181 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a8c9b93527cb12dd9b5d464adcbd8c781}\label{class_y_a_m_l_1_1_node_a8c9b93527cb12dd9b5d464adcbd8c781}} 
+\index{YAML::Node@{YAML::Node}!SetTag@{SetTag}}
+\index{SetTag@{SetTag}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{SetTag()}{SetTag()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} Y\+A\+M\+L\+::\+Node\+::\+Set\+Tag (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&}]{tag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 168 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_ae843efe9fc5933f7adec123661c73c16}\label{class_y_a_m_l_1_1_node_ae843efe9fc5933f7adec123661c73c16}} 
+\index{YAML::Node@{YAML::Node}!size@{size}}
+\index{size@{size}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Y\+A\+M\+L\+::\+Node\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 277 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_ac1e18c6a11d984560dedbf4ca816d87e}\label{class_y_a_m_l_1_1_node_ac1e18c6a11d984560dedbf4ca816d87e}} 
+\index{YAML::Node@{YAML::Node}!Style@{Style}}
+\index{Style@{Style}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{Style()}{Style()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_y_a_m_l_1_1_emitter_style_ae86640662c85ce6062a37f9636b6959f}{Emitter\+Style\+::value}} Y\+A\+M\+L\+::\+Node\+::\+Style (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 175 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a58aaece650ba5da327f7ba3b2223d60c}\label{class_y_a_m_l_1_1_node_a58aaece650ba5da327f7ba3b2223d60c}} 
+\index{YAML::Node@{YAML::Node}!Tag@{Tag}}
+\index{Tag@{Tag}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{Tag()}{Tag()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \& Y\+A\+M\+L\+::\+Node\+::\+Tag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 162 of file impl.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a03ec765b519b11c1bdf9c050298a966d}\label{class_y_a_m_l_1_1_node_a03ec765b519b11c1bdf9c050298a966d}} 
+\index{YAML::Node@{YAML::Node}!Type@{Type}}
+\index{Type@{Type}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{Type()}{Type()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_y_a_m_l_1_1_node_type_af83cf3f3c2eca0bf0eae1bbf981e86c4}{Node\+Type\+::value}} Y\+A\+M\+L\+::\+Node\+::\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 76 of file impl.\+h.
+
+
+
+\subsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_aa5bd1397d82d2b3c48bbc0a5557de43f}\label{class_y_a_m_l_1_1_node_aa5bd1397d82d2b3c48bbc0a5557de43f}} 
+\index{YAML::Node@{YAML::Node}!as\_if@{as\_if}}
+\index{as\_if@{as\_if}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{as\_if}{as\_if}}
+{\footnotesize\ttfamily template$<$typename T , typename S $>$ \\
+friend struct \mbox{\hyperlink{struct_y_a_m_l_1_1as__if}{as\+\_\+if}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 39 of file node.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a95513f553864beda7d559428085c05f9}\label{class_y_a_m_l_1_1_node_a95513f553864beda7d559428085c05f9}} 
+\index{YAML::Node@{YAML::Node}!detail::iterator\_base@{detail::iterator\_base}}
+\index{detail::iterator\_base@{detail::iterator\_base}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{detail::iterator\_base}{detail::iterator\_base}}
+{\footnotesize\ttfamily template$<$typename $>$ \\
+friend class \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1iterator__base}{detail\+::iterator\+\_\+base}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 37 of file node.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_accc6b154ee40bff3b5acc6db8015a8c6}\label{class_y_a_m_l_1_1_node_accc6b154ee40bff3b5acc6db8015a8c6}} 
+\index{YAML::Node@{YAML::Node}!detail::iterator\_value@{detail::iterator\_value}}
+\index{detail::iterator\_value@{detail::iterator\_value}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{detail::iterator\_value}{detail::iterator\_value}}
+{\footnotesize\ttfamily friend struct \mbox{\hyperlink{struct_y_a_m_l_1_1detail_1_1iterator__value}{detail\+::iterator\+\_\+value}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 33 of file node.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_abb1f10f2e479de89a0809c3e7f8fac9b}\label{class_y_a_m_l_1_1_node_abb1f10f2e479de89a0809c3e7f8fac9b}} 
+\index{YAML::Node@{YAML::Node}!detail::node@{detail::node}}
+\index{detail::node@{detail::node}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{detail::node}{detail::node}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node}{detail\+::node}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 34 of file node.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a21fe8a2c1cad43a713578f42e65878d6}\label{class_y_a_m_l_1_1_node_a21fe8a2c1cad43a713578f42e65878d6}} 
+\index{YAML::Node@{YAML::Node}!detail::node\_data@{detail::node\_data}}
+\index{detail::node\_data@{detail::node\_data}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{detail::node\_data}{detail::node\_data}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{class_y_a_m_l_1_1detail_1_1node__data}{detail\+::node\+\_\+data}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 35 of file node.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a3698ada19fa4946ec1b589a2b23e695f}\label{class_y_a_m_l_1_1_node_a3698ada19fa4946ec1b589a2b23e695f}} 
+\index{YAML::Node@{YAML::Node}!NodeBuilder@{NodeBuilder}}
+\index{NodeBuilder@{NodeBuilder}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{NodeBuilder}{NodeBuilder}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{class_y_a_m_l_1_1_node_builder}{Node\+Builder}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 31 of file node.\+h.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_node_a499f933f221a93e5f5fe7f1a18f8f25b}\label{class_y_a_m_l_1_1_node_a499f933f221a93e5f5fe7f1a18f8f25b}} 
+\index{YAML::Node@{YAML::Node}!NodeEvents@{NodeEvents}}
+\index{NodeEvents@{NodeEvents}!YAML::Node@{YAML::Node}}
+\subsubsection{\texorpdfstring{NodeEvents}{NodeEvents}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{class_y_a_m_l_1_1_node_events}{Node\+Events}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 32 of file node.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+V\+C\+Repos/\+Open\+G\+L\+T6/\+Open\+G\+L\+T6/third-\/party/include/yaml-\/cpp/node/\mbox{\hyperlink{node_8h}{node.\+h}}\item 
+D\+:/\+V\+C\+Repos/\+Open\+G\+L\+T6/\+Open\+G\+L\+T6/third-\/party/include/yaml-\/cpp/node/\mbox{\hyperlink{impl_8h}{impl.\+h}}\end{DoxyCompactItemize}

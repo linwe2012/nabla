@@ -1,0 +1,129 @@
+\hypertarget{convert_8h}{}\section{D\+:/\+V\+C\+Repos/\+Open\+G\+L\+T6/\+Open\+G\+L\+T6/third-\/party/include/yaml-\/cpp/node/convert.h File Reference}
+\label{convert_8h}\index{D:/VCRepos/OpenGLT6/OpenGLT6/third-\/party/include/yaml-\/cpp/node/convert.h@{D:/VCRepos/OpenGLT6/OpenGLT6/third-\/party/include/yaml-\/cpp/node/convert.h}}
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$limits$>$}\newline
+{\ttfamily \#include $<$list$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include \char`\"{}yaml-\/cpp/binary.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}yaml-\/cpp/node/impl.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}yaml-\/cpp/node/iterator.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}yaml-\/cpp/node/node.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}yaml-\/cpp/node/type.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}yaml-\/cpp/null.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_y_a_m_l_1_1convert}{Y\+A\+M\+L\+::convert$<$ T $>$}}
+\item 
+struct \mbox{\hyperlink{struct_y_a_m_l_1_1convert_3_01_node_01_4}{Y\+A\+M\+L\+::convert$<$ Node $>$}}
+\item 
+struct \mbox{\hyperlink{struct_y_a_m_l_1_1convert_3_01std_1_1string_01_4}{Y\+A\+M\+L\+::convert$<$ std\+::string $>$}}
+\item 
+struct \mbox{\hyperlink{struct_y_a_m_l_1_1convert_3_01const_01char_01_5_01_4}{Y\+A\+M\+L\+::convert$<$ const char $\ast$ $>$}}
+\item 
+struct \mbox{\hyperlink{struct_y_a_m_l_1_1convert_3_01const_01char[_n]_4}{Y\+A\+M\+L\+::convert$<$ const char\mbox{[}\+N\mbox{]}$>$}}
+\item 
+struct \mbox{\hyperlink{struct_y_a_m_l_1_1convert_3_01___null_01_4}{Y\+A\+M\+L\+::convert$<$ \+\_\+\+Null $>$}}
+\item 
+struct \mbox{\hyperlink{struct_y_a_m_l_1_1convert_3_01bool_01_4}{Y\+A\+M\+L\+::convert$<$ bool $>$}}
+\item 
+struct \mbox{\hyperlink{struct_y_a_m_l_1_1convert_3_01std_1_1map_3_01_k_00_01_v_01_4_01_4}{Y\+A\+M\+L\+::convert$<$ std\+::map$<$ K, V $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{struct_y_a_m_l_1_1convert_3_01std_1_1vector_3_01_t_01_4_01_4}{Y\+A\+M\+L\+::convert$<$ std\+::vector$<$ T $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{struct_y_a_m_l_1_1convert_3_01std_1_1list_3_01_t_01_4_01_4}{Y\+A\+M\+L\+::convert$<$ std\+::list$<$ T $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{struct_y_a_m_l_1_1convert_3_01std_1_1array_3_01_t_00_01_n_01_4_01_4}{Y\+A\+M\+L\+::convert$<$ std\+::array$<$ T, N $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{struct_y_a_m_l_1_1convert_3_01std_1_1pair_3_01_t_00_01_u_01_4_01_4}{Y\+A\+M\+L\+::convert$<$ std\+::pair$<$ T, U $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{struct_y_a_m_l_1_1convert_3_01_binary_01_4}{Y\+A\+M\+L\+::convert$<$ Binary $>$}}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespace_y_a_m_l}{Y\+A\+ML}}
+\item 
+ \mbox{\hyperlink{namespace_y_a_m_l_1_1conversion}{Y\+A\+M\+L\+::conversion}}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{convert_8h_a4f178fdf476b07d0d4647131f9f19701}{Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+LE}}(\mbox{\hyperlink{glad_8h_a890efa53b3d7deeeced6f3a0d6653ed3}{type}},  negative\+\_\+op)
+\item 
+\#define \mbox{\hyperlink{convert_8h_afcc9bae739f7f375cdef090841d544cd}{Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+L\+E\+\_\+\+S\+I\+G\+N\+ED}}(\mbox{\hyperlink{glad_8h_a890efa53b3d7deeeced6f3a0d6653ed3}{type}})~\mbox{\hyperlink{convert_8h_a4f178fdf476b07d0d4647131f9f19701}{Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+LE}}(\mbox{\hyperlink{glad_8h_a890efa53b3d7deeeced6f3a0d6653ed3}{type}}, -\/)
+\item 
+\#define \mbox{\hyperlink{convert_8h_a04f1a7657db1f282eda8eaad13cd61ca}{Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+L\+E\+\_\+\+U\+N\+S\+I\+G\+N\+ED}}(\mbox{\hyperlink{glad_8h_a890efa53b3d7deeeced6f3a0d6653ed3}{type}})~\mbox{\hyperlink{convert_8h_a4f178fdf476b07d0d4647131f9f19701}{Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+LE}}(\mbox{\hyperlink{glad_8h_a890efa53b3d7deeeced6f3a0d6653ed3}{type}}, +)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespace_y_a_m_l_1_1conversion_abdfeb83d63be37e4500bd46cc91886b4}{Y\+A\+M\+L\+::conversion\+::\+Is\+Infinity}} (const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&input)
+\item 
+bool \mbox{\hyperlink{namespace_y_a_m_l_1_1conversion_aeee2784a85a229fc7792b257fd8f6087}{Y\+A\+M\+L\+::conversion\+::\+Is\+Negative\+Infinity}} (const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&input)
+\item 
+bool \mbox{\hyperlink{namespace_y_a_m_l_1_1conversion_a18c1203ebbec9aa7332b1c517e0986d3}{Y\+A\+M\+L\+::conversion\+::\+Is\+NaN}} (const \mbox{\hyperlink{glad_8h_ac83513893df92266f79a515488701770}{std\+::string}} \&input)
+\item 
+\mbox{\hyperlink{namespace_y_a_m_l_a2107fc2246ece5fe031db8f36cb7c292}{Y\+A\+M\+L\+::\+Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+L\+E\+\_\+\+S\+I\+G\+N\+ED}} (int)
+\item 
+\mbox{\hyperlink{namespace_y_a_m_l_a0e73e714546f78997780dac5eb2c0798}{Y\+A\+M\+L\+::\+Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+L\+E\+\_\+\+S\+I\+G\+N\+ED}} (short)
+\item 
+\mbox{\hyperlink{namespace_y_a_m_l_af57faf99be6cc3fd56f519a12132666b}{Y\+A\+M\+L\+::\+Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+L\+E\+\_\+\+S\+I\+G\+N\+ED}} (long)
+\item 
+\mbox{\hyperlink{namespace_y_a_m_l_a746a6583f314d0e9ded6777e58bd78cc}{Y\+A\+M\+L\+::\+Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+L\+E\+\_\+\+S\+I\+G\+N\+ED}} (long long)
+\item 
+\mbox{\hyperlink{namespace_y_a_m_l_a7f1e377d3aaaac18b78afe3ae447eddc}{Y\+A\+M\+L\+::\+Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+L\+E\+\_\+\+U\+N\+S\+I\+G\+N\+ED}} (unsigned)
+\item 
+\mbox{\hyperlink{namespace_y_a_m_l_afdcac0d3e390bcaa980178fee42ad214}{Y\+A\+M\+L\+::\+Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+L\+E\+\_\+\+U\+N\+S\+I\+G\+N\+ED}} (unsigned short)
+\item 
+\mbox{\hyperlink{namespace_y_a_m_l_a50a4d429ce5f8ad4a2b72fdc73e69297}{Y\+A\+M\+L\+::\+Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+L\+E\+\_\+\+U\+N\+S\+I\+G\+N\+ED}} (unsigned long)
+\item 
+\mbox{\hyperlink{namespace_y_a_m_l_aa79b3484e4ada6e6b59bd7a20994fea8}{Y\+A\+M\+L\+::\+Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+L\+E\+\_\+\+U\+N\+S\+I\+G\+N\+ED}} (unsigned long long)
+\item 
+\mbox{\hyperlink{namespace_y_a_m_l_a61d33d69e34277e205cc9a2483f5e156}{Y\+A\+M\+L\+::\+Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+L\+E\+\_\+\+S\+I\+G\+N\+ED}} (char)
+\item 
+\mbox{\hyperlink{namespace_y_a_m_l_a988ca78e757b17476ac3b02b04d83e3b}{Y\+A\+M\+L\+::\+Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+L\+E\+\_\+\+S\+I\+G\+N\+ED}} (signed char)
+\item 
+\mbox{\hyperlink{namespace_y_a_m_l_ab1074b275dd770115a9976e4e421ba09}{Y\+A\+M\+L\+::\+Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+L\+E\+\_\+\+U\+N\+S\+I\+G\+N\+ED}} (unsigned char)
+\item 
+\mbox{\hyperlink{namespace_y_a_m_l_a0c5f93e7570dd08ce0c59640316e179b}{Y\+A\+M\+L\+::\+Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+L\+E\+\_\+\+S\+I\+G\+N\+ED}} (float)
+\item 
+\mbox{\hyperlink{namespace_y_a_m_l_a014a313ea6c602c58917f833ed68e94b}{Y\+A\+M\+L\+::\+Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+L\+E\+\_\+\+S\+I\+G\+N\+ED}} (double)
+\item 
+\mbox{\hyperlink{namespace_y_a_m_l_aa1acc378fbd32c1f6f3511cbd3f2c6b5}{Y\+A\+M\+L\+::\+Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+L\+E\+\_\+\+S\+I\+G\+N\+ED}} (long double)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{convert_8h_a4f178fdf476b07d0d4647131f9f19701}\label{convert_8h_a4f178fdf476b07d0d4647131f9f19701}} 
+\index{convert.h@{convert.h}!YAML\_DEFINE\_CONVERT\_STREAMABLE@{YAML\_DEFINE\_CONVERT\_STREAMABLE}}
+\index{YAML\_DEFINE\_CONVERT\_STREAMABLE@{YAML\_DEFINE\_CONVERT\_STREAMABLE}!convert.h@{convert.h}}
+\subsubsection{\texorpdfstring{YAML\_DEFINE\_CONVERT\_STREAMABLE}{YAML\_DEFINE\_CONVERT\_STREAMABLE}}
+{\footnotesize\ttfamily \#define Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+LE(\begin{DoxyParamCaption}\item[{}]{\mbox{\hyperlink{glad_8h_a890efa53b3d7deeeced6f3a0d6653ed3}{type}},  }\item[{}]{negative\+\_\+op }\end{DoxyParamCaption})}
+
+
+
+Definition at line 91 of file convert.\+h.
+
+\mbox{\Hypertarget{convert_8h_afcc9bae739f7f375cdef090841d544cd}\label{convert_8h_afcc9bae739f7f375cdef090841d544cd}} 
+\index{convert.h@{convert.h}!YAML\_DEFINE\_CONVERT\_STREAMABLE\_SIGNED@{YAML\_DEFINE\_CONVERT\_STREAMABLE\_SIGNED}}
+\index{YAML\_DEFINE\_CONVERT\_STREAMABLE\_SIGNED@{YAML\_DEFINE\_CONVERT\_STREAMABLE\_SIGNED}!convert.h@{convert.h}}
+\subsubsection{\texorpdfstring{YAML\_DEFINE\_CONVERT\_STREAMABLE\_SIGNED}{YAML\_DEFINE\_CONVERT\_STREAMABLE\_SIGNED}}
+{\footnotesize\ttfamily \#define Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+L\+E\+\_\+\+S\+I\+G\+N\+ED(\begin{DoxyParamCaption}\item[{}]{\mbox{\hyperlink{glad_8h_a890efa53b3d7deeeced6f3a0d6653ed3}{type}} }\end{DoxyParamCaption})~\mbox{\hyperlink{convert_8h_a4f178fdf476b07d0d4647131f9f19701}{Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+LE}}(\mbox{\hyperlink{glad_8h_a890efa53b3d7deeeced6f3a0d6653ed3}{type}}, -\/)}
+
+
+
+Definition at line 130 of file convert.\+h.
+
+\mbox{\Hypertarget{convert_8h_a04f1a7657db1f282eda8eaad13cd61ca}\label{convert_8h_a04f1a7657db1f282eda8eaad13cd61ca}} 
+\index{convert.h@{convert.h}!YAML\_DEFINE\_CONVERT\_STREAMABLE\_UNSIGNED@{YAML\_DEFINE\_CONVERT\_STREAMABLE\_UNSIGNED}}
+\index{YAML\_DEFINE\_CONVERT\_STREAMABLE\_UNSIGNED@{YAML\_DEFINE\_CONVERT\_STREAMABLE\_UNSIGNED}!convert.h@{convert.h}}
+\subsubsection{\texorpdfstring{YAML\_DEFINE\_CONVERT\_STREAMABLE\_UNSIGNED}{YAML\_DEFINE\_CONVERT\_STREAMABLE\_UNSIGNED}}
+{\footnotesize\ttfamily \#define Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+L\+E\+\_\+\+U\+N\+S\+I\+G\+N\+ED(\begin{DoxyParamCaption}\item[{}]{\mbox{\hyperlink{glad_8h_a890efa53b3d7deeeced6f3a0d6653ed3}{type}} }\end{DoxyParamCaption})~\mbox{\hyperlink{convert_8h_a4f178fdf476b07d0d4647131f9f19701}{Y\+A\+M\+L\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+\+S\+T\+R\+E\+A\+M\+A\+B\+LE}}(\mbox{\hyperlink{glad_8h_a890efa53b3d7deeeced6f3a0d6653ed3}{type}}, +)}
+
+
+
+Definition at line 133 of file convert.\+h.
+

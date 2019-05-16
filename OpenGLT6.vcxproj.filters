@@ -1,0 +1,393 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Header Files\utils">
+      <UniqueIdentifier>{a1cdb7da-ca86-413c-9bde-1ae16b122133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\third-party">
+      <UniqueIdentifier>{a4b42458-473f-4c49-842c-231e92dd213b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\renderer">
+      <UniqueIdentifier>{c4c1ac10-feef-4fad-81d0-a8f7a2c42988}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\utils\containers">
+      <UniqueIdentifier>{4c34ff69-7173-4240-9254-90a190099656}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\utils\memeory">
+      <UniqueIdentifier>{e62d7c7a-ad2c-4649-9b96-ee05d17d5dfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\asset">
+      <UniqueIdentifier>{c4c1bca2-8c7e-4a8d-ad23-30d0135f36d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\asset">
+      <UniqueIdentifier>{2ce36cdf-dc57-4937-8725-1f89c70bfcd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\utils">
+      <UniqueIdentifier>{82bf5cd5-4aa7-46ae-b8a2-f80621a5c4bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\third-party\yaml">
+      <UniqueIdentifier>{2274a142-1628-4401-b193-7a21e6bf4485}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\renderer">
+      <UniqueIdentifier>{7b1f0037-3e66-4fe2-a690-b35ff48a5827}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\third-party\imgui">
+      <UniqueIdentifier>{ced717d4-4bdb-4957-9fad-1b7c4778dad6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\system">
+      <UniqueIdentifier>{b7ab0ff6-e3a2-4ef9-a6f8-b708ac5e636a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="openglt6\benchmark.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\utils\typeid.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\test.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\src\glad.c">
+      <Filter>Source Files\third-party</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\core\service-locator.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\core\asset\bootstrap.cc">
+      <Filter>Source Files\asset</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\core\asset\model.cc">
+      <Filter>Source Files\asset</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\core\asset\texture.cc">
+      <Filter>Source Files\asset</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\core\config.cc">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\utils\filesystem.cc">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\utils\memory\page-allocator.cc">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\binary.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\convert.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\directives.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\emit.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\emitfromevents.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\emitter.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\emitterstate.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\emitterutils.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\exceptions.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\exp.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\memory.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\node.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\node_data.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\nodebuilder.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\nodeevents.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\null.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\ostream_wrapper.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\parse.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\parser.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\regex_yaml.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\scanner.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\scanscalar.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\scantag.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\scantoken.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\simplekey.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\singledocparser.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\stream.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\tag.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\contrib\graphbuilder.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\yaml-src\contrib\graphbuilderadapter.cpp">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\core\renderer.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\core\renderer\drawcall-gl.cc">
+      <Filter>Source Files\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\core\renderer\shader.cc">
+      <Filter>Source Files\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\core\renderer\render-resources.cc">
+      <Filter>Source Files\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\imgui\imgui.cpp">
+      <Filter>Source Files\third-party\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\imgui\imgui_demo.cpp">
+      <Filter>Source Files\third-party\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\imgui\imgui_draw.cpp">
+      <Filter>Source Files\third-party\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\imgui\imgui_widgets.cpp">
+      <Filter>Source Files\third-party\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\imgui\impl\imgui_impl_glfw.cpp">
+      <Filter>Source Files\third-party\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\imgui\impl\imgui_impl_opengl3.cpp">
+      <Filter>Source Files\third-party\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\core\renderer\compiled-drawcall.cc">
+      <Filter>Source Files\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\test2.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\editor\gui.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\systems\lighting.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="openglt6\core\component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="openglt6\core\entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\core\entity-manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="openglt6\utils\platform-info.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\components\skeleton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\systems\animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\core\component-registry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\core\service-locator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\core\renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\core\renderer\compiled-drawcall.h">
+      <Filter>Header Files\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\core\renderer\render-resources.h">
+      <Filter>Header Files\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\utils\containers\deque.h">
+      <Filter>Header Files\utils\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="openglt6\utils\containers\vector.h">
+      <Filter>Header Files\utils\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\utils\memory\heap-allocator.h">
+      <Filter>Header Files\utils\memeory</Filter>
+    </ClInclude>
+    <ClInclude Include="openglt6\utils\memory\memmanip.h">
+      <Filter>Header Files\utils\memeory</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\utils\memory\page-allocator.h">
+      <Filter>Header Files\utils\memeory</Filter>
+    </ClInclude>
+    <ClInclude Include="openglt6\utils\memory\slot-allocator.h">
+      <Filter>Header Files\utils\memeory</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\utils\typeid.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\utils\assertion.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\utils\logger.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\core\data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\core\config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\utils\filesystem.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\core\renderer\shader.h">
+      <Filter>Header Files\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\utils\utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\core\asset\bootstrap.h">
+      <Filter>Header Files\asset</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\core\asset\model.h">
+      <Filter>Header Files\asset</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\utils\containers\map.h">
+      <Filter>Header Files\utils\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\core\asset\texture.h">
+      <Filter>Header Files\asset</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\collectionstack.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\directives.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\emitterstate.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\emitterutils.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\exp.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\indentation.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\nodebuilder.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\nodeevents.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\ptr_vector.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\regex_yaml.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\regeximpl.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\scanner.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\scanscalar.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\scantag.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\setting.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\singledocparser.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\stream.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\streamcharsource.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\stringsource.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\tag.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\token.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\yaml-src\contrib\graphbuilderadapter.h">
+      <Filter>Source Files\third-party\yaml</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\core\renderer\drawcall.h">
+      <Filter>Header Files\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\utils\containers\set.h">
+      <Filter>Header Files\utils\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\core\camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\editor\gui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\systems\isystem.h">
+      <Filter>Header Files\system</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\systems\lighting.h">
+      <Filter>Header Files\system</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

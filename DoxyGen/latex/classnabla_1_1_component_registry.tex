@@ -1,0 +1,111 @@
+\hypertarget{classnabla_1_1_component_registry}{}\section{nabla\+::Component\+Registry Class Reference}
+\label{classnabla_1_1_component_registry}\index{nabla::ComponentRegistry@{nabla::ComponentRegistry}}
+
+
+{\ttfamily \#include $<$component-\/registry.\+h$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structnabla_1_1_component_registry_1_1_handle}{Handle}}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classnabla_1_1_component_registry_a41e06a6e157b4458ad1353070f916e4a}{Component\+Registry}} ()
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{structnabla_1_1_component_registry_1_1_handle}{Handle}} \mbox{\hyperlink{classnabla_1_1_component_registry_a776156940c82f102cbcfc7e0fbd2030b}{Expose}} (const char $\ast$name, \mbox{\hyperlink{structnabla_1_1_sharable_component}{Sharable\+Component}}$<$ T $>$ $\ast$component)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classnabla_1_1_component_registry_ac6ea0dbc1f8d059e5344a23507a5ad6f}{change\+Component}} (\mbox{\hyperlink{structnabla_1_1_component_registry_1_1_handle}{Handle}} handle, \mbox{\hyperlink{structnabla_1_1_sharable_component}{Sharable\+Component}}$<$ T $>$ $\ast$component)
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{structnabla_1_1_sharable_component}{Sharable\+Component}}$<$ T $>$ $\ast$ \mbox{\hyperlink{classnabla_1_1_component_registry_aa61c3930a419c090e7ed649dd87af063}{request}} (const char $\ast$name)
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{classnabla_1_1_component_registry_a192ab752b97fe4b9be910645b2167a3e}{validate}} (int offset)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classnabla_1_1_component_registry}{Component\+Registry}} $\ast$ \mbox{\hyperlink{classnabla_1_1_component_registry_ad3bcf27ad62f7628ac2e69affab26a9e}{init\+Service}} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 38 of file component-\/registry.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classnabla_1_1_component_registry_a41e06a6e157b4458ad1353070f916e4a}\label{classnabla_1_1_component_registry_a41e06a6e157b4458ad1353070f916e4a}} 
+\index{nabla::ComponentRegistry@{nabla::ComponentRegistry}!ComponentRegistry@{ComponentRegistry}}
+\index{ComponentRegistry@{ComponentRegistry}!nabla::ComponentRegistry@{nabla::ComponentRegistry}}
+\subsubsection{\texorpdfstring{ComponentRegistry()}{ComponentRegistry()}}
+{\footnotesize\ttfamily nabla\+::\+Component\+Registry\+::\+Component\+Registry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 46 of file component-\/registry.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classnabla_1_1_component_registry_ac6ea0dbc1f8d059e5344a23507a5ad6f}\label{classnabla_1_1_component_registry_ac6ea0dbc1f8d059e5344a23507a5ad6f}} 
+\index{nabla::ComponentRegistry@{nabla::ComponentRegistry}!changeComponent@{changeComponent}}
+\index{changeComponent@{changeComponent}!nabla::ComponentRegistry@{nabla::ComponentRegistry}}
+\subsubsection{\texorpdfstring{changeComponent()}{changeComponent()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void nabla\+::\+Component\+Registry\+::change\+Component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnabla_1_1_component_registry_1_1_handle}{Handle}}}]{handle,  }\item[{\mbox{\hyperlink{structnabla_1_1_sharable_component}{Sharable\+Component}}$<$ T $>$ $\ast$}]{component }\end{DoxyParamCaption})}
+
+
+
+Definition at line 114 of file component-\/registry.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_component_registry_a776156940c82f102cbcfc7e0fbd2030b}\label{classnabla_1_1_component_registry_a776156940c82f102cbcfc7e0fbd2030b}} 
+\index{nabla::ComponentRegistry@{nabla::ComponentRegistry}!Expose@{Expose}}
+\index{Expose@{Expose}!nabla::ComponentRegistry@{nabla::ComponentRegistry}}
+\subsubsection{\texorpdfstring{Expose()}{Expose()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{structnabla_1_1_component_registry_1_1_handle}{Component\+Registry\+::\+Handle}} nabla\+::\+Component\+Registry\+::\+Expose (\begin{DoxyParamCaption}\item[{const char $\ast$}]{name,  }\item[{\mbox{\hyperlink{structnabla_1_1_sharable_component}{Sharable\+Component}}$<$ T $>$ $\ast$}]{component }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 87 of file component-\/registry.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_component_registry_ad3bcf27ad62f7628ac2e69affab26a9e}\label{classnabla_1_1_component_registry_ad3bcf27ad62f7628ac2e69affab26a9e}} 
+\index{nabla::ComponentRegistry@{nabla::ComponentRegistry}!initService@{initService}}
+\index{initService@{initService}!nabla::ComponentRegistry@{nabla::ComponentRegistry}}
+\subsubsection{\texorpdfstring{initService()}{initService()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classnabla_1_1_component_registry}{Component\+Registry}}$\ast$ nabla\+::\+Component\+Registry\+::init\+Service (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 42 of file component-\/registry.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_component_registry_aa61c3930a419c090e7ed649dd87af063}\label{classnabla_1_1_component_registry_aa61c3930a419c090e7ed649dd87af063}} 
+\index{nabla::ComponentRegistry@{nabla::ComponentRegistry}!request@{request}}
+\index{request@{request}!nabla::ComponentRegistry@{nabla::ComponentRegistry}}
+\subsubsection{\texorpdfstring{request()}{request()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{structnabla_1_1_sharable_component}{Sharable\+Component}}$<$ T $>$ $\ast$ nabla\+::\+Component\+Registry\+::request (\begin{DoxyParamCaption}\item[{const char $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+Definition at line 102 of file component-\/registry.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_component_registry_a192ab752b97fe4b9be910645b2167a3e}\label{classnabla_1_1_component_registry_a192ab752b97fe4b9be910645b2167a3e}} 
+\index{nabla::ComponentRegistry@{nabla::ComponentRegistry}!validate@{validate}}
+\index{validate@{validate}!nabla::ComponentRegistry@{nabla::ComponentRegistry}}
+\subsubsection{\texorpdfstring{validate()}{validate()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool nabla\+::\+Component\+Registry\+::validate (\begin{DoxyParamCaption}\item[{int}]{offset }\end{DoxyParamCaption})}
+
+
+
+Definition at line 122 of file component-\/registry.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+V\+C\+Repos/\+Open\+G\+L\+T6/\+Open\+G\+L\+T6/core/\mbox{\hyperlink{component-registry_8h}{component-\/registry.\+h}}\end{DoxyCompactItemize}

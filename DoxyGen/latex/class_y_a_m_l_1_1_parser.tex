@@ -1,0 +1,158 @@
+\hypertarget{class_y_a_m_l_1_1_parser}{}\section{Y\+A\+ML\+::Parser Class Reference}
+\label{class_y_a_m_l_1_1_parser}\index{YAML::Parser@{YAML::Parser}}
+
+
+{\ttfamily \#include $<$parser.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_parser_a0e70f6d93a2179bfeb0f46a8fa29c2e4}{Parser}} ()
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_parser_ae50ae1f48cf0eaa1c0f661a1e7e342e1}{Parser}} (const \mbox{\hyperlink{class_y_a_m_l_1_1_parser}{Parser}} \&)=delete
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_parser_a49484a840b41e33f667cf1a8b38d14f9}{Parser}} (\mbox{\hyperlink{class_y_a_m_l_1_1_parser}{Parser}} \&\&)=default
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_parser}{Parser}} \& \mbox{\hyperlink{class_y_a_m_l_1_1_parser_abcfdbdd14d7847a960e82bb3cfe682e7}{operator=}} (const \mbox{\hyperlink{class_y_a_m_l_1_1_parser}{Parser}} \&)=delete
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_parser}{Parser}} \& \mbox{\hyperlink{class_y_a_m_l_1_1_parser_a2af7e07c9e09cb4a9e79708f39d5d901}{operator=}} (\mbox{\hyperlink{class_y_a_m_l_1_1_parser}{Parser}} \&\&)=default
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_parser_a48fa032c51c491baa16738c4340b20e8}{Parser}} (std\+::istream \&in)
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_parser_ab901da63c58009ce94635dd6150e574f}{$\sim$\+Parser}} ()
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_parser_a292eda06e37bf6460d421460341e9c47}{operator bool}} () const
+\item 
+\mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} \mbox{\hyperlink{class_y_a_m_l_1_1_parser_aa988a8bbe094e6c6c6a9d18b38d5d880}{Load}} (std\+::istream \&in)
+\item 
+bool \mbox{\hyperlink{class_y_a_m_l_1_1_parser_ab5c33d17f902e0e7a50d5212ba46f6bf}{Handle\+Next\+Document}} (\mbox{\hyperlink{class_y_a_m_l_1_1_event_handler}{Event\+Handler}} \&event\+Handler)
+\item 
+\mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} \mbox{\hyperlink{class_y_a_m_l_1_1_parser_abca395895c919ccbd15fb042858f8ae5}{Print\+Tokens}} (std\+::ostream \&out)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A parser turns a stream of bytes into one stream of \char`\"{}events\char`\"{} per \mbox{\hyperlink{namespace_y_a_m_l}{Y\+A\+ML}} document in the input stream. 
+
+Definition at line 26 of file parser.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_y_a_m_l_1_1_parser_a0e70f6d93a2179bfeb0f46a8fa29c2e4}\label{class_y_a_m_l_1_1_parser_a0e70f6d93a2179bfeb0f46a8fa29c2e4}} 
+\index{YAML::Parser@{YAML::Parser}!Parser@{Parser}}
+\index{Parser@{Parser}!YAML::Parser@{YAML::Parser}}
+\subsubsection{\texorpdfstring{Parser()}{Parser()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily Y\+A\+M\+L\+::\+Parser\+::\+Parser (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Constructs an empty parser (with no input. 
+
+Definition at line 14 of file parser.\+cpp.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_parser_ae50ae1f48cf0eaa1c0f661a1e7e342e1}\label{class_y_a_m_l_1_1_parser_ae50ae1f48cf0eaa1c0f661a1e7e342e1}} 
+\index{YAML::Parser@{YAML::Parser}!Parser@{Parser}}
+\index{Parser@{Parser}!YAML::Parser@{YAML::Parser}}
+\subsubsection{\texorpdfstring{Parser()}{Parser()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily Y\+A\+M\+L\+::\+Parser\+::\+Parser (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_y_a_m_l_1_1_parser}{Parser}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+non copyable but movable \mbox{\Hypertarget{class_y_a_m_l_1_1_parser_a49484a840b41e33f667cf1a8b38d14f9}\label{class_y_a_m_l_1_1_parser_a49484a840b41e33f667cf1a8b38d14f9}} 
+\index{YAML::Parser@{YAML::Parser}!Parser@{Parser}}
+\index{Parser@{Parser}!YAML::Parser@{YAML::Parser}}
+\subsubsection{\texorpdfstring{Parser()}{Parser()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily Y\+A\+M\+L\+::\+Parser\+::\+Parser (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_y_a_m_l_1_1_parser}{Parser}} \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_parser_a48fa032c51c491baa16738c4340b20e8}\label{class_y_a_m_l_1_1_parser_a48fa032c51c491baa16738c4340b20e8}} 
+\index{YAML::Parser@{YAML::Parser}!Parser@{Parser}}
+\index{Parser@{Parser}!YAML::Parser@{YAML::Parser}}
+\subsubsection{\texorpdfstring{Parser()}{Parser()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily Y\+A\+M\+L\+::\+Parser\+::\+Parser (\begin{DoxyParamCaption}\item[{std\+::istream \&}]{in }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+Constructs a parser from the given input stream. The input stream must live as long as the parser. 
+
+Definition at line 16 of file parser.\+cpp.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_parser_ab901da63c58009ce94635dd6150e574f}\label{class_y_a_m_l_1_1_parser_ab901da63c58009ce94635dd6150e574f}} 
+\index{YAML::Parser@{YAML::Parser}!````~Parser@{$\sim$Parser}}
+\index{````~Parser@{$\sim$Parser}!YAML::Parser@{YAML::Parser}}
+\subsubsection{\texorpdfstring{$\sim$Parser()}{~Parser()}}
+{\footnotesize\ttfamily Y\+A\+M\+L\+::\+Parser\+::$\sim$\+Parser (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 18 of file parser.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_y_a_m_l_1_1_parser_ab5c33d17f902e0e7a50d5212ba46f6bf}\label{class_y_a_m_l_1_1_parser_ab5c33d17f902e0e7a50d5212ba46f6bf}} 
+\index{YAML::Parser@{YAML::Parser}!HandleNextDocument@{HandleNextDocument}}
+\index{HandleNextDocument@{HandleNextDocument}!YAML::Parser@{YAML::Parser}}
+\subsubsection{\texorpdfstring{HandleNextDocument()}{HandleNextDocument()}}
+{\footnotesize\ttfamily bool Y\+A\+M\+L\+::\+Parser\+::\+Handle\+Next\+Document (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_y_a_m_l_1_1_event_handler}{Event\+Handler}} \&}]{event\+Handler }\end{DoxyParamCaption})}
+
+Handles the next document by calling events on the
+\begin{DoxyCode}{0}
+\DoxyCodeLine{eventHandler }
+\end{DoxyCode}
+ .
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em a} & \mbox{\hyperlink{class_y_a_m_l_1_1_parser_exception}{Parser\+Exception}} on error. \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Returns}
+false if there are no more documents 
+\end{DoxyReturn}
+
+
+Definition at line 29 of file parser.\+cpp.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_parser_aa988a8bbe094e6c6c6a9d18b38d5d880}\label{class_y_a_m_l_1_1_parser_aa988a8bbe094e6c6c6a9d18b38d5d880}} 
+\index{YAML::Parser@{YAML::Parser}!Load@{Load}}
+\index{Load@{Load}!YAML::Parser@{YAML::Parser}}
+\subsubsection{\texorpdfstring{Load()}{Load()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} Y\+A\+M\+L\+::\+Parser\+::\+Load (\begin{DoxyParamCaption}\item[{std\+::istream \&}]{in }\end{DoxyParamCaption})}
+
+Resets the parser with the given input stream. Any existing state is erased. 
+
+Definition at line 24 of file parser.\+cpp.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_parser_a292eda06e37bf6460d421460341e9c47}\label{class_y_a_m_l_1_1_parser_a292eda06e37bf6460d421460341e9c47}} 
+\index{YAML::Parser@{YAML::Parser}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!YAML::Parser@{YAML::Parser}}
+\subsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily Y\+A\+M\+L\+::\+Parser\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [explicit]}}
+
+Evaluates to true if the parser has some valid input to be read. 
+
+Definition at line 20 of file parser.\+cpp.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_parser_abcfdbdd14d7847a960e82bb3cfe682e7}\label{class_y_a_m_l_1_1_parser_abcfdbdd14d7847a960e82bb3cfe682e7}} 
+\index{YAML::Parser@{YAML::Parser}!operator=@{operator=}}
+\index{operator=@{operator=}!YAML::Parser@{YAML::Parser}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_y_a_m_l_1_1_parser}{Parser}}\& Y\+A\+M\+L\+::\+Parser\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_y_a_m_l_1_1_parser}{Parser}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_parser_a2af7e07c9e09cb4a9e79708f39d5d901}\label{class_y_a_m_l_1_1_parser_a2af7e07c9e09cb4a9e79708f39d5d901}} 
+\index{YAML::Parser@{YAML::Parser}!operator=@{operator=}}
+\index{operator=@{operator=}!YAML::Parser@{YAML::Parser}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_y_a_m_l_1_1_parser}{Parser}}\& Y\+A\+M\+L\+::\+Parser\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_y_a_m_l_1_1_parser}{Parser}} \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_parser_abca395895c919ccbd15fb042858f8ae5}\label{class_y_a_m_l_1_1_parser_abca395895c919ccbd15fb042858f8ae5}} 
+\index{YAML::Parser@{YAML::Parser}!PrintTokens@{PrintTokens}}
+\index{PrintTokens@{PrintTokens}!YAML::Parser@{YAML::Parser}}
+\subsubsection{\texorpdfstring{PrintTokens()}{PrintTokens()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} Y\+A\+M\+L\+::\+Parser\+::\+Print\+Tokens (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out }\end{DoxyParamCaption})}
+
+
+
+Definition at line 115 of file parser.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+V\+C\+Repos/\+Open\+G\+L\+T6/\+Open\+G\+L\+T6/third-\/party/include/yaml-\/cpp/\mbox{\hyperlink{parser_8h}{parser.\+h}}\item 
+D\+:/\+V\+C\+Repos/\+Open\+G\+L\+T6/\+Open\+G\+L\+T6/third-\/party/include/yaml-\/src/\mbox{\hyperlink{parser_8cpp}{parser.\+cpp}}\end{DoxyCompactItemize}

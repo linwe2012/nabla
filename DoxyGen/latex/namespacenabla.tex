@@ -1,0 +1,142 @@
+\hypertarget{namespacenabla}{}\section{nabla Namespace Reference}
+\label{namespacenabla}\index{nabla@{nabla}}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacenabla_1_1data}{data}}
+\item 
+ \mbox{\hyperlink{namespacenabla_1_1detail}{detail}}
+\item 
+ \mbox{\hyperlink{namespacenabla_1_1renderer}{renderer}}
+\end{DoxyCompactItemize}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structnabla_1_1_animatable_component}{Animatable\+Component}}
+\item 
+class \mbox{\hyperlink{classnabla_1_1_animation_system}{Animation\+System}}
+\item 
+class \mbox{\hyperlink{classnabla_1_1_component_registry}{Component\+Registry}}
+\item 
+class \mbox{\hyperlink{classnabla_1_1_config_manager}{Config\+Manager}}
+\item 
+struct \mbox{\hyperlink{structnabla_1_1_entity}{Entity}}
+\item 
+class \mbox{\hyperlink{classnabla_1_1_entity_manager}{Entity\+Manager}}
+\item 
+struct \mbox{\hyperlink{structnabla_1_1_local_pose_component}{Local\+Pose\+Component}}
+\item 
+struct \mbox{\hyperlink{structnabla_1_1_mesh_static_component}{Mesh\+Static\+Component}}
+\item 
+class \mbox{\hyperlink{classnabla_1_1_model_data}{Model\+Data}}
+\item 
+struct \mbox{\hyperlink{structnabla_1_1_polygon_static_component}{Polygon\+Static\+Component}}
+\item 
+class \mbox{\hyperlink{classnabla_1_1_sampler}{Sampler}}
+\item 
+class \mbox{\hyperlink{classnabla_1_1_service_locator}{Service\+Locator}}
+\item 
+struct \mbox{\hyperlink{structnabla_1_1_sharable_component}{Sharable\+Component}}
+\item 
+struct \mbox{\hyperlink{structnabla_1_1_skeleton_component}{Skeleton\+Component}}
+\item 
+class \mbox{\hyperlink{classnabla_1_1_slot_allocator}{Slot\+Allocator}}
+\item 
+class \mbox{\hyperlink{classnabla_1_1_slot_allocator_proxy}{Slot\+Allocator\+Proxy}}
+\item 
+class \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{S\+T\+L\+Vector\+Ex}}
+\item 
+struct \mbox{\hyperlink{structnabla_1_1_undeletable_ptr_handle}{Undeletable\+Ptr\+Handle}}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T , typename Alloc  = \+::std\+::allocator$<$\+T$>$$>$ }\\using \mbox{\hyperlink{namespacenabla_a2f96ae838f528e078f7bcdb42fbbe706}{Safe\+Vector}} = \+::std\+::vector$<$ T, Alloc $>$
+\item 
+{\footnotesize template$<$typename T , typename Alloc  = \+::std\+::allocator$<$\+T$>$$>$ }\\using \mbox{\hyperlink{namespacenabla_a34f7ca8c9af290f9af3ed299236ff959}{Vector}} = \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$
+\item 
+using \mbox{\hyperlink{namespacenabla_abd03676c495fab67cc7ac9b90e31c152}{Listen\+CB}} = std\+::function$<$ void(fs\+::path \&)$>$
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespacenabla_a76f6ec6bf96a20352e3fe6d075bfe137}{Listen\+File}} (fs\+::path path, std\+::function$<$ void(fs\+::path \&)$>$ callback)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classnabla_1_1_service_locator}{Service\+Locator}} \mbox{\hyperlink{namespacenabla_ac9094e134a73575efe47915c9f6b10fc}{Global\+Services}}
+\item 
+std\+::map$<$ fs\+::path, std\+::vector$<$ \mbox{\hyperlink{namespacenabla_abd03676c495fab67cc7ac9b90e31c152}{Listen\+CB}} $>$ $>$ \mbox{\hyperlink{namespacenabla_abc8c0b4e42511a328da34e4f82ef92da}{g\+Listeners}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{namespacenabla_abd03676c495fab67cc7ac9b90e31c152}\label{namespacenabla_abd03676c495fab67cc7ac9b90e31c152}} 
+\index{nabla@{nabla}!ListenCB@{ListenCB}}
+\index{ListenCB@{ListenCB}!nabla@{nabla}}
+\subsubsection{\texorpdfstring{ListenCB}{ListenCB}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacenabla_abd03676c495fab67cc7ac9b90e31c152}{nabla\+::\+Listen\+CB}} = typedef std\+::function$<$void(fs\+::path\&)$>$}
+
+
+
+Definition at line 4 of file filesystem.\+cc.
+
+\mbox{\Hypertarget{namespacenabla_a2f96ae838f528e078f7bcdb42fbbe706}\label{namespacenabla_a2f96ae838f528e078f7bcdb42fbbe706}} 
+\index{nabla@{nabla}!SafeVector@{SafeVector}}
+\index{SafeVector@{SafeVector}!nabla@{nabla}}
+\subsubsection{\texorpdfstring{SafeVector}{SafeVector}}
+{\footnotesize\ttfamily template$<$typename T , typename Alloc  = \+::std\+::allocator$<$\+T$>$$>$ \\
+using \mbox{\hyperlink{namespacenabla_a2f96ae838f528e078f7bcdb42fbbe706}{nabla\+::\+Safe\+Vector}} = typedef \+::std\+::vector$<$T, Alloc$>$}
+
+
+
+Definition at line 212 of file vector.\+h.
+
+\mbox{\Hypertarget{namespacenabla_a34f7ca8c9af290f9af3ed299236ff959}\label{namespacenabla_a34f7ca8c9af290f9af3ed299236ff959}} 
+\index{nabla@{nabla}!Vector@{Vector}}
+\index{Vector@{Vector}!nabla@{nabla}}
+\subsubsection{\texorpdfstring{Vector}{Vector}}
+{\footnotesize\ttfamily template$<$typename T , typename Alloc  = \+::std\+::allocator$<$\+T$>$$>$ \\
+using \mbox{\hyperlink{namespacenabla_a34f7ca8c9af290f9af3ed299236ff959}{nabla\+::\+Vector}} = typedef \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{S\+T\+L\+Vector\+Ex}}$<$T, Alloc$>$}
+
+
+
+Definition at line 216 of file vector.\+h.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacenabla_a76f6ec6bf96a20352e3fe6d075bfe137}\label{namespacenabla_a76f6ec6bf96a20352e3fe6d075bfe137}} 
+\index{nabla@{nabla}!ListenFile@{ListenFile}}
+\index{ListenFile@{ListenFile}!nabla@{nabla}}
+\subsubsection{\texorpdfstring{ListenFile()}{ListenFile()}}
+{\footnotesize\ttfamily void nabla\+::\+Listen\+File (\begin{DoxyParamCaption}\item[{fs\+::path}]{path,  }\item[{std\+::function$<$ void(fs\+::path \&)$>$}]{callback }\end{DoxyParamCaption})}
+
+
+
+Definition at line 7 of file filesystem.\+cc.
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{namespacenabla_abc8c0b4e42511a328da34e4f82ef92da}\label{namespacenabla_abc8c0b4e42511a328da34e4f82ef92da}} 
+\index{nabla@{nabla}!gListeners@{gListeners}}
+\index{gListeners@{gListeners}!nabla@{nabla}}
+\subsubsection{\texorpdfstring{gListeners}{gListeners}}
+{\footnotesize\ttfamily std\+::map$<$fs\+::path, std\+::vector$<$\mbox{\hyperlink{namespacenabla_abd03676c495fab67cc7ac9b90e31c152}{Listen\+CB}}$>$ $>$ nabla\+::g\+Listeners}
+
+
+
+Definition at line 5 of file filesystem.\+cc.
+
+\mbox{\Hypertarget{namespacenabla_ac9094e134a73575efe47915c9f6b10fc}\label{namespacenabla_ac9094e134a73575efe47915c9f6b10fc}} 
+\index{nabla@{nabla}!GlobalServices@{GlobalServices}}
+\index{GlobalServices@{GlobalServices}!nabla@{nabla}}
+\subsubsection{\texorpdfstring{GlobalServices}{GlobalServices}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classnabla_1_1_service_locator}{nabla\+::\+Service\+Locator}} nabla\+::\+Global\+Services}
+
+
+
+Definition at line 3 of file service-\/locator.\+cc.
+

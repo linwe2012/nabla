@@ -1,0 +1,102 @@
+\hypertarget{class_y_a_m_l_1_1_scanner}{}\section{Y\+A\+ML\+::Scanner Class Reference}
+\label{class_y_a_m_l_1_1_scanner}\index{YAML::Scanner@{YAML::Scanner}}
+
+
+{\ttfamily \#include $<$scanner.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_scanner_aea23d10585c1509e61ab0bd488d3fde2}{Scanner}} (std\+::istream \&in)
+\item 
+\mbox{\hyperlink{class_y_a_m_l_1_1_scanner_a0ac4b5ac07f864a667f3e742b149a304}{$\sim$\+Scanner}} ()
+\item 
+bool \mbox{\hyperlink{class_y_a_m_l_1_1_scanner_aca838c1612fbd22188f9d912c90e1129}{empty}} ()
+\item 
+\mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} \mbox{\hyperlink{class_y_a_m_l_1_1_scanner_a59105995d1326628b33b330299e5db4e}{pop}} ()
+\item 
+\mbox{\hyperlink{struct_y_a_m_l_1_1_token}{Token}} \& \mbox{\hyperlink{class_y_a_m_l_1_1_scanner_a65433ee930cad573a7f82da86f91c80d}{peek}} ()
+\item 
+\mbox{\hyperlink{struct_y_a_m_l_1_1_mark}{Mark}} \mbox{\hyperlink{class_y_a_m_l_1_1_scanner_ac2ea7a607ea1d3e96dfbf090b0c29e0a}{mark}} () const
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A scanner transforms a stream of characters into a stream of tokens. 
+
+Definition at line 30 of file scanner.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_y_a_m_l_1_1_scanner_aea23d10585c1509e61ab0bd488d3fde2}\label{class_y_a_m_l_1_1_scanner_aea23d10585c1509e61ab0bd488d3fde2}} 
+\index{YAML::Scanner@{YAML::Scanner}!Scanner@{Scanner}}
+\index{Scanner@{Scanner}!YAML::Scanner@{YAML::Scanner}}
+\subsubsection{\texorpdfstring{Scanner()}{Scanner()}}
+{\footnotesize\ttfamily Y\+A\+M\+L\+::\+Scanner\+::\+Scanner (\begin{DoxyParamCaption}\item[{std\+::istream \&}]{in }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Definition at line 10 of file scanner.\+cpp.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_scanner_a0ac4b5ac07f864a667f3e742b149a304}\label{class_y_a_m_l_1_1_scanner_a0ac4b5ac07f864a667f3e742b149a304}} 
+\index{YAML::Scanner@{YAML::Scanner}!````~Scanner@{$\sim$Scanner}}
+\index{````~Scanner@{$\sim$Scanner}!YAML::Scanner@{YAML::Scanner}}
+\subsubsection{\texorpdfstring{$\sim$Scanner()}{~Scanner()}}
+{\footnotesize\ttfamily Y\+A\+M\+L\+::\+Scanner\+::$\sim$\+Scanner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 22 of file scanner.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_y_a_m_l_1_1_scanner_aca838c1612fbd22188f9d912c90e1129}\label{class_y_a_m_l_1_1_scanner_aca838c1612fbd22188f9d912c90e1129}} 
+\index{YAML::Scanner@{YAML::Scanner}!empty@{empty}}
+\index{empty@{empty}!YAML::Scanner@{YAML::Scanner}}
+\subsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily bool Y\+A\+M\+L\+::\+Scanner\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns true if there are no more tokens to be read. 
+
+Definition at line 24 of file scanner.\+cpp.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_scanner_ac2ea7a607ea1d3e96dfbf090b0c29e0a}\label{class_y_a_m_l_1_1_scanner_ac2ea7a607ea1d3e96dfbf090b0c29e0a}} 
+\index{YAML::Scanner@{YAML::Scanner}!mark@{mark}}
+\index{mark@{mark}!YAML::Scanner@{YAML::Scanner}}
+\subsubsection{\texorpdfstring{mark()}{mark()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_y_a_m_l_1_1_mark}{Mark}} Y\+A\+M\+L\+::\+Scanner\+::mark (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns the current mark in the input stream. 
+
+Definition at line 51 of file scanner.\+cpp.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_scanner_a65433ee930cad573a7f82da86f91c80d}\label{class_y_a_m_l_1_1_scanner_a65433ee930cad573a7f82da86f91c80d}} 
+\index{YAML::Scanner@{YAML::Scanner}!peek@{peek}}
+\index{peek@{peek}!YAML::Scanner@{YAML::Scanner}}
+\subsubsection{\texorpdfstring{peek()}{peek()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_y_a_m_l_1_1_token}{Token}} \& Y\+A\+M\+L\+::\+Scanner\+::peek (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns, but does not remove, the next token in the queue. 
+
+Definition at line 35 of file scanner.\+cpp.
+
+\mbox{\Hypertarget{class_y_a_m_l_1_1_scanner_a59105995d1326628b33b330299e5db4e}\label{class_y_a_m_l_1_1_scanner_a59105995d1326628b33b330299e5db4e}} 
+\index{YAML::Scanner@{YAML::Scanner}!pop@{pop}}
+\index{pop@{pop}!YAML::Scanner@{YAML::Scanner}}
+\subsubsection{\texorpdfstring{pop()}{pop()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} Y\+A\+M\+L\+::\+Scanner\+::pop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Removes the next token in the queue. 
+
+Definition at line 29 of file scanner.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+V\+C\+Repos/\+Open\+G\+L\+T6/\+Open\+G\+L\+T6/third-\/party/include/yaml-\/src/\mbox{\hyperlink{scanner_8h}{scanner.\+h}}\item 
+D\+:/\+V\+C\+Repos/\+Open\+G\+L\+T6/\+Open\+G\+L\+T6/third-\/party/include/yaml-\/src/\mbox{\hyperlink{scanner_8cpp}{scanner.\+cpp}}\item 
+D\+:/\+V\+C\+Repos/\+Open\+G\+L\+T6/\+Open\+G\+L\+T6/third-\/party/include/yaml-\/src/\mbox{\hyperlink{scantoken_8cpp}{scantoken.\+cpp}}\item 
+D\+:/\+V\+C\+Repos/\+Open\+G\+L\+T6/\+Open\+G\+L\+T6/third-\/party/include/yaml-\/src/\mbox{\hyperlink{simplekey_8cpp}{simplekey.\+cpp}}\end{DoxyCompactItemize}

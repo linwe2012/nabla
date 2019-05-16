@@ -1,0 +1,70 @@
+\hypertarget{group__gtx__matrix__interpolation}{}\section{G\+L\+M\+\_\+\+G\+T\+X\+\_\+matrix\+\_\+interpolation}
+\label{group__gtx__matrix__interpolation}\index{GLM\_GTX\_matrix\_interpolation@{GLM\_GTX\_matrix\_interpolation}}
+
+
+Allows to directly interpolate two exiciting matrices.  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T , precision P$>$ }\\\mbox{\hyperlink{setup_8hpp_ab2d052de21a70539923e9bcbf6e83a51}{G\+L\+M\+\_\+\+F\+U\+N\+C\+\_\+\+D\+E\+CL}} \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} \mbox{\hyperlink{group__gtx__matrix__interpolation_ga9aef292eb5f29bdbb58a53ef4281af92}{glm\+::axis\+Angle}} (\mbox{\hyperlink{structglm_1_1tmat4x4}{tmat4x4}}$<$ T, P $>$ const \&mat, \mbox{\hyperlink{structglm_1_1tvec3}{tvec3}}$<$ T, P $>$ \&\mbox{\hyperlink{group__gtc__quaternion_ga0b3e87a13b2708154b72259e50789a19}{axis}}, T \&\mbox{\hyperlink{group__gtc__quaternion_gad4a4448baedb198b2b1e7880d2544dc9}{angle}})
+\item 
+{\footnotesize template$<$typename T , precision P$>$ }\\\mbox{\hyperlink{setup_8hpp_ab2d052de21a70539923e9bcbf6e83a51}{G\+L\+M\+\_\+\+F\+U\+N\+C\+\_\+\+D\+E\+CL}} \mbox{\hyperlink{structglm_1_1tmat4x4}{tmat4x4}}$<$ T, P $>$ \mbox{\hyperlink{group__gtx__matrix__interpolation_ga82d4bc058e9628cb2ea1d4e117a0cf39}{glm\+::axis\+Angle\+Matrix}} (\mbox{\hyperlink{structglm_1_1tvec3}{tvec3}}$<$ T, P $>$ const \&\mbox{\hyperlink{group__gtc__quaternion_ga0b3e87a13b2708154b72259e50789a19}{axis}}, T const \mbox{\hyperlink{group__gtc__quaternion_gad4a4448baedb198b2b1e7880d2544dc9}{angle}})
+\item 
+{\footnotesize template$<$typename T , precision P$>$ }\\\mbox{\hyperlink{setup_8hpp_ab2d052de21a70539923e9bcbf6e83a51}{G\+L\+M\+\_\+\+F\+U\+N\+C\+\_\+\+D\+E\+CL}} \mbox{\hyperlink{structglm_1_1tmat4x4}{tmat4x4}}$<$ T, P $>$ \mbox{\hyperlink{group__gtx__matrix__interpolation_ga6b8170aa4cf43caf81400696ebb38afe}{glm\+::extract\+Matrix\+Rotation}} (\mbox{\hyperlink{structglm_1_1tmat4x4}{tmat4x4}}$<$ T, P $>$ const \&mat)
+\item 
+{\footnotesize template$<$typename T , precision P$>$ }\\\mbox{\hyperlink{setup_8hpp_ab2d052de21a70539923e9bcbf6e83a51}{G\+L\+M\+\_\+\+F\+U\+N\+C\+\_\+\+D\+E\+CL}} \mbox{\hyperlink{structglm_1_1tmat4x4}{tmat4x4}}$<$ T, P $>$ \mbox{\hyperlink{group__gtx__matrix__interpolation_ga45099a92c5c704503565619ac2bcd5c6}{glm\+::interpolate}} (\mbox{\hyperlink{structglm_1_1tmat4x4}{tmat4x4}}$<$ T, P $>$ const \&m1, \mbox{\hyperlink{structglm_1_1tmat4x4}{tmat4x4}}$<$ T, P $>$ const \&m2, T const delta)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Allows to directly interpolate two exiciting matrices. 
+
+$<$\mbox{\hyperlink{matrix__interpolation_8hpp}{glm/gtx/matrix\+\_\+interpolation.\+hpp}}$>$ need to be included to use these functionalities. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__gtx__matrix__interpolation_ga9aef292eb5f29bdbb58a53ef4281af92}\label{group__gtx__matrix__interpolation_ga9aef292eb5f29bdbb58a53ef4281af92}} 
+\index{GLM\_GTX\_matrix\_interpolation@{GLM\_GTX\_matrix\_interpolation}!axisAngle@{axisAngle}}
+\index{axisAngle@{axisAngle}!GLM\_GTX\_matrix\_interpolation@{GLM\_GTX\_matrix\_interpolation}}
+\subsubsection{\texorpdfstring{axisAngle()}{axisAngle()}}
+{\footnotesize\ttfamily template$<$typename T , precision P$>$ \\
+\mbox{\hyperlink{setup_8hpp_ab2d052de21a70539923e9bcbf6e83a51}{G\+L\+M\+\_\+\+F\+U\+N\+C\+\_\+\+D\+E\+CL}} \mbox{\hyperlink{glad_8h_a950fc91edb4504f62f1c577bf4727c29}{void}} glm\+::axis\+Angle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structglm_1_1tmat4x4}{tmat4x4}}$<$ T, P $>$ const \&}]{mat,  }\item[{\mbox{\hyperlink{structglm_1_1tvec3}{tvec3}}$<$ T, P $>$ \&}]{axis,  }\item[{T \&}]{angle }\end{DoxyParamCaption})}
+
+Get the axis and angle of the rotation from a matrix. From G\+L\+M\+\_\+\+G\+T\+X\+\_\+matrix\+\_\+interpolation extension. 
+
+Definition at line 8 of file matrix\+\_\+interpolation.\+inl.
+
+\mbox{\Hypertarget{group__gtx__matrix__interpolation_ga82d4bc058e9628cb2ea1d4e117a0cf39}\label{group__gtx__matrix__interpolation_ga82d4bc058e9628cb2ea1d4e117a0cf39}} 
+\index{GLM\_GTX\_matrix\_interpolation@{GLM\_GTX\_matrix\_interpolation}!axisAngleMatrix@{axisAngleMatrix}}
+\index{axisAngleMatrix@{axisAngleMatrix}!GLM\_GTX\_matrix\_interpolation@{GLM\_GTX\_matrix\_interpolation}}
+\subsubsection{\texorpdfstring{axisAngleMatrix()}{axisAngleMatrix()}}
+{\footnotesize\ttfamily template$<$typename T , precision P$>$ \\
+\mbox{\hyperlink{setup_8hpp_ab2d052de21a70539923e9bcbf6e83a51}{G\+L\+M\+\_\+\+F\+U\+N\+C\+\_\+\+D\+E\+CL}} \mbox{\hyperlink{structglm_1_1tmat4x4}{tmat4x4}}$<$T, P$>$ glm\+::axis\+Angle\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structglm_1_1tvec3}{tvec3}}$<$ T, P $>$ const \&}]{axis,  }\item[{T const}]{angle }\end{DoxyParamCaption})}
+
+Build a matrix from axis and angle. From G\+L\+M\+\_\+\+G\+T\+X\+\_\+matrix\+\_\+interpolation extension. 
+
+Definition at line 83 of file matrix\+\_\+interpolation.\+inl.
+
+\mbox{\Hypertarget{group__gtx__matrix__interpolation_ga6b8170aa4cf43caf81400696ebb38afe}\label{group__gtx__matrix__interpolation_ga6b8170aa4cf43caf81400696ebb38afe}} 
+\index{GLM\_GTX\_matrix\_interpolation@{GLM\_GTX\_matrix\_interpolation}!extractMatrixRotation@{extractMatrixRotation}}
+\index{extractMatrixRotation@{extractMatrixRotation}!GLM\_GTX\_matrix\_interpolation@{GLM\_GTX\_matrix\_interpolation}}
+\subsubsection{\texorpdfstring{extractMatrixRotation()}{extractMatrixRotation()}}
+{\footnotesize\ttfamily template$<$typename T , precision P$>$ \\
+\mbox{\hyperlink{setup_8hpp_ab2d052de21a70539923e9bcbf6e83a51}{G\+L\+M\+\_\+\+F\+U\+N\+C\+\_\+\+D\+E\+CL}} \mbox{\hyperlink{structglm_1_1tmat4x4}{tmat4x4}}$<$T, P$>$ glm\+::extract\+Matrix\+Rotation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structglm_1_1tmat4x4}{tmat4x4}}$<$ T, P $>$ const \&}]{mat }\end{DoxyParamCaption})}
+
+Extracts the rotation part of a matrix. From G\+L\+M\+\_\+\+G\+T\+X\+\_\+matrix\+\_\+interpolation extension. 
+
+Definition at line 103 of file matrix\+\_\+interpolation.\+inl.
+
+\mbox{\Hypertarget{group__gtx__matrix__interpolation_ga45099a92c5c704503565619ac2bcd5c6}\label{group__gtx__matrix__interpolation_ga45099a92c5c704503565619ac2bcd5c6}} 
+\index{GLM\_GTX\_matrix\_interpolation@{GLM\_GTX\_matrix\_interpolation}!interpolate@{interpolate}}
+\index{interpolate@{interpolate}!GLM\_GTX\_matrix\_interpolation@{GLM\_GTX\_matrix\_interpolation}}
+\subsubsection{\texorpdfstring{interpolate()}{interpolate()}}
+{\footnotesize\ttfamily template$<$typename T , precision P$>$ \\
+\mbox{\hyperlink{setup_8hpp_ab2d052de21a70539923e9bcbf6e83a51}{G\+L\+M\+\_\+\+F\+U\+N\+C\+\_\+\+D\+E\+CL}} \mbox{\hyperlink{structglm_1_1tmat4x4}{tmat4x4}}$<$T, P$>$ glm\+::interpolate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structglm_1_1tmat4x4}{tmat4x4}}$<$ T, P $>$ const \&}]{m1,  }\item[{\mbox{\hyperlink{structglm_1_1tmat4x4}{tmat4x4}}$<$ T, P $>$ const \&}]{m2,  }\item[{T const}]{delta }\end{DoxyParamCaption})}
+
+Build a interpolation of 4 $\ast$ 4 matrixes. From G\+L\+M\+\_\+\+G\+T\+X\+\_\+matrix\+\_\+interpolation extension. Warning! works only with rotation and/or translation matrixes, scale will generate unexpected results. 
+
+Definition at line 117 of file matrix\+\_\+interpolation.\+inl.
+

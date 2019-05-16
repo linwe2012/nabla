@@ -1,0 +1,7 @@
+metal: 
+  - silver:
+      albedo: [0.2, 0.5, 0.7]
+      metallic: 0.67
+      roughness: 0.2
+      ambient-occlusion: 0.5
+  

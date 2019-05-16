@@ -1,0 +1,208 @@
+\hypertarget{structnabla_1_1_entity}{}\section{nabla\+::Entity Struct Reference}
+\label{structnabla_1_1_entity}\index{nabla::Entity@{nabla::Entity}}
+
+
+{\ttfamily \#include $<$entity.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \+: entity\+\_\+t \{ \mbox{\hyperlink{structnabla_1_1_entity_af5d356291772b453f7788f76d3b6eda3a2dc217e059d1f8553805dfaae2db3051}{k\+Invalid\+Index}} = k\+Index\+Mask
+ \}
+\item 
+enum \+: entity\+\_\+t \{ \mbox{\hyperlink{structnabla_1_1_entity_adaba9a30fd5fdebbe2a7f02ebe218bd2a1a033d53efd50a9e1848472cb1d0a6e6}{k\+Max\+Entities}} = k\+Index\+Mask
+ \}
+\item 
+using \mbox{\hyperlink{structnabla_1_1_entity_a0e7d5826cda759dfeb3a81c8175f3b4d}{entity\+\_\+t}} = unsigned int
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structnabla_1_1_entity_a0e7d5826cda759dfeb3a81c8175f3b4d}{entity\+\_\+t}} \mbox{\hyperlink{structnabla_1_1_entity_a4305d04861f997e061c98ff154d67063}{index}} () const
+\item 
+\mbox{\hyperlink{structnabla_1_1_entity_a0e7d5826cda759dfeb3a81c8175f3b4d}{entity\+\_\+t}} \mbox{\hyperlink{structnabla_1_1_entity_a5573713a19571f575b0245a8ed438172}{generation}} () const
+\item 
+void \mbox{\hyperlink{structnabla_1_1_entity_a853114bf954cd6fed1cff037edfe74a2}{set\+\_\+index}} (\mbox{\hyperlink{structnabla_1_1_entity_a0e7d5826cda759dfeb3a81c8175f3b4d}{entity\+\_\+t}} \mbox{\hyperlink{structnabla_1_1_entity_a4305d04861f997e061c98ff154d67063}{index}})
+\item 
+void \mbox{\hyperlink{structnabla_1_1_entity_ac93adb2a92a18f6f8a5d3ecf6844c317}{set\+\_\+generation}} (char gen)
+\item 
+bool \mbox{\hyperlink{structnabla_1_1_entity_ab121ebf82b7a9a60de85b4683454569f}{is\+Nil}} () const
+\item 
+void \mbox{\hyperlink{structnabla_1_1_entity_a089ff4e9a1f34c51bc9d472f2a47f33d}{mark\+Nil}} ()
+\item 
+bool \mbox{\hyperlink{structnabla_1_1_entity_a7c9daf8724739c429a2c22c7fa271a31}{operator==}} (const \mbox{\hyperlink{structnabla_1_1_entity}{Entity}} \&rhs) const
+\item 
+bool \mbox{\hyperlink{structnabla_1_1_entity_a4d68a63047a53435df7345276f397dda}{operator!=}} (const \mbox{\hyperlink{structnabla_1_1_entity}{Entity}} \&rhs) const
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{structnabla_1_1_entity}{Entity}} \mbox{\hyperlink{structnabla_1_1_entity_a35c224e7c7c7f35e71150cdc3184b356}{create\+Nil}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structnabla_1_1_entity_a0e7d5826cda759dfeb3a81c8175f3b4d}{entity\+\_\+t}} \mbox{\hyperlink{structnabla_1_1_entity_ab7db36f74338d506d40f7f17e3308b29}{vbo}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 8 of file entity.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\mbox{\Hypertarget{structnabla_1_1_entity_a0e7d5826cda759dfeb3a81c8175f3b4d}\label{structnabla_1_1_entity_a0e7d5826cda759dfeb3a81c8175f3b4d}} 
+\index{nabla::Entity@{nabla::Entity}!entity\_t@{entity\_t}}
+\index{entity\_t@{entity\_t}!nabla::Entity@{nabla::Entity}}
+\subsubsection{\texorpdfstring{entity\_t}{entity\_t}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{structnabla_1_1_entity_a0e7d5826cda759dfeb3a81c8175f3b4d}{nabla\+::\+Entity\+::entity\+\_\+t}} =  unsigned int}
+
+
+
+Definition at line 10 of file entity.\+h.
+
+
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{structnabla_1_1_entity_af5d356291772b453f7788f76d3b6eda3}\label{structnabla_1_1_entity_af5d356291772b453f7788f76d3b6eda3}} 
+\subsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily anonymous enum \+: \mbox{\hyperlink{structnabla_1_1_entity_a0e7d5826cda759dfeb3a81c8175f3b4d}{entity\+\_\+t}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kInvalidIndex@{kInvalidIndex}!nabla::Entity@{nabla::Entity}}\index{nabla::Entity@{nabla::Entity}!kInvalidIndex@{kInvalidIndex}}}\mbox{\Hypertarget{structnabla_1_1_entity_af5d356291772b453f7788f76d3b6eda3a2dc217e059d1f8553805dfaae2db3051}\label{structnabla_1_1_entity_af5d356291772b453f7788f76d3b6eda3a2dc217e059d1f8553805dfaae2db3051}} 
+k\+Invalid\+Index&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 18 of file entity.\+h.
+
+\mbox{\Hypertarget{structnabla_1_1_entity_adaba9a30fd5fdebbe2a7f02ebe218bd2}\label{structnabla_1_1_entity_adaba9a30fd5fdebbe2a7f02ebe218bd2}} 
+\subsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily anonymous enum \+: \mbox{\hyperlink{structnabla_1_1_entity_a0e7d5826cda759dfeb3a81c8175f3b4d}{entity\+\_\+t}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kMaxEntities@{kMaxEntities}!nabla::Entity@{nabla::Entity}}\index{nabla::Entity@{nabla::Entity}!kMaxEntities@{kMaxEntities}}}\mbox{\Hypertarget{structnabla_1_1_entity_adaba9a30fd5fdebbe2a7f02ebe218bd2a1a033d53efd50a9e1848472cb1d0a6e6}\label{structnabla_1_1_entity_adaba9a30fd5fdebbe2a7f02ebe218bd2a1a033d53efd50a9e1848472cb1d0a6e6}} 
+k\+Max\+Entities&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 19 of file entity.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structnabla_1_1_entity_a35c224e7c7c7f35e71150cdc3184b356}\label{structnabla_1_1_entity_a35c224e7c7c7f35e71150cdc3184b356}} 
+\index{nabla::Entity@{nabla::Entity}!createNil@{createNil}}
+\index{createNil@{createNil}!nabla::Entity@{nabla::Entity}}
+\subsubsection{\texorpdfstring{createNil()}{createNil()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{structnabla_1_1_entity}{Entity}} nabla\+::\+Entity\+::create\+Nil (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 35 of file entity.\+h.
+
+\mbox{\Hypertarget{structnabla_1_1_entity_a5573713a19571f575b0245a8ed438172}\label{structnabla_1_1_entity_a5573713a19571f575b0245a8ed438172}} 
+\index{nabla::Entity@{nabla::Entity}!generation@{generation}}
+\index{generation@{generation}!nabla::Entity@{nabla::Entity}}
+\subsubsection{\texorpdfstring{generation()}{generation()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structnabla_1_1_entity_a0e7d5826cda759dfeb3a81c8175f3b4d}{entity\+\_\+t}} nabla\+::\+Entity\+::generation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 23 of file entity.\+h.
+
+\mbox{\Hypertarget{structnabla_1_1_entity_a4305d04861f997e061c98ff154d67063}\label{structnabla_1_1_entity_a4305d04861f997e061c98ff154d67063}} 
+\index{nabla::Entity@{nabla::Entity}!index@{index}}
+\index{index@{index}!nabla::Entity@{nabla::Entity}}
+\subsubsection{\texorpdfstring{index()}{index()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structnabla_1_1_entity_a0e7d5826cda759dfeb3a81c8175f3b4d}{entity\+\_\+t}} nabla\+::\+Entity\+::index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 22 of file entity.\+h.
+
+\mbox{\Hypertarget{structnabla_1_1_entity_ab121ebf82b7a9a60de85b4683454569f}\label{structnabla_1_1_entity_ab121ebf82b7a9a60de85b4683454569f}} 
+\index{nabla::Entity@{nabla::Entity}!isNil@{isNil}}
+\index{isNil@{isNil}!nabla::Entity@{nabla::Entity}}
+\subsubsection{\texorpdfstring{isNil()}{isNil()}}
+{\footnotesize\ttfamily bool nabla\+::\+Entity\+::is\+Nil (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 28 of file entity.\+h.
+
+\mbox{\Hypertarget{structnabla_1_1_entity_a089ff4e9a1f34c51bc9d472f2a47f33d}\label{structnabla_1_1_entity_a089ff4e9a1f34c51bc9d472f2a47f33d}} 
+\index{nabla::Entity@{nabla::Entity}!markNil@{markNil}}
+\index{markNil@{markNil}!nabla::Entity@{nabla::Entity}}
+\subsubsection{\texorpdfstring{markNil()}{markNil()}}
+{\footnotesize\ttfamily void nabla\+::\+Entity\+::mark\+Nil (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 29 of file entity.\+h.
+
+\mbox{\Hypertarget{structnabla_1_1_entity_a4d68a63047a53435df7345276f397dda}\label{structnabla_1_1_entity_a4d68a63047a53435df7345276f397dda}} 
+\index{nabla::Entity@{nabla::Entity}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!nabla::Entity@{nabla::Entity}}
+\subsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool nabla\+::\+Entity\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structnabla_1_1_entity}{Entity}} \&}]{rhs }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 33 of file entity.\+h.
+
+\mbox{\Hypertarget{structnabla_1_1_entity_a7c9daf8724739c429a2c22c7fa271a31}\label{structnabla_1_1_entity_a7c9daf8724739c429a2c22c7fa271a31}} 
+\index{nabla::Entity@{nabla::Entity}!operator==@{operator==}}
+\index{operator==@{operator==}!nabla::Entity@{nabla::Entity}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool nabla\+::\+Entity\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structnabla_1_1_entity}{Entity}} \&}]{rhs }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 32 of file entity.\+h.
+
+\mbox{\Hypertarget{structnabla_1_1_entity_ac93adb2a92a18f6f8a5d3ecf6844c317}\label{structnabla_1_1_entity_ac93adb2a92a18f6f8a5d3ecf6844c317}} 
+\index{nabla::Entity@{nabla::Entity}!set\_generation@{set\_generation}}
+\index{set\_generation@{set\_generation}!nabla::Entity@{nabla::Entity}}
+\subsubsection{\texorpdfstring{set\_generation()}{set\_generation()}}
+{\footnotesize\ttfamily void nabla\+::\+Entity\+::set\+\_\+generation (\begin{DoxyParamCaption}\item[{char}]{gen }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 39 of file entity.\+h.
+
+\mbox{\Hypertarget{structnabla_1_1_entity_a853114bf954cd6fed1cff037edfe74a2}\label{structnabla_1_1_entity_a853114bf954cd6fed1cff037edfe74a2}} 
+\index{nabla::Entity@{nabla::Entity}!set\_index@{set\_index}}
+\index{set\_index@{set\_index}!nabla::Entity@{nabla::Entity}}
+\subsubsection{\texorpdfstring{set\_index()}{set\_index()}}
+{\footnotesize\ttfamily void nabla\+::\+Entity\+::set\+\_\+index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnabla_1_1_entity_a0e7d5826cda759dfeb3a81c8175f3b4d}{entity\+\_\+t}}}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 25 of file entity.\+h.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{structnabla_1_1_entity_ab7db36f74338d506d40f7f17e3308b29}\label{structnabla_1_1_entity_ab7db36f74338d506d40f7f17e3308b29}} 
+\index{nabla::Entity@{nabla::Entity}!vbo@{vbo}}
+\index{vbo@{vbo}!nabla::Entity@{nabla::Entity}}
+\subsubsection{\texorpdfstring{vbo}{vbo}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structnabla_1_1_entity_a0e7d5826cda759dfeb3a81c8175f3b4d}{entity\+\_\+t}} nabla\+::\+Entity\+::vbo}
+
+
+
+Definition at line 20 of file entity.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+V\+C\+Repos/\+Open\+G\+L\+T6/\+Open\+G\+L\+T6/core/\mbox{\hyperlink{entity_8h}{entity.\+h}}\end{DoxyCompactItemize}
