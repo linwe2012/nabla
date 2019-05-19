@@ -39,21 +39,21 @@ struct IndexedDrawCall {
 
 	IndexedDrawCall() = default;
 	IndexedDrawCall(MeshHandle _hmesh)
-		:hshader(), hmesh(_hmesh), model(1.0f) {}
+		:hshader(), hmesh(_hmesh) {}
+	IndexedDrawCall(ShaderHandle _hshader, MeshHandle _hmesh)
+		:hshader(_hshader), hmesh(_hmesh) {}
 
 	ShaderHandle hshader;
 	MeshHandle hmesh;
-	glm::mat4 model;
 };
 
-struct ShaderDescript {
-	NA_DRAWCALL(ShaderDescript);
+struct UseShaderDrawCall {
+	NA_DRAWCALL(UseShaderDrawCall);
 
-	ShaderDescript(): shader() {}
-	ShaderDescript(glm::mat4 _model, Shader _shader)
-		: shader(_shader) {}
+	UseShaderDrawCall(ShaderHandle _hshader)
+		: hshader(_hshader) {}
 	
-	Shader shader;
+	ShaderHandle hshader;
 };
 
 struct PBRDrawCall {
@@ -88,7 +88,24 @@ struct MaterialDrawCall {
 	uint32_t offset_by_bytes;
 };
 
+struct SwitchFrameBufferDrawCall {
+	NA_DRAWCALL(SwitchFrameBufferDrawCall);
 
+	
+
+	enum Transition {
+		kRenderOnFrameBuffer,
+		kSampleFromFrameBuffer,
+		kCopyFrameToDefault,
+		kCopyFrameBufferToDefault
+	};
+
+	SwitchFrameBufferDrawCall(Transition t, FrameBufferHandle hf)
+		:trans(t), hframe(hf) {};
+
+	Transition trans;
+	FrameBufferHandle hframe;
+};
 
 }
 }

@@ -49,6 +49,9 @@
     <Filter Include="Header Files\system">
       <UniqueIdentifier>{b7ab0ff6-e3a2-4ef9-a6f8-b708ac5e636a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\system">
+      <UniqueIdentifier>{77739840-0569-4a57-9632-cc200dc2dff3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="openglt6\benchmark.cc">
@@ -214,7 +217,16 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="OpenGLT6\systems\lighting.cc">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\system</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\third-party\include\imgui\imgui_stdlib.cpp">
+      <Filter>Source Files\third-party\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\systems\renderable.cc">
+      <Filter>Source Files\system</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\systems\material.cc">
+      <Filter>Source Files\system</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -387,6 +399,18 @@
       <Filter>Header Files\system</Filter>
     </ClInclude>
     <ClInclude Include="OpenGLT6\systems\lighting.h">
+      <Filter>Header Files\system</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\systems\material.h">
+      <Filter>Header Files\system</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\components\primitive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\utils\containers\sparse-set.h">
+      <Filter>Header Files\utils\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\systems\renderable.h">
       <Filter>Header Files\system</Filter>
     </ClInclude>
   </ItemGroup>

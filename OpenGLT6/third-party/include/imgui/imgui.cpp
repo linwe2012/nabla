@@ -990,6 +990,8 @@ CODE
 #ifdef _MSC_VER
 #pragma warning (disable: 4127)     // condition expression is constant
 #pragma warning (disable: 4996)     // 'This function or variable may be unsafe': strcpy, strdup, sprintf, vsnprintf, sscanf, fopen
+#pragma warning (disable: 26496)
+#pragma warning (disable: 26451)
 #endif
 
 // Clang/GCC warnings with -Weverything

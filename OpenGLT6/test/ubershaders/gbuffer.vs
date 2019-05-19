@@ -9,7 +9,6 @@ layout (location = $ID) in vec3 aBitangent; //@ Bitangent && Tangent
 layout (location = $ID) in vec2 aTexCoords; //@ TexCoords
 
 
-
 out vec3 FragPos;
 
 out vec3 NormalMap; //@ NormalMap
@@ -31,6 +30,7 @@ void main()
     mat3 normalMatrix = transpose(inverse(mat3(model))); //@ NormalMap
     NormalMap = normalMatrix * aNormalMap; //@ NormalMap
 
-
+    NormalMap = (0, 0, 0); //@ !NormalMap
+    
     gl_Position = projection * view * worldPos;
 }

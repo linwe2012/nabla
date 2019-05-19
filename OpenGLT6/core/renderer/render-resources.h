@@ -31,7 +31,7 @@ public:
 
 	bool operator<(const Handle& rhs) const { return index() < rhs.index(); }
 	bool operator==(const Handle& rhs) const { return index() == rhs.index(); }
-	bool operator!=(const Handle& rhs) const { return !operator==(); }
+	bool operator!=(const Handle& rhs) const { return !operator==(rhs); }
 
 private:
 	constexpr static uint32_t GetNilIndex(int i) {
@@ -50,7 +50,7 @@ using ShaderHandle = Handle<12, 20, 0>;
 using MaterialHandle = Handle<12, 20, 1>;
 using MeshHandle =  Handle<12, 20, 2>;
 using NameHandle = Handle<13, 1, 3>;
-
+using FrameBufferHandle = Handle<12, 20, 4>;
 
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
@@ -187,25 +187,48 @@ MeshHandle NewMesh(MemoryInfo data, MemoryInfo indices, const Vector<LayoutInfo>
 
 MeshBuffer OpenHandle(MeshHandle md);
 
+struct FrameBuffer {
+	uint32_t fbo;
+	uint32_t rbo_depth;
+	
+	/*
+	uint32_t position;
+	uint32_t normal;
+	uint32_t diffuse_spec;
 
-struct Light {
-	enum Type : uint8_t {
-		Direction,
-		Point,
-		Spot
-	};
-	glm::vec3 position;
-	glm::vec3 direction; /**< ingnored by point light*/
-	glm::vec3 color;
-	float linear;
-	float quad;
-	float radius;
-	float cutoff; /**< used only by spot light */
-	float outer_cutoff; /**< used only by spot light */
-	Type type;
-	bool draw_mesh;
-	MeshHandle hmesh;
+	uint32_t albedo;
+	uint32_t metallic_roughness_ao;
+	*/
+	int width;
+	int height;
+	Vector<uint32_t> attachments;
+	Vector<const char*> attachments_name;
+	ShaderHandle attached_shader;
 };
+
+// use default buffer
+FrameBufferHandle NewGBuffer(int width, int height, ShaderHandle attached_shader, const Vector<std::pair<TextureFormat, const char*>>& textures);
+
+const FrameBuffer& OpenHandle(FrameBufferHandle);
+
+struct InitConfig {
+	const char* name = "Nabla";
+	int width = 800;
+	int height = 600;
+	int fps_hint = 60;
+};
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

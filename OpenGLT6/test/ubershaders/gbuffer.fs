@@ -29,8 +29,7 @@ void main()
 
 #ifdef ON_NormalsMap
     // also store the per-fragment normals into the gbuffer
-    gNormal = normalize(Normal);
-#endif 
+    gNormal = normalize(Normal); 
 
 #ifdef ON_DiffuseMap
     // and the diffuse per-fragment color

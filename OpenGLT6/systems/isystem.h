@@ -43,7 +43,7 @@ public:
 	}
 
 	double Time() const {
-		return MilliSecond();
+		return Second();
 	}
 
 	uint64_t CountFrames() {
@@ -51,22 +51,26 @@ public:
 	}
 
 	double GetLastFrameDuration() {
-		return std::chrono::duration_cast<micro>(current_ - last_).count() * 0.001;
+		return std::chrono::duration_cast<milli>(current_ - last_).count() * 0.001;
 	}
 
 	double GetLastFrameFps() {
 		return 1.0 / GetLastFrameDuration();
 	}
 
+	steady_time_point GetCurrentTimeRaw() {
+		return current_;
+	}
+
 private:
-	uint64_t total_frame_count_;
+	uint64_t total_frame_count_ = 0;
 
 	steady_time_point current_;
 	steady_time_point last_;
 	steady_time_point begin_;
 };
 
-class ISysterm {
+class ISystem {
 public:
 	// called upon system first registered
 	virtual void Initilize() = 0;
@@ -77,11 +81,14 @@ public:
 	// remove enitiy from system
 	virtual void Remove(Entity) = 0;
 
-	virtual bool Has(Entity) = 0;
+	virtual bool Has(Entity) const = 0;
+
+	virtual void Update(Entity) = 0;
 
 	// called upon every frame
 	virtual void Update(Clock& clock) = 0;
 
+	virtual const char* name() const = 0;
 };
 }
 

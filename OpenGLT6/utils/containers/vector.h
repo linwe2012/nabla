@@ -24,9 +24,10 @@ public:
 	using size_type              = std::size_t;
 	using difference_type        = std::ptrdiff_t;
 	using reference              = value_type &;
-	using pointer                = T *;       // std::allocator_traits<Alloc>::pointer;
-	using const_pointer          = const T*;  // std::allocator_traits<Alloc>::const_pointer;
+	using pointer                = T *;          // std::allocator_traits<Alloc>::pointer;
+	using const_pointer          = const T*;     // std::allocator_traits<Alloc>::const_pointer;
 	using iterator               = pointer;
+	using const_iterator         = const_pointer;
 	
 	reference operator[](size_t pos) {
 		NA_ASSERT(pos < size(), "accessing elements out of bound");
@@ -45,6 +46,11 @@ public:
 	}
 
 	STLVectorEx(Alloc* alloc) : begin_(nullptr), end_(nullptr), end_of_storage_(nullptr), alloc_(alloc){}
+	
+	STLVectorEx(std::initializer_list<T> init) : STLVectorEx() {
+		insert(begin(), init.begin(), init.end());
+	}
+
 	STLVectorEx(const STLVectorEx& rhs) 
 		: begin_(nullptr), end_(nullptr), end_of_storage_(nullptr)
 	{
@@ -62,8 +68,10 @@ public:
 
 	iterator begin() { return begin_; }
 	iterator end()   { return end_; }
-	const iterator begin() const { return begin_; }
-	const iterator end()   const { return end_; }
+	const_iterator begin() const { return begin_; }
+	const_iterator end()   const { return end_; }
+
+
 	void swap(STLVectorEx& rhs) {
 		using std::swap;
 
@@ -71,6 +79,24 @@ public:
 		swap(rhs.end_, end_);
 		swap(rhs.end_of_storage_, end_of_storage_);
 		swap(alloc_, alloc_);
+	}
+
+
+	const STLVectorEx& operator=(const STLVectorEx& rhs) {
+		if (&rhs == this) {
+			return *this;
+		}
+
+		this->~STLVectorEx();
+
+		// simply call the copy ctor
+		::new(this) STLVectorEx(rhs);
+
+		return *this;
+	}
+
+	bool operator==(const STLVectorEx& rhs) const {
+		return this == &rhs;
 	}
 
 	void emplace_back(T&& val) {
@@ -120,7 +146,7 @@ public:
 		return position;
 	}
 
-	void insert(iterator position, iterator first, iterator last) {
+	void insert(iterator position, const_iterator first, const_iterator last) {
 		NA_ASSERT(position >= begin_ && position <= end_, "iterator is out of range");
 		size_t size_required = last - first;
 		if (size_required > capacity() - size()) {
@@ -169,6 +195,21 @@ public:
 		begin_ = new_begin;
 		end_ = new_end;
 		end_of_storage_ = begin_ + new_size;
+	}
+
+	// make sure size is at least `count`, and the final size might be bigger
+	size_t size_at_least(size_t count, const T& value) {
+		if (count < size()) {
+			return size();
+		}
+
+		size_t cap = (capacity() == 0) ? 1 : capacity();
+		while (count >= cap) {
+			cap *= 2;
+		}
+
+		resize(cap, value);
+		return cap;
 	}
 
 	void resize(size_t count) {
@@ -256,7 +297,9 @@ private:
 		end_ = begin_;
 	}
 
-	/** non trivially destructable, normally has pointer to release or destructor is defined */
+	/** not trivially destructable, we have to cal it's detor
+	* normally has pointer to release or destructor is defined 
+	*/
 	template<>
 	void selective_clear< false >() {
 		while (end_ != begin_)
@@ -270,7 +313,7 @@ private:
 	T* end_;
 	T* end_of_storage_;
 	Alloc* alloc_;
-	static inline Alloc* default_alloc = new Alloc;
+	static inline Alloc* default_alloc = new Alloc; // works in c++17
 };
 
 // thread safe vector

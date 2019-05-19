@@ -48,6 +48,9 @@ Index of this file:
 #define _CRT_SECURE_NO_WARNINGS
 #endif
 
+#pragma warning (push)
+#pragma warning (disable: 26451 6011)
+
 #include "imgui.h"
 #include <ctype.h>          // toupper
 #include <limits.h>         // INT_MIN, INT_MAX
@@ -4489,7 +4492,7 @@ void ShowExampleAppDocuments(bool* p_open)
 
     ImGui::End();
 }
-
+#pragma warning (pop)
 // End of Demo code
 #else
 

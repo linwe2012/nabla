@@ -8,6 +8,8 @@
 #include "imgui/imgui.h"
 #include "imgui/impl/imgui_impl_glfw.h"
 #include "imgui/impl/imgui_impl_opengl3.h"
+#include "imgui/imgui_stdlib.h"
+
 #pragma warning (pop)
 
 namespace nabla {

@@ -42,7 +42,7 @@ enum class LogSeverity {
 #endif // NA_DEBUG
 
 #define NA_LEAVE_IF(ret, cond, ...) do { \
-if(cond) { NA_ASSERT(cond, __VAR_ARGS__); } else { } \
+if(cond) { NA_ASSERT(cond, __VAR_ARGS__); return ret; } else { } \
 }while (0)
 
 

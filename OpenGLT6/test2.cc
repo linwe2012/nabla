@@ -3,7 +3,7 @@
 #include <regex>
 #include <thread>
 
-#include "systems/animation.h"
+
 
 #include "core/entity-manager.h"
 #include "core/renderer.h"
@@ -13,21 +13,81 @@
 #include "GLFW/glfw3.h"
 #include "editor/gui.h"
 
+#include "systems/animation.h"
 #include "systems/lighting.h"
+#include "systems/renderable.h"
+#include "systems/material.h"
+
 
 
 void renderQuad();
 void renderCube();
+nabla::renderer::MeshHandle GetCubeMesh() {
+	float vertices[] = {
+		// back face
+		-1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
+		 1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 1.0f, // top-right
+		 1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 0.0f, // bottom-right         
+		 1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 1.0f, // top-right
+		-1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
+		-1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 1.0f, // top-left
+		// front face
+		-1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f, 0.0f, // bottom-left
+		 1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f, 0.0f, // bottom-right
+		 1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f, 1.0f, // top-right
+		 1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f, 1.0f, // top-right
+		-1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f, 1.0f, // top-left
+		-1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f, 0.0f, // bottom-left
+		// left face
+		-1.0f,  1.0f,  1.0f, -1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-right
+		-1.0f,  1.0f, -1.0f, -1.0f,  0.0f,  0.0f, 1.0f, 1.0f, // top-left
+		-1.0f, -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-left
+		-1.0f, -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-left
+		-1.0f, -1.0f,  1.0f, -1.0f,  0.0f,  0.0f, 0.0f, 0.0f, // bottom-right
+		-1.0f,  1.0f,  1.0f, -1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-right
+		// right face
+		 1.0f,  1.0f,  1.0f,  1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-left
+		 1.0f, -1.0f, -1.0f,  1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-right
+		 1.0f,  1.0f, -1.0f,  1.0f,  0.0f,  0.0f, 1.0f, 1.0f, // top-right         
+		 1.0f, -1.0f, -1.0f,  1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-right
+		 1.0f,  1.0f,  1.0f,  1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-left
+		 1.0f, -1.0f,  1.0f,  1.0f,  0.0f,  0.0f, 0.0f, 0.0f, // bottom-left     
+		// bottom face
+		-1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, 0.0f, 1.0f, // top-right
+		 1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, 1.0f, 1.0f, // top-left
+		 1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f, 1.0f, 0.0f, // bottom-left
+		 1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f, 1.0f, 0.0f, // bottom-left
+		-1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f, 0.0f, 0.0f, // bottom-right
+		-1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, 0.0f, 1.0f, // top-right
+		// top face
+		-1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 1.0f, // top-left
+		 1.0f,  1.0f , 1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 0.0f, // bottom-right
+		 1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 1.0f, // top-right     
+		 1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 0.0f, // bottom-right
+		-1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 1.0f, // top-left
+		-1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 0.0f  // bottom-left        
+	};
+	using namespace nabla;
+	using namespace nabla::renderer;
+	Vector<LayoutInfo> layouts;
+	layouts.push_back(LayoutInfo{
+		0, 3, LayoutInfo::kFloat, false, 8 * sizeof(float), 0
+		});
+	layouts.push_back(LayoutInfo{
+		1, 3, LayoutInfo::kFloat, false, 8 * sizeof(float), 3 * sizeof(float)
+		});
+
+	layouts.push_back(LayoutInfo{
+		2, 2, LayoutInfo::kFloat, false, 8 * sizeof(float), 6 * sizeof(float)
+		});
+
+	return NewMesh(MemoryInfo{ vertices , sizeof(vertices) }, MemoryInfo{ nullptr, 0 }, layouts);
+}
 
 int main()
 {
 	using namespace nabla;
-	std::ifstream ifs("test/ubershaders/gbuffer.vs");
-	Set<std::string> str;
-	str.insert("Bitangent");
-	str.insert("Tangent");
-	std::string res = renderer::PreprocessShader(ifs, str, 330);
-	std::cout << res;
+
 	int SCR_WIDTH = 1200, SCR_HEIGHT = 600;
 	{
 		renderer::InitConfig cfg;
@@ -41,15 +101,22 @@ int main()
 
 	LightingSystem sys_lighting;
 	AnimationSystem sys_animation;
+	RenderableSystem sys_renderable;
+	MatrialSysterm sys_material;
+
+	
+
 	sys_lighting.Initilize();
+	sys_renderable.Initilize();
+	sys_material.Initilize();
+
+	sys_renderable.AttachBeforeRender(&sys_material);
+
 	Vector<Entity> lights;
-	lights.push_back(entity_manager.Create());
-	lights.push_back(entity_manager.Create());
 
 	AssetManager assets;
 	assets.ParseAssetsFromFile("./test/assets.yml");
 	auto teapot = assets.LoadModelToGPU("teapot", false);
-	// renderer::NewShader(renderer::ShaderFilePath{"test", "test"});
 	Set<std::string> macros;
 	macros.insert("NormalMap");
 	macros.insert("Bitangent");
@@ -59,20 +126,19 @@ int main()
 	macros.insert("Specular");
 
 	auto geopass = renderer::NewShader(renderer::ShaderFilePath{ "test/ubershaders/gbuffer.vs", "test/ubershaders/gbuffer.fs" }, macros);
+	sys_material.SetUpMaterialHandles(geopass, MatrialSysterm::Uniforms{});
+
 	auto hdiffuse = renderer::NewUniform(geopass, "Diffuse", renderer::MaterialType::kVec3);
 	auto hspecular = renderer::NewUniform(geopass, "Specular", renderer::MaterialType::kFloat);
 	auto hmodel = renderer::NewUniform(geopass, "model", renderer::MaterialType::kMat4);
-	auto hview = renderer::NewUniform(geopass, "view", renderer::MaterialType::kFloat);
-	auto hproject = renderer::NewUniform(geopass, "projection", renderer::MaterialType::kFloat);
+	auto hview = renderer::NewUniform(geopass, "view", renderer::MaterialType::kMat4);
+	auto hproject = renderer::NewUniform(geopass, "projection", renderer::MaterialType::kMat4);
+	auto halbedo = renderer::NewUniform(geopass, "Albedo", renderer::MaterialType::kVec3);
+	auto hmetal = renderer::NewUniform(geopass, "Metallic", renderer::MaterialType::kFloat);
+	auto hrough = renderer::NewUniform(geopass, "Roughness", renderer::MaterialType::kFloat);
+	auto hao = renderer::NewUniform(geopass, "AO", renderer::MaterialType::kFloat);
 
-	auto lightingpass = renderer::NewShader(renderer::ShaderFilePath{ "test/ubershaders/deferred-shading.vs", "test/ubershaders/deferred-shading.fs" }, macros);
-	sys_lighting.SetShader(lightingpass);
-	sys_lighting.NewLight(lights[0], LightingSystem::Light{
-		LightingSystem::Light::kPoint
-		});
-	sys_lighting.NewLight(lights[1], LightingSystem::Light{
-		LightingSystem::Light::kSpot
-		});
+
 
 	auto postprocess = renderer::NewShader(renderer::ShaderFilePath{ "test/ubershaders/deferred-light-box.vs", "test/ubershaders/deferred-light-box.fs" }, macros);
 	auto hbox_proj = renderer::NewUniform(postprocess, "projection", renderer::MaterialType::kMat4);
@@ -80,107 +146,102 @@ int main()
 	auto hbox_model = renderer::NewUniform(postprocess, "model", renderer::MaterialType::kMat4);
 	auto hbox_lightColor = renderer::NewUniform(postprocess, "lightColor", renderer::MaterialType::kVec3);
 
-	renderer::GBuffer gbuffer;
-	gbuffer.Create(SCR_WIDTH, SCR_HEIGHT);
+	auto hcube = GetCubeMesh();
+
+	auto lightingpass = renderer::NewShader(renderer::ShaderFilePath{ "test/ubershaders/deferred-shading.vs", "test/ubershaders/deferred-shading.fs" }, macros);
+	sys_lighting.SetShader(lightingpass, postprocess);
+
+	sys_renderable.SetRenderPassShader(renderer::RenderPass::kPostProc, postprocess, hbox_model);
+	sys_renderable.SetRenderPassShader(renderer::RenderPass::KForward, geopass, hmodel);
+
+	for (int i = 0; i < 16; ++i) {
+		lights.push_back(entity_manager.Create());
+		sys_lighting.NewLight(lights.back(), LightingSystem::Light{
+		LightingSystem::Light::kPoint, hcube
+			});
+	}
+
+	lights.push_back(entity_manager.Create());
+	sys_lighting.NewLight(lights.back(), LightingSystem::Light{
+		LightingSystem::Light::kSpot, hcube
+		});
+
 	glEnable(GL_DEPTH_TEST);
 	Camera camera;
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	using renderer::OpenHandle;
 	float last_frame = glfwGetTime();
-	float time_acc = 0.0f;
 	bool first_move = true;
 	float last_x = 0.0f, last_y = 0.0f;
 
 	InitGui();
+	std::string textipt;
 
 	glm::vec3 diffuse(4.0f, 4.0f, 4.0f);
 	float specular = 0.5f;
+	float ao = 0.0f;
+	float rough = 0.0f;
+	float metallic = 0.0f;
+	glm::vec3 albedo = glm::vec3(0.0f);
+
 	bool display_box = true;
 	Clock clock;
 
+	renderer::detail::PrepareRenderContext__Temp();
+	{
+		using namespace renderer;
+		using std::make_pair;
+		Vector<std::pair<TextureFormat, const char*>> textures{
+			make_pair(TextureFormat::kRGB, "gPosition"),
+			make_pair(TextureFormat::kRGB, "gNormal"),
+			make_pair(TextureFormat::kRGBA, "gDiffuseSpec"),
+			make_pair(TextureFormat::kRGB, "gAlbedo"),
+			make_pair(TextureFormat::kRGB, "gMetaRoughAO")
+		};
+		renderer::SetDefaultGBuffer(renderer::NewGBuffer(
+			SCR_WIDTH, SCR_HEIGHT, lightingpass, textures
+		));
+	}
+	
 	while (renderer::IsAlive())
 	{
-		auto end_time = std::chrono::steady_clock::now() + std::chrono::milliseconds(16);
-		float current_frame = static_cast<float>(glfwGetTime());
-		float delta_time = current_frame - last_frame;
-		last_frame = current_frame;
-
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glBindFramebuffer(GL_FRAMEBUFFER, gbuffer.fbo);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		glm::mat4 view = camera.GetViewMatrix();
 		glm::mat4 model = glm::mat4(1.0f);
-
+		using namespace renderer;
 		
-		OpenHandle(geopass).Use();
 
-		glUniformMatrix4fv(OpenHandle(hproject), 1, GL_FALSE, &projection[0][0]);
-		glUniformMatrix4fv(OpenHandle(hview), 1, GL_FALSE, &view[0][0]);
-		glUniformMatrix4fv(OpenHandle(hmodel), 1, GL_FALSE, &model[0][0]);
+		model = glm::mat4(1.0f);
+		UseShader(geopass);
 
-		glUniform3fv(OpenHandle(hdiffuse), 1, &diffuse[0]);
-		glUniform1f(OpenHandle(hspecular), specular);
-
-		glBindVertexArray(OpenHandle(teapot.meshes_[0].hMesh).vao);
-		glDrawElements(GL_TRIANGLES, OpenHandle(teapot.meshes_[0].hMesh).num_indices, GL_UNSIGNED_INT, 0);
-		glBindVertexArray(0);
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-
-
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		OpenHandle(lightingpass).Use();
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, gbuffer.position);
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, gbuffer.normal);
-		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, gbuffer.albedo_spec);
+		SetUniform(hproject, projection);
+		SetUniform(hview, view);
+		SetUniform(hmodel, model);
 		
-		sys_lighting.SetEyePos(camera.Position);
+		SetUniform(hdiffuse, diffuse);
+		SetUniform(hspecular, specular);
+		SetUniform(halbedo, albedo);
+		SetUniform(hmetal, metallic);
+		SetUniform(hrough, rough);
+		SetUniform(hao, ao);
+
+		DrawMesh(teapot.meshes_[0].hMesh);
+
+
+
+		sys_lighting.SetEyePos(camera.Position, projection, view);
 		sys_lighting.Update(clock);
+		
+
+		
+
 		renderer::FlushAllDrawCalls();
 		renderer::GetRenderContext()->Reset(renderer::GetRenderContext()->resources.buffer, renderer::GetRenderContext()->resources.end_of_storage - renderer::GetRenderContext()->resources.buffer);
-		renderQuad();
 
-		if (display_box) {
-			// 2.5. copy content of geometry's depth buffer to default framebuffer's depth buffer
-			 // ----------------------------------------------------------------------------------
-			glBindFramebuffer(GL_READ_FRAMEBUFFER, gbuffer.fbo);
-			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); // write to default framebuffer
-			// blit to default framebuffer. Note that this may or may not work as the internal formats of both the FBO and default framebuffer have to match.
-			// the internal formats are implementation defined. This works on all of my systems, but if it doesn't on yours you'll likely have to write to the 		
-			// depth buffer in another shader stage (or somehow see to match the default framebuffer's internal format with the FBO's internal format).
-			glBlitFramebuffer(0, 0, SCR_WIDTH, SCR_HEIGHT, 0, 0, SCR_WIDTH, SCR_HEIGHT, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
-			glBindFramebuffer(GL_FRAMEBUFFER, 0);
-			
-			auto l = sys_lighting.GetLight(lights[0]);
-			OpenHandle(postprocess).Use();
-			glUniformMatrix4fv(OpenHandle(hbox_proj), 1, GL_FALSE, &projection[0][0]);
-			glUniformMatrix4fv(OpenHandle(hbox_view), 1, GL_FALSE, &view[0][0]);
-			model = glm::mat4(1.0f);
-			model = glm::scale(model, glm::vec3(0.125f));
-			model = glm::translate(model, l->position);
-		
-			glUniformMatrix4fv(OpenHandle(hbox_model), 1, GL_FALSE, &model[0][0]);
-			glUniform3fv(OpenHandle(hbox_lightColor), 1, &l->color[0]);
-			
-			renderCube();
 
-			l = sys_lighting.GetLight(lights[1]);
-			
-			model = glm::mat4(1.0f);
-			model = glm::scale(model, glm::vec3(0.125f));
-			model = glm::translate(model, l->position);
-
-			glUniformMatrix4fv(OpenHandle(hbox_model), 1, GL_FALSE, &model[0][0]);
-			glUniform3fv(OpenHandle(hbox_lightColor), 1, &l->color[0]);
-
-			renderCube();
-		}
+		int mm = glGetError();
 
 
 		PrepareGuiFrame();
@@ -209,52 +270,72 @@ int main()
 
 
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-			camera.ProcessKeyboard(FORWARD, delta_time);
+			camera.ProcessKeyboard(FORWARD, clock.GetLastFrameDuration());
 		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-			camera.ProcessKeyboard(BACKWARD, delta_time);
+			camera.ProcessKeyboard(BACKWARD, clock.GetLastFrameDuration());
 		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-			camera.ProcessKeyboard(LEFT, delta_time);
+			camera.ProcessKeyboard(LEFT, clock.GetLastFrameDuration());
 		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-			camera.ProcessKeyboard(RIGHT, delta_time);
+			camera.ProcessKeyboard(RIGHT, clock.GetLastFrameDuration());
 		if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS)
-			camera.ProcessKeyboard(UP, delta_time);
+			camera.ProcessKeyboard(UP, clock.GetLastFrameDuration());
 		if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
-			camera.ProcessKeyboard(DOWN, delta_time);
+			camera.ProcessKeyboard(DOWN, clock.GetLastFrameDuration());
 		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 			camera.BudgeCamera(0.0f, 0.5f);
 
 
-		camera.PassDeltaTime(delta_time);
+		camera.PassDeltaTime(clock.GetLastFrameDuration());
 
 		{
-			ImGui::Begin("Editor");
 
-			if (ImGui::TreeNode("Lighting")) {
+			ImGui::Begin("Editor", nullptr, ImGuiWindowFlags_MenuBar);
+
+			if (ImGui::BeginMenuBar()) {
+			
+				if (ImGui::BeginMenu("Options"))
+				{
+					ImGui::MenuItem("(dummy menu)", NULL, false, false);
+					if(ImGui::BeginMenu("Camara")) {
+						ImGui::DragFloat("Move Speed", &camera.MovementSpeed, 0.01f);
+						ImGui::DragFloat("Mouse Sensitivity", &camera.MouseSensitivity, 0.001f);
+						ImGui::EndMenu();
+					}
+					ImGui::EndMenu();
+				}
+			
+				ImGui::EndMenuBar();
+			}
+
+			if (ImGui::CollapsingHeader(sys_lighting.name())) {
 				sys_lighting.OnGui(lights);
-				ImGui::TreePop();
-				ImGui::Separator();
 			}
 
 
-			if (ImGui::TreeNode("Teapot - Material")) {
+			if (ImGui::CollapsingHeader("Teapot - Material")) {
 				ImGui::ColorEdit3("Diffuse", &diffuse.x);
 
 				ImGui::DragFloat("Specular", &specular, 0.01f, 0.0f, 1.0f);
+				
+				ImGui::Text("Physically Based Rendering:");
+				ImGui::DragFloat("Ambient Occulsion", &ao, 0.01f, 0.0f, 1.0f);
+				ImGui::DragFloat("Metallic", &metallic, 0.01f, 0.0f, 1.0f);
+				ImGui::DragFloat("Roughness", &rough, 0.01f, 0.0f, 1.0f);
+				ImGui::ColorEdit3("Albedo", &albedo.r);
 
-				ImGui::TreePop();
 				ImGui::Separator();
 			}
-			clock.NextFrame();
-			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", clock.GetLastFrameDuration(), 1000.0f / clock.GetLastFrameDuration());
+			
+			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", clock.GetLastFrameDuration() * 1000.0f, clock.GetLastFrameFps());
 			ImGui::End();
 		}
 
 		EndGuiFrame();
 
 		sys_animation.update(0.2f);
-		time_acc += 0.0001;
 
-		std::this_thread::sleep_until(end_time);
+		std::this_thread::sleep_until(clock.GetCurrentTimeRaw() + std::chrono::microseconds(16));
+		clock.NextFrame();
 	}
 	return 0;
 }

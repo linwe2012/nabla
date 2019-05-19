@@ -8,8 +8,8 @@
 
 namespace nabla {
 namespace renderer {
-
-void GBuffer::Create(int width, int height) {
+	/*
+void FrameBuffer::Create(int width, int height) {
 	glGenFramebuffers(1, &fbo);
 	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 
@@ -29,16 +29,32 @@ void GBuffer::Create(int width, int height) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, normal, 0);
 
-	// albedo & specular
-	glGenTextures(1, &albedo_spec);
-	glBindTexture(GL_TEXTURE_2D, albedo_spec);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+	// diffuse & specular
+	glGenTextures(1, &diffuse_spec);
+	glBindTexture(GL_TEXTURE_2D, diffuse_spec);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE/ GL_FLOAT, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, albedo_spec, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, diffuse_spec, 0);
 
-	GLuint attachments[3] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2 };
-	glDrawBuffers(3, attachments);
+	// albedo
+	glGenTextures(1, &albedo);
+	glBindTexture(GL_TEXTURE_2D, albedo);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, width, height, 0, GL_RGB, GL_FLOAT, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT3, GL_TEXTURE_2D, albedo, 0);
+
+	// metallic & roughness ambient occulsion
+	glGenTextures(1, &metallic_roughness_ao);
+	glBindTexture(GL_TEXTURE_2D, metallic_roughness_ao);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, width, height, 0, GL_RGB, GL_FLOAT, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT4, GL_TEXTURE_2D, metallic_roughness_ao, 0);
+
+	GLuint attachments[5] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3, GL_COLOR_ATTACHMENT4 };
+	glDrawBuffers(5, attachments);
 	// - Create and attach depth buffer (renderbuffer)
 		
 	glGenRenderbuffers(1, &rbo_depth);
@@ -51,12 +67,11 @@ void GBuffer::Create(int width, int height) {
 		std::cout << "Framebuffer not complete!" << std::endl;
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-}
+}*/
 
 static GLFWwindow* gDefaultWindow;
-GBuffer gGBuffer;
 
-void Init(const InitConfig& cfg) {
+void InitWindow(const InitConfig& cfg) {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -66,7 +81,7 @@ void Init(const InitConfig& cfg) {
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
 #endif
 	GLFWwindow* glfwwin = glfwCreateWindow(cfg.width, cfg.height, cfg.name, NULL, NULL);
-	
+
 	glfwMakeContextCurrent(glfwwin);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
@@ -74,15 +89,21 @@ void Init(const InitConfig& cfg) {
 		return;
 	}
 
-	auto framecb = 
-	glfwSetFramebufferSizeCallback(glfwwin, [](GLFWwindow * window, int width, int height) {
+	auto framecb =
+		glfwSetFramebufferSizeCallback(glfwwin, [](GLFWwindow * window, int width, int height) {
 		glViewport(0, 0, width, height);
 	});
 
 	glViewport(0, 0, cfg.width, cfg.height);
 	gDefaultWindow = glfwwin;
-	// gGBuffer.Create(cfg.width, cfg.height);
 }
+
+
+void Init(const InitConfig& cfg) {
+	InitWindow(cfg);
+}
+
+
 void NextFrame()
 {
 	NA_ASSERT(gDefaultWindow != nullptr, "unexpected null window");

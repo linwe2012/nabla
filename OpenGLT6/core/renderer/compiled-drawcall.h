@@ -13,9 +13,11 @@ struct SortKey {
 	/** |<----depth bit---->|
 	(MSB)                (48)                  (32)                  (16)           (LSB)
 	00000000  0000 0000  0000 0000  0000 0000  0000 0000  0000 0000  0000 0000  0000 0000
-	                                    ^|<----depth bit---->| |<----target id---->| ^^^^
-								        |                                              |
-								        +---- 1: deferred 0: forward render                +---- change state bit
+	                               | ^|^ |<----depth bit---->| |<----target id---->| ^^^^
+								     | |                                               |
+								     | +---Render Pass Low Priority Bit                +---- change state bit
+									 |
+									 +---Render Pass    
 	*/
 
 	enum Step {
@@ -26,7 +28,13 @@ struct SortKey {
 		kStateChangeEnd
 	};
 
-	uint64_t sortkey = 0;
+
+	uint64_t sortkey;
+
+	SortKey() :sortkey(0) 
+	{
+		set_pass_low_priority(true);
+	}
 
 	bool operator<(const SortKey& rhs) const { return sortkey < rhs.sortkey; }
 	bool operator>(const SortKey& rhs) const { return sortkey > rhs.sortkey; }
@@ -40,9 +48,12 @@ struct SortKey {
 	void set_target(uint16_t handle_id) {
 		set_bits<36, 20>(handle_id);
 	}
+	void set_pass_low_priority(bool ifbeg) {
+		set_bits<37, 36>(ifbeg);
+	}
 
 	void set_pass(RenderPass rp) {
-		set_bits<40, 36>(static_cast<uint8_t>(rp));
+		set_bits<41, 37>(static_cast<uint8_t>(rp));
 	}
 	void set_chstate(Step state) {
 		set_bits<4, 0>(state);
@@ -77,7 +88,7 @@ struct SortKey {
 
 struct Command{
 	SortKey sortkey;
-	uint64_t offset = 0;
+	int64_t offset = 0;
 	bool operator<(const Command& rhs) const { return sortkey < rhs.sortkey; }
 };
 
@@ -88,9 +99,12 @@ struct RenderResource {
 	{
 		kAlign = sizeof(resource_t),
 	};
+#pragma warning(push)
+#pragma warning (disable: 26495)
 	RenderResource(void* buffer_, size_t size_by_bytes) {
 		Reset(buffer_, size_by_bytes);
 	}
+#pragma warning(pop)
 
 	RenderResource() : buffer(nullptr), next(nullptr), end_of_storage(nullptr){}
 
@@ -155,8 +169,6 @@ struct RenderResource {
 	resource_t* end_of_storage;
 };
 
-struct SmartContext;
-
 struct RenderState {
 	RenderState(SortKey::Step _render_step, RenderPass _render_pass)
 		:render_step(_render_step), render_pass(_render_pass), is_valid(true) {}
@@ -170,6 +182,7 @@ struct ScopedState {
 
 	RenderState last_state;
 
+	ScopedState(RenderPass _render_pass);
 	ScopedState(SortKey::Step _render_step, RenderPass _render_pass);
 	~ScopedState();
 };
@@ -187,7 +200,7 @@ struct RenderContext {
 	void AddCmd(Command cmd, Resources... src) {
 		cmd.offset = resources.Offset();
 		commands.push_back(std::move(cmd));
-		resources.Construct(src...);
+		resources.Construct<T>(src...);
 	}
 
 	void Reset(void *new_resource, size_t size_by_bytes) {
@@ -223,7 +236,7 @@ void SetUniform<glm::vec3>(MaterialHandle md, glm::vec3 data);
 template <>
 void SetUniform<glm::mat4>(MaterialHandle md, glm::mat4 data);
 
-void DrawMesh(MeshHandle mesh, ShaderHandle shader);
+void DrawMesh(MeshHandle mesh, ShaderHandle shader = ShaderHandle::MakeNil());
 
 void UseShader(ShaderHandle shader);
 
@@ -233,12 +246,17 @@ void UseTexture();
 // this should be called once per frame
 void FlushAllDrawCalls();
 
+void FlushAllDrawCallsWithNoExtraCommands();
+
 RenderContext* GetRenderContext();
 // RenderContext* GetRenderContext();
 
 namespace detail {
 	void PrepareRenderContext(void* pointer, size_t size);
+	void PrepareRenderContext__Temp();
 }
+
+void SetDefaultGBuffer(FrameBufferHandle);
 
 
 }

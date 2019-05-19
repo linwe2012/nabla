@@ -332,12 +332,14 @@ ShaderHandle NewShader(ShaderFilePath path,
 	{
 		std::ifstream ifs(path.vertex);
 		vertex = PreprocessShader(ifs, macros, version);
+		//std::cout << vertex;
 		ssc.vertex = vertex.c_str();
 	}
 
 	{
 		std::ifstream ifs(path.fragment);
 		fragment = PreprocessShader(ifs, macros, version);
+		//std::cout << fragment;
 		ssc.fragment = fragment.c_str();
 	}
 
@@ -373,12 +375,15 @@ ShaderHandle NewShader(ShaderInfo info)
 static BufferManger<MeshBuffer, MeshHandle, 4096> gMeshBuffer;
 
 MeshHandle NewMesh(MemoryInfo data, MemoryInfo indices, const Vector<LayoutInfo>& layouts) {
-	unsigned int VBO, VAO, EBO;
+	unsigned int VBO = 0, VAO = 0, EBO = 0;
 	//TODO(L) Check gl errors
 	//TODO(L) delelte vbo if already exits
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
+
+	if (indices.ptr != nullptr) {
+		glGenBuffers(1, &EBO);
+	}
 
 	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
 	glBindVertexArray(VAO);
@@ -386,8 +391,10 @@ MeshHandle NewMesh(MemoryInfo data, MemoryInfo indices, const Vector<LayoutInfo>
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, data.size_by_bytes, data.ptr, GL_STATIC_DRAW);
 	
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size_by_bytes, indices.ptr, GL_STATIC_DRAW);
+	if (indices.ptr != nullptr) {
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size_by_bytes, indices.ptr, GL_STATIC_DRAW);
+	}
 
 	for (const auto& ly : layouts) {
 		glVertexAttribPointer(ly.position, ly.count_per_vertex, 
@@ -401,12 +408,96 @@ MeshHandle NewMesh(MemoryInfo data, MemoryInfo indices, const Vector<LayoutInfo>
 	gMeshBuffer.buffer[handle.index()].ebo = EBO;
 	gMeshBuffer.buffer[handle.index()].vao = VAO;
 	gMeshBuffer.buffer[handle.index()].vbo = VBO;
-	gMeshBuffer.buffer[handle.index()].num_indices = indices.size_by_bytes / sizeof(unsigned int);
+	if (indices.ptr != nullptr) {
+		gMeshBuffer.buffer[handle.index()].num_indices = indices.size_by_bytes / sizeof(unsigned int);
+	}
+	gMeshBuffer.buffer[handle.index()].num_indices = data.size_by_bytes / sizeof(float);
 	return handle;
 }
 
 MeshBuffer OpenHandle(MeshHandle md) {
 	return gMeshBuffer.buffer[md.index()];
 }
+
+
+
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+///////                Gbuffer                ///////
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+static BufferManger<FrameBuffer, FrameBufferHandle, 16> gFrameBuffers;
+
+FrameBufferHandle NewGBuffer(int width, int height, ShaderHandle attached_shader, const Vector<std::pair<TextureFormat, const char *>>& textures)
+{
+	FrameBufferHandle hframe = gFrameBuffers.NewHandle();
+	FrameBuffer g;
+	glGenFramebuffers(1, &g.fbo);
+	glBindFramebuffer(GL_FRAMEBUFFER, g.fbo);
+	g.width = width;
+	g.height = height;
+
+	GLuint attach_ids[32];
+
+	auto shader = OpenHandle(attached_shader);
+	shader.Use();
+
+	for (auto texture : textures) {
+		int type = -1;
+		if (texture.first == TextureFormat::kRGB) {
+			type = GL_RGB16F;
+		}
+		else if (texture.first == TextureFormat::kRGBA) {
+			type = GL_RGBA;
+		}
+		else {
+			NA_ASSERT(false, "type not supported");
+		}
+
+		uint32_t color;
+		glGenTextures(1, &color);
+		glBindTexture(GL_TEXTURE_2D, color);
+		glTexImage2D(GL_TEXTURE_2D, 0, type, width, height, 0, GL_RGB, GL_FLOAT, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + g.attachments.size(), GL_TEXTURE_2D, color, 0);
+
+		attach_ids[g.attachments.size()] = GL_COLOR_ATTACHMENT0 + g.attachments.size();
+
+		shader.SetInt(texture.second, g.attachments.size());
+
+		NA_ASSERT(glGetError() == 0);
+
+		g.attachments.push_back(color);
+	}
+
+	glDrawBuffers(g.attachments.size(), attach_ids);
+
+	glGenRenderbuffers(1, &g.rbo_depth);
+	glBindRenderbuffer(GL_RENDERBUFFER, g.rbo_depth);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, g.rbo_depth);
+
+	NA_ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE, "Framebuffer not complete!");
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	NA_ASSERT(glGetError() == 0);
+
+	g.attached_shader = attached_shader;
+
+	gFrameBuffers.buffer[hframe.index()] = g;
+
+	return hframe;
+}
+
+const FrameBuffer& OpenHandle(FrameBufferHandle hf)
+{
+	return gFrameBuffers.Open(hf);
+}
+
+
+
+
 }
 }

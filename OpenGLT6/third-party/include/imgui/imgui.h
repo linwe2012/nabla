@@ -27,6 +27,10 @@ Index of this file:
 
 #pragma once
 
+#pragma warning (push)
+#pragma warning (disable: 26495)
+#pragma warning (disable: 26451)
+
 // Configuration file with compile-time options (edit imconfig.h or define IMGUI_USER_CONFIG to your own filename)
 #ifdef IMGUI_USER_CONFIG
 #include IMGUI_USER_CONFIG
@@ -34,6 +38,7 @@ Index of this file:
 #if !defined(IMGUI_DISABLE_INCLUDE_IMCONFIG_H) || defined(IMGUI_INCLUDE_IMCONFIG_H)
 #include "imconfig.h"
 #endif
+
 
 //-----------------------------------------------------------------------------
 // Header mess
@@ -2188,3 +2193,5 @@ struct ImFont
 #ifdef IMGUI_INCLUDE_IMGUI_USER_H
 #include "imgui_user.h"
 #endif
+
+#pragma warning (pop)

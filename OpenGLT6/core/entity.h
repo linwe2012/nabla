@@ -8,6 +8,7 @@ namespace nabla {
 struct Entity
 {
 	using entity_t = unsigned int;
+	using index_t = uint16_t;
 private:
 	enum :entity_t {
 		kIndexMask = 0xFFFFFF,

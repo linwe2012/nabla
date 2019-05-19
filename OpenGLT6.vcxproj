@@ -148,11 +148,14 @@
     <ClCompile Include="OpenGLT6\core\service-locator.cc" />
     <ClCompile Include="OpenGLT6\editor\gui.cc" />
     <ClCompile Include="OpenGLT6\systems\lighting.cc" />
+    <ClCompile Include="OpenGLT6\systems\material.cc" />
+    <ClCompile Include="OpenGLT6\systems\renderable.cc" />
     <ClCompile Include="OpenGLT6\test.cc" />
     <ClCompile Include="OpenGLT6\test2.cc" />
     <ClCompile Include="OpenGLT6\third-party\include\imgui\imgui.cpp" />
     <ClCompile Include="OpenGLT6\third-party\include\imgui\imgui_demo.cpp" />
     <ClCompile Include="OpenGLT6\third-party\include\imgui\imgui_draw.cpp" />
+    <ClCompile Include="OpenGLT6\third-party\include\imgui\imgui_stdlib.cpp" />
     <ClCompile Include="OpenGLT6\third-party\include\imgui\imgui_widgets.cpp" />
     <ClCompile Include="OpenGLT6\third-party\include\imgui\impl\imgui_impl_glfw.cpp" />
     <ClCompile Include="OpenGLT6\third-party\include\imgui\impl\imgui_impl_opengl3.cpp" />
@@ -192,6 +195,7 @@
     <ClCompile Include="OpenGLT6\utils\typeid.cc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="OpenGLT6\components\primitive.h" />
     <ClInclude Include="OpenGLT6\components\skeleton.h" />
     <ClInclude Include="OpenGLT6\core\asset\bootstrap.h" />
     <ClInclude Include="OpenGLT6\core\asset\model.h" />
@@ -213,6 +217,8 @@
     <ClInclude Include="OpenGLT6\systems\animation.h" />
     <ClInclude Include="OpenGLT6\systems\isystem.h" />
     <ClInclude Include="OpenGLT6\systems\lighting.h" />
+    <ClInclude Include="OpenGLT6\systems\material.h" />
+    <ClInclude Include="OpenGLT6\systems\renderable.h" />
     <ClInclude Include="OpenGLT6\third-party\include\yaml-src\collectionstack.h" />
     <ClInclude Include="OpenGLT6\third-party\include\yaml-src\contrib\graphbuilderadapter.h" />
     <ClInclude Include="OpenGLT6\third-party\include\yaml-src\directives.h" />
@@ -239,6 +245,7 @@
     <ClInclude Include="OpenGLT6\utils\containers\deque.h" />
     <ClInclude Include="OpenGLT6\utils\containers\map.h" />
     <ClInclude Include="OpenGLT6\utils\containers\set.h" />
+    <ClInclude Include="OpenGLT6\utils\containers\sparse-set.h" />
     <ClInclude Include="openglt6\utils\containers\vector.h" />
     <ClInclude Include="OpenGLT6\utils\filesystem.h" />
     <ClInclude Include="OpenGLT6\utils\logger.h" />

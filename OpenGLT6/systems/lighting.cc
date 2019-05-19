@@ -3,20 +3,29 @@
 #include "editor/gui.h"
 
 namespace nabla {
-void LightingSystem::SetShader(renderer::ShaderHandle lightingpass) {
+void LightingSystem::Initilize() {
+	num_spot_ = 0;
+	num_point_ = 0;
+	max_point_ = 32;
+	max_spot_ = 32;
+}
+
+
+void LightingSystem::SetShader(renderer::ShaderHandle lightingpass, renderer::ShaderHandle postprocess) {
 	hshader_ = lightingpass;
 	hcamera_ = renderer::NewUniform(lightingpass, "viewPos", renderer::MaterialType::kVec3);
 	hnum_point_ = renderer::NewUniform(lightingpass, "num_points", renderer::MaterialType::kInt);
 	hnum_spot_ = renderer::NewUniform(lightingpass, "num_spots", renderer::MaterialType::kInt);
 
-	renderer::OpenHandle(lightingpass).Use();
-	renderer::OpenHandle(lightingpass).SetInt("gPosition", 0);
-	renderer::OpenHandle(lightingpass).SetInt("gNormal", 1);
-	renderer::OpenHandle(lightingpass).SetInt("gAlbedoSpec", 2);
+	hpostprocess_ = postprocess;
+	hbox_proj_ = renderer::NewUniform(postprocess, "projection", renderer::MaterialType::kMat4);
+	hbox_view_ = renderer::NewUniform(postprocess, "view", renderer::MaterialType::kMat4);
+	hbox_model_ = renderer::NewUniform(postprocess, "model", renderer::MaterialType::kMat4);
+	hbox_lightcolor_ = renderer::NewUniform(postprocess, "lightColor", renderer::MaterialType::kVec3);
 }
 
-// activities on gui, note that you can actually do nothing
 
+// activities on gui, note that you can actually do nothing
 void LightingSystem::OnGui(const Vector<Entity>& actives) {
 	for (auto e : actives) {
 		auto p = lights_.find(e);
@@ -35,13 +44,13 @@ void LightingSystem::OnGui(const Vector<Entity>& actives) {
 		default:
 			break;
 		}
-		
 	}
 }
 
 void LightingSystem::DrawGuiPoint(Light& l)
 {
 	if (ImGui::TreeNode(l.name.c_str())) {
+		
 		ImGui::ColorPicker3("Color", &l.color[0]);
 		ImGui::DragFloat("Position.x", &l.position.x, 0.5f);
 		ImGui::DragFloat("Position.y", &l.position.y, 0.5f);
@@ -49,6 +58,11 @@ void LightingSystem::DrawGuiPoint(Light& l)
 		ImGui::DragFloat("Linear", &l.linear, 0.01f, 0.0f, 2.0f, "%.3f");
 		ImGui::DragFloat("Quad", &l.quad, 0.0001f, 0.0f, 1.0f, "%.4f");
 
+		ImGui::InputText("Name", &l.name);
+		if (l.draw_mesh) {
+			ImGui::DragFloat3("Scale", &l.mesh_scale[0], 0.1f);
+		}
+		ImGui::Checkbox("Show Box", &l.draw_mesh);
 		ImGui::TreePop();
 		ImGui::Separator();
 	}
@@ -57,6 +71,7 @@ void LightingSystem::DrawGuiPoint(Light& l)
 void LightingSystem::DrawGuiSpot(Light& l)
 {
 	if (ImGui::TreeNode(l.name.c_str())) {
+		
 		ImGui::ColorPicker3("Color", &l.color[0]);
 		ImGui::DragFloat("Pos.x", &l.position.x, 0.5f);
 		ImGui::DragFloat("Pos.y", &l.position.y, 0.5f);
@@ -71,6 +86,12 @@ void LightingSystem::DrawGuiSpot(Light& l)
 		ImGui::DragFloat("Inner Cutoff (Deg)", &l.cutoff, 0.1f, 0.0f, 180.0f);
 		ImGui::DragFloat("Outer Cutoff (Deg)", &l.outer_cutoff, 0.1f, 0.0f, 180.0f);
 
+		ImGui::InputText("Name", &l.name);
+		ImGui::Checkbox("Show Box", &l.draw_mesh);
+		if (l.draw_mesh) {
+			ImGui::DragFloat3("Scale", &l.mesh_scale[0], 0.1f);
+		}
+
 		ImGui::TreePop();
 		ImGui::Separator();
 	}
@@ -83,9 +104,21 @@ void LightingSystem::Update(Clock& clock)
 	rc_ = renderer::GetRenderContext();
 	//rc_->NewTarget(MeshHandle::MakeNil())
 		//.Attach(hshader_)
-	SetUniform(hcamera_, camera_pos_);
-	SetUniform(hnum_point_, num_point_);
-	SetUniform(hnum_spot_, num_spot_);
+	{
+		ScopedState post(RenderPass::kPostProc);
+		UseShader(hpostprocess_);
+		SetUniform(hbox_proj_, project_);
+		SetUniform(hbox_view_, view_);
+	}
+
+	{
+		ScopedState deferred(RenderPass::kDeferred);
+		UseShader(hshader_);
+		SetUniform(hcamera_, camera_pos_);
+		SetUniform(hnum_point_, num_point_);
+		SetUniform(hnum_spot_, num_spot_);
+	}
+
 
 	int npoint = 0;
 	int nspot = 0;
@@ -102,8 +135,44 @@ void LightingSystem::Update(Clock& clock)
 		default:
 			break;
 		}
+
+		if(l.draw_mesh)
+		{
+			glm::mat4 model(1.0f);
+			model = glm::scale(model, l.mesh_scale);
+			model = glm::translate(model, l.position);
+		
+			ScopedState post(RenderPass::kPostProc);
+			SetUniform(hbox_lightcolor_, l.color);
+			SetUniform(hbox_model_, model);
+			DrawMesh(l.hmesh, hpostprocess_);
+		}
+		
 	}
 
+}
+
+void LightingSystem::NewLight(Entity e, Light l) {
+	switch (l.type)
+	{
+	case Light::kPoint:
+		if (l.name == "") {
+			l.name = "PointLight #";
+			l.name += std::to_string(num_point_);
+		}
+		num_point_++;
+		break;
+	case Light::kSpot:
+		if (l.name == "") {
+			l.name = "SpotLight #";
+			l.name += std::to_string(num_spot_);
+		}
+		num_spot_++;
+		break;
+	default:
+		break;
+	}
+	lights_[e] = l;
 }
 
 void LightingSystem::AddPointHandle(int id) {
@@ -203,11 +272,15 @@ void LightingSystem::RenderPoint(int id, const Light& l)
 	// rc_->NewTarget(l.hmesh)
 		//.Attach(hshader_)
 		//.ModelMat(model)
-	SetUniform(h.color, l.color);
-	SetUniform(h.position, l.position);
-	SetUniform(h.linear, l.linear);
-	SetUniform(h.quad, l.quad);
-	SetUniform(h.radius, l.radius);	
+	{
+		ScopedState deferred(RenderPass::kDeferred);
+
+		SetUniform(h.color, l.color);
+		SetUniform(h.position, l.position);
+		SetUniform(h.linear, l.linear);
+		SetUniform(h.quad, l.quad);
+		SetUniform(h.radius, l.radius);
+	}
 }
 
 void LightingSystem::RenderSpot(int id, const Light& l)
@@ -232,13 +305,18 @@ void LightingSystem::RenderSpot(int id, const Light& l)
 
 	//rc_->NewTarget(l.hmesh)
 		//.ModelMat(model)
+	{
+		ScopedState deferred(RenderPass::kDeferred);
+
 		SetUniform(h.position, l.position);
 		SetUniform(h.direction, direction);
-		SetUniform(h.color, l.color)	  ;
-		SetUniform(h.linear, l.linear)	  ;
-		SetUniform(h.quad, l.quad)		  ;
-		SetUniform(h.cutoff, cutoff)	  ;
+		SetUniform(h.color, l.color);
+		SetUniform(h.linear, l.linear);
+		SetUniform(h.quad, l.quad);
+		SetUniform(h.cutoff, cutoff);
 		SetUniform(h.outer_cutoff, outer_cutoff);
+	}
+		
 }
 
 

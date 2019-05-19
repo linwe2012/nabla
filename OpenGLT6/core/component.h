@@ -1,8 +1,9 @@
 #ifndef _NABLA_CORE_SHARABLE_COMPONENT_H_
 #define _NABLA_CORE_SHARABLE_COMPONENT_H_
 
-
 #include "entity.h"
+#include "glm/glm.hpp"
+#include "glm/gtc/quaternion.hpp"
 
 namespace nabla {
 

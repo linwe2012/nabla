@@ -8,40 +8,28 @@ namespace nabla {
 
 namespace renderer {
 
-const Vector<Command>* RadixSort(Vector<Vector<Command>*> cmds_set ) {
-	static Vector<Command> a;
+const Vector<Command>* RadixSort(Vector<Command> *cmds, uint64_t max ) {
 	static Vector<Command> b;
-	a.clear();
 	b.clear();
 
-	uint64_t max = 0;
-	int n_cmds = 0;
+	Vector<Command>& a = *cmds;
 
-	for (auto cmds : cmds_set) {
-		for (auto cmd : *(cmds)) {
-			if (cmd.sortkey.sortkey > max) {
-				max = cmd.sortkey.sortkey;
-			}
-			a.push_back(cmd);
-		}
-		n_cmds += cmds->size();
+	int n_cmds = a.size();
+	
+	if (b.size() < a.size()) {
+		b.resize(a.size());
 	}
 
-	if (b.size() < n_cmds) {
-		// a.resize(n_cmds);
-		b.resize(n_cmds);
-	}
 	uint64_t bucket[16];
 	enum : uint64_t {
 		bitmask = 0xF
 	};
-	int bucket_max_index[16];
+	//int bucket_max_index[16];
 	uint64_t lsd = 0;
 	
-	while ((max >> (lsd * 4)) > 0)
+	while (max > 0)
 	{
-		memset(bucket, 0, 16 * sizeof(int));
-		memset(bucket_max_index, 0, 16 * sizeof(int));
+		memset(bucket, 0, 16 * sizeof(uint64_t));
 
 		uint64_t shift = lsd * 4;
 
@@ -68,7 +56,15 @@ const Vector<Command>* RadixSort(Vector<Vector<Command>*> cmds_set ) {
 	return &a;
 }
 thread_local RenderContext tlsRenderContext;
-RenderResource::resource_t* gResourceBuffer;
+static RenderResource::resource_t* gResourceBuffer = nullptr;
+static Vector<Command> gDefaultCommands;
+static FrameBufferHandle gDefaultGBufferHandle;
+
+static RenderContext gReservedContext;
+static RenderResource::resource_t* gReservedResourceBuffer = nullptr;
+
+static Vector<Command> gCommandBuffer;
+
 
 typedef void (*DrawCallFunc)(void*);
 void FlushAllDrawCalls(const Vector<Command>& cmds) {
@@ -78,25 +74,70 @@ void FlushAllDrawCalls(const Vector<Command>& cmds) {
 	}
 }
 
+void RecomputeOffset(const Vector<RenderContext*>& rcs, uint64_t* max, Vector<Command>* cmds) {
+	for (auto rc : rcs) {
+		int64_t offset = (RenderResource::resource_t*)rc->resources.buffer - (RenderResource::resource_t*)rcs[0]->resources.buffer;
+		for (auto cmd : rc->commands) {
+			cmd.offset += offset;
+			(*cmds).push_back(cmd);
+			if (cmd.sortkey.sortkey > * max) {
+				*max = cmd.sortkey.sortkey;
+			}
+		}
+	}
+}
+
+void FlushAllDrawCalls()
+{
+	gCommandBuffer.clear();
+	
+	uint64_t max_sortkey = 0;
+
+	Vector<RenderContext*>rcs;
+	rcs.push_back(&tlsRenderContext);
+	rcs.push_back(&gReservedContext);
+
+	RecomputeOffset(rcs, &max_sortkey, &gCommandBuffer);
+
+	const auto sorted = RadixSort(&gCommandBuffer, max_sortkey);
+	FlushAllDrawCalls(*sorted);
+}
+
+void FlushAllDrawCallsWithNoExtraCommands() {
+	gCommandBuffer.clear();
+
+	uint64_t max_sortkey = 0;
+
+	Vector<RenderContext*>rcs;
+	rcs.push_back(&tlsRenderContext);
+
+	RecomputeOffset(rcs, &max_sortkey, &gCommandBuffer);
+
+	const auto sorted = RadixSort(&gCommandBuffer, max_sortkey);
+	FlushAllDrawCalls(*sorted);
+}
+
 void DrawMesh(MeshHandle mesh, ShaderHandle shader)
 {
 	Command cmd;
 	cmd.sortkey.set_pass(tlsRenderContext.render_pass);
-	cmd.sortkey.set_chstate(SortKey::Step::kDrawCall);
+	//cmd.sortkey.set_chstate(SortKey::Step::kDrawCall);
+	auto& rc = tlsRenderContext;
+	cmd.offset = tlsRenderContext.ResourcesOffset();
+	rc.commands.push_back(cmd);
+	rc.resources.Construct<IndexedDrawCall>(shader, mesh);
 }
 
 void UseShader(ShaderHandle shader)
 {
-
-}
-
-
-void FlushAllDrawCalls()
-{
-	Vector<Vector<Command>*> cmds_set;
-	cmds_set.push_back(&tlsRenderContext.commands);
-	const auto sorted = RadixSort(cmds_set);
-	FlushAllDrawCalls(*sorted);
+	Command cmd;
+	
+	//cmd.sortkey.set_chstate(SortKey::Step::kActivateShader);
+	cmd.sortkey.set_pass(tlsRenderContext.render_pass);
+	auto& rc = tlsRenderContext;
+	cmd.offset = tlsRenderContext.ResourcesOffset();
+	rc.commands.push_back(cmd);
+	rc.resources.Construct<UseShaderDrawCall>(shader);
 }
 
 RenderContext* GetRenderContext()
@@ -109,12 +150,13 @@ void SetUniformHelper(MaterialHandle md, T data) {
 	auto& rc = tlsRenderContext;
 	Command cmd;
 	cmd.offset = rc.ResourcesOffset();
-	cmd.sortkey.set_chstate(SortKey::kBindParam);
+	//cmd.sortkey.set_chstate(SortKey::kBindParam);
 	cmd.sortkey.set_pass(rc.render_pass);
 	rc.commands.push_back(cmd);
 	MaterialDrawCall* mdc = rc.resources.Construct<MaterialDrawCall>(md, sizeof(MaterialDrawCall));
 	void* off = rc.resources.Construct<T>(std::move(data));
 }
+
 template<>
 void SetUniform<float>(MaterialHandle md, float data) {
 	//TODO(L) Write msg
@@ -144,6 +186,25 @@ void SetUniform<glm::mat4>(MaterialHandle md, glm::mat4 data) {
 	return;
 }
 
+void SetDefaultGBuffer(FrameBufferHandle hf) {
+	if (gReservedResourceBuffer == nullptr) {
+		gReservedResourceBuffer = new RenderResource::resource_t[128];
+		gReservedContext.Reset(gReservedResourceBuffer, 128);
+	}
+
+	gDefaultGBufferHandle = hf;
+	Command cmd;
+	cmd.sortkey.set_pass_low_priority(false);
+	cmd.sortkey.set_pass(RenderPass::KForward);
+	
+	gReservedContext.AddCmd<SwitchFrameBufferDrawCall>(cmd, SwitchFrameBufferDrawCall::kRenderOnFrameBuffer, hf);
+	
+	cmd.sortkey.set_pass(RenderPass::kDeferred);
+	gReservedContext.AddCmd<SwitchFrameBufferDrawCall>(cmd, SwitchFrameBufferDrawCall::kSampleFromFrameBuffer, hf);
+
+	cmd.sortkey.set_pass(RenderPass::kPostProc);
+	gReservedContext.AddCmd<SwitchFrameBufferDrawCall>(cmd, SwitchFrameBufferDrawCall::kCopyFrameBufferToDefault, hf);
+}
 
 
 namespace detail {
@@ -152,6 +213,22 @@ void PrepareRenderContext(void *pointer, size_t size) {
 	tlsRenderContext.Reset(pointer, size);
 }
 
+void PrepareRenderContext__Temp()
+{
+	if (gResourceBuffer == nullptr) {
+		gResourceBuffer = new RenderResource::resource_t[65536];
+	}
+	tlsRenderContext.Reset(gResourceBuffer, 65536);
+}
+
+
+
+}
+
+ScopedState::ScopedState(RenderPass _render_pass)
+	:last_state(tlsRenderContext.render_step, tlsRenderContext.render_pass)
+{
+	tlsRenderContext.render_pass = _render_pass;
 }
 
 ScopedState::ScopedState(SortKey::Step _render_state, RenderPass _render_pass)

@@ -5,11 +5,11 @@
 #include "containers/map.h"
 
 namespace nabla {
-class LightingSystem : public ISysterm {
+class LightingSystem : public ISystem {
+public:
 	using MaterialHandle = renderer::MaterialHandle;
 	using MeshHandle = renderer::MeshHandle;
 	using ShaderHanlde = renderer::ShaderHandle;
-public:
 
 	struct Light {
 		enum Type : uint8_t {
@@ -17,83 +17,67 @@ public:
 			kPoint,
 			kSpot
 		}; 
+
+		using vec3 = glm::vec3;
+
 		Light() :Light(kPoint) {}
 		Light(Type t) : type(t) {}
-		glm::vec3 position = glm::vec3(1.0f);
-		float yaw = 0.0f;
-		float pitch = 0.0f;
-		// glm::vec3 direction = glm::vec3(0.0f, 0.0f, -1.0f); /**< ingnored by point light*/
-		glm::vec3 color = glm::vec3(0.0f);
+		Light(Type t, MeshHandle _hmesh) : type(t), hmesh(_hmesh) {}
+
+		vec3 position = glm::vec3(1.0f);
+		vec3 color    = glm::vec3(0.0f);
+
+		// euler angles
+		float yaw    = 0.0f;
+		float pitch  = 0.0f;
+
+		// attenuation infos
 		float linear = 0.5f;
-		float quad = 0.05f;
+		float quad   = 0.05f;
 		float radius = 0.1f;
-		float cutoff = 0.1f; /**< used only by spot light */
+
+		// the inner & outter cone of spot light
+		float cutoff       = 0.1f; /**< used only by spot light */
 		float outer_cutoff = 0.2f; /**< used only by spot light */
+
+		// describe light type, which may result in some feature disabled
 		Type type;
 		bool draw_mesh = true;
 		MeshHandle hmesh;
 		glm::vec3 mesh_scale = glm::vec3(0.125f);
-		std::string name = "";
-		//display data:
-
+		std::string name;
 	};
 
-	void Initilize() override {
-		num_spot_ = 0;
-		num_point_ = 0;
-		max_point_ = 32;
-		max_spot_ = 32;
-	}
+	void Initilize() override;
 
-	void SetShader(renderer::ShaderHandle lightingpass);
+	void SetShader(renderer::ShaderHandle lightingpass, renderer::ShaderHandle prostproc);
 
 	// activities on gui, note that you can actually do nothing
 	virtual void OnGui(const Vector<Entity>& actives);
 
-	//TODO(L)
-	virtual void Remove(Entity) override {}
-
-	virtual bool Has(Entity e) override {
+	virtual bool Has(Entity e) const override {
 		return lights_.count(e);
 	}
 
 	// called upon every frame
 	virtual void Update(Clock& clock) override;
 
-	const Light* GetLight(Entity e) const {
-		auto itr = lights_.find(e);
-		if (itr == lights_.end()) {
-			return nullptr;
-		}
-		return &itr->second;
-	}
+	const char* name() const override { return "Lighting"; }
 
-	void SetEyePos(glm::vec3 eye) {
+	const Light* GetLight(Entity e) const;
+
+	void SetEyePos(glm::vec3 eye, glm::mat4 project, glm::mat4 view) {
 		camera_pos_ = eye;
+		project_ = project;
+		view_ = view;
 	}
 
-	void NewLight(Entity e, Light l) {
-		switch (l.type)
-		{
-		case Light::kPoint:
-			if (l.name == "") {
-				l.name = "PointLight";
-				l.name += std::to_string(num_point_);
-			}
-			num_point_++;
-			break;
-		case Light::kSpot:
-			if (l.name == "") {
-				l.name = "SpotLight";
-				l.name += std::to_string(num_spot_);
-			}
-			num_spot_++;
-			break;
-		default:
-			break;
-		}
-		lights_[e] = l;
-	}
+	void NewLight(Entity e, Light l);
+
+	//TODO(L)
+	virtual void Remove(Entity) override {}
+
+	void Update(Entity) override {}
 
 private:
 
@@ -131,7 +115,10 @@ private:
 	Vector<PointHandle> hpoint_;
 	Vector<SpotHandle> hspot_;
 	MaterialHandle hcamera_;
+
 	glm::vec3 camera_pos_;
+	glm::mat4 project_;
+	glm::mat4 view_;
 
 	int max_point_ = 0;
 	int max_spot_ = 0;
@@ -143,8 +130,25 @@ private:
 	MaterialHandle hnum_point_;
 
 	ShaderHanlde hshader_;
+	renderer::ShaderHandle hpostprocess_;
 	renderer::RenderContext* rc_ = nullptr;
+
+	MaterialHandle hbox_proj_;
+	MaterialHandle hbox_view_;
+	MaterialHandle hbox_model_;
+	MaterialHandle hbox_lightcolor_;
+	
 	
 };
+
+inline const LightingSystem::Light* LightingSystem::GetLight(Entity e) const {
+	auto itr = lights_.find(e);
+	if (itr == lights_.end()) {
+		return nullptr;
+	}
+	return &itr->second;
+}
+
+
 }
 #endif // !_NABLA_LIGHTING_SYSTERM_H_
