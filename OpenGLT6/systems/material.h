@@ -5,12 +5,12 @@
 
 namespace nabla {
 #define NA_BUILTIN_MATERIAL_SYS_LIST(V)\
-	V(diffuse,           Vec3)   \
-	V(specular,          Float)\
-	V(albedo,            Vec3) \
-	V(metallic,          Float) \
-	V(roughness,         Float) \
-	V(ambient_occulsion, Float)
+	V(diffuse,           Vec3,  (1.0f))   \
+	V(specular,          Float, (0.2f))\
+	V(albedo,            Vec3,  (0.0f)) \
+	V(metallic,          Float, (0.0f)) \
+	V(roughness,         Float, (0.0f)) \
+	V(ambient_occulsion, Float, (0.0f))
 
 class MatrialSysterm : public ISystem {
 public:
@@ -32,7 +32,7 @@ public:
 	struct Material {
 		using Vec3 = glm::vec3;
 		using Float = float;
-#define DEF_MAT(name, t) t name;
+#define DEF_MAT(name, t, def) t name = t def;
 		NA_BUILTIN_MATERIAL_SYS_LIST(DEF_MAT)
 #undef DEF_MAT
 	};
@@ -47,6 +47,12 @@ public:
 
 	void SetUpMaterialHandles(renderer::ShaderHandle shader, Uniforms names);
 
+	void Add(Entity, Material material = Material());
+
+	Material& GetEdit(Entity e) {
+		NA_ASSERT(Has(e));
+		return dense_[sparse_[e.index()]];
+	}
 	//TODO
 	void Remove(Entity) override {}
 

@@ -14,24 +14,24 @@ void RenderableSystem::OnGui(const Vector<Entity>& actives)
 		auto& rend = dense_[sparse_[e.index()]];
 		auto& r = rend.rigid;
 
-		ImGui::DragFloat("Pos.x", &r.position.x);
-		ImGui::DragFloat("Pos.y", &r.position.y);
-		ImGui::DragFloat("Pos.z", &r.position.z);
+		ImGui::DragFloat("Pos.x", &r.position.x, 0.02f);
+		ImGui::DragFloat("Pos.y", &r.position.y, 0.02f);
+		ImGui::DragFloat("Pos.z", &r.position.z, 0.02f);
 
-		ImGui::DragFloat("Quan.w", &r.quaternion.w);
-		ImGui::DragFloat("Quan.x", &r.quaternion.x);
-		ImGui::DragFloat("Quan.y", &r.quaternion.y);
-		ImGui::DragFloat("Quan.z", &r.quaternion.z);
+		ImGui::DragFloat("Quan.w", &r.quaternion.w, 0.02f);
+		ImGui::DragFloat("Quan.x", &r.quaternion.x, 0.02f);
+		ImGui::DragFloat("Quan.y", &r.quaternion.y, 0.02f);
+		ImGui::DragFloat("Quan.z", &r.quaternion.z, 0.02f);
 
-		ImGui::DragFloat("Scale.x", &r.scale.x);
-		ImGui::DragFloat("Scale.x", &r.scale.y);
-		ImGui::DragFloat("Scale.x", &r.scale.z);
+		ImGui::DragFloat("Scale.x", &r.scale.x, 0.02f);
+		ImGui::DragFloat("Scale.y", &r.scale.y, 0.02f);
+		ImGui::DragFloat("Scale.z", &r.scale.z, 0.02f);
 	}
 }
 
 void RenderableSystem::Update(Clock& clock) {
 	using namespace renderer;
-	// UseShader(hshader_);
+	
 	ShaderHandle hshader;
 	for (auto& r : dense_) {
 		auto& info = render_handles_[(uint16_t)r.pass];

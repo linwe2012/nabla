@@ -117,6 +117,7 @@ int main()
 	AssetManager assets;
 	assets.ParseAssetsFromFile("./test/assets.yml");
 	auto teapot = assets.LoadModelToGPU("teapot", false);
+	auto eteapot = entity_manager.Create();
 	Set<std::string> macros;
 	macros.insert("NormalMap");
 	macros.insert("Bitangent");
@@ -203,6 +204,47 @@ int main()
 		));
 	}
 	
+	Vector<Entity> solids{
+		eteapot
+	};
+
+	sys_renderable.Add(eteapot, teapot.meshes_[0].hMesh);
+	sys_material.Add(eteapot);
+	
+	solids.push_back(entity_manager.Create()); // desktop
+	sys_renderable.Add(solids.back(), hcube, RigidBody{
+		glm::vec3(0.0f, -0.8f, 0.0f),
+		glm::vec3(1.0f, 0.2f, 1.0f),
+		glm::quat()
+		});
+	sys_material.Add(solids.back());
+	sys_material.GetEdit(solids.back()).diffuse = glm::vec3(1.0f, 0.0f, 0.0f);
+
+	float pos[] = {
+		1.0f, 1.0f,
+		-1.0f, 1.0f,
+		-1.0f, -1.0f,
+		1.0f, -1.0f
+	};
+
+	float colors[] = {
+		0.0f, 1.0f, 0.0f,
+		1.0f, 1.0f, 0.0f,
+		0.0f, 1.0f, 1.0f,
+		0.0f, 0.0f, 1.0f,
+	};
+
+	for (int i = 0; i < 4; ++i) {
+		solids.push_back(entity_manager.Create()); // legs
+		sys_renderable.Add(solids.back(), hcube, RigidBody{
+			glm::vec3(pos[i*2] *5.0f, -1.0f, pos[i * 2 + 1] * 5.0f),
+			glm::vec3(0.12f, 0.8f, 0.12f),
+			glm::quat()
+			});
+		sys_material.Add(solids.back());
+		sys_material.GetEdit(solids.back()).diffuse = glm::vec3(colors[i * 3], colors[i * 3 + 1], colors[i * 3 + 2]);
+	}
+	
 	while (renderer::IsAlive())
 	{
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -218,6 +260,8 @@ int main()
 
 		SetUniform(hproject, projection);
 		SetUniform(hview, view);
+
+		/*
 		SetUniform(hmodel, model);
 		
 		SetUniform(hdiffuse, diffuse);
@@ -226,15 +270,16 @@ int main()
 		SetUniform(hmetal, metallic);
 		SetUniform(hrough, rough);
 		SetUniform(hao, ao);
+		*/
 
-		DrawMesh(teapot.meshes_[0].hMesh);
 
+		//DrawMesh(teapot.meshes_[0].hMesh);
 
+		sys_renderable.Update(clock);
 
 		sys_lighting.SetEyePos(camera.Position, projection, view);
 		sys_lighting.Update(clock);
-		
-
+		sys_material.Update(clock);
 		
 
 		renderer::FlushAllDrawCalls();
@@ -311,20 +356,27 @@ int main()
 				sys_lighting.OnGui(lights);
 			}
 
+			int cnt = 0;
+			Vector<Entity> tmp;
+			for (auto solid : solids) {
+				tmp.clear();
+				tmp.push_back(solid);
+				if (ImGui::CollapsingHeader(std::to_string(cnt).c_str())) {
+					if (ImGui::TreeNode("Material")) {
+						sys_material.OnGui(tmp);
+						ImGui::TreePop();
+						ImGui::Separator();
+					}
 
-			if (ImGui::CollapsingHeader("Teapot - Material")) {
-				ImGui::ColorEdit3("Diffuse", &diffuse.x);
-
-				ImGui::DragFloat("Specular", &specular, 0.01f, 0.0f, 1.0f);
-				
-				ImGui::Text("Physically Based Rendering:");
-				ImGui::DragFloat("Ambient Occulsion", &ao, 0.01f, 0.0f, 1.0f);
-				ImGui::DragFloat("Metallic", &metallic, 0.01f, 0.0f, 1.0f);
-				ImGui::DragFloat("Roughness", &rough, 0.01f, 0.0f, 1.0f);
-				ImGui::ColorEdit3("Albedo", &albedo.r);
-
-				ImGui::Separator();
+					if (ImGui::TreeNode("Transform")) {
+						sys_renderable.OnGui(tmp);
+						ImGui::TreePop();
+						ImGui::Separator();
+					}
+				}
+				++cnt;
 			}
+			
 			
 			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", clock.GetLastFrameDuration() * 1000.0f, clock.GetLastFrameFps());
 			ImGui::End();
