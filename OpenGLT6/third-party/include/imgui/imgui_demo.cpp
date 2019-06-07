@@ -48,8 +48,8 @@ Index of this file:
 #define _CRT_SECURE_NO_WARNINGS
 #endif
 
-#pragma warning (push)
-#pragma warning (disable: 26451 6011)
+#pragma warning (push, 0)
+// #pragma warning (disable: 26451 6011)
 
 #include "imgui.h"
 #include <ctype.h>          // toupper

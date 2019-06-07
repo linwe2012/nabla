@@ -37,6 +37,7 @@ void main()
     gNormal = normalize(NormalMap);
  
     // and the diffuse per-fragment color
+    // gDiffuseSpec.rgb = vec3(TexCoords, 0.0); //@ DiffuseMap && TexCoords
     gDiffuseSpec.rgb = texture(DiffuseMap, TexCoords).rgb; //@ DiffuseMap && TexCoords
     gDiffuseSpec.rgb = Diffuse.rgb; //@ Diffuse
 

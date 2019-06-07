@@ -1,8 +1,10 @@
 #ifndef _NA_UTILS_CONTAINERS_MAP_H_
 #define _NA_UTILS_CONTAINERS_MAP_H_
 
+#pragma warning (push, 0)
 #include <map>
 #include <unordered_map>
+#pragma warning (pop)
 
 namespace nabla {
 

@@ -4,7 +4,7 @@
 #include <utils/logger.h>
 
 #include <glad/glad.h>
-#include <glm/glm.hpp>
+#include "glm.h"
 
 #include <string>
 #include <fstream>

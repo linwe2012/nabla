@@ -38,7 +38,7 @@ Index of this file:
 
 #ifdef _MSC_VER
 #pragma warning (push)
-#pragma warning (disable: 4251) // class 'xxx' needs to have dll-interface to be used by clients of struct 'xxx' // when IMGUI_API is set to__declspec(dllexport)
+#pragma warning (disable: 4251 26495) // class 'xxx' needs to have dll-interface to be used by clients of struct 'xxx' // when IMGUI_API is set to__declspec(dllexport)
 #endif
 
 #ifdef __clang__
@@ -545,11 +545,11 @@ struct ImGuiDataTypeInfo
     const char* PrintFmt;       // Default printf format for the type
     const char* ScanFmt;        // Default scanf format for the type
 };
-
+#pragma warning (disable: 26495)
 // Stacked color modifier, backup of modified data so we can restore it
 struct ImGuiColorMod
 {
-    ImGuiCol    Col;
+    ImGuiCol    Col = 0;
     ImVec4      BackupValue;
 };
 

@@ -2,6 +2,7 @@
 #define _NABLA_MATERIAL_SYSTERM_H_
 #include "isystem.h"
 #include "core/renderer.h"
+#include "containers/map.h"
 
 namespace nabla {
 #define NA_BUILTIN_MATERIAL_SYS_LIST(V)\
@@ -29,6 +30,30 @@ public:
 		
 	};
 
+	struct MaterialScope;
+	struct MaterialPrototype {
+		MaterialPrototype()
+			: super(nullptr)
+		{}
+
+		template<typename T>
+		MaterialPrototype Add(std::string name, renderer::MaterialHandle h, T def) {
+			defaults.insert(defaults.end(), (char*)& def, ((char*)& def) + sizeof(T));
+			names.push_back(name);
+			handles.push_back(h);
+		}
+
+		MaterialPrototype(Vector<std::string> _names, 
+			              Vector<renderer::MaterialHandle> _handles) 
+			: names(std::move(_names)), handles(_handles), super(nullptr)
+		{}
+
+		MaterialScope* super;
+		Vector<std::string> names;
+		Vector<renderer::MaterialHandle> handles;
+		Vector<char> defaults;
+	};
+
 	struct Material {
 		using Vec3 = glm::vec3;
 		using Float = float;
@@ -47,12 +72,14 @@ public:
 
 	void SetUpMaterialHandles(renderer::ShaderHandle shader, Uniforms names);
 
-	void Add(Entity, Material material = Material());
+	void RegisterMaterial(std::string scoped_name, MaterialPrototype proto);
 
+	void Add(Entity, Material material = Material());
+	/*
 	Material& GetEdit(Entity e) {
 		NA_ASSERT(Has(e));
 		return dense_[sparse_[e.index()]];
-	}
+	}*/
 	//TODO
 	void Remove(Entity) override {}
 
@@ -61,13 +88,33 @@ public:
 	void Initilize() override {}
 
 private:
-	Material materials_;
+	// Material materials_;
 #define DEF_MH(name, ...) renderer::MaterialHandle h##name##_;
 	NA_BUILTIN_MATERIAL_SYS_LIST(DEF_MH)
 #undef DEF_MH
 
 	Vector<Entity::entity_t> sparse_;
-	Vector<Material> dense_;
+	// Vector<Material> dense_;
+
+	
+
+	struct MaterialScope {
+		MaterialScope* super = nullptr;
+		std::string name;
+		Map<std::string, MaterialScope> subs;
+		Map<std::string, MaterialPrototype> protos_;
+	};
+
+	struct MaterialInstance{
+		MaterialPrototype* proto;
+		void* data;
+	};
+
+	Vector<MaterialInstance> dense_;
+
+	MaterialScope root_mat_scope_;
+	Map<std::string, Map<std::string, MaterialPrototype>> prototypes_;
+
 };
 
 inline bool MatrialSysterm::Has(Entity e) const {

@@ -34,9 +34,15 @@ const int NR_LIGHTS = 32;
 const int MAX_SPOT_LIGHT = 32;
 uniform PointLight points[NR_LIGHTS];
 uniform SpotLight spots[MAX_SPOT_LIGHT];
-uniform vec3 viewPos;
+// uniform vec3 viewPos;
+
+
 uniform int num_points; // point lights
 uniform int num_spots;
+
+uniform vec3 the_fucking;
+
+
 /*
 vec3 getNormalFromMap(vec)
 {
@@ -110,14 +116,16 @@ void main()
     float Roughness = texture(gMetaRoughAO, TexCoords).g;
     float AO = texture(gMetaRoughAO, TexCoords).b;
     vec3 lighting  = Diffuse * 0.1; // hard-coded ambient component
-    vec3 viewDir  = normalize(viewPos - FragPos);
-
+    // vec3 viewDir  = normalize(viewPos - FragPos);
+    vec3 viewDir  = normalize(the_fucking - FragPos);
+    
     // calculate reflectance at normal incidence; if dia-electric (like plastic) use F0 
     // of 0.04 and if it's a metal, use the albedo color as F0 (metallic workflow)    
     vec3 F0 = vec3(0.04); 
     F0 = mix(F0, Albedo, Metallic);
     // reflectance equation
     vec3 Lo = vec3(0.0);
+
 
     for(int i = 0; i < num_points; ++i) 
     {
@@ -147,10 +155,10 @@ void main()
         // have diffuse lighting, or a linear blend if partly metal (pure metals
         // have no diffuse light).
         kD *= 1.0 - Metallic;	  
-
+        
         // scale light by NdotL
         float NdotL = max(dot(Normal, L), 0.0);        
-
+        
         // add to outgoing radiance Lo
         Lo += (kD * Albedo / PI + specular) * radiance * NdotL;  // note that we already multiplied the BRDF by the Fresnel (kS) so we won't multiply by kS again
     }
@@ -158,12 +166,10 @@ void main()
         vec3 ambient = vec3(0.03) * Albedo * AO;
         lighting += ambient + Lo;
     }
-    
+
 
     /////////////////////// END PBR//////////////
 
-
-    
     for(int i = 0; i < num_points; ++i)
     {
         // calculate distance between light source and current fragment
@@ -219,6 +225,7 @@ void main()
     }
 
 
-
+    // FragColor = vec4(TexCoords, 0.0, 1.0);
     FragColor = vec4(lighting, 1.0);
+    // FragColor = vec4(texture(gDiffuseSpec, TexCoords).rgb, 0);
 }

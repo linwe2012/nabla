@@ -22,6 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{2467ED19-5EFF-4644-8B6A-B07A7967E005}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -117,8 +118,10 @@
     <ClCompile />
     <ClCompile />
     <ClCompile>
-      <AdditionalOptions>/std:c++17 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>$(SolutionDir)/OpenGLT6;$(SolutionDir)/OpenGLT6/utils;$(SolutionDir)/OpenGLT6/third-party/include;</AdditionalIncludeDirectories>
+      <WarningLevel>Level4</WarningLevel>
+      <AdditionalOptions>/std:c++17 %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -130,8 +133,10 @@
     <ClCompile />
     <ClCompile />
     <ClCompile>
-      <AdditionalOptions>/std:c++17 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>$(SolutionDir)/OpenGLT6;$(SolutionDir)/OpenGLT6/utils;$(SolutionDir)/OpenGLT6/third-party/include;</AdditionalIncludeDirectories>
+      <WarningLevel>Level4</WarningLevel>
+      <AdditionalOptions>/std:c++17 %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -152,6 +157,7 @@
     <ClCompile Include="OpenGLT6\systems\renderable.cc" />
     <ClCompile Include="OpenGLT6\test.cc" />
     <ClCompile Include="OpenGLT6\test2.cc" />
+    <ClCompile Include="OpenGLT6\test3.cc" />
     <ClCompile Include="OpenGLT6\third-party\include\imgui\imgui.cpp" />
     <ClCompile Include="OpenGLT6\third-party\include\imgui\imgui_demo.cpp" />
     <ClCompile Include="OpenGLT6\third-party\include\imgui\imgui_draw.cpp" />
@@ -198,6 +204,7 @@
     <ClInclude Include="OpenGLT6\components\primitive.h" />
     <ClInclude Include="OpenGLT6\components\skeleton.h" />
     <ClInclude Include="OpenGLT6\core\asset\bootstrap.h" />
+    <ClInclude Include="OpenGLT6\core\asset\builtins.h" />
     <ClInclude Include="OpenGLT6\core\asset\model.h" />
     <ClInclude Include="OpenGLT6\core\asset\texture.h" />
     <ClInclude Include="OpenGLT6\core\camera.h" />
@@ -219,6 +226,8 @@
     <ClInclude Include="OpenGLT6\systems\lighting.h" />
     <ClInclude Include="OpenGLT6\systems\material.h" />
     <ClInclude Include="OpenGLT6\systems\renderable.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\glm.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\stb_image_impl.h" />
     <ClInclude Include="OpenGLT6\third-party\include\yaml-src\collectionstack.h" />
     <ClInclude Include="OpenGLT6\third-party\include\yaml-src\contrib\graphbuilderadapter.h" />
     <ClInclude Include="OpenGLT6\third-party\include\yaml-src\directives.h" />
@@ -254,6 +263,7 @@
     <ClInclude Include="OpenGLT6\utils\memory\page-allocator.h" />
     <ClInclude Include="openglt6\utils\memory\slot-allocator.h" />
     <ClInclude Include="openglt6\utils\platform-info.h" />
+    <ClInclude Include="OpenGLT6\utils\cppstring.h" />
     <ClInclude Include="OpenGLT6\utils\typeid.h" />
     <ClInclude Include="OpenGLT6\utils\utils.h" />
   </ItemGroup>

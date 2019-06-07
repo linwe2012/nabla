@@ -57,6 +57,14 @@ NA_DRAWCALL_IMPL(MaterialDrawCall) {
 	case MaterialType::kMat4:
 		glUniformMatrix4fv(id, 1, GL_FALSE, (static_cast<float*>(payload)));
 		break;
+	case MaterialType::kSampler2D:
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, id);
+		break;
+	case MaterialType::kSampler3D:
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_3D, id);
+		break;
 	default:
 		//TODO: log error
 		break;

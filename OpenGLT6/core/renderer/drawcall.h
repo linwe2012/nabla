@@ -79,6 +79,7 @@ struct PBRDrawCall {
 
 struct MaterialDrawCall {
 	NA_DRAWCALL(MaterialDrawCall);
+	using offset_t = uint32_t;
 	MaterialDrawCall(MaterialHandle _md, uint32_t _offset_by_bytes)
 		:md(_md), offset_by_bytes(_offset_by_bytes)
 	{}

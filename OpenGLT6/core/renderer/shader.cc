@@ -24,21 +24,15 @@ bool Shader::CompileShader(ShaderSourceCode ssc)
 {
 	// shader Program
 	ID = glCreateProgram();
-	char Heap[10] = { 0 };
 	try
 	{
 		int vertex = CompileShaderPass(ssc.vertex, GL_VERTEX_SHADER);
-		char Heap2[10] = { 0 };
 		int fragment = CompileShaderPass(ssc.fragment, GL_FRAGMENT_SHADER);
-		char Heap3[10] = { 0 };
-		int geometry;
-		char Heap4[10] = { 0 };
+		int geometry = 0; (void)geometry;
 		if (ssc.geometry != nullptr) {
 			geometry = CompileShaderPass(ssc.geometry, GL_GEOMETRY_SHADER);
 		}
-		char Heap5[10] = { 0 };
 		glLinkProgram(ID);
-		char Heap6[10] = { 0 };
 		CheckCompileErrors(ID, "PROGRAM");
 
 		glDeleteShader(vertex);

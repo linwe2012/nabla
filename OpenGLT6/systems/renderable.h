@@ -17,7 +17,7 @@ public:
 	struct Renderable {
 		RigidBody rigid;
 		renderer::MeshHandle hmesh;
-		renderer::RenderPass pass;
+		renderer::RenderPass pass = renderer::RenderPass::kForward;
 		Entity lookback;
 		std::string name;
 	};
@@ -43,9 +43,9 @@ public:
 
 	void Update(Clock& clock) override;
 
-	const char* name() const override { return "RigidBody"; }
+	const char* name() const override { return "Renderable"; }
 
-	void Add(Entity, renderer::MeshHandle hmesh, RigidBody r = RigidBody(), renderer::RenderPass pass = renderer::RenderPass::KForward);
+	void Add(Entity, renderer::MeshHandle hmesh, RigidBody r = RigidBody(), renderer::RenderPass pass = renderer::RenderPass::kForward);
 
 	const RigidBody& GetRigid(Entity) const;
 

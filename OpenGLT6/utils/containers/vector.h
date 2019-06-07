@@ -1,11 +1,14 @@
 #ifndef _NABLA_CONTAINERS_VECTOR_H_
 #define _NABLA_CONTAINERS_VECTOR_H_
 
-
+#pragma warning (push, 0)
 #include <memory>
+#include <vector>
+#pragma (pop)
+
 #include "memory/memmanip.h"
 #include "logger.h"
-#include <vector>
+
 
 namespace nabla {
 
@@ -39,13 +42,13 @@ public:
 		return begin_[pos];
 	}
 
-	STLVectorEx() : begin_(nullptr), end_(nullptr), end_of_storage_(nullptr), alloc_(default_alloc) {}
+	STLVectorEx() noexcept : begin_(nullptr), end_(nullptr), end_of_storage_(nullptr), alloc_(default_alloc) {}
 
-	STLVectorEx(STLVectorEx&& rhs) : STLVectorEx() {
+	STLVectorEx(STLVectorEx&& rhs) noexcept : STLVectorEx() {
 		swap(rhs);
 	}
 
-	STLVectorEx(Alloc* alloc) : begin_(nullptr), end_(nullptr), end_of_storage_(nullptr), alloc_(alloc){}
+	STLVectorEx(Alloc* alloc) noexcept : begin_(nullptr), end_(nullptr), end_of_storage_(nullptr), alloc_(alloc){}
 	
 	STLVectorEx(std::initializer_list<T> init) : STLVectorEx() {
 		insert(begin(), init.begin(), init.end());
@@ -72,7 +75,7 @@ public:
 	const_iterator end()   const { return end_; }
 
 
-	void swap(STLVectorEx& rhs) {
+	void swap(STLVectorEx& rhs) noexcept {
 		using std::swap;
 
 		swap(rhs.begin_, begin_);
@@ -95,7 +98,7 @@ public:
 		return *this;
 	}
 
-	bool operator==(const STLVectorEx& rhs) const {
+	bool operator==(const STLVectorEx& rhs) const noexcept {
 		return this == &rhs;
 	}
 
@@ -150,7 +153,7 @@ public:
 		NA_ASSERT(position >= begin_ && position <= end_, "iterator is out of range");
 		size_t size_required = last - first;
 		if (size_required > capacity() - size()) {
-			int new_cap = (capacity() == 0) ? 1 : capacity();
+			size_t new_cap = (capacity() == 0) ? 1 : capacity();
 			while (new_cap < size_required + size())
 			{
 				new_cap *= 2;

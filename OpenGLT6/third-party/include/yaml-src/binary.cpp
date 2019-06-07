@@ -1,3 +1,4 @@
+#pragma warning (push, 0)
 #include "yaml-cpp/binary.h"
 
 #include <cctype>
@@ -98,3 +99,4 @@ std::vector<unsigned char> DecodeBase64(const std::string &input) {
   return ret;
 }
 }
+#pragma (pop)

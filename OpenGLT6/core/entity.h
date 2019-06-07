@@ -2,6 +2,7 @@
 #define _NABLA_CORE_ENTITY_H_
 
 #include "assertion.h"
+#include <stdint.h>
 
 namespace nabla {
 
@@ -35,6 +36,9 @@ public:
 
 	static Entity CreateNil() { return Entity{ kNil }; }
 
+	Entity() : id (kNil) {}
+
+	Entity(entity_t _id) : id(_id) {}
 };
 
 inline void Entity::set_generation(char gen) {

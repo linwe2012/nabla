@@ -172,10 +172,11 @@ class EmitterState {
         else
           return EmitterNodeType::BlockMap;
       }
-
+#pragma warning (push, 0)
       // can't get here
       assert(false);
       return EmitterNodeType::NoType;
+#pragma warning (pop)
     }
   };
 

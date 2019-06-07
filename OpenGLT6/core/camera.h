@@ -2,8 +2,7 @@
 #define CAMERA_H
 
 #include <glad/glad.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
+#include "glm.h"
 
 #include <vector>
 #define GLGH_CAMERA_PI 3.14159265f

@@ -31,7 +31,7 @@ public:
 	}
 
 	double NanoSecond() const {
-		return std::chrono::duration_cast<nano>(current_ - begin_).count();
+		return static_cast<double>(std::chrono::duration_cast<nano>(current_ - begin_).count());
 	}
 
 	double MilliSecond() const {
@@ -52,6 +52,10 @@ public:
 
 	double GetLastFrameDuration() {
 		return std::chrono::duration_cast<milli>(current_ - last_).count() * 0.001;
+	}
+
+	float GetLastFrameDurationFloat() {
+		return static_cast<float>(GetLastFrameDuration());
 	}
 
 	double GetLastFrameFps() {

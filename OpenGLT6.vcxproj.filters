@@ -228,6 +228,9 @@
     <ClCompile Include="OpenGLT6\systems\material.cc">
       <Filter>Source Files\system</Filter>
     </ClCompile>
+    <ClCompile Include="OpenGLT6\test3.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="openglt6\core\component.h">
@@ -412,6 +415,18 @@
     </ClInclude>
     <ClInclude Include="OpenGLT6\systems\renderable.h">
       <Filter>Header Files\system</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\glm.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\stb_image_impl.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\core\asset\builtins.h">
+      <Filter>Header Files\asset</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\utils\cppstring.h">
+      <Filter>Header Files\utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

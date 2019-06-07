@@ -8,6 +8,7 @@
 #include "yaml-cpp/yaml.h"
 
 #include "model.h"
+
 #include "core/renderer.h"
 
 namespace nabla {
@@ -21,27 +22,16 @@ namespace nabla {
 	};
 
 	struct LoadedModel {
-		struct SingleModel {
-			renderer::MeshHandle hMesh;
-
-#define DEF_MATERIAL_HANDLE(name, ...) renderer::MaterialHandle h##name;
-#define DO_NOTHING(...)
-			NA_BUILTIN_TEXTURE_LIST(DEF_MATERIAL_HANDLE, DEF_MATERIAL_HANDLE, DO_NOTHING);
-			struct PBR {
-				NA_BUILTIN_TEXTURE_LIST(DO_NOTHING, DO_NOTHING, DEF_MATERIAL_HANDLE);
-			};
-#undef DEF_MATERIAL_HANDLE
-#undef DO_NOTHING
-			PBR pbr;
-			bool HasPBR() { return !pbr.hAlbedo.IsNil(); }
-		};
-		Vector<SingleModel>meshes_;
+		Vector<BuiltinTextureCombo>meshes_;
 	};
 
 	class AssetManager {
 	public:
 		void ParseAssetsFromFile(const char* path);
 		void ParseModelFromFile(const char* path);
+		static renderer::MaterialHandle LoadTexture(const char* path);
+		static renderer::MaterialHandle LoadTexture(const char* path, const char* p2);
+
 		LoadedModel LoadModelToGPU(const char* model_id_str, bool auto_shader = true);
 
 		struct ModelInfo {

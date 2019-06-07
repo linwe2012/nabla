@@ -1,7 +1,11 @@
 #include "bootstrap.h"
 
+#include "yaml-cpp/yaml.h"
 #include "utils.h"
 #include <sstream>
+
+#include "stb_image.h"
+
 
 namespace nabla {
 
@@ -87,6 +91,74 @@ void AssetManager::ParseModelFromFile(const char* path)
 	}
 }
 
+renderer::MaterialHandle AssetManager::LoadTexture(const char* path) {
+	using namespace renderer;
+	int width, height, nrChannels;
+	auto GetTextureByChannel = [&nrChannels]() {
+		if (nrChannels == 1) {
+			return TextureFormat::kRed;
+		}
+		if (nrChannels == 3) {
+			return TextureFormat::kRGB;
+		}
+		if (nrChannels == 4) {
+			return TextureFormat::kRGBA;
+		}
+		return TextureFormat::kRed;
+	};
+	// stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
+											// The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
+	unsigned char* data = stbi_load(path, &width, &height, &nrChannels, 0);
+	if (data)
+	{
+		return renderer::NewTexture(data, width, height, GetTextureByChannel());
+	}
+	else
+	{
+		std::cout << "Failed to load texture" << std::endl;
+	}
+	stbi_image_free(data);
+	return renderer::MaterialHandle();
+}
+
+renderer::MaterialHandle AssetManager::LoadTexture(const char* path, const char* p2)
+{
+	using namespace renderer;
+	int width, height, nrChannels;
+	auto GetTextureByChannel = [&nrChannels]() {
+		if (nrChannels == 1) {
+			return TextureFormat::kRed;
+		}
+		if (nrChannels == 3) {
+			return TextureFormat::kRGB;
+		}
+		if (nrChannels == 4) {
+			return TextureFormat::kRGBA;
+		}
+		return TextureFormat::kRed;
+	};
+	// stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
+											// The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
+	unsigned char* data = stbi_load(path, &width, &height, &nrChannels, 0);
+	unsigned char* data2 = stbi_load(p2, &width, &height, &nrChannels, 0);
+
+	for (int i = 0; i < width * height * nrChannels; ++i) {
+		data[i] = (data[i] / 255.0f) * (data2[i] / 255.0f) * 255.0f; //(data[i] + data2[i]) / 2;
+	}
+
+	if (data)
+	{
+		return renderer::NewTexture(data, width, height, GetTextureByChannel());
+	}
+	else
+	{
+		std::cout << "Failed to load texture" << std::endl;
+	}
+	stbi_image_free(data);
+	stbi_image_free(data2);
+	return renderer::MaterialHandle();
+}
+
 LoadedModel AssetManager::LoadModelToGPU(const char* model_id_str, bool auto_shader)
 {
 	auto gotcha = models_.find(model_id_str);
@@ -130,8 +202,9 @@ struct IsVec3 : std::false_type {};
 template<>
 struct IsVec3<glm::vec3> : std::true_type {};
 
-LoadedModel AssetManager::LoadModelToGPU(std::map<std::string, ModelInfo>::iterator gotcha, bool auto_shader, MaterialOverride matover)
+LoadedModel AssetManager::LoadModelToGPU(std::map<std::string, ModelInfo>::iterator gotcha, [[maybe_unused]]bool auto_shader, MaterialOverride matover)
 {
+	
 	if (gotcha->second.loaded) {
 		NA_LOG_ERROR("model %s already loaded to gpu", gotcha->first.c_str());
 		return LoadedModel();
@@ -139,7 +212,7 @@ LoadedModel AssetManager::LoadModelToGPU(std::map<std::string, ModelInfo>::itera
 
 	auto& info = gotcha->second;
 	ModelAsset model;
-	model.LoadModel(info.abs_path);
+	model.LoadModel(info.abs_path, ModelAsset::Options(ModelAsset::kCompute));
 	renderer::ShaderInfo shaderinfo;
 	const auto& meshes = model.meshes();
 	const auto material = GetMaterial(info.material.c_str());
@@ -169,7 +242,12 @@ LoadedModel AssetManager::LoadModelToGPU(std::map<std::string, ModelInfo>::itera
 					return false;
 				}
 				std::string uniform = fallback_uniform;
-				std::transform(uniform.begin(), uniform.end(), uniform.begin(), std::tolower);
+				std::transform(uniform.begin(), uniform.end(), uniform.begin(), [](const char c) -> char {
+					if (c >= 'A' && c <= 'Z') {
+						return static_cast<char>(c - 'A' + 'a');
+					}
+					return c;
+				});
 				auto node = material[uniform];
 				if (!node.IsDefined()) {
 					return false;
@@ -213,7 +291,7 @@ LoadedModel AssetManager::LoadModelToGPU(std::map<std::string, ModelInfo>::itera
 	}
 
 	LoadedModel lm;
-	LoadedModel::SingleModel sm;
+	BuiltinTextureCombo sm;
 	sm.hMesh = meshes[0].h_mesh;
 	lm.meshes_.push_back(sm);
 	return lm;

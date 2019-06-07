@@ -77,7 +77,8 @@ ShaderHandle NewShader(ShaderFilePath path,
 enum struct MaterialType : uint8_t {
 	kUniform,
 
-	kSampler,
+	kSampler2D,
+	kSampler3D,
 	kFloat,
 	kMat4,
 	kVec3,
@@ -86,7 +87,7 @@ enum struct MaterialType : uint8_t {
 };
 
 enum struct RenderPass : uint8_t {
-	KForward,  /**< geometry & Gbuffers */
+	kForward,  /**< geometry & Gbuffers */
 	kDeferred, /**< incl. lighting */
 	kPostProc,
 };
@@ -98,8 +99,8 @@ enum TextureFormat {
 };
 
 struct MaterialHeader {
-	RenderPass render_pass;
-	MaterialType type;
+	RenderPass render_pass = RenderPass::kForward;
+	MaterialType type = MaterialType::kSampler2D;
 	ShaderHandle hshader;
 };
 
@@ -191,14 +192,14 @@ struct FrameBuffer {
 	uint32_t fbo;
 	uint32_t rbo_depth;
 	
-	/*
-	uint32_t position;
-	uint32_t normal;
-	uint32_t diffuse_spec;
-
-	uint32_t albedo;
-	uint32_t metallic_roughness_ao;
-	*/
+	
+	// uint32_t position;
+	// uint32_t normal;
+	// uint32_t diffuse_spec;
+	// 
+	// uint32_t albedo;
+	// uint32_t metallic_roughness_ao;
+	
 	int width;
 	int height;
 	Vector<uint32_t> attachments;

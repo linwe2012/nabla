@@ -34,7 +34,8 @@ PageAllocator::PageAllocator(const char* name, size_t size)
 	// memory_ = VirtualAlloc(NULL, 2 * GB, MEM_COMMIT, PAGE_READWRITE);
 	if (current_ == NULL) {
 		auto error_code = GetLastError();
-		auto m = error_code;
+		(void)error_code;
+		//TODO(L) throw error
 	}
 	end_ = static_cast<void*>((char *)current_ + size);
 }

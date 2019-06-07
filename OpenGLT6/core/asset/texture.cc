@@ -10,7 +10,7 @@ namespace nabla {
 std::map<std::string, TextureAsset> known;
 using renderer::TextureFormat;
 
-TextureAsset TextureAsset::LoadTexture(const std::string& absolute_path, BuiltinMaterial texture_type)
+TextureAsset TextureAsset::LoadTexture(const std::string& absolute_path, [[maybe_unused]] BuiltinMaterial texture_type)
 {
 	std::string path = absolute_path;
 
@@ -32,7 +32,7 @@ TextureAsset TextureAsset::LoadTexture(const std::string& absolute_path, Builtin
 		return TextureAsset();
 	}
 
-	TextureFormat format;
+	TextureFormat format = TextureFormat::kRed;
 	if (nrComponents == 1)
 		format = TextureFormat::kRed;
 	else if (nrComponents == 3)

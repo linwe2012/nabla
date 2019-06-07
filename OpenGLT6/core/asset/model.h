@@ -20,6 +20,13 @@ namespace nabla {
 
 class ModelAsset {
 public:	
+	enum LoadMethod : char {
+		kAuto, // load if exits, not load if otherwise
+		kIgnore,
+		kCompute,
+		kReserve,
+	};
+
 	struct Mesh {
 		using Texture = renderer::MaterialHandle;
 		bool has_position;
@@ -30,14 +37,27 @@ public:
 		renderer::MeshHandle h_mesh;
 		Vector<glm::vec3> soup; /**< positon, normal, tex_coords, tangent, bitangent */
 
-#define LIST_TEXTURE(name, type, ainame) Texture name##Map;
+		Vector<glm::vec3> Position;
+#define BUILTIN_TEXTURE_DECL(name, ...) Texture name##Map;
 #define DO_NOTHING(...) 
-		NA_BUILTIN_TEXTURE_LIST(LIST_TEXTURE, LIST_TEXTURE, DO_NOTHING)
-#undef  LIST_TEXTURE
-#undef  DO_NOTHING
-
+		NA_BUILTIN_TEXTURE_LIST(BUILTIN_TEXTURE_DECL, BUILTIN_TEXTURE_DECL, DO_NOTHING)
+#undef DO_NOTHING
+#undef BUILTIN_TEXTURE_DECL
 		Texture AmbientOcclusionMap;
 		// Vector<TextureAsset> textures;
+	};
+
+	struct Options {
+		Options() {}
+		Options(LoadMethod m) {
+			NormalMapMethod = m;
+			TangentAndBitangentMapMethod = m;
+			TextureCoordMapMethod = m;
+		}
+
+		LoadMethod NormalMapMethod = LoadMethod::kAuto;
+		LoadMethod TangentAndBitangentMapMethod = LoadMethod::kAuto;
+		LoadMethod TextureCoordMapMethod = LoadMethod::kAuto;
 	};
 
 	/** loads a model with supported ASSIMP extensions from file 
@@ -45,13 +65,13 @@ public:
 	textures will be in gpu and vertices and others are still in cpu memory
 	@note path must be absolute or relative to program launching pos
 	*/
-	void LoadModel(const char* abs_path) {
+	void LoadModel(const char* abs_path, Options opt) {
 		fs::path path = abs_path;
 
-		LoadModel(path);
+		LoadModel(path, opt);
 	}
 
-	void LoadModel(const fs::path abs_path);
+	void LoadModel(const fs::path abs_path, Options opt);
 
 	const Vector<Mesh>& meshes() {
 		return meshes_;
@@ -74,6 +94,7 @@ private:
 private:
 	Vector<Mesh> meshes_;
 	fs::path dir_;
+	Options opt_;
 };
 
 }

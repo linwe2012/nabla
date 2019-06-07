@@ -1,3 +1,8 @@
 teapot:
   bin: ./bin/teapot.fbx
   material: metal.silver
+  
+castle:
+  bin: ./bin/castleA.fbx
+  material: metal.silver
+  

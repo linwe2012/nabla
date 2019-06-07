@@ -21,6 +21,8 @@ Index of this file:
 
 */
 
+
+
 #if defined(_MSC_VER) && !defined(_CRT_SECURE_NO_WARNINGS)
 #define _CRT_SECURE_NO_WARNINGS
 #endif
@@ -168,6 +170,10 @@ namespace IMGUI_STB_NAMESPACE
 using namespace IMGUI_STB_NAMESPACE;
 #endif
 
+#pragma warning (push, 0)
+#pragma warning (disable: 6255)
+#pragma warning (disable: 26451)
+#pragma warning (disable: 26495)
 //-----------------------------------------------------------------------------
 // [SECTION] Style functions
 //-----------------------------------------------------------------------------
@@ -3304,3 +3310,5 @@ static const char* GetDefaultCompressedFontDataTTFBase85()
 {
     return proggy_clean_ttf_compressed_data_base85;
 }
+
+#pragma warning (pop)

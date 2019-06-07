@@ -2,10 +2,10 @@
 #define _NABLA_CORE_PRMITIVE_COMPONENT_H_
 
 #include "core/entity.h"
-#include "glm/glm.hpp"
-#include "glm/gtc/quaternion.hpp"
+#include "glm.h"
 
 namespace nabla {
+
 
 struct RigidBody {
 	glm::vec3 position = glm::vec3(0.0f);

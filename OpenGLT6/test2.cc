@@ -1,4 +1,4 @@
-#if 1
+#if 0
 #include <iostream>
 #include <regex>
 #include <thread>
@@ -117,6 +117,7 @@ int main()
 	AssetManager assets;
 	assets.ParseAssetsFromFile("./test/assets.yml");
 	auto teapot = assets.LoadModelToGPU("teapot", false);
+	// auto teapot = assets.LoadModelToGPU("castle", false);
 	auto eteapot = entity_manager.Create();
 	Set<std::string> macros;
 	macros.insert("NormalMap");
@@ -153,7 +154,7 @@ int main()
 	sys_lighting.SetShader(lightingpass, postprocess);
 
 	sys_renderable.SetRenderPassShader(renderer::RenderPass::kPostProc, postprocess, hbox_model);
-	sys_renderable.SetRenderPassShader(renderer::RenderPass::KForward, geopass, hmodel);
+	sys_renderable.SetRenderPassShader(renderer::RenderPass::kForward, geopass, hmodel);
 
 	for (int i = 0; i < 16; ++i) {
 		lights.push_back(entity_manager.Create());
@@ -178,14 +179,7 @@ int main()
 	InitGui();
 	std::string textipt;
 
-	glm::vec3 diffuse(4.0f, 4.0f, 4.0f);
-	float specular = 0.5f;
-	float ao = 0.0f;
-	float rough = 0.0f;
-	float metallic = 0.0f;
-	glm::vec3 albedo = glm::vec3(0.0f);
 
-	bool display_box = true;
 	Clock clock;
 
 	renderer::detail::PrepareRenderContext__Temp();
@@ -208,8 +202,14 @@ int main()
 		eteapot
 	};
 
-	sys_renderable.Add(eteapot, teapot.meshes_[0].hMesh);
-	sys_material.Add(eteapot);
+	for (auto& m : teapot.meshes_) {
+		auto e = entity_manager.Create();
+		solids.push_back(e);
+		sys_renderable.Add(e, m.hMesh);
+		sys_material.Add(e);
+	}
+	// sys_renderable.Add(eteapot, teapot.meshes_[0].hMesh);
+	// sys_material.Add(eteapot);
 	
 	solids.push_back(entity_manager.Create()); // desktop
 	sys_renderable.Add(solids.back(), hcube, RigidBody{
@@ -234,6 +234,7 @@ int main()
 		0.0f, 0.0f, 1.0f,
 	};
 
+	
 	for (int i = 0; i < 4; ++i) {
 		solids.push_back(entity_manager.Create()); // legs
 		sys_renderable.Add(solids.back(), hcube, RigidBody{
@@ -244,6 +245,9 @@ int main()
 		sys_material.Add(solids.back());
 		sys_material.GetEdit(solids.back()).diffuse = glm::vec3(colors[i * 3], colors[i * 3 + 1], colors[i * 3 + 2]);
 	}
+
+	auto hMonet = AssetManager::LoadTexture("test/img/Monet.bmp");
+
 	
 	while (renderer::IsAlive())
 	{
@@ -285,10 +289,6 @@ int main()
 		renderer::FlushAllDrawCalls();
 		renderer::GetRenderContext()->Reset(renderer::GetRenderContext()->resources.buffer, renderer::GetRenderContext()->resources.end_of_storage - renderer::GetRenderContext()->resources.buffer);
 
-
-		int mm = glGetError();
-
-
 		PrepareGuiFrame();
 		ImGui::ShowDemoWindow();
 
@@ -304,8 +304,8 @@ int main()
 					float yoffset = static_cast<float>(last_y - ypos);
 					camera.ProcessMouseMovement(xoffset, yoffset);
 				}
-				last_x = xpos;
-				last_y = ypos;
+				last_x = static_cast<float>(xpos);
+				last_y = static_cast<float>(ypos);
 				first_move = 1;
 
 			}
@@ -315,22 +315,22 @@ int main()
 
 
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-			camera.ProcessKeyboard(FORWARD, clock.GetLastFrameDuration());
+			camera.ProcessKeyboard(FORWARD, clock.GetLastFrameDurationFloat());
 		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-			camera.ProcessKeyboard(BACKWARD, clock.GetLastFrameDuration());
+			camera.ProcessKeyboard(BACKWARD, clock.GetLastFrameDurationFloat());
 		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-			camera.ProcessKeyboard(LEFT, clock.GetLastFrameDuration());
+			camera.ProcessKeyboard(LEFT, clock.GetLastFrameDurationFloat());
 		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-			camera.ProcessKeyboard(RIGHT, clock.GetLastFrameDuration());
-		if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS)
-			camera.ProcessKeyboard(UP, clock.GetLastFrameDuration());
-		if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
-			camera.ProcessKeyboard(DOWN, clock.GetLastFrameDuration());
+			camera.ProcessKeyboard(RIGHT, clock.GetLastFrameDurationFloat());
+		if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+			camera.ProcessKeyboard(UP, clock.GetLastFrameDurationFloat());
+		if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+			camera.ProcessKeyboard(DOWN, clock.GetLastFrameDurationFloat());
 		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 			camera.BudgeCamera(0.0f, 0.5f);
 
 
-		camera.PassDeltaTime(clock.GetLastFrameDuration());
+		camera.PassDeltaTime(clock.GetLastFrameDurationFloat());
 
 		{
 

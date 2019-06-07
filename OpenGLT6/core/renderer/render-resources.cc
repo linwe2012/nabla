@@ -52,8 +52,8 @@ inline MaterialHeader MaterialManger::GetDecriptor(MaterialHandle mat) {
 }
 
 MaterialHandle MaterialManger::NewTexture(const unsigned char* data,
-	int width, int height,
-	TextureFormat format) {
+	                                      int width, int height,
+	                                      TextureFormat format) {
 	uint32_t id;
 	glGenTextures(1, &id);
 	if (id == 0) {
@@ -62,16 +62,19 @@ MaterialHandle MaterialManger::NewTexture(const unsigned char* data,
 	}
 
 	glBindTexture(GL_TEXTURE_2D, id);
-	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
-	glGenerateMipmap(GL_TEXTURE_2D);
+	
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+	NA_ASSERT(glGetError() == 0, "Invalid opengl cmd");
 	MaterialHeader header;
-	header.type = MaterialType::kSampler;
+	header.type = MaterialType::kSampler2D;
 	MaterialHandle md(headers_.size());
 	buffer_.push_back(id);
 	headers_.push_back(header);
@@ -106,7 +109,8 @@ inline uint32_t MaterialManger::GetMaterialSize(MaterialHandle md) {
 	switch (GetDecriptor(md).type)
 	{
 	case MaterialType::kFloat: // fall through
-	case MaterialType::kSampler:
+	case MaterialType::kSampler3D:
+	case MaterialType::kSampler2D:
 		return sizeof uint32_t;
 
 	case MaterialType::kVec3:
@@ -332,14 +336,14 @@ ShaderHandle NewShader(ShaderFilePath path,
 	{
 		std::ifstream ifs(path.vertex);
 		vertex = PreprocessShader(ifs, macros, version);
-		//std::cout << vertex;
+		// std::cout << vertex;
 		ssc.vertex = vertex.c_str();
 	}
 
 	{
 		std::ifstream ifs(path.fragment);
 		fragment = PreprocessShader(ifs, macros, version);
-		//std::cout << fragment;
+		std::cout << fragment;
 		ssc.fragment = fragment.c_str();
 	}
 

@@ -172,7 +172,7 @@ struct RenderResource {
 struct RenderState {
 	RenderState(SortKey::Step _render_step, RenderPass _render_pass)
 		:render_step(_render_step), render_pass(_render_pass), is_valid(true) {}
-	RenderState() : is_valid (false), render_step(SortKey::Step::kDrawCall), render_pass(RenderPass::KForward) {}
+	RenderState() : is_valid (false), render_step(SortKey::Step::kDrawCall), render_pass(RenderPass::kForward) {}
 	SortKey::Step render_step;
 	RenderPass render_pass;
 	bool is_valid;
@@ -215,7 +215,7 @@ struct RenderContext {
 	uint16_t base = 10;
 	uint16_t tid = base;
 	SortKey::Step render_step = SortKey::Step::kDrawCall;
-	RenderPass render_pass = RenderPass::KForward;
+	RenderPass render_pass = RenderPass::kForward;
 };
 
 template <typename T>
@@ -240,7 +240,7 @@ void DrawMesh(MeshHandle mesh, ShaderHandle shader = ShaderHandle::MakeNil());
 
 void UseShader(ShaderHandle shader);
 
-void UseTexture();
+void UseTexture(MaterialHandle md);
 
 
 // this should be called once per frame

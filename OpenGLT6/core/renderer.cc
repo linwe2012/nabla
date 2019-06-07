@@ -89,8 +89,7 @@ void InitWindow(const InitConfig& cfg) {
 		return;
 	}
 
-	auto framecb =
-		glfwSetFramebufferSizeCallback(glfwwin, [](GLFWwindow * window, int width, int height) {
+	glfwSetFramebufferSizeCallback(glfwwin, []([[maybe_unused]] GLFWwindow * window, int width, int height) {
 		glViewport(0, 0, width, height);
 	});
 

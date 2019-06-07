@@ -12,6 +12,7 @@
 #pragma warning( disable: 6378 )
 #pragma warning( disable: 6387 )
 #pragma warning( disable: 28182 )
+#pragma warning( disable: 4100 )
 
 #include "stb_image.h"
 

@@ -1,7 +1,9 @@
 #include "compiled-drawcall.h"
 #include "containers/map.h"
+#pragma warning (push, 0)
 #include <thread>
 #include <algorithm>
+#pragma warning (pop)
 #include "utils.h"
 
 namespace nabla {
@@ -14,7 +16,7 @@ const Vector<Command>* RadixSort(Vector<Command> *cmds, uint64_t max ) {
 
 	Vector<Command>& a = *cmds;
 
-	int n_cmds = a.size();
+	int64_t n_cmds = static_cast<int64_t>(a.size());
 	
 	if (b.size() < a.size()) {
 		b.resize(a.size());
@@ -43,7 +45,7 @@ const Vector<Command>* RadixSort(Vector<Command> *cmds, uint64_t max ) {
 			bucket[i] += bucket[i - 1];
 		}
 
-		for (int i = n_cmds - 1; i >= 0; --i) {
+		for (int64_t i = n_cmds - 1; i >= 0; --i) {
 			b[--bucket[(a[i].sortkey.sortkey >> shift) & bitmask]] = a[i];
 		}
 
@@ -140,6 +142,22 @@ void UseShader(ShaderHandle shader)
 	rc.resources.Construct<UseShaderDrawCall>(shader);
 }
 
+void UseTexture(MaterialHandle md)
+{
+	{
+		auto type = GetMaterialDecriptor(md).type;
+		NA_LEAVE_IF((void)0, type != MaterialType::kSampler2D && type != MaterialType::kSampler3D, "");
+	}
+	
+	auto& rc = tlsRenderContext;
+	Command cmd;
+	cmd.offset = rc.ResourcesOffset();
+	cmd.sortkey.set_pass(rc.render_pass);
+	rc.commands.push_back(cmd);
+	MaterialDrawCall* mdc = rc.resources.Construct<MaterialDrawCall>(md, static_cast<MaterialDrawCall::offset_t>(0));
+	(void)mdc;
+}
+
 RenderContext* GetRenderContext()
 {
 	return &tlsRenderContext;
@@ -153,8 +171,10 @@ void SetUniformHelper(MaterialHandle md, T data) {
 	//cmd.sortkey.set_chstate(SortKey::kBindParam);
 	cmd.sortkey.set_pass(rc.render_pass);
 	rc.commands.push_back(cmd);
-	MaterialDrawCall* mdc = rc.resources.Construct<MaterialDrawCall>(md, sizeof(MaterialDrawCall));
+	MaterialDrawCall* mdc = rc.resources.Construct<MaterialDrawCall>(md, static_cast<MaterialDrawCall::offset_t>(sizeof(MaterialDrawCall)));
 	void* off = rc.resources.Construct<T>(std::move(data));
+	(void)off;
+	(void)mdc;
 }
 
 template<>
@@ -195,7 +215,7 @@ void SetDefaultGBuffer(FrameBufferHandle hf) {
 	gDefaultGBufferHandle = hf;
 	Command cmd;
 	cmd.sortkey.set_pass_low_priority(false);
-	cmd.sortkey.set_pass(RenderPass::KForward);
+	cmd.sortkey.set_pass(RenderPass::kForward);
 	
 	gReservedContext.AddCmd<SwitchFrameBufferDrawCall>(cmd, SwitchFrameBufferDrawCall::kRenderOnFrameBuffer, hf);
 	
