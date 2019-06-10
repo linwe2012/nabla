@@ -291,9 +291,15 @@ LoadedModel AssetManager::LoadModelToGPU(std::map<std::string, ModelInfo>::itera
 	}
 
 	LoadedModel lm;
-	BuiltinTextureCombo sm;
-	sm.hMesh = meshes[0].h_mesh;
-	lm.meshes_.push_back(sm);
+	// BuiltinTextureCombo sm;
+	// sm.hMesh = meshes[0].h_mesh;
+	// lm.meshes_.push_back(sm);
+	for (auto& mesh : meshes) {
+		BuiltinTextureCombo sm;
+		sm.hMesh = mesh.h_mesh;
+		lm.meshes_.push_back(sm);
+		sm.transform = mesh.transform;
+	}
 	return lm;
 }
 

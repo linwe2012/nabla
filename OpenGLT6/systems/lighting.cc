@@ -203,10 +203,10 @@ void LightingSystem::AddPointHandle(int id) {
 		p.quad = renderer::NewUniform(hshader_, a.c_str(), MaterialType::kFloat);
 	}
 
-	{
-		std::string a = base + "Radius";
-		p.radius = NewUniform(hshader_, a.c_str(), MaterialType::kFloat);
-	}
+	//{
+	//	std::string a = base + "Radius";
+	//	p.radius = NewUniform(hshader_, a.c_str(), MaterialType::kFloat);
+	//}
 
 	hpoint_.push_back(std::move(p));
 }
@@ -280,7 +280,7 @@ void LightingSystem::RenderPoint(int id, const Light& l)
 		SetUniform(h.position, l.position);
 		SetUniform(h.linear, l.linear);
 		SetUniform(h.quad, l.quad);
-		SetUniform(h.radius, l.radius);
+		// SetUniform(h.radius, l.radius);
 	}
 }
 

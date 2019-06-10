@@ -69,6 +69,7 @@ void ModelAsset::ProcessNode(aiNode* node, const aiScene* scene, int hierachy) {
 	for (unsigned int i = 0; i < node->mNumMeshes; i++)
 	{
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+		transform = *(glm::mat4*)(&node->mTransformation);
 		ProcessMesh(mesh, scene);
 	}
 
@@ -95,7 +96,7 @@ void ModelAsset::ProcessMesh(aiMesh* mesh, const aiScene* scene) {
 	Vector<LayoutInfo> layouts;
 
 	auto& m = meshes_.back();
-
+	m.transform = transform;
 
 	m.has_position = true;
 	cnt += sz_vec3;

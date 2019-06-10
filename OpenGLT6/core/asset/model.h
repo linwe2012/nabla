@@ -44,6 +44,7 @@ public:
 #undef DO_NOTHING
 #undef BUILTIN_TEXTURE_DECL
 		Texture AmbientOcclusionMap;
+		glm::mat4 transform;
 		// Vector<TextureAsset> textures;
 	};
 
@@ -92,6 +93,7 @@ private:
 	void ProcessMaterialTexture(Mesh* dst, const aiScene* scene, const aiMesh* mesh);
 
 private:
+	glm::mat4 transform;
 	Vector<Mesh> meshes_;
 	fs::path dir_;
 	Options opt_;

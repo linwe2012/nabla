@@ -50,6 +50,7 @@ struct BuiltinTextureCombo {
 #undef DO_NOTHING
 	PBR pbr;
 	bool HasPBR() { return !pbr.hAlbedo.IsNil(); }
+	glm::mat4 transform;
 };
 
 }

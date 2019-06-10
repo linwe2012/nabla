@@ -428,5 +428,11 @@
     <ClInclude Include="OpenGLT6\utils\cppstring.h">
       <Filter>Header Files\utils</Filter>
     </ClInclude>
+    <ClInclude Include="OpenGLT6\systems\polygon.h">
+      <Filter>Header Files\system</Filter>
+    </ClInclude>
+    <ClInclude Include="loader.h">
+      <Filter>Header Files\asset</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

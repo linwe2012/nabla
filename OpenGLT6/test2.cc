@@ -1,4 +1,4 @@
-#if 0
+#if 1
 #include <iostream>
 #include <regex>
 #include <thread>
@@ -17,8 +17,10 @@
 #include "systems/lighting.h"
 #include "systems/renderable.h"
 #include "systems/material.h"
-
-
+#include <glm/gtx/matrix_decompose.hpp>
+extern "C" {
+	_declspec(dllexport) DWORD NvOptimusEnablement = 0x00000001;
+}
 
 void renderQuad();
 void renderCube();
@@ -116,8 +118,8 @@ int main()
 
 	AssetManager assets;
 	assets.ParseAssetsFromFile("./test/assets.yml");
-	auto teapot = assets.LoadModelToGPU("teapot", false);
-	// auto teapot = assets.LoadModelToGPU("castle", false);
+	//auto teapot = assets.LoadModelToGPU("teapot", false);
+	auto teapot = assets.LoadModelToGPU("castle", false);
 	auto eteapot = entity_manager.Create();
 	Set<std::string> macros;
 	macros.insert("NormalMap");
@@ -205,7 +207,11 @@ int main()
 	for (auto& m : teapot.meshes_) {
 		auto e = entity_manager.Create();
 		solids.push_back(e);
-		sys_renderable.Add(e, m.hMesh);
+		RigidBody r;
+		glm::vec3 skew;
+		glm::vec4 perspective;
+		glm::decompose(m.transform, r.scale, r.quaternion, r.position, skew, perspective);
+		sys_renderable.Add(e, m.hMesh, r);
 		sys_material.Add(e);
 	}
 	// sys_renderable.Add(eteapot, teapot.meshes_[0].hMesh);
@@ -218,7 +224,7 @@ int main()
 		glm::quat()
 		});
 	sys_material.Add(solids.back());
-	sys_material.GetEdit(solids.back()).diffuse = glm::vec3(1.0f, 0.0f, 0.0f);
+	// sys_material.GetEdit(solids.back()).diffuse = glm::vec3(1.0f, 0.0f, 0.0f);
 
 	float pos[] = {
 		1.0f, 1.0f,
@@ -243,7 +249,7 @@ int main()
 			glm::quat()
 			});
 		sys_material.Add(solids.back());
-		sys_material.GetEdit(solids.back()).diffuse = glm::vec3(colors[i * 3], colors[i * 3 + 1], colors[i * 3 + 2]);
+		// sys_material.GetEdit(solids.back()).diffuse = glm::vec3(colors[i * 3], colors[i * 3 + 1], colors[i * 3 + 2]);
 	}
 
 	auto hMonet = AssetManager::LoadTexture("test/img/Monet.bmp");

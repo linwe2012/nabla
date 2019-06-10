@@ -94,7 +94,7 @@ private:
 #undef DEF_MH
 
 	Vector<Entity::entity_t> sparse_;
-	// Vector<Material> dense_;
+	Vector<Material> dense_;
 
 	
 
@@ -110,8 +110,8 @@ private:
 		void* data;
 	};
 
-	Vector<MaterialInstance> dense_;
-
+	// Vector<MaterialInstance> dense_;
+	
 	MaterialScope root_mat_scope_;
 	Map<std::string, Map<std::string, MaterialPrototype>> prototypes_;
 

@@ -201,6 +201,7 @@
     <ClCompile Include="OpenGLT6\utils\typeid.cc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="loader.h" />
     <ClInclude Include="OpenGLT6\components\primitive.h" />
     <ClInclude Include="OpenGLT6\components\skeleton.h" />
     <ClInclude Include="OpenGLT6\core\asset\bootstrap.h" />
@@ -225,6 +226,7 @@
     <ClInclude Include="OpenGLT6\systems\isystem.h" />
     <ClInclude Include="OpenGLT6\systems\lighting.h" />
     <ClInclude Include="OpenGLT6\systems\material.h" />
+    <ClInclude Include="OpenGLT6\systems\polygon.h" />
     <ClInclude Include="OpenGLT6\systems\renderable.h" />
     <ClInclude Include="OpenGLT6\third-party\include\glm.h" />
     <ClInclude Include="OpenGLT6\third-party\include\stb_image_impl.h" />

@@ -85,6 +85,7 @@ inline MaterialHandle MaterialManger::NewUniform(ShaderHandle target, const char
 	Shader shader = ::nabla::renderer::OpenHandle(target);
 	int id = glGetUniformLocation(shader.ID, name);
 	if (id < 0) {
+		NA_ASSERT(false, "Invalid handle");
 		return MaterialHandle::MakeNil();
 	}
 	MaterialHeader header;

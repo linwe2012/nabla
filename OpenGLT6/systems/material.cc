@@ -42,26 +42,26 @@ void MatrialSysterm::Add(Entity e, Material material)
 {
 	sparse_.size_at_least(e.index(), Entity::kInvalidIndex);
 	sparse_[e.index()] = dense_.size();
-	// dense_.push_back(material);
+	dense_.push_back(material);
 }
 
 void MatrialSysterm::OnGui(const Vector<Entity>& actives)
 {
 	using namespace renderer;
-	for (auto e : actives) {
-		if (!Has(e)) {
-			return;
-		}
+	//for (auto e : actives) {
+		//if (!Has(e)) {
+			//return;
+		//}
 
-		auto& m = dense_[sparse_[e.index()]];
+		//auto& m = dense_[sparse_[e.index()]];
 
-		void* data = m.data;
-		int i = 0;
+		//void* data = m.data;
+		//int i = 0;
 
-		for (auto h : m.proto->handles) {
-			auto str = m.proto->names[i].c_str();
-			switch (GetMaterialDecriptor(h).type)
-			{
+		//for (auto h : m.proto->handles) {
+			//auto str = m.proto->names[i].c_str();
+			//switch (GetMaterialDecriptor(h).type)
+			//{
 			// case MaterialType::kSampler2D: // fall through
 			// case MaterialType::kSampler3D:
 			// 	UseTexture(h);
@@ -70,23 +70,23 @@ void MatrialSysterm::OnGui(const Vector<Entity>& actives)
 			// 	data = ((int*)data) + 1;
 			// 	break;
 
-			case MaterialType::kFloat:
-				ImGui::DragFloat(str, (float*)data, 0.01f, 0.0f, 2.0f);
-				data = ((float*)data) + 1;
-				break;
-			case MaterialType::kVec3:
-				ImGui::ColorEdit3(str, (float*)data);
-				data = ((glm::vec3*)data) + 1;
-				break;
+			// case MaterialType::kFloat:
+			// 	ImGui::DragFloat(str, (float*)data, 0.01f, 0.0f, 2.0f);
+			// 	data = ((float*)data) + 1;
+			// 	break;
+			// case MaterialType::kVec3:
+			// 	ImGui::ColorEdit3(str, (float*)data);
+			// 	data = ((glm::vec3*)data) + 1;
+			// 	break;
 			// case MaterialType::kMat4:
 			// 	SetUniform(h, *(glm::mat4*)data);
 			// 	data = ((glm::mat4*)data) + 1;
 			// 	break;
-			default:
-				break;
-			}
-			++i;
-		}
+			//default:
+				//break;
+			//}
+			//++i;
+		//}
 		
 
 		// ImGui::ColorEdit3("Diffuse", &m.diffuse[0]);
@@ -98,18 +98,18 @@ void MatrialSysterm::OnGui(const Vector<Entity>& actives)
 		// ImGui::DragFloat("Metallic", &m.metallic, 0.01f, 0.0f, 1.0f);
 		// ImGui::DragFloat("Roughness", &m.roughness, 0.01f, 0.0f, 1.0f);
 		// ImGui::DragFloat("Ambient Occulison", &m.ambient_occulsion, 0.1f);
-	}
+	//}
 }
 
 
-/*
+
 void MatrialSysterm::Update(Entity e)
 {
 #define SET_UNI(name, ...) renderer::SetUniform(h##name##_, dense_[sparse_[e.index()]].##name);
 	NA_BUILTIN_MATERIAL_SYS_LIST(SET_UNI)
 #undef SET_UNI
-}*/
-
+}
+/*
 void MatrialSysterm::Update(Entity e)
 {
 	using namespace renderer;
@@ -142,6 +142,6 @@ void MatrialSysterm::Update(Entity e)
 			break;
 		}
 	}
-}
+}*/
 
 }
