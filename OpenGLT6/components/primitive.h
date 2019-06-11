@@ -15,6 +15,7 @@ struct Transform {
 
 struct RigidBody {
 	glm::vec3 velocity;
+	glm::vec3 accleration;
 	float mass;
 };
 
