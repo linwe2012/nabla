@@ -231,6 +231,12 @@
     <ClCompile Include="OpenGLT6\test3.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="OpenGLT6\systems\collision.cc">
+      <Filter>Source Files\system</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\systems\polygon.cc">
+      <Filter>Source Files\system</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="openglt6\core\component.h">
@@ -433,6 +439,12 @@
     </ClInclude>
     <ClInclude Include="loader.h">
       <Filter>Header Files\asset</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\core\sparse-map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\systems\collision.h">
+      <Filter>Header Files\system</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
