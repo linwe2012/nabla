@@ -38,7 +38,7 @@ public:
 
 		template<typename T>
 		MaterialPrototype Add(std::string name, renderer::MaterialHandle h, T def) {
-			defaults.insert(defaults.end(), (char*)& def, ((char*)& def) + sizeof(T));
+			defaults.insert(defaults.end(), (char*)& def, ((ch bar*)& def) + sizeof(T));
 			names.push_back(name);
 			handles.push_back(h);
 		}
@@ -74,7 +74,7 @@ public:
 
 	void RegisterMaterial(std::string scoped_name, MaterialPrototype proto);
 
-	void Add(Entity, Material material = Material());
+	void Add(Entity, Material material);
 	/*
 	Material& GetEdit(Entity e) {
 		NA_ASSERT(Has(e));
@@ -86,6 +86,8 @@ public:
 	void Update(Clock& clock) override {}
 
 	void Initilize() override {}
+
+	void Add(Entity e) override { Add(e, Material()); }
 
 private:
 	// Material materials_;

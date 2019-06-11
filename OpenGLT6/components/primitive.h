@@ -7,10 +7,15 @@
 namespace nabla {
 
 
-struct RigidBody {
+struct Transform {
 	glm::vec3 position = glm::vec3(0.0f);
 	glm::vec3 scale = glm::vec3(1.0f);
 	glm::quat quaternion;
+};
+
+struct RigidBody {
+	glm::vec3 velocity;
+	float mass;
 };
 
 }

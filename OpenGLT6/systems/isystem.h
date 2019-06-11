@@ -92,6 +92,8 @@ public:
 	// called upon every frame
 	virtual void Update(Clock& clock) = 0;
 
+	virtual void Add(Entity) = 0;
+
 	virtual const char* name() const = 0;
 };
 }

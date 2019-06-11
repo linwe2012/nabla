@@ -272,6 +272,20 @@ public:
 		alloc_ = nullptr;
 	}
 
+	void erase(iterator postion) {
+		erase(postion, postion + 1);
+	}
+
+	void erase(iterator first, iterator last) {
+		NA_ASSERT(first < last && 
+			first >= begin() && last <= end(), "Erasing element out of range");
+
+		selective_destroy<std::is_trivially_destructible<T>::value>(first, last);
+
+		memmove(first, last, (end() - last) * sizeof(T));
+		end_ -= (last - first);
+	}
+
 	~STLVectorEx() {
 		clear();
 		if (alloc_ != nullptr && begin_ != nullptr) {
@@ -280,6 +294,7 @@ public:
 		begin_ = end_ = end_of_storage_ = nullptr;
 	}
 
+	
 private:
 	/** ensure there is space for at least one element */
 	void ensure_space() {
@@ -309,6 +324,25 @@ private:
 		{
 			--end_;
 			end_->~T();
+		}
+	}
+
+	template<bool istrivial>
+	void selective_destroy(iterator first, iterator last) {
+		static_assert(false, "This should never be called");
+	}
+
+	template<>
+	void selective_destroy< true >(iterator first, iterator last) {
+		return;
+	}
+
+	template<>
+	void selective_destroy< false >(iterator first, iterator last) {
+		while (first != last)
+		{
+			first->~T();
+			++first;
 		}
 	}
 

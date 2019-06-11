@@ -12,7 +12,7 @@ void RenderableSystem::OnGui(const Vector<Entity>& actives)
 		if (!Has(e))
 			continue;
 		auto& rend = dense_[sparse_[e.index()]];
-		auto& r = rend.rigid;
+		auto& r = rend.transform;
 
 		ImGui::DragFloat("Pos.x", &r.position.x, 0.02f);
 		ImGui::DragFloat("Pos.y", &r.position.y, 0.02f);
@@ -40,9 +40,9 @@ void RenderableSystem::Update(Clock& clock) {
 			UseShader(hshader);
 		}
 		glm::mat4 model(1.0f);
-		model = glm::scale(model, r.rigid.scale);
-		model = glm::mat4_cast(r.rigid.quaternion) * model;
-		model = glm::translate(model, r.rigid.position);
+		model = glm::scale(model, r.transform.scale);
+		model = glm::mat4_cast(r.transform.quaternion) * model;
+		model = glm::translate(model, r.transform.position);
 
 		for (auto sys : before_render_) {
 			sys->Update(r.lookback);
@@ -54,24 +54,24 @@ void RenderableSystem::Update(Clock& clock) {
 }
 
 
-void RenderableSystem::Add(Entity e, renderer::MeshHandle hmesh, RigidBody r, renderer::RenderPass pass)
+void RenderableSystem::Add(Entity e, renderer::MeshHandle hmesh, Transform t, renderer::RenderPass pass)
 {
 	sparse_.size_at_least(e.index(), Entity::kInvalidIndex);
 
 	sparse_[e.index()] = dense_.size();
 	dense_.push_back(Renderable{
-		r,
+		t,
 		hmesh,
 		pass,
 		e,
 		});
 }
 
-const RigidBody& RenderableSystem::GetRigid(Entity e) const
+const RenderableSystem::Renderable& RenderableSystem::GetRenderable(Entity e) const
 {
-	NA_LEAVE_IF(invalid_.rigid, !Has(e), "No such entitiy");
+	NA_LEAVE_IF(invalid_, !Has(e), "No such entitiy");
 		
-	return dense_[sparse_[e.index()]].rigid;
+	return dense_[sparse_[e.index()]];
 }
 
 

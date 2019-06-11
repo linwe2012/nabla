@@ -15,7 +15,7 @@ class RenderableSystem : public ISystem {
 	};
 public:
 	struct Renderable {
-		RigidBody rigid;
+		Transform transform;
 		renderer::MeshHandle hmesh;
 		renderer::RenderPass pass = renderer::RenderPass::kForward;
 		Entity lookback;
@@ -45,9 +45,17 @@ public:
 
 	const char* name() const override { return "Renderable"; }
 
-	void Add(Entity, renderer::MeshHandle hmesh, RigidBody r = RigidBody(), renderer::RenderPass pass = renderer::RenderPass::kForward);
+	void Add(Entity, renderer::MeshHandle hmesh, Transform t = Transform(), renderer::RenderPass pass = renderer::RenderPass::kForward);
 
-	const RigidBody& GetRigid(Entity) const;
+	const Renderable& GetRenderable(Entity) const;
+
+	Transform* GetTransformEdit(Entity e) {
+		if (!Has(e)) {
+			return nullptr;
+		}
+
+		return &dense_[sparse_[e.index()]].transform;
+	}
 
 	void AttachBeforeRender(ISystem* sys) {
 		before_render_.push_back(sys);
@@ -60,6 +68,8 @@ public:
 
 	void Update(Entity) override {}
 
+	void Add(Entity) override {}
+
 private:
 	
 	Vector<Entity::entity_t> sparse_;
@@ -68,7 +78,6 @@ private:
 	
 	Vector<RenderHandle_> render_handles_;
 	Vector<ISystem*> before_render_;
-	
 };
 
 }

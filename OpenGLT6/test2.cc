@@ -207,7 +207,7 @@ int main()
 	for (auto& m : teapot.meshes_) {
 		auto e = entity_manager.Create();
 		solids.push_back(e);
-		RigidBody r;
+		Transform r;
 		glm::vec3 skew;
 		glm::vec4 perspective;
 		glm::decompose(m.transform, r.scale, r.quaternion, r.position, skew, perspective);
@@ -218,7 +218,7 @@ int main()
 	// sys_material.Add(eteapot);
 	
 	solids.push_back(entity_manager.Create()); // desktop
-	sys_renderable.Add(solids.back(), hcube, RigidBody{
+	sys_renderable.Add(solids.back(), hcube, Transform{
 		glm::vec3(0.0f, -0.8f, 0.0f),
 		glm::vec3(1.0f, 0.2f, 1.0f),
 		glm::quat()
@@ -243,7 +243,7 @@ int main()
 	
 	for (int i = 0; i < 4; ++i) {
 		solids.push_back(entity_manager.Create()); // legs
-		sys_renderable.Add(solids.back(), hcube, RigidBody{
+		sys_renderable.Add(solids.back(), hcube, Transform{
 			glm::vec3(pos[i*2] *5.0f, -1.0f, pos[i * 2 + 1] * 5.0f),
 			glm::vec3(0.12f, 0.8f, 0.12f),
 			glm::quat()

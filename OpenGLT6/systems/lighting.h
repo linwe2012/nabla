@@ -59,6 +59,8 @@ public:
 		return lights_.count(e);
 	}
 
+	void Add(Entity) override {}
+
 	// called upon every frame
 	virtual void Update(Clock& clock) override;
 

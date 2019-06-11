@@ -1,25 +1,13 @@
-#pragma once
-#include "containers/vector.h"
-#include "systems/isystem.h"
-#include "core/renderer.h"
-
+#ifndef _NABLA_SYSTEM_COLLISON_H_
+#define _NABLA_SYSTEM_COLLISON_H_
+#include "isystem.h"
+#include "core/sparse-map.h"
+#include "components/primitive.h"
 #include "renderable.h"
 
 namespace nabla {
-
-class PolygonSystem : public ISystem {
+class CollisonSystem : public ISystem {
 public:
-	enum {
-		kCube,
-		kSphere,
-		kCylinder,
-		kCone,
-		kPrism,
-		kFrustrum
-	};
-
-	void Add(Entity) override {}
-
 	// called upon system first registered
 	void Initilize() override {};
 
@@ -33,17 +21,22 @@ public:
 
 	virtual void Update(Entity) override {};
 
-	// called upon every frame
-	void Update(Clock& clock) override {};
+	// called upon every frame, update collide object
+	void Update(Clock& clock) override;
 
-	void BindRenderable(RenderableSystem* render);
+	void Add(Entity) override;
 
 	const char* name() const override {
 		return "polygon";
 	}
 
+private:
+	SparseBindirectMap<RigidBody> rigids_;
 	RenderableSystem* render;
+	// octree etc.
 };
-
-
 }
+
+
+#endif // !_NABLA_SYSTEM_COLLISON_H_
+
