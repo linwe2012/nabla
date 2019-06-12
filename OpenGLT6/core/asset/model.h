@@ -94,6 +94,7 @@ private:
 
 private:
 	glm::mat4 transform;
+	glm::mat4 parent_transform = glm::mat4(1.0f);
 	Vector<Mesh> meshes_;
 	fs::path dir_;
 	Options opt_;

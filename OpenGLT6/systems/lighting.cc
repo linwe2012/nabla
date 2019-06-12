@@ -141,7 +141,7 @@ void LightingSystem::Update([[maybe_unused]]Clock& clock)
 		{
 			glm::mat4 model(1.0f);
 			model = glm::scale(model, l.mesh_scale);
-			model = glm::translate(model, l.position);
+			model = glm::translate(model, l.position / l.mesh_scale);
 		
 			ScopedState post(RenderPass::kPostProc);
 			SetUniform(hbox_lightcolor_, l.color);

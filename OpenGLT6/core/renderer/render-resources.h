@@ -1,6 +1,7 @@
 #ifndef _NABLA_CORE_RENDER_RESOURCES_H_
 #define _NABLA_CORE_RENDER_RESOURCES_H_
 #include <stdint.h>
+#include <functional>
 #include "logger.h"
 
 #include "shader.h"
@@ -96,6 +97,8 @@ enum TextureFormat {
 	kRed = GL_RED,
 	kRGB = GL_RGB,
 	kRGBA = GL_RGBA,
+	kFloat,
+	kInt32,
 };
 
 struct MaterialHeader {
@@ -203,12 +206,26 @@ struct FrameBuffer {
 	int width;
 	int height;
 	Vector<uint32_t> attachments;
+	Vector<uint32_t> attach_ids;
 	Vector<const char*> attachments_name;
+	Vector<glm::vec4> clear_color;
 	ShaderHandle attached_shader;
 };
 
+struct Attachment {
+	Attachment(TextureFormat _format, const char* _name)
+		: format(_format), name(_name), clear_color(0) {}
+	Attachment(TextureFormat _format, const char* _name, glm::vec4 _clear_color)
+		: format(_format), name(_name), clear_color(_clear_color) {}
+	
+	TextureFormat format;
+	const char* name;
+	glm::vec4 clear_color;
+};
+
+
 // use default buffer
-FrameBufferHandle NewGBuffer(int width, int height, ShaderHandle attached_shader, const Vector<std::pair<TextureFormat, const char*>>& textures);
+FrameBufferHandle NewGBuffer(int width, int height, ShaderHandle attached_shader, const Vector<Attachment>& textures);
 
 const FrameBuffer& OpenHandle(FrameBufferHandle);
 

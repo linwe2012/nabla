@@ -12,6 +12,8 @@ class RenderableSystem : public ISystem {
 	struct RenderHandle_ {
 		renderer::ShaderHandle hshader_;
 		renderer::MaterialHandle hmodel_;
+		renderer::MaterialHandle hentity_;
+		int entity_attachment_id_;
 	};
 public:
 	struct Renderable {
@@ -22,10 +24,14 @@ public:
 		std::string name;
 	};
 	
-	void SetRenderPassShader(renderer::RenderPass pass, renderer::ShaderHandle hshader, renderer::MaterialHandle hmodel) {
+	void SetRenderPassShader(renderer::RenderPass pass, 
+		renderer::ShaderHandle hshader,
+		renderer::MaterialHandle hmodel,
+		renderer::MaterialHandle hentity,
+		int entity_attachment_id) {
 		render_handles_.size_at_least((uint16_t)pass, RenderHandle_{});
 		render_handles_[(uint16_t)pass] = RenderHandle_{
-			hshader, hmodel
+			hshader, hmodel, hentity, entity_attachment_id
 		};
 	}
 

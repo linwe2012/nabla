@@ -48,12 +48,12 @@ void MatrialSysterm::Add(Entity e, Material material)
 void MatrialSysterm::OnGui(const Vector<Entity>& actives)
 {
 	using namespace renderer;
-	//for (auto e : actives) {
-		//if (!Has(e)) {
-			//return;
-		//}
+	for (auto e : actives) {
+		if (!Has(e)) {
+			return;
+		}
 
-		//auto& m = dense_[sparse_[e.index()]];
+		auto& m = dense_[sparse_[e.index()]];
 
 		//void* data = m.data;
 		//int i = 0;
@@ -93,12 +93,12 @@ void MatrialSysterm::OnGui(const Vector<Entity>& actives)
 		// ImGui::DragFloat("Specular", &m.specular, 0.01f, -1.0f, 2.0f);
 		// 
 		// 
-		// ImGui::Text("Physically Based Rendering");
-		// ImGui::ColorEdit3("Albedo", &m.albedo[0]);
-		// ImGui::DragFloat("Metallic", &m.metallic, 0.01f, 0.0f, 1.0f);
-		// ImGui::DragFloat("Roughness", &m.roughness, 0.01f, 0.0f, 1.0f);
-		// ImGui::DragFloat("Ambient Occulison", &m.ambient_occulsion, 0.1f);
-	//}
+		ImGui::Text("Physically Based Rendering");
+		ImGui::ColorEdit3("Albedo", &m.albedo[0]);
+		ImGui::DragFloat("Metallic", &m.metallic, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat("Roughness", &m.roughness, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat("Ambient Occulison", &m.ambient_occulsion, 0.1f);
+	}
 }
 
 

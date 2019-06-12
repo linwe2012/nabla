@@ -75,6 +75,15 @@ NA_DRAWCALL_IMPL(MaterialDrawCall) {
 unsigned int quadVAO = 0;
 unsigned int quadVBO;
 
+FrameBufferHandle hactive_frame;
+
+NA_DRAWCALL_IMPL(FrameBufferAttachmentReaderDrawCall) {
+	const auto& f = OpenHandle(hframe);
+	glBindFramebuffer(GL_READ_FRAMEBUFFER, f.fbo);
+	glReadBuffer(f.attach_ids[id]);
+	callback();
+}
+
 NA_DRAWCALL_IMPL(SwitchFrameBufferDrawCall) {
 	const auto& f = OpenHandle(hframe);
 	int cnt = 0;
@@ -88,9 +97,11 @@ NA_DRAWCALL_IMPL(SwitchFrameBufferDrawCall) {
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		ActivateShader(f.attached_shader);
+		// glDrawBuffers(f.attach_ids.size(), &f.attach_ids[0]);
 		for (auto t : f.attachments) {
 			glActiveTexture(GL_TEXTURE0 + cnt);
 			glBindTexture(GL_TEXTURE_2D, t);
+			glClearBufferfv(GL_COLOR, cnt, &f.clear_color[cnt].r);
 			++cnt;
 		}
 		break;
@@ -133,8 +144,18 @@ NA_DRAWCALL_IMPL(SwitchFrameBufferDrawCall) {
 	default:
 		break;
 	}
+	int uu = glGetError();
+	assert(uu == 0);
 }
 
+
+
+PixelColor ReadPixel(int x, int y) {
+	PixelColor pixel;
+	const auto& f = OpenHandle(hactive_frame);
+	glReadPixels(x, y, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, &(pixel.r));
+	return pixel;
+}
 
 }
 }

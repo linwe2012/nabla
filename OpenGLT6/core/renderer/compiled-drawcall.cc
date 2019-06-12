@@ -158,6 +158,17 @@ void UseTexture(MaterialHandle md)
 	(void)mdc;
 }
 
+void ReadFromDefaultGBufferAttachment(int id, std::function<void()> callback)
+{
+	auto& rc = tlsRenderContext;
+	Command cmd;
+	cmd.offset = rc.ResourcesOffset();
+	cmd.sortkey.set_pass(rc.render_pass);
+	cmd.sortkey.set_depth(SortKey::kDepthMax);
+	rc.commands.push_back(cmd);
+	rc.resources.Construct<FrameBufferAttachmentReaderDrawCall>(gDefaultGBufferHandle, id, callback);
+}
+
 RenderContext* GetRenderContext()
 {
 	return &tlsRenderContext;

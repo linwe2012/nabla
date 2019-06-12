@@ -28,6 +28,9 @@ struct SortKey {
 		kStateChangeEnd
 	};
 
+	enum {
+		kDepthMax = UINT16_MAX
+	};
 
 	uint64_t sortkey;
 
@@ -242,6 +245,7 @@ void UseShader(ShaderHandle shader);
 
 void UseTexture(MaterialHandle md);
 
+void ReadFromDefaultGBufferAttachment(int id, std::function<void()> callback);
 
 // this should be called once per frame
 void FlushAllDrawCalls();

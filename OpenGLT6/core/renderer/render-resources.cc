@@ -433,7 +433,7 @@ MeshBuffer OpenHandle(MeshHandle md) {
 /////////////////////////////////////////////////////
 static BufferManger<FrameBuffer, FrameBufferHandle, 16> gFrameBuffers;
 
-FrameBufferHandle NewGBuffer(int width, int height, ShaderHandle attached_shader, const Vector<std::pair<TextureFormat, const char *>>& textures)
+FrameBufferHandle NewGBuffer(int width, int height, ShaderHandle attached_shader, const Vector<Attachment>& textures)
 {
 	FrameBufferHandle hframe = gFrameBuffers.NewHandle();
 	FrameBuffer g;
@@ -442,18 +442,21 @@ FrameBufferHandle NewGBuffer(int width, int height, ShaderHandle attached_shader
 	g.width = width;
 	g.height = height;
 
-	GLuint attach_ids[32];
-
 	auto shader = OpenHandle(attached_shader);
 	shader.Use();
 
 	for (auto texture : textures) {
 		int type = -1;
-		if (texture.first == TextureFormat::kRGB) {
+		int external_type = GL_RGB;
+		if (texture.format == TextureFormat::kRGB) {
 			type = GL_RGB16F;
 		}
-		else if (texture.first == TextureFormat::kRGBA) {
+		else if (texture.format == TextureFormat::kRGBA) {
 			type = GL_RGBA;
+		}
+		else if (texture.format == TextureFormat::kFloat) {
+			type = GL_R32F;
+			external_type = GL_RED;
 		}
 		else {
 			NA_ASSERT(false, "type not supported");
@@ -462,21 +465,23 @@ FrameBufferHandle NewGBuffer(int width, int height, ShaderHandle attached_shader
 		uint32_t color;
 		glGenTextures(1, &color);
 		glBindTexture(GL_TEXTURE_2D, color);
-		glTexImage2D(GL_TEXTURE_2D, 0, type, width, height, 0, GL_RGB, GL_FLOAT, NULL);
+		glTexImage2D(GL_TEXTURE_2D, 0, type, width, height, 0, external_type, GL_FLOAT, NULL);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + g.attachments.size(), GL_TEXTURE_2D, color, 0);
-
-		attach_ids[g.attachments.size()] = GL_COLOR_ATTACHMENT0 + g.attachments.size();
-
-		shader.SetInt(texture.second, g.attachments.size());
-
 		NA_ASSERT(glGetError() == 0);
 
+		g.attach_ids.push_back(GL_COLOR_ATTACHMENT0 + g.attachments.size());
+		shader.SetInt(texture.name, g.attachments.size());
+
+		NA_ASSERT(glGetError() == 0);
+		
 		g.attachments.push_back(color);
+
+		g.clear_color.push_back(texture.clear_color);
 	}
 
-	glDrawBuffers(g.attachments.size(), attach_ids);
+	glDrawBuffers(g.attachments.size(), &g.attach_ids[0]);
 
 	glGenRenderbuffers(1, &g.rbo_depth);
 	glBindRenderbuffer(GL_RENDERBUFFER, g.rbo_depth);

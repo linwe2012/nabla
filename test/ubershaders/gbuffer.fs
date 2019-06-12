@@ -8,6 +8,7 @@ layout (location = $ID) out vec3 gAlbedo;
 
 layout (location = $ID) out vec3 gMetaRoughAO;
 
+layout (location = $ID) out vec3 gEntity;
 
 in vec3 FragPos;
 
@@ -27,6 +28,10 @@ uniform vec3 Albedo;
 uniform float Metallic;
 uniform float Roughness;
 uniform float AO;
+
+uniform vec3 Entity;
+
+
 
 void main()
 {    
@@ -49,4 +54,6 @@ void main()
     gMetaRoughAO.r = Metallic;
     gMetaRoughAO.g = Roughness;
     gMetaRoughAO.b = AO;
+
+    gEntity = Entity;
 }

@@ -116,11 +116,7 @@ int main()
 
 	Vector<Entity> lights;
 
-	AssetManager assets;
-	assets.ParseAssetsFromFile("./test/assets.yml");
-	//auto teapot = assets.LoadModelToGPU("teapot", false);
-	auto teapot = assets.LoadModelToGPU("castle", false);
-	auto eteapot = entity_manager.Create();
+	
 	Set<std::string> macros;
 	macros.insert("NormalMap");
 	macros.insert("Bitangent");
@@ -141,7 +137,7 @@ int main()
 	auto hmetal = renderer::NewUniform(geopass, "Metallic", renderer::MaterialType::kFloat);
 	auto hrough = renderer::NewUniform(geopass, "Roughness", renderer::MaterialType::kFloat);
 	auto hao = renderer::NewUniform(geopass, "AO", renderer::MaterialType::kFloat);
-
+	auto hentity = renderer::NewUniform(geopass, "Entity", renderer::MaterialType::kVec3);
 
 
 	auto postprocess = renderer::NewShader(renderer::ShaderFilePath{ "test/ubershaders/deferred-light-box.vs", "test/ubershaders/deferred-light-box.fs" }, macros);
@@ -155,8 +151,8 @@ int main()
 	auto lightingpass = renderer::NewShader(renderer::ShaderFilePath{ "test/ubershaders/deferred-shading.vs", "test/ubershaders/deferred-shading.fs" }, macros);
 	sys_lighting.SetShader(lightingpass, postprocess);
 
-	sys_renderable.SetRenderPassShader(renderer::RenderPass::kPostProc, postprocess, hbox_model);
-	sys_renderable.SetRenderPassShader(renderer::RenderPass::kForward, geopass, hmodel);
+	sys_renderable.SetRenderPassShader(renderer::RenderPass::kPostProc, postprocess, hbox_model, hentity, 5);
+	sys_renderable.SetRenderPassShader(renderer::RenderPass::kForward, geopass, hmodel, hentity, 5);
 
 	for (int i = 0; i < 16; ++i) {
 		lights.push_back(entity_manager.Create());
@@ -187,19 +183,24 @@ int main()
 	renderer::detail::PrepareRenderContext__Temp();
 	{
 		using namespace renderer;
-		using std::make_pair;
-		Vector<std::pair<TextureFormat, const char*>> textures{
-			make_pair(TextureFormat::kRGB, "gPosition"),
-			make_pair(TextureFormat::kRGB, "gNormal"),
-			make_pair(TextureFormat::kRGBA, "gDiffuseSpec"),
-			make_pair(TextureFormat::kRGB, "gAlbedo"),
-			make_pair(TextureFormat::kRGB, "gMetaRoughAO")
+		Vector<Attachment> textures{
+			Attachment(TextureFormat::kRGB, "gPosition"),
+			Attachment(TextureFormat::kRGB, "gNormal"),
+			Attachment(TextureFormat::kRGBA, "gDiffuseSpec"),
+			Attachment(TextureFormat::kRGB, "gAlbedo"),
+			Attachment(TextureFormat::kRGB, "gMetaRoughAO"),
+			Attachment(TextureFormat::kRGB, "gEntity", glm::vec4(1.0f)),
 		};
 		renderer::SetDefaultGBuffer(renderer::NewGBuffer(
 			SCR_WIDTH, SCR_HEIGHT, lightingpass, textures
 		));
 	}
 	
+	AssetManager assets;
+	assets.ParseAssetsFromFile("./test/assets.yml");
+	//auto teapot = assets.LoadModelToGPU("teapot", false);
+	auto teapot = assets.LoadModelToGPU("castle", false);
+	auto eteapot = entity_manager.Create();
 	Vector<Entity> solids{
 		eteapot
 	};
@@ -254,7 +255,7 @@ int main()
 
 	auto hMonet = AssetManager::LoadTexture("test/img/Monet.bmp");
 
-	
+	Vector<Entity> tmp;
 	while (renderer::IsAlive())
 	{
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -290,7 +291,29 @@ int main()
 		sys_lighting.SetEyePos(camera.Position, projection, view);
 		sys_lighting.Update(clock);
 		sys_material.Update(clock);
-		
+
+		GLFWwindow* window = static_cast<GLFWwindow*>(renderer::GetWindow());
+
+		{
+			renderer::ScopedState scope(renderer::RenderPass::kForward);
+			renderer::ReadFromDefaultGBufferAttachment(5, [&tmp, &window] {
+				if (IsUserWorkingOnGui()) {
+					return;
+				}
+				int left_button = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
+				if (left_button == GLFW_PRESS) {
+					double xpos, ypos;
+					glfwGetCursorPos(window, &xpos, &ypos);
+					auto pixel = renderer::ReadPixel(xpos, ypos);
+					int i;
+					i = pixel.r + pixel.g * 255 + pixel.b * 255 * 255;
+					Entity e(i);
+					tmp.clear();
+					tmp.push_back(e);
+				}
+			});
+
+		}
 
 		renderer::FlushAllDrawCalls();
 		renderer::GetRenderContext()->Reset(renderer::GetRenderContext()->resources.buffer, renderer::GetRenderContext()->resources.end_of_storage - renderer::GetRenderContext()->resources.buffer);
@@ -298,7 +321,7 @@ int main()
 		PrepareGuiFrame();
 		ImGui::ShowDemoWindow();
 
-		GLFWwindow* window = static_cast<GLFWwindow*>(renderer::GetWindow());
+		
 		if (!IsUserWorkingOnGui()) {
 			int left_button = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
 
@@ -363,11 +386,11 @@ int main()
 			}
 
 			int cnt = 0;
-			Vector<Entity> tmp;
-			for (auto solid : solids) {
-				tmp.clear();
-				tmp.push_back(solid);
-				if (ImGui::CollapsingHeader(std::to_string(cnt).c_str())) {
+			
+			//for (auto solid : solids) {
+				//tmp.clear();
+				//tmp.push_back(solid);
+				//if (ImGui::CollapsingHeader(std::to_string(cnt).c_str())) {
 					if (ImGui::TreeNode("Material")) {
 						sys_material.OnGui(tmp);
 						ImGui::TreePop();
@@ -379,9 +402,9 @@ int main()
 						ImGui::TreePop();
 						ImGui::Separator();
 					}
-				}
-				++cnt;
-			}
+				//}
+				//++cnt;
+			//}
 			
 			
 			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", clock.GetLastFrameDuration() * 1000.0f, clock.GetLastFrameFps());

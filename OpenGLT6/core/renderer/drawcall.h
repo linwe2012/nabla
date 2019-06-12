@@ -89,10 +89,18 @@ struct MaterialDrawCall {
 	uint32_t offset_by_bytes;
 };
 
+struct FrameBufferAttachmentReaderDrawCall {
+	NA_DRAWCALL(FrameBufferAttachmentReaderDrawCall);
+	FrameBufferAttachmentReaderDrawCall(FrameBufferHandle hf, int _id, std::function<void()> cb)
+		: hframe(hf), id(_id), callback(cb) {}
+
+	FrameBufferHandle hframe;
+	int id;
+	std::function<void()> callback;
+};
+
 struct SwitchFrameBufferDrawCall {
 	NA_DRAWCALL(SwitchFrameBufferDrawCall);
-
-	
 
 	enum Transition {
 		kRenderOnFrameBuffer,
@@ -107,6 +115,15 @@ struct SwitchFrameBufferDrawCall {
 	Transition trans;
 	FrameBufferHandle hframe;
 };
+
+
+struct PixelColor {
+	char r;
+	char g;
+	char b;
+	char a;
+};
+PixelColor ReadPixel(int x, int y);
 
 }
 }

@@ -65,17 +65,20 @@ void ModelAsset::ProcessNode(aiNode* node, const aiScene* scene) {
 
 void ModelAsset::ProcessNode(aiNode* node, const aiScene* scene, int hierachy) {
 	// meshes_.reserve(meshes_.size() + node->mNumMeshes);
-
+	transform = parent_transform * (*(glm::mat4*)(&node->mTransformation));
 	for (unsigned int i = 0; i < node->mNumMeshes; i++)
 	{
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-		transform = *(glm::mat4*)(&node->mTransformation);
+		
 		ProcessMesh(mesh, scene);
 	}
 
+	auto last_transform = parent_transform;
+	parent_transform = transform;
 	for (unsigned int i = 0; i < node->mNumChildren; ++i) {
 		ProcessNode(node->mChildren[i], scene, hierachy + 1);
 	}
+	parent_transform = last_transform;
 }
 
 
@@ -100,7 +103,7 @@ void ModelAsset::ProcessMesh(aiMesh* mesh, const aiScene* scene) {
 
 	m.has_position = true;
 	cnt += sz_vec3;
-
+	
 	{
 		auto beg = reinterpret_cast<glm::vec3*>(mesh->mVertices);
 		auto end = beg + mesh->mNumVertices;
