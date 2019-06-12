@@ -21,7 +21,7 @@ public:
 	}
 
 	T* ptr(Entity e) {
-		if (!Has(e)) {
+		if (!count(e)) {
 			return nullptr;
 		}
 		return &dense_[sparse_[e.index()]];
@@ -48,7 +48,7 @@ public:
 	size_t size() { return dense_.size(); }
 
 	void erase(Entity e) {
-		NA_LEAVE_IF((void)0, !Has(e)), "Erasing inexist element");
+		NA_LEAVE_IF((void)0, !count(e), "Erasing inexist element");
 		dense_.erase(dense_.begin() + sparse_[e.index()]);
 		sparse_[e.index()] = Entity::kInvalidIndex;
 	}
@@ -106,7 +106,7 @@ public:
 	size_t size() { return dense_.size(); }
 
 	void erase(Entity e) {
-		NA_LEAVE_IF((void)0, !Has(e)), "Erasing inexist element");
+		NA_LEAVE_IF((void)0, !count(e), "Erasing inexist element");
 		dense_.erase(dense_.begin() + sparse_[e.index()]);
 		sparse_[e.index()] = Entity::kInvalidIndex;
 	}

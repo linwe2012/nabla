@@ -120,8 +120,7 @@
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)/OpenGLT6;$(SolutionDir)/OpenGLT6/utils;$(SolutionDir)/OpenGLT6/third-party/include;</AdditionalIncludeDirectories>
       <WarningLevel>Level4</WarningLevel>
-      <AdditionalOptions>/std:c++17 %(AdditionalOptions)</AdditionalOptions>
-      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -135,8 +134,7 @@
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)/OpenGLT6;$(SolutionDir)/OpenGLT6/utils;$(SolutionDir)/OpenGLT6/third-party/include;</AdditionalIncludeDirectories>
       <WarningLevel>Level4</WarningLevel>
-      <AdditionalOptions>/std:c++17 %(AdditionalOptions)</AdditionalOptions>
-      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>

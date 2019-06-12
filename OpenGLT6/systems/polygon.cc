@@ -76,25 +76,31 @@ renderer::MeshHandle PopulateCube() {
 	layouts.push_back(LayoutInfo::CreatePacked<glm::vec2>(4, 96 * sizeof(float)));
 	return NewMesh(MemoryInfo{ vertices , sizeof(vertices) }, MemoryInfo{ indices, sizeof(indices) }, layouts);
 }
+using namespace renderer;
 
 renderer::MeshHandle PopulateSphere(int axis_division) {
 	// ...
+	return MeshHandle();
 }
 
 renderer::MeshHandle PopulateCylinder(int axis_division) {
 	// ...
+	return MeshHandle();
 }
 
 renderer::MeshHandle PopulateCone(int axis_division) {
 	// ...
+	return MeshHandle();
 }
 
 renderer::MeshHandle PopulatePrism(int n) {
 	// ...
+	return MeshHandle();
 }
 
 renderer::MeshHandle PopulateFrustrum(int axis_division) {
 	// ...
+	return MeshHandle();
 }
 
 }
