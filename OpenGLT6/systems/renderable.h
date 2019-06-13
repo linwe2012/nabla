@@ -79,7 +79,7 @@ public:
 
 	struct VertexData {
 		glm::vec3* posititons;
-		size_t num_indices;
+		size_t num_vertices;
 	};
 
 	const std::shared_ptr<VertexData> GetVertices(Entity e);
