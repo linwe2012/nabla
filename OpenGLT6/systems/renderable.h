@@ -78,7 +78,7 @@ public:
 	void Add(Entity) override {}
 
 	struct VertexData {
-		glm::vec3* posititons;
+		glm::vec3* positions;
 		size_t num_vertices;
 	};
 
