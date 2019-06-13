@@ -76,6 +76,8 @@ public:
 
 	void Add(Entity) override {}
 
+	std::array<glm::vec3, 2> GetAABB(Entity);
+
 private:
 	
 	Vector<Entity::entity_t> sparse_;
