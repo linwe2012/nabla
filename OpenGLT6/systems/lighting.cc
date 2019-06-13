@@ -13,7 +13,7 @@ void LightingSystem::Initilize() {
 
 void LightingSystem::SetShader(renderer::ShaderHandle lightingpass, renderer::ShaderHandle postprocess) {
 	hshader_ = lightingpass;
-	hcamera_ = renderer::NewUniform(lightingpass, "the_fucking", renderer::MaterialType::kVec3);
+	hcamera_ = renderer::NewUniform(lightingpass, "viewPos", renderer::MaterialType::kVec3);
 	// hcamera_ = renderer::NewUniform(lightingpass, "the_fucking", renderer::MaterialType::kVec3);
 	hnum_point_ = renderer::NewUniform(lightingpass, "num_points", renderer::MaterialType::kInt);
 	hnum_spot_ = renderer::NewUniform(lightingpass, "num_spots", renderer::MaterialType::kInt);

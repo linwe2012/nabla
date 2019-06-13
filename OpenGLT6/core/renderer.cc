@@ -122,7 +122,15 @@ void PrepareFrame()
 
 void* GetWindow()
 {
+	
 	return gDefaultWindow;
+}
+
+std::tuple<int, int> GetWindowSize()
+{
+	int w, h;
+	glfwGetWindowSize(gDefaultWindow, &w, &h);
+	return std::tuple<int, int>(w, h);
 }
 
 }

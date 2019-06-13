@@ -7,6 +7,7 @@ uniform sampler2D gNormal;
 uniform sampler2D gDiffuseSpec;
 uniform sampler2D gAlbedo;
 uniform sampler2D gMetaRoughAO;
+uniform sampler2D gPicker;
 
 struct PointLight {
     vec3 Position;
@@ -40,7 +41,7 @@ uniform SpotLight spots[MAX_SPOT_LIGHT];
 uniform int num_points; // point lights
 uniform int num_spots;
 
-uniform vec3 the_fucking;
+uniform vec3 viewPos;
 
 
 /*
@@ -116,8 +117,8 @@ void main()
     float Roughness = texture(gMetaRoughAO, TexCoords).g;
     float AO = texture(gMetaRoughAO, TexCoords).b;
     vec3 lighting  = Diffuse * 0.1; // hard-coded ambient component
-    // vec3 viewDir  = normalize(viewPos - FragPos);
-    vec3 viewDir  = normalize(the_fucking - FragPos);
+    vec3 viewDir  = normalize(viewPos - FragPos);
+    // vec3 viewDir  = normalize(the_fucking - FragPos);
     
     // calculate reflectance at normal incidence; if dia-electric (like plastic) use F0 
     // of 0.04 and if it's a metal, use the albedo color as F0 (metallic workflow)    
@@ -226,6 +227,6 @@ void main()
 
 
     // FragColor = vec4(TexCoords, 0.0, 1.0);
-    FragColor = vec4(lighting, 1.0);
+    FragColor = vec4(lighting, 1.0); // +  vec4(texture(gPicker, TexCoords).rgb, 1.0) * 0.8;
     // FragColor = vec4(texture(gDiffuseSpec, TexCoords).rgb, 0);
 }

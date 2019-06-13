@@ -4,6 +4,7 @@
 #include "renderer/render-resources.h"
 #include "renderer/shader.h"
 #include "renderer/compiled-drawcall.h"
+#include <tuple>
 
 namespace nabla {
 namespace renderer {	
@@ -13,6 +14,8 @@ namespace renderer {
 	bool IsAlive();
 
 	void* GetWindow();
+
+	std::tuple<int, int> GetWindowSize();
 }
 }
 

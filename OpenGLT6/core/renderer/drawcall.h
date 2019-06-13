@@ -117,13 +117,15 @@ struct SwitchFrameBufferDrawCall {
 };
 
 
-struct PixelColor {
-	char r;
-	char g;
-	char b;
-	char a;
+struct SolidPixel {
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
+	// unsigned char a;
 };
-PixelColor ReadPixel(int x, int y);
+SolidPixel ReadSolidPixel(int x, int y);
+
+void ScreenShot(int width, int hight, SolidPixel* data);
 
 }
 }

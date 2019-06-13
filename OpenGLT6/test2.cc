@@ -4,7 +4,6 @@
 #include <thread>
 
 
-
 #include "core/entity-manager.h"
 #include "core/renderer.h"
 #include "core/asset/bootstrap.h"
@@ -17,7 +16,10 @@
 #include "systems/lighting.h"
 #include "systems/renderable.h"
 #include "systems/material.h"
+#include "systems/playback.h"
 #include <glm/gtx/matrix_decompose.hpp>
+
+
 extern "C" {
 	_declspec(dllexport) DWORD NvOptimusEnablement = 0x00000001;
 }
@@ -105,12 +107,13 @@ int main()
 	AnimationSystem sys_animation;
 	RenderableSystem sys_renderable;
 	MatrialSysterm sys_material;
-
+	PlaybackSystem sys_playback;
 	
 
 	sys_lighting.Initilize();
 	sys_renderable.Initilize();
 	sys_material.Initilize();
+	sys_playback.Initilize();
 
 	sys_renderable.AttachBeforeRender(&sys_material);
 
@@ -154,7 +157,7 @@ int main()
 	sys_renderable.SetRenderPassShader(renderer::RenderPass::kPostProc, postprocess, hbox_model, hentity, 5);
 	sys_renderable.SetRenderPassShader(renderer::RenderPass::kForward, geopass, hmodel, hentity, 5);
 
-	for (int i = 0; i < 16; ++i) {
+	for (int i = 0; i < 4; ++i) {
 		lights.push_back(entity_manager.Create());
 		sys_lighting.NewLight(lights.back(), LightingSystem::Light{
 		LightingSystem::Light::kPoint, hcube
@@ -199,7 +202,7 @@ int main()
 	AssetManager assets;
 	assets.ParseAssetsFromFile("./test/assets.yml");
 	//auto teapot = assets.LoadModelToGPU("teapot", false);
-	auto teapot = assets.LoadModelToGPU("castle", false);
+	auto teapot = assets.LoadModelToGPU("teapot", false);
 	auto eteapot = entity_manager.Create();
 	Vector<Entity> solids{
 		eteapot
@@ -256,6 +259,10 @@ int main()
 	auto hMonet = AssetManager::LoadTexture("test/img/Monet.bmp");
 
 	Vector<Entity> tmp;
+	bool gui_show_style_config = false;
+	bool gui_show_style_open = false;
+
+
 	while (renderer::IsAlive())
 	{
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -291,6 +298,7 @@ int main()
 		sys_lighting.SetEyePos(camera.Position, projection, view);
 		sys_lighting.Update(clock);
 		sys_material.Update(clock);
+		sys_playback.Update(clock);
 
 		GLFWwindow* window = static_cast<GLFWwindow*>(renderer::GetWindow());
 
@@ -304,21 +312,23 @@ int main()
 				if (left_button == GLFW_PRESS) {
 					double xpos, ypos;
 					glfwGetCursorPos(window, &xpos, &ypos);
-					auto pixel = renderer::ReadPixel(xpos, ypos);
+					auto pixel = renderer::ReadSolidPixel(xpos, ypos);
 					int i;
-					i = pixel.r + pixel.g * 255 + pixel.b * 255 * 255;
+					i = pixel.r + pixel.g * 256 + pixel.b * 256 * 256;
 					Entity e(i);
 					tmp.clear();
 					tmp.push_back(e);
 				}
 			});
-
 		}
+
+		
 
 		renderer::FlushAllDrawCalls();
 		renderer::GetRenderContext()->Reset(renderer::GetRenderContext()->resources.buffer, renderer::GetRenderContext()->resources.end_of_storage - renderer::GetRenderContext()->resources.buffer);
 
 		PrepareGuiFrame();
+
 		ImGui::ShowDemoWindow();
 
 		
@@ -375,11 +385,15 @@ int main()
 						ImGui::DragFloat("Mouse Sensitivity", &camera.MouseSensitivity, 0.001f);
 						ImGui::EndMenu();
 					}
+					ImGui::MenuItem("Style", NULL, &gui_show_style_config);
 					ImGui::EndMenu();
+
 				}
 			
 				ImGui::EndMenuBar();
 			}
+
+			sys_playback.OnGui(tmp);
 
 			if (ImGui::CollapsingHeader(sys_lighting.name())) {
 				sys_lighting.OnGui(lights);
@@ -408,6 +422,13 @@ int main()
 			
 			
 			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", clock.GetLastFrameDuration() * 1000.0f, clock.GetLastFrameFps());
+			ImGui::End();
+		}
+
+		if (gui_show_style_config) {
+			if (ImGui::Begin("Style", &gui_show_style_config, ImGuiWindowFlags_MenuBar)) {
+				
+			}
 			ImGui::End();
 		}
 

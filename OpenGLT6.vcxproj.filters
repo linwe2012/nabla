@@ -237,6 +237,9 @@
     <ClCompile Include="OpenGLT6\systems\polygon.cc">
       <Filter>Source Files\system</Filter>
     </ClCompile>
+    <ClCompile Include="OpenGLT6\systems\playback.cc">
+      <Filter>Source Files\system</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="openglt6\core\component.h">
@@ -444,6 +447,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="OpenGLT6\systems\collision.h">
+      <Filter>Header Files\system</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\third-party\include\stb_image_write.h">
+      <Filter>Source Files\third-party</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\systems\playback.h">
       <Filter>Header Files\system</Filter>
     </ClInclude>
   </ItemGroup>

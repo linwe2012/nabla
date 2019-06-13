@@ -113,7 +113,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile />
     <Link>
-      <AdditionalDependencies>assimp-vc140-mt.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>swscale.lib;avformat.lib;avutil.lib;avcodec.lib;assimp-vc140-mt.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ClCompile />
     <ClCompile />
@@ -126,7 +126,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile />
     <Link>
-      <AdditionalDependencies>assimp-vc140-mt.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>swscale.lib;avformat.lib;avutil.lib;avcodec.lib;assimp-vc140-mt.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ClCompile />
     <ClCompile />
@@ -153,6 +153,7 @@
     <ClCompile Include="OpenGLT6\systems\collision.cc" />
     <ClCompile Include="OpenGLT6\systems\lighting.cc" />
     <ClCompile Include="OpenGLT6\systems\material.cc" />
+    <ClCompile Include="OpenGLT6\systems\playback.cc" />
     <ClCompile Include="OpenGLT6\systems\polygon.cc" />
     <ClCompile Include="OpenGLT6\systems\renderable.cc" />
     <ClCompile Include="OpenGLT6\test.cc" />
@@ -228,10 +229,12 @@
     <ClInclude Include="OpenGLT6\systems\isystem.h" />
     <ClInclude Include="OpenGLT6\systems\lighting.h" />
     <ClInclude Include="OpenGLT6\systems\material.h" />
+    <ClInclude Include="OpenGLT6\systems\playback.h" />
     <ClInclude Include="OpenGLT6\systems\polygon.h" />
     <ClInclude Include="OpenGLT6\systems\renderable.h" />
     <ClInclude Include="OpenGLT6\third-party\include\glm.h" />
     <ClInclude Include="OpenGLT6\third-party\include\stb_image_impl.h" />
+    <ClInclude Include="OpenGLT6\third-party\include\stb_image_write.h" />
     <ClInclude Include="OpenGLT6\third-party\include\yaml-src\collectionstack.h" />
     <ClInclude Include="OpenGLT6\third-party\include\yaml-src\contrib\graphbuilderadapter.h" />
     <ClInclude Include="OpenGLT6\third-party\include\yaml-src\directives.h" />

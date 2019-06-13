@@ -48,9 +48,9 @@ void RenderableSystem::Update(Clock& clock) {
 			sys->Update(r.lookback);
 		}
 		glm::vec3 fentity;
-		fentity.x = (r.lookback.index() & 0xFF) / ((float)0xFF);
-		fentity.y = ((r.lookback.index() & 0xFF00) >> 8) / ((float)0xFF);
-		fentity.z = ((r.lookback.index() & 0xFF0000) >> 16) / ((float)0xFF);
+		fentity.x = (r.lookback.index() & 0xFF) / ((float)255.0f);
+		fentity.y = ((r.lookback.index() & 0xFF00) >> 8) / ((float)255.0f);
+		fentity.z = ((r.lookback.index() & 0xFF0000) >> 16) / ((float)255.0f);
 		SetUniform(info.hentity_, fentity);
 		SetUniform(info.hmodel_, model);
 		DrawMesh(r.hmesh);

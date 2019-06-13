@@ -4,6 +4,8 @@
 #include "core/renderer.h"
 
 #include "renderable.h"
+#include "containers/map.h"
+#include "core/entity-manager.h"
 
 namespace nabla {
 
@@ -24,7 +26,7 @@ public:
 	void Initilize() override {};
 
 	// activities on gui, note that you can actually do nothing
-	virtual void OnGui(const Vector<Entity>& actives) override {};
+	virtual void OnGui(const Vector<Entity>& actives) override;
 
 	// remove enitiy from system
 	virtual void Remove(Entity) override {};
@@ -43,6 +45,21 @@ public:
 	}
 
 	RenderableSystem* render;
+	struct UniqueObject {
+		std::string name;
+		int division;
+		bool operator<(const UniqueObject& rhs) {
+			if (division >= rhs.division) {
+				return false;
+			}
+			if (name >= rhs.name) {
+				return false;
+			}
+			return true;
+		}
+	};
+	Map<UniqueObject, Vector<renderer::MeshHandle> > objects_;
+	EntityManager* em_;
 };
 
 

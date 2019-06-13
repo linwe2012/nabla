@@ -1,5 +1,5 @@
 #include "polygon.h"
-
+#include "editor/gui.h"
 
 namespace nabla {
 
@@ -102,5 +102,24 @@ renderer::MeshHandle PopulateFrustrum(int axis_division) {
 	// ...
 	return MeshHandle();
 }
+
+void PolygonSystem::OnGui([[maybe_unused]]const Vector<Entity>& actives) {
+	bool flag_cube = ImGui::Button("New Cube");
+
+	// ....
+
+
+	if (flag_cube) {
+		auto itr = objects_.find(UniqueObject{ "Cubic", 0 });
+		if (itr == objects_.end()) {
+			MeshHandle mesh = PopulateCube();
+			objects_[UniqueObject{ "Cubic", 0 }] = Vector<MeshHandle>({ mesh });
+			itr = objects_.find(UniqueObject{ "Cubic", 0 });
+		}
+		MeshHandle hmesh = itr->second[0];
+		render->Add(em_->Create(), hmesh);
+	}
+}
+
 
 }

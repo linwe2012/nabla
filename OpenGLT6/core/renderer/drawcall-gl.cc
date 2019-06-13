@@ -79,6 +79,14 @@ FrameBufferHandle hactive_frame;
 
 NA_DRAWCALL_IMPL(FrameBufferAttachmentReaderDrawCall) {
 	const auto& f = OpenHandle(hframe);
+	if (id < 0) {
+		glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
+		callback();
+		return;
+	}
+	glFlush();
+	glFinish();
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	glBindFramebuffer(GL_READ_FRAMEBUFFER, f.fbo);
 	glReadBuffer(f.attach_ids[id]);
 	callback();
@@ -150,11 +158,17 @@ NA_DRAWCALL_IMPL(SwitchFrameBufferDrawCall) {
 
 
 
-PixelColor ReadPixel(int x, int y) {
-	PixelColor pixel;
+SolidPixel ReadSolidPixel(int x, int y) {
+	SolidPixel pixel;
 	const auto& f = OpenHandle(hactive_frame);
 	glReadPixels(x, y, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, &(pixel.r));
+
 	return pixel;
+}
+
+void ScreenShot(int width, int height, SolidPixel* data)
+{
+	glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, data);
 }
 
 }
