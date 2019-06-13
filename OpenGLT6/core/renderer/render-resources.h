@@ -139,6 +139,7 @@ struct MeshBuffer {
 	uint32_t vbo;
 	uint32_t ebo;
 	uint32_t num_indices;
+	uint32_t num_vertices;
 };
 
 struct MemoryInfo {

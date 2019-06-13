@@ -413,6 +413,7 @@ MeshHandle NewMesh(MemoryInfo data, MemoryInfo indices, const Vector<LayoutInfo>
 	gMeshBuffer.buffer[handle.index()].ebo = EBO;
 	gMeshBuffer.buffer[handle.index()].vao = VAO;
 	gMeshBuffer.buffer[handle.index()].vbo = VBO;
+	gMeshBuffer.buffer[handle.index()].num_vertices = data.size_by_bytes / sizeof(glm::vec3);
 	if (indices.ptr != nullptr) {
 		gMeshBuffer.buffer[handle.index()].num_indices = indices.size_by_bytes / sizeof(unsigned int);
 	}

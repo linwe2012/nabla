@@ -6,6 +6,7 @@
 
 #include "components/primitive.h"
 
+
 namespace nabla {
 
 class RenderableSystem : public ISystem {
@@ -76,8 +77,13 @@ public:
 
 	void Add(Entity) override {}
 
-	std::array<glm::vec3, 2> GetAABB(Entity);
+	struct VertexData {
+		glm::vec3* posititons;
+		size_t num_indices;
+	};
 
+	const std::shared_ptr<VertexData> GetVertices(Entity e);
+	
 private:
 	
 	Vector<Entity::entity_t> sparse_;

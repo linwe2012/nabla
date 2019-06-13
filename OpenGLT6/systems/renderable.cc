@@ -78,6 +78,15 @@ const RenderableSystem::Renderable& RenderableSystem::GetRenderable(Entity e) co
 	return dense_[sparse_[e.index()]];
 }
 
+const std::shared_ptr<RenderableSystem::VertexData> RenderableSystem::GetVertices(Entity e)
+{
+	auto mesh = renderer::OpenHandle(GetRenderable(e).hmesh);
+	glBindBuffer(GL_ARRAY_BUFFER, mesh.vbo);
+	void* data = glMapBufferRange(GL_ARRAY_BUFFER, 0, mesh.num_vertices * sizeof(glm::vec3), GL_MAP_READ_BIT);
+	glm::vec3* vecs = reinterpret_cast<glm::vec3*>(data);
+	return std::shared_ptr<VertexData>(new VertexData{ vecs , mesh.num_vertices });
+}
+
 
 
 
