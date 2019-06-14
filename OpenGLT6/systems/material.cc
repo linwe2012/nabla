@@ -54,6 +54,12 @@ void MatrialSysterm::Initialize(SystemContext& ctx)
 void MatrialSysterm::OnGui(const Vector<Entity>& actives)
 {
 	using namespace renderer;
+	if (actives.size() == 0) {
+		return;
+	}
+	if (!ImGui::CollapsingHeader("Material")) {
+		return;
+	}
 	for (auto e : actives) {
 		if (!Has(e)) {
 			return;

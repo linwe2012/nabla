@@ -35,6 +35,7 @@ void AssetsSystem::OnGui(const Vector<Entity>& actives)
 		if (ImGui::TreeNode("Models")) {
 			ImGui::Checkbox("Use builtin loader", &data_->use_builtin);
 			for (auto& itr : data_->models) {
+				// ImGui::SameLine();
 				ImGui::PushStyleColor(ImGuiCol_Button,        (ImVec4)ImColor::HSV(205.0f / 360.0f, 1.0f, 0.39f));
 				ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(205.0f / 360.0f, 0.7f, 0.49f));
 				ImGui::PushStyleColor(ImGuiCol_ButtonActive,  (ImVec4)ImColor::HSV(205.0f / 360.0f, 0.8f, 0.59f));

@@ -11,6 +11,7 @@ namespace nabla {
 
 class PolygonSystem : public ISystem {
 public:
+
 	enum {
 		kCube,
 		kSphere,
@@ -23,7 +24,7 @@ public:
 	void Add(Entity) override {}
 
 	// called upon system first registered
-	void Initilize() override {};
+	void Initialize(SystemContext&) override;
 
 	// activities on gui, note that you can actually do nothing
 	virtual void OnGui(const Vector<Entity>& actives) override;
@@ -31,14 +32,12 @@ public:
 	// remove enitiy from system
 	virtual void Remove(Entity) override {};
 
-	virtual bool Has(Entity) const override {};
+	virtual bool Has(Entity) const override { return false; };
 
 	virtual void Update(Entity) override {};
 
 	// called upon every frame
 	void Update(Clock& clock) override {};
-
-	void BindRenderable(RenderableSystem* render);
 
 	const char* name() const override {
 		return "polygon";
@@ -58,6 +57,10 @@ public:
 			return true;
 		}
 	};
+	
+private:
+	struct Data;
+	Data* data_;
 	Map<UniqueObject, Vector<renderer::MeshHandle> > objects_;
 	EntityManager* em_;
 };

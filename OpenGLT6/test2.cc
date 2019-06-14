@@ -19,6 +19,7 @@
 #include "systems/playback.h"
 #include "systems/collision.h"
 #include "systems/assets.h"
+#include "systems/polygon.h"
 
 #include <glm/gtx/matrix_decompose.hpp>
 
@@ -215,12 +216,14 @@ int main()
 	MatrialSysterm sys_material;
 	PlaybackSystem sys_playback;
 	CollisionSystem sys_collision;
+	PolygonSystem sys_polygon;
 	AssetsSystem sys_assets;
-
+	
 	sys_lighting.Initialize(sys_ctx);
 	sys_material.Initialize(sys_ctx);
 	sys_playback.Initialize(sys_ctx);
 	sys_collision.Initialize(sys_ctx);
+	sys_polygon.Initialize(sys_ctx);
 	sys_assets.Initialize(sys_ctx);
 
 	Vector<Entity> lights;
@@ -391,6 +394,7 @@ int main()
 			);
 	}
 	
+	bool mouse_last_pressed = false;
 	NA_ASSERT(glGetError() == 0);
 	while (renderer::IsAlive())
 	{
@@ -449,20 +453,31 @@ int main()
 
 		{
 			renderer::ScopedState scope(renderer::RenderPass::kForward);
-			renderer::ReadFromDefaultGBufferAttachment(5, [&SCR_WIDTH, &SCR_HEIGHT, &tmp, &window] {
+			renderer::ReadFromDefaultGBufferAttachment(5, [&mouse_last_pressed, &SCR_WIDTH, &SCR_HEIGHT, &tmp, &window] {
 				if (IsUserWorkingOnGui()) {
 					return;
 				}
+
 				int left_button = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
 				if (left_button == GLFW_PRESS) {
+					if (mouse_last_pressed) {
+						return;
+					}
+					mouse_last_pressed = true;
 					double xpos, ypos;
 					glfwGetCursorPos(window, &xpos, &ypos);
 					auto pixel = renderer::ReadSolidPixel(xpos, SCR_HEIGHT - ypos);
 					int i;
 					i = pixel.r + pixel.g * 256 + pixel.b * 256 * 256;
-					Entity e(i);
 					tmp.clear();
+					if (i >= 1.0f * 256 + 1.0f * 256 * 256) {
+						return;
+					}
+					Entity e(i);
 					tmp.push_back(e);
+				}
+				else {
+					mouse_last_pressed = false;
 				}
 			});
 		}
@@ -540,10 +555,15 @@ int main()
 			if (tmp.size()) {
 				ImGui::Text("Selected entity %d", tmp.back().IsNil()? -1 : tmp.back().index());
 			}
+			else {
+				ImGui::Text("Selected entity Nil");
+			}
 
 			sys_playback.OnGui(tmp);
 
 			sys_assets.OnGui(tmp);
+
+			sys_polygon.OnGui(tmp);
 
 			if (ImGui::CollapsingHeader(sys_lighting.name())) {
 				sys_lighting.OnGui(lights);
@@ -560,30 +580,21 @@ int main()
 						sys_collision.Add(tmp.back());
 					}
 				}
+				if (sys_material.Has(tmp.back())) {
+					sys_material.OnGui(tmp);
+				}
+				else {
+					if (ImGui::Button("Add Material")) {
+						sys_material.Add(tmp.back());
+					}
+				}
 			}
 			
-
-			int cnt = 0;
-			
-			//for (auto solid : solids) {
-				//tmp.clear();
-				//tmp.push_back(solid);
-				//if (ImGui::CollapsingHeader(std::to_string(cnt).c_str())) {
-					if (ImGui::TreeNode("Material")) {
-						sys_material.OnGui(tmp);
-						ImGui::TreePop();
-						ImGui::Separator();
-					}
-
-					if (ImGui::TreeNode("Transform")) {
-						sys_renderable.OnGui(tmp);
-						ImGui::TreePop();
-						ImGui::Separator();
-					}
-				//}
-				//++cnt;
-			//}
-			
+			if (ImGui::TreeNode("Transform")) {
+				sys_renderable.OnGui(tmp);
+				ImGui::TreePop();
+				ImGui::Separator();
+			}
 			
 			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", clock.GetLastFrameDuration() * 1000.0f, clock.GetLastFrameFps());
 			ImGui::End();

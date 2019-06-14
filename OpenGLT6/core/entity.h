@@ -29,7 +29,7 @@ public:
 
 	bool IsNil() const { return (id & kGenerationMask) == kGenerationMask; }
 	void MarkNil() { id |= kGenerationMask; }
-	
+
 	bool operator<(const Entity& rhs) const { return id < rhs.id; }
 	bool operator==(const Entity& rhs) const { return id == rhs.id; }
 	bool operator!=(const Entity& rhs) const { return id != rhs.id; }
