@@ -48,7 +48,7 @@ public:
 	struct UniqueObject {
 		std::string name;
 		int division;
-		bool operator<(const UniqueObject& rhs) {
+		bool operator<(const UniqueObject& rhs) const {
 			if (division >= rhs.division) {
 				return false;
 			}

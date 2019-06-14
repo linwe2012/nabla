@@ -37,6 +37,16 @@ void AssetManager::ParseAssetsFromFile(const char* path)
 			std::string model_path = get_absolute(model_desc);
 			ParseModelFromFile(model_path.c_str());
 		}
+
+		auto texture_desc = root_["textures"];
+		if (mat_desc.IsNull()) {
+			NA_LOG_WARN("no textures descriptor in file: %s, is that intended?", path);
+		}
+		else {
+			std::string texture_path = get_absolute(texture_desc);
+			textures_ = YAML::LoadFile(texture_path);
+		}
+
 	}
 	catch (YAML::ParserException& e) {
 		NA_LOG_ERROR("failed to load assets descriptor %s", e.what());
@@ -188,6 +198,76 @@ YAML::Node AssetManager::GetMaterial(const char* name)
 	}
 
 	return node;
+}
+
+renderer::MaterialHandle AssetManager::GetTexture(const char* name)
+{
+	auto texture = textures_[name];
+	if(texture.IsNull() || !texture.IsDefined()) {
+		return renderer::MaterialHandle();
+	}
+	
+
+	if (texture.IsMap()) {
+		Vector<std::string> paths;
+		Vector< unsigned char*> data;
+		Defer cleanup([&data] {
+			for (auto datum : data) {
+				stbi_image_free(datum);
+			}
+		});
+		auto lmbd_3dtexture = [this, &paths, &texture](const char* name) -> bool {
+			auto nright = texture[name];
+			if (texture.IsNull() || !texture.IsDefined()) {
+				NA_LOG_ERROR("Expected %s specifier for 3D image", name);
+				return false;
+			}
+			auto path = fs::absolute(nright.as<std::string>(), cwd_);
+			
+			if (!fs::exists(path)) {
+				NA_LOG_ERROR("Can't find file %s", path.c_str());
+				return false;
+			}
+			paths.push_back(path.string());
+		};
+		if (!lmbd_3dtexture("right")) {
+			return renderer::MaterialHandle();
+		}
+		if (!lmbd_3dtexture("left")) {
+			return renderer::MaterialHandle();
+		}
+		if (!lmbd_3dtexture("top")) {
+			return renderer::MaterialHandle();
+		}
+		if (!lmbd_3dtexture("bottom")) {
+			return renderer::MaterialHandle();
+		}
+		if (!lmbd_3dtexture("front")) {
+			return renderer::MaterialHandle();
+		}
+		if (!lmbd_3dtexture("back")) {
+			return renderer::MaterialHandle();
+		}
+
+		int x = 0, y = 0;
+		int last_x = 0, last_y = 0;
+		int nchannels = 0;
+		for (auto& file : paths) {
+			//TODO: Check all images all same size
+			unsigned char* datum = stbi_load(file.c_str(), &x, &y, &nchannels, 3);
+			if (datum == nullptr) {
+				NA_LOG_ERROR("Unable to load image");
+			}
+			data.push_back(datum);
+
+			last_x = x;
+			last_y = y;
+		}
+		return renderer::NewTextureCubic(data, x, y, renderer::TextureFormat::kRGB);
+	}
+
+	//TODO: Add 2d image suppport
+	return renderer::MaterialHandle();
 }
 
 template <typename T>

@@ -94,6 +94,9 @@ void InitWindow(const InitConfig& cfg) {
 	});
 
 	glViewport(0, 0, cfg.width, cfg.height);
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
+
 	gDefaultWindow = glfwwin;
 }
 

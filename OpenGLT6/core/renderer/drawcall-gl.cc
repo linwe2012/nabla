@@ -29,7 +29,7 @@ NA_DRAWCALL_IMPL(IndexedDrawCall) {
 		glDrawElements(GL_TRIANGLES, mat.num_indices, GL_UNSIGNED_INT, 0);
 	}
 	else {
-		glDrawArrays(GL_TRIANGLES, 0, mat.num_indices);
+		glDrawArrays(GL_TRIANGLES, 0, mat.num_vertices);
 	}
 	
 }
@@ -61,9 +61,9 @@ NA_DRAWCALL_IMPL(MaterialDrawCall) {
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, id);
 		break;
-	case MaterialType::kSampler3D:
+	case MaterialType::kSamplerCubic:
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_3D, id);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, id);
 		break;
 	default:
 		//TODO: log error
@@ -156,6 +156,14 @@ NA_DRAWCALL_IMPL(SwitchFrameBufferDrawCall) {
 	assert(uu == 0);
 }
 
+NA_DRAWCALL_IMPL(StateDrawCall) {
+	if ((int)state | (int)State::DepthTest) {
+		glEnable(GL_DEPTH_TEST);
+	}
+	else {
+		glDisable(GL_DEPTH_TEST);
+	}
+}
 
 
 SolidPixel ReadSolidPixel(int x, int y) {
@@ -170,6 +178,9 @@ void ScreenShot(int width, int height, SolidPixel* data)
 {
 	glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, data);
 }
+
+
+
 
 }
 }

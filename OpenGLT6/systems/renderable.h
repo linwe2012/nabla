@@ -5,7 +5,7 @@
 #include "core/renderer.h"
 
 #include "components/primitive.h"
-
+#include "core/entity-manager.h"
 
 namespace nabla {
 
@@ -71,7 +71,7 @@ public:
 	//TODO
 	void Remove(Entity) override {}
 
-	void Initilize() override {}
+	void Initialize([[maybe_unused]]SystemContext&) override {}
 
 	void Update(Entity) override {}
 
@@ -93,6 +93,11 @@ private:
 	Vector<RenderHandle_> render_handles_;
 	Vector<ISystem*> before_render_;
 };
+
+void SetRenderable(RenderableSystem* render);
+void SetEntityManager(EntityManager* manager);
+RenderableSystem* GetRenderable();
+EntityManager* GetEntityManager();
 
 }
 #endif // !_NABLA_RIGID_BODY_SYSTEM_H_

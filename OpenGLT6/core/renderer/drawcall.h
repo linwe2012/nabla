@@ -26,12 +26,15 @@
 
 namespace nabla {
 namespace renderer {
-enum struct State {
+enum struct State : int {
 	Filled = 0x0, Line = 0x1,
+	DepthTest = 0x2
 };
+
 
 struct StateDrawCall {
 	NA_DRAWCALL(StateDrawCall);
+	State state;
 };
 
 struct IndexedDrawCall {

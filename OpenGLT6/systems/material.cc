@@ -1,6 +1,7 @@
 #include "material.h"
 #include "editor/gui.h"
 #include "cppstring.h"
+#include "renderable.h"
 
 namespace nabla {
 	
@@ -45,6 +46,11 @@ void MatrialSysterm::Add(Entity e, Material material)
 	dense_.push_back(material);
 }
 
+void MatrialSysterm::Initialize(SystemContext& ctx)
+{
+	ctx.render->AttachBeforeRender(this);
+}
+
 void MatrialSysterm::OnGui(const Vector<Entity>& actives)
 {
 	using namespace renderer;
@@ -63,7 +69,7 @@ void MatrialSysterm::OnGui(const Vector<Entity>& actives)
 			//switch (GetMaterialDecriptor(h).type)
 			//{
 			// case MaterialType::kSampler2D: // fall through
-			// case MaterialType::kSampler3D:
+			// case MaterialType::kSamplerCubic:
 			// 	UseTexture(h);
 			// case MaterialType::kInt:
 			// 	SetUniform(h, *(int*)data);
@@ -120,7 +126,7 @@ void MatrialSysterm::Update(Entity e)
 		switch (GetMaterialDecriptor(h).type)
 		{
 		case MaterialType::kSampler2D: // fall through
-		case MaterialType::kSampler3D:
+		case MaterialType::kSamplerCubic:
 			UseTexture(h);
 		case MaterialType::kInt:
 			SetUniform(h, *(int*)data);

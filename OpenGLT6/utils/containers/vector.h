@@ -60,7 +60,7 @@ public:
 		alloc_ = rhs.alloc_;
 		reserve(rhs.capacity());
 		end_ = begin_ + rhs.size();
-		detail::SelectiveCopy(begin_, rhs.begin(), rhs.size());
+		nabla::detail::SelectiveCopy(begin_, rhs.begin(), rhs.size());
 		end_of_storage_ = begin_ + rhs.capacity();
 	}
 
@@ -168,14 +168,14 @@ public:
 			if (begin() != nullptr) {
 				alloc_->deallocate(begin_, capacity());
 			}
-			detail::SelectiveCopy<T>(new_pos, first, size_required);
+			nabla::detail::SelectiveCopy<T>(new_pos, first, size_required);
 			begin_ = new_begin;
 			end_ = new_end + size_required;
 			end_of_storage_ = begin_ + new_cap;
 			return;
 		}
 		memcpy(position + size_required, position, (end_ - position) * sizeof(T));
-		detail::SelectiveCopy<T>(position, first, size_required);
+		nabla::detail::SelectiveCopy<T>(position, first, size_required);
 		end_ += size_required;
 	}
 

@@ -30,6 +30,8 @@ public:
 
 	uint32_t GetMaterialSize(MaterialHandle md);
 
+	MaterialHandle NewTextureCubic(const Vector<unsigned char*>& data, int width, int height, TextureFormat format);
+
 private:
 	Vector<MaterialHeader> headers_;
 	Vector<uint32_t> buffer_;
@@ -81,6 +83,40 @@ MaterialHandle MaterialManger::NewTexture(const unsigned char* data,
 	return md;
 }
 
+//TODO: Support for other texture
+MaterialHandle MaterialManger::NewTextureCubic(const Vector<unsigned char*>& data, int width, int height, TextureFormat format) {
+	uint32_t id;
+	glGenTextures(1, &id);
+	if (id == 0) {
+		NA_LOG_ERROR("Unable to generate texture buffer");
+		return MaterialHandle::MakeNil();
+	}
+
+	glBindTexture(GL_TEXTURE_CUBE_MAP, id);
+
+	int cnt = 0;
+	for (auto datum : data) {
+		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + cnt,
+			0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, datum
+		);
+		++cnt;
+	}
+
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+	NA_ASSERT(glGetError() == 0, "Invalid opengl cmd");
+	MaterialHeader header;
+	header.type = MaterialType::kSamplerCubic;
+	MaterialHandle md(headers_.size());
+	buffer_.push_back(id);
+	headers_.push_back(header);
+	return md;
+}
+
 inline MaterialHandle MaterialManger::NewUniform(ShaderHandle target, const char* name, MaterialType type) {
 	Shader shader = ::nabla::renderer::OpenHandle(target);
 	int id = glGetUniformLocation(shader.ID, name);
@@ -110,7 +146,7 @@ inline uint32_t MaterialManger::GetMaterialSize(MaterialHandle md) {
 	switch (GetDecriptor(md).type)
 	{
 	case MaterialType::kFloat: // fall through
-	case MaterialType::kSampler3D:
+	case MaterialType::kSamplerCubic:
 	case MaterialType::kSampler2D:
 		return sizeof uint32_t;
 
@@ -133,6 +169,11 @@ MaterialManger gMaterialManger(1024);
 MaterialHandle NewTexture(const unsigned char* data, int width, int height, TextureFormat format)
 {
 	return gMaterialManger.NewTexture(data, width, height, format);
+}
+
+MaterialHandle NewTextureCubic(const Vector<unsigned char*>& data, int width, int height, TextureFormat format)
+{
+	return gMaterialManger.NewTextureCubic(data, width, height, format);
 }
 
 MaterialHandle NewUniform(ShaderHandle target, const char* name, MaterialType type)

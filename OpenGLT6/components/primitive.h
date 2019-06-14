@@ -17,6 +17,8 @@ struct RigidBody {
 	glm::vec3 velocity;
 	glm::vec3 accleration;
 	float mass;
+	glm::vec3 _min;
+	glm::vec3 _max;
 };
 
 }

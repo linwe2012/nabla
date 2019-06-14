@@ -4,7 +4,12 @@
 
 namespace nabla {
 
-
+RenderableSystem* gptrRenderableSys = nullptr;
+EntityManager* gptrEntityManager = nullptr;
+void SetRenderable(RenderableSystem* render) { gptrRenderableSys = render; }
+void SetEntityManager(EntityManager* manager) { gptrEntityManager = manager; }
+RenderableSystem* GetRenderable() { return gptrRenderableSys; }
+EntityManager* GetEntityManager() { return gptrEntityManager; }
 
 void RenderableSystem::OnGui(const Vector<Entity>& actives)
 {
@@ -80,6 +85,10 @@ const RenderableSystem::Renderable& RenderableSystem::GetRenderable(Entity e) co
 
 const std::shared_ptr<RenderableSystem::VertexData> RenderableSystem::GetVertices(Entity e)
 {
+	if (!Has(e)) {
+		return std::shared_ptr<VertexData>(nullptr);
+	}
+
 	auto mesh = renderer::OpenHandle(GetRenderable(e).hmesh);
 	glBindBuffer(GL_ARRAY_BUFFER, mesh.vbo);
 	void* data = glMapBufferRange(GL_ARRAY_BUFFER, 0, mesh.num_vertices * sizeof(glm::vec3), GL_MAP_READ_BIT);

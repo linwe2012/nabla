@@ -8,8 +8,6 @@
 namespace nabla {
 class PlaybackSystem : public ISystem {
 public:
-	// called upon system first registered
-	void Initilize() override;
 
 	// activities on gui, note that you can actually do nothing
 	virtual void OnGui(const Vector<Entity>& actives) override;
@@ -30,11 +28,12 @@ public:
 		return "playback";
 	}
 
-
+	void Initialize([[maybe_unused]]SystemContext&){}
 	
 	bool IsRecording() {
 		return hidden_video_streamer_ != nullptr;
 	}
+
 private:
 
 	bool screenshot_button_ = false;

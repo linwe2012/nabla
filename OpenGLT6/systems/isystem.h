@@ -74,10 +74,20 @@ private:
 	steady_time_point begin_;
 };
 
+class RenderableSystem;
+class EntityManager;
+
+struct SystemContext {
+	RenderableSystem* render;
+	EntityManager* entity_manager;
+};
+
 class ISystem {
 public:
-	// called upon system first registered
-	virtual void Initilize() = 0;
+	
+	virtual void Initilize() {};
+
+	virtual void Initialize(SystemContext&) {}
 
 	// activities on gui, note that you can actually do nothing
 	virtual void OnGui(const Vector<Entity>& actives) = 0;

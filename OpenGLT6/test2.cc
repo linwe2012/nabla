@@ -88,6 +88,96 @@ nabla::renderer::MeshHandle GetCubeMesh() {
 	return NewMesh(MemoryInfo{ vertices , sizeof(vertices) }, MemoryInfo{ nullptr, 0 }, layouts);
 }
 
+
+float cubeVertices[] = {
+	// positions          // texture Coords
+	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+	 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+	-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+
+	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+	 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+	-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+
+	-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+	-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+	-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+	 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+	 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+	 0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+	 0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+	 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+	 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+
+	-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+	-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+	-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+};
+float skyboxVertices[] = {
+	// positions          
+	-1.0f,  1.0f, -1.0f,
+	-1.0f, -1.0f, -1.0f,
+	 1.0f, -1.0f, -1.0f,
+	 1.0f, -1.0f, -1.0f,
+	 1.0f,  1.0f, -1.0f,
+	-1.0f,  1.0f, -1.0f,
+
+	-1.0f, -1.0f,  1.0f,
+	-1.0f, -1.0f, -1.0f,
+	-1.0f,  1.0f, -1.0f,
+	-1.0f,  1.0f, -1.0f,
+	-1.0f,  1.0f,  1.0f,
+	-1.0f, -1.0f,  1.0f,
+
+	 1.0f, -1.0f, -1.0f,
+	 1.0f, -1.0f,  1.0f,
+	 1.0f,  1.0f,  1.0f,
+	 1.0f,  1.0f,  1.0f,
+	 1.0f,  1.0f, -1.0f,
+	 1.0f, -1.0f, -1.0f,
+
+	-1.0f, -1.0f,  1.0f,
+	-1.0f,  1.0f,  1.0f,
+	 1.0f,  1.0f,  1.0f,
+	 1.0f,  1.0f,  1.0f,
+	 1.0f, -1.0f,  1.0f,
+	-1.0f, -1.0f,  1.0f,
+
+	-1.0f,  1.0f, -1.0f,
+	 1.0f,  1.0f, -1.0f,
+	 1.0f,  1.0f,  1.0f,
+	 1.0f,  1.0f,  1.0f,
+	-1.0f,  1.0f,  1.0f,
+	-1.0f,  1.0f, -1.0f,
+
+	-1.0f, -1.0f, -1.0f,
+	-1.0f, -1.0f,  1.0f,
+	 1.0f, -1.0f, -1.0f,
+	 1.0f, -1.0f, -1.0f,
+	-1.0f, -1.0f,  1.0f,
+	 1.0f, -1.0f,  1.0f
+};
+
 int main()
 {
 	using namespace nabla;
@@ -102,20 +192,25 @@ int main()
 	GlobalServices.launch<ComponentRegistry>("ComponentRegistry");
 
 	EntityManager entity_manager;
+	RenderableSystem sys_renderable;
+	sys_renderable.Initialize(SystemContext{nullptr, nullptr});
+	SetRenderable(&sys_renderable);
+	SetEntityManager(&entity_manager);
+	SystemContext sys_ctx{
+		&sys_renderable,
+		&entity_manager,
+	};
+
+
+	AnimationSystem sys_animation;
 
 	LightingSystem sys_lighting;
-	AnimationSystem sys_animation;
-	RenderableSystem sys_renderable;
 	MatrialSysterm sys_material;
 	PlaybackSystem sys_playback;
 	
-
-	sys_lighting.Initilize();
-	sys_renderable.Initilize();
-	sys_material.Initilize();
-	sys_playback.Initilize();
-
-	sys_renderable.AttachBeforeRender(&sys_material);
+	sys_lighting.Initialize(sys_ctx);
+	sys_material.Initialize(sys_ctx);
+	sys_playback.Initialize(sys_ctx);
 
 	Vector<Entity> lights;
 
@@ -151,6 +246,13 @@ int main()
 
 	auto hcube = GetCubeMesh();
 
+	auto skyboxpass = renderer::NewShader(renderer::ShaderFilePath{ "test/ubershaders/skybox.vs", "test/ubershaders/skybox.fs" }, macros);
+	auto hskybox_proj = renderer::NewUniform(skyboxpass, "projection", renderer::MaterialType::kMat4);
+	auto hskybox_view = renderer::NewUniform(skyboxpass, "view", renderer::MaterialType::kMat4);
+	OpenHandle(skyboxpass).Use();
+	OpenHandle(skyboxpass).SetInt("skybox", 0);
+	NA_ASSERT(glGetError() == 0);
+
 	auto lightingpass = renderer::NewShader(renderer::ShaderFilePath{ "test/ubershaders/deferred-shading.vs", "test/ubershaders/deferred-shading.fs" }, macros);
 	sys_lighting.SetShader(lightingpass, postprocess);
 
@@ -169,7 +271,7 @@ int main()
 		LightingSystem::Light::kSpot, hcube
 		});
 
-	glEnable(GL_DEPTH_TEST);
+	//glEnable(GL_DEPTH_TEST);
 	Camera camera;
 
 	using renderer::OpenHandle;
@@ -178,12 +280,12 @@ int main()
 	float last_x = 0.0f, last_y = 0.0f;
 
 	InitGui();
-	std::string textipt;
 
 
 	Clock clock;
 
 	renderer::detail::PrepareRenderContext__Temp();
+	NA_ASSERT(glGetError() == 0);
 	{
 		using namespace renderer;
 		Vector<Attachment> textures{
@@ -257,14 +359,28 @@ int main()
 	}
 
 	auto hMonet = AssetManager::LoadTexture("test/img/Monet.bmp");
+	auto htex_skybox = assets.GetTexture("default_skybox");
 
 	Vector<Entity> tmp;
 	bool gui_show_style_config = false;
 	bool gui_show_style_open = false;
 
+	renderer::MeshHandle hmesh_skybox;
+	{
+		using namespace renderer;
+		Vector<LayoutInfo> layouts;
+		layouts.push_back(LayoutInfo::CreatePacked<glm::vec3>(0, 0));
+		hmesh_skybox = renderer::NewMesh(
+			renderer::MemoryInfo{ skyboxVertices, sizeof(skyboxVertices) },
+			renderer::MemoryInfo{ nullptr, 0 },
+			layouts
+			);
+	}
+	
 
 	while (renderer::IsAlive())
 	{
+
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
@@ -292,6 +408,19 @@ int main()
 
 
 		//DrawMesh(teapot.meshes_[0].hMesh);
+		{
+			renderer::ScopedState scope(renderer::RenderPass::kPostProc);
+			UseShader(skyboxpass);
+			SetUniform(hskybox_proj, projection);
+			glm::vec3 trans;
+			glm::quat quat;
+			glm::vec3 whatev;
+			glm::vec4 we;
+			glm::decompose(view, whatev, quat, trans, whatev, we);
+			SetUniform(hskybox_view, glm::translate(glm::mat4(glm::mat3(view)), trans / 100.0f));
+			UseTexture(htex_skybox);
+			DrawMesh(hmesh_skybox);
+		}
 
 		sys_renderable.Update(clock);
 
@@ -299,6 +428,8 @@ int main()
 		sys_lighting.Update(clock);
 		sys_material.Update(clock);
 		sys_playback.Update(clock);
+
+		
 
 		GLFWwindow* window = static_cast<GLFWwindow*>(renderer::GetWindow());
 

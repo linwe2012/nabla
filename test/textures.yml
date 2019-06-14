@@ -1,0 +1,7 @@
+default_skybox:
+  right:  img/skybox/right.jpg
+  left:   img/skybox/left.jpg
+  top:    img/skybox/top.jpg
+  bottom: img/skybox/bottom.jpg
+  front:  img/skybox/front.jpg
+  back:   img/skybox/back.jpg

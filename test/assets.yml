@@ -1,2 +1,3 @@
 materials: ./materials.yml
 models: ./models.yml
+textures: ./textures.yml

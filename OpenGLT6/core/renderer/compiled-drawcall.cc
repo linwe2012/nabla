@@ -119,6 +119,7 @@ void FlushAllDrawCallsWithNoExtraCommands() {
 	FlushAllDrawCalls(*sorted);
 }
 
+
 void DrawMesh(MeshHandle mesh, ShaderHandle shader)
 {
 	Command cmd;
@@ -146,7 +147,7 @@ void UseTexture(MaterialHandle md)
 {
 	{
 		auto type = GetMaterialDecriptor(md).type;
-		NA_LEAVE_IF((void)0, type != MaterialType::kSampler2D && type != MaterialType::kSampler3D, "");
+		NA_LEAVE_IF((void)0, type != MaterialType::kSampler2D && type != MaterialType::kSamplerCubic, "");
 	}
 	
 	auto& rc = tlsRenderContext;

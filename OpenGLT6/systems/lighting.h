@@ -48,7 +48,7 @@ public:
 		std::string name;
 	};
 
-	void Initilize() override;
+	void Initialize(SystemContext&) override;
 
 	void SetShader(renderer::ShaderHandle lightingpass, renderer::ShaderHandle prostproc);
 

@@ -252,6 +252,8 @@ void FlushAllDrawCalls();
 
 void FlushAllDrawCallsWithNoExtraCommands();
 
+void RenderSkybox(MaterialHandle image);
+
 RenderContext* GetRenderContext();
 // RenderContext* GetRenderContext();
 

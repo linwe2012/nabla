@@ -3,7 +3,7 @@
 #include "editor/gui.h"
 
 namespace nabla {
-void LightingSystem::Initilize() {
+void LightingSystem::Initialize([[maybe_unused]] SystemContext&) {
 	num_spot_ = 0;
 	num_point_ = 0;
 	max_point_ = 32;

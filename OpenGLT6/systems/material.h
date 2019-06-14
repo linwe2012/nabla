@@ -85,7 +85,7 @@ public:
 
 	void Update(Clock& clock) override {}
 
-	void Initilize() override {}
+	void Initialize(SystemContext&) override;
 
 	void Add(Entity e) override { Add(e, Material()); }
 

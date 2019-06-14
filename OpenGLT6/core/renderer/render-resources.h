@@ -79,7 +79,7 @@ enum struct MaterialType : uint8_t {
 	kUniform,
 
 	kSampler2D,
-	kSampler3D,
+	kSamplerCubic,
 	kFloat,
 	kMat4,
 	kVec3,
@@ -88,6 +88,7 @@ enum struct MaterialType : uint8_t {
 };
 
 enum struct RenderPass : uint8_t {
+	kSkybox,
 	kForward,  /**< geometry & Gbuffers */
 	kDeferred, /**< incl. lighting */
 	kPostProc,
@@ -109,8 +110,12 @@ struct MaterialHeader {
 
 
 MaterialHandle NewTexture(const unsigned char* data,
-	int width, int height,
-	TextureFormat format);
+	                      int width, int height,
+	                      TextureFormat format);
+
+MaterialHandle NewTextureCubic(const Vector<unsigned char*>& data,
+	                        int width, int height,
+	                        TextureFormat format);
 
 std::string PreprocessShader(
 	std::istream& is,

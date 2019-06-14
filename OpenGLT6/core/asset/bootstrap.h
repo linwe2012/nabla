@@ -48,11 +48,15 @@ namespace nabla {
 		
 		// guarantees return a object map
 		YAML::Node GetMaterial(const char* name);
+
+		renderer::MaterialHandle GetTexture(const char* name);
+
 	private:
 		LoadedModel LoadModelToGPU(std::map<std::string, ModelInfo>::iterator gotcha, bool auto_shader, MaterialOverride matover = MaterialOverride());
 
 		Map<fs::path, YAML::Node> files_;
 		YAML::Node materials_;
+		YAML::Node textures_;
 		std::map<std::string, ModelInfo> models_;
 		YAML::Node root_;
 		fs::path cwd_; /**< current working directory */
