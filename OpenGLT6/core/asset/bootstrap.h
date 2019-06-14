@@ -42,7 +42,8 @@ namespace nabla {
 #define DEF_MODEL_INFO(type, name) type name;
 			NA_ASSET_MODEL_INFO_LIST(DEF_MODEL_INFO, DEF_MODEL_INFO)
 #undef DEF_MODEL_INFO
-				bool loaded = false;
+			
+			bool loaded = false;
 			fs::path abs_path;
 		};
 		
@@ -51,12 +52,19 @@ namespace nabla {
 
 		renderer::MaterialHandle GetTexture(const char* name);
 
+		YAML::Node yaml_models() {
+			return yaml_models_;
+		}
+
+		fs::path cwd() { return cwd_; }
+
 	private:
 		LoadedModel LoadModelToGPU(std::map<std::string, ModelInfo>::iterator gotcha, bool auto_shader, MaterialOverride matover = MaterialOverride());
 
 		Map<fs::path, YAML::Node> files_;
 		YAML::Node materials_;
 		YAML::Node textures_;
+		YAML::Node yaml_models_;
 		std::map<std::string, ModelInfo> models_;
 		YAML::Node root_;
 		fs::path cwd_; /**< current working directory */

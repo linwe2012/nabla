@@ -42,7 +42,7 @@ uniform int num_points; // point lights
 uniform int num_spots;
 
 uniform vec3 viewPos;
-
+// uniform samplerCube skybox;
 
 /*
 vec3 getNormalFromMap(vec)
@@ -225,9 +225,10 @@ void main()
         lighting += diffuse + specular;
     }
 
-    
-   // FragColor = vec4(TexCoords, 0.0, 1.0);
-    FragColor = vec4(lighting, 1.0); // +  vec4(texture(gPicker, TexCoords).rgb, 1.0) * 0.8;
+    //vec3 sky_reflect = reflect(-viewDir, Normal);
+    //vec4 sky_color = vec4(texture(skybox, sky_reflect).rgb, 1.0);
+    FragColor = vec4(lighting, 1.0);
+    //FragColor = vec4(lighting, 1.0) * 0.5 + sky_color * 0.5; // +  vec4(texture(gPicker, TexCoords).rgb, 1.0) * 0.8;
     // FragColor = vec4(lighting * 0.05, 0.01)  + vec4(e, 0.99);
     // FragColor = vec4(texture(gDiffuseSpec, TexCoords).rgb, 0);
 }

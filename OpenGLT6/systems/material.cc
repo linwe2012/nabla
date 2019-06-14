@@ -111,6 +111,9 @@ void MatrialSysterm::OnGui(const Vector<Entity>& actives)
 
 void MatrialSysterm::Update(Entity e)
 {
+	if (!Has(e)) {
+		return;
+	}
 #define SET_UNI(name, ...) renderer::SetUniform(h##name##_, dense_[sparse_[e.index()]].##name);
 	NA_BUILTIN_MATERIAL_SYS_LIST(SET_UNI)
 #undef SET_UNI

@@ -31,7 +31,8 @@ NA_DRAWCALL_IMPL(IndexedDrawCall) {
 	else {
 		glDrawArrays(GL_TRIANGLES, 0, mat.num_vertices);
 	}
-	
+	int uu = glGetError();
+	assert(uu == 0);
 }
 
 
@@ -90,11 +91,14 @@ NA_DRAWCALL_IMPL(FrameBufferAttachmentReaderDrawCall) {
 	glBindFramebuffer(GL_READ_FRAMEBUFFER, f.fbo);
 	glReadBuffer(f.attach_ids[id]);
 	callback();
+	int uu = glGetError();
+	assert(uu == 0);
 }
 
 NA_DRAWCALL_IMPL(SwitchFrameBufferDrawCall) {
 	const auto& f = OpenHandle(hframe);
 	int cnt = 0;
+	int uu;
 	switch (trans)
 	{
 	case nabla::renderer::SwitchFrameBufferDrawCall::kRenderOnFrameBuffer:
@@ -140,11 +144,16 @@ NA_DRAWCALL_IMPL(SwitchFrameBufferDrawCall) {
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 			glEnableVertexAttribArray(1);
 			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+			
 		}
 		glBindVertexArray(quadVAO);
+		//uu = glGetError();
+		//assert(uu == 0);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+		uu = glGetError();
+		//assert(uu == 0);
 		glBindVertexArray(0);
-
+		
 		// 2.5. copy content of geometry's depth buffer to default framebuffer's depth buffer
 		// ----------------------------------------------------------------------------------
 		glBindFramebuffer(GL_READ_FRAMEBUFFER, f.fbo);
@@ -158,7 +167,7 @@ NA_DRAWCALL_IMPL(SwitchFrameBufferDrawCall) {
 	default:
 		break;
 	}
-	int uu = glGetError();
+	uu = glGetError();
 	assert(uu == 0);
 }
 

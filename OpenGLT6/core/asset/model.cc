@@ -24,6 +24,11 @@ void ModelAsset::LoadModel(const fs::path abs_path, Options opt) {
 	std::string str = abs_path.string();
 	opt_ = opt;
 
+	if (opt.use_builtin) {
+		LoadObj();
+		return;
+	}
+
 	Assimp::Importer importer;
 
 	int flag = aiProcess_Triangulate | aiProcess_FlipUVs;
@@ -262,7 +267,7 @@ void ProcessMaterialTexturePass(Texture& dst,
 		materials->GetTexture(type, i, &str);
 		fs::path path = str.C_Str();
 		if (path.is_relative()) {
-			path = fs::canonical(path, dir);
+			path = fs::weakly_canonical(dir / path);
 		}
 
 		std::string file = path.string();
@@ -280,6 +285,54 @@ void ModelAsset::ProcessMaterialTexture(Mesh* dst, const aiScene* scene, const a
 	NA_BUILTIN_TEXTURE_LIST(PROCESS_PASS, PROCESS_PASS, DO_NOTHING);
 #undef DO_NOTHING
 	ProcessMaterialTexturePass(dst->AmbientOcclusionMap, mat, BuiltinMaterial::kAmbientOcclusionMap, aiTextureType_LIGHTMAP, dir_);
+}
+
+void ModelAsset::LoadObj()
+{
+	if (true /* if has mesh */) {
+		// ...
+	}
+}
+
+void ModelAsset::LoadObjMesh()
+{
+	Vector<float> soup;
+
+	meshes_.push_back(Mesh());
+	Mesh& m = meshes_.back();
+
+	Vector<glm::vec3> points;
+	Vector<glm::vec3> normal;
+	Vector<glm::vec3> tangents;   // fill in zeros
+	Vector<glm::vec3> bitangents; // fill in zeros
+	Vector<glm::vec2> textCoords;
+	Vector<unsigned>  indices;
+
+	//... fill the vectors
+
+	using namespace renderer;
+	Vector<LayoutInfo> layouts;
+	layouts.push_back(LayoutInfo::CreatePacked<glm::vec3>(0, soup.size() * sizeof(float)));
+	soup.insert(soup.end(), reinterpret_cast<float*>(points.begin()), reinterpret_cast<float*>(points.end()));
+	
+	layouts.push_back(LayoutInfo::CreatePacked<glm::vec3>(1, soup.size() * sizeof(float)));
+	soup.insert(soup.end(), reinterpret_cast<float*>(normal.begin()), reinterpret_cast<float*>(normal.end()));
+
+	layouts.push_back(LayoutInfo::CreatePacked<glm::vec3>(2, soup.size() * sizeof(float)));
+	soup.insert(soup.end(), reinterpret_cast<float*>(tangents.begin()), reinterpret_cast<float*>(tangents.end()));
+
+	layouts.push_back(LayoutInfo::CreatePacked<glm::vec3>(3, soup.size() * sizeof(float)));
+	soup.insert(soup.end(), reinterpret_cast<float*>(bitangents.begin()), reinterpret_cast<float*>(bitangents.end()));
+
+	layouts.push_back(LayoutInfo::CreatePacked<glm::vec2>(4, soup.size() * sizeof(float)));
+	soup.insert(soup.end(), reinterpret_cast<float*>(textCoords.begin()), reinterpret_cast<float*>(textCoords.end()));
+
+	m.transform = glm::mat4(1.0f); // or anything you like
+	m.h_mesh = NewMesh(
+		MemoryInfo{ soup.begin(), soup.size() * sizeof(float) }, // vertices
+		MemoryInfo{ indices.begin(), indices.size() * sizeof(unsigned) }, // indices
+		layouts
+	);
 }
 
 

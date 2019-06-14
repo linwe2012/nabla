@@ -50,7 +50,7 @@ public:
 
 	void Initialize(SystemContext&) override;
 
-	void SetShader(renderer::ShaderHandle lightingpass, renderer::ShaderHandle prostproc);
+	void SetShader(renderer::ShaderHandle lightingpass, renderer::ShaderHandle prostproc, MaterialHandle hskybox);
 
 	// activities on gui, note that you can actually do nothing
 	virtual void OnGui(const Vector<Entity>& actives);
@@ -117,7 +117,8 @@ private:
 	Vector<PointHandle> hpoint_;
 	Vector<SpotHandle> hspot_;
 	MaterialHandle hcamera_;
-
+	MaterialHandle hskybox_;
+	MaterialHandle hskybox_texture_;
 	glm::vec3 camera_pos_;
 	glm::mat4 project_;
 	glm::mat4 view_;
@@ -139,7 +140,6 @@ private:
 	MaterialHandle hbox_view_;
 	MaterialHandle hbox_model_;
 	MaterialHandle hbox_lightcolor_;
-	
 	
 };
 

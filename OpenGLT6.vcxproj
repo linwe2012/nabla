@@ -150,6 +150,7 @@
     <ClCompile Include="OpenGLT6\core\renderer\shader.cc" />
     <ClCompile Include="OpenGLT6\core\service-locator.cc" />
     <ClCompile Include="OpenGLT6\editor\gui.cc" />
+    <ClCompile Include="OpenGLT6\systems\assets.cc" />
     <ClCompile Include="OpenGLT6\systems\collision.cc" />
     <ClCompile Include="OpenGLT6\systems\lighting.cc" />
     <ClCompile Include="OpenGLT6\systems\material.cc" />
@@ -225,6 +226,7 @@
     <ClInclude Include="OpenGLT6\core\sparse-map.h" />
     <ClInclude Include="OpenGLT6\editor\gui.h" />
     <ClInclude Include="OpenGLT6\systems\animation.h" />
+    <ClInclude Include="OpenGLT6\systems\assets.h" />
     <ClInclude Include="OpenGLT6\systems\collision.h" />
     <ClInclude Include="OpenGLT6\systems\isystem.h" />
     <ClInclude Include="OpenGLT6\systems\lighting.h" />

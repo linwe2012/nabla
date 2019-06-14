@@ -20,66 +20,82 @@ public:
 	using minute = std::chrono::minutes;
 
 	void Gensis() {
-		current_ = begin_ = steady_clock::now();
+		begin_ = gensis_ = steady_clock::now();
 		total_frame_count_ = 0;
 	}
 
 	void NextFrame() {
-		last_ = current_;
-		current_ = steady_clock::now();
+		last_ = begin_;
+		begin_ = steady_clock::now();
 		++total_frame_count_;
 	}
 
 	double NanoSecond() const {
-		return static_cast<double>(std::chrono::duration_cast<nano>(current_ - begin_).count());
+		return static_cast<double>(std::chrono::duration_cast<nano>(begin_ - gensis_).count());
 	}
 
 	double MilliSecond() const {
-		return std::chrono::duration_cast<micro>(current_ - begin_).count() * 0.001;
+		return std::chrono::duration_cast<micro>(begin_ - gensis_).count() * 0.001;
 	}
 
 	double Second() const {
-		return std::chrono::duration_cast<milli>(current_ - begin_).count() * 0.001;
+		return std::chrono::duration_cast<milli>(begin_ - gensis_).count() * 0.001;
 	}
 
 	double Time() const {
 		return Second();
 	}
 
-	uint64_t CountFrames() {
+	uint64_t CountFrames() const {
 		return total_frame_count_;
 	}
 
-	double GetLastFrameDuration() {
-		return std::chrono::duration_cast<milli>(current_ - last_).count() * 0.001;
+	double GetLastFrameDuration() const {
+		return std::chrono::duration_cast<milli>(begin_ - last_).count() * 0.001;
 	}
 
-	float GetLastFrameDurationFloat() {
+	float GetLastFrameDurationFloat() const {
 		return static_cast<float>(GetLastFrameDuration());
 	}
 
-	double GetLastFrameFps() {
+	double GetLastFrameFps() const {
 		return 1.0 / GetLastFrameDuration();
 	}
 
-	steady_time_point GetCurrentTimeRaw() {
-		return current_;
+	steady_time_point GetCurrentTimeRaw() const {
+		return begin_;
+	}
+
+	void set_fps(int fps) { fps_ = fps; sec_per_frame_ = 1.0 / fps_; }
+
+	int fps() const { return fps_; }
+
+	double ThisFrameElapse() const {
+		return std::chrono::duration_cast<micro>(begin_ - std::chrono::steady_clock::now()).count() * 0.001 * 0.001;
+	}
+
+	bool IsTimeout() const {
+		return ThisFrameElapse() >= sec_per_frame_;
 	}
 
 private:
 	uint64_t total_frame_count_ = 0;
 
-	steady_time_point current_;
-	steady_time_point last_;
-	steady_time_point begin_;
+	steady_time_point begin_; //< begin of the frame
+	steady_time_point last_; 
+	steady_time_point gensis_; //< begin of the FIRST Frame
+	int fps_; //< desired fps
+	double sec_per_frame_;
 };
 
 class RenderableSystem;
 class EntityManager;
+class AssetManager;
 
 struct SystemContext {
 	RenderableSystem* render;
 	EntityManager* entity_manager;
+	AssetManager* assets;
 };
 
 class ISystem {

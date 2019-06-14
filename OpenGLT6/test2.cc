@@ -18,6 +18,7 @@
 #include "systems/material.h"
 #include "systems/playback.h"
 #include "systems/collision.h"
+#include "systems/assets.h"
 
 #include <glm/gtx/matrix_decompose.hpp>
 
@@ -193,6 +194,9 @@ int main()
 	}
 	GlobalServices.launch<ComponentRegistry>("ComponentRegistry");
 
+	AssetManager assets;
+	assets.ParseAssetsFromFile("./test/assets.yml");
+
 	EntityManager entity_manager;
 	RenderableSystem sys_renderable;
 	sys_renderable.Initialize(SystemContext{nullptr, nullptr});
@@ -201,6 +205,7 @@ int main()
 	SystemContext sys_ctx{
 		&sys_renderable,
 		&entity_manager,
+		&assets,
 	};
 
 
@@ -210,11 +215,13 @@ int main()
 	MatrialSysterm sys_material;
 	PlaybackSystem sys_playback;
 	CollisionSystem sys_collision;
-	
+	AssetsSystem sys_assets;
+
 	sys_lighting.Initialize(sys_ctx);
 	sys_material.Initialize(sys_ctx);
 	sys_playback.Initialize(sys_ctx);
 	sys_collision.Initialize(sys_ctx);
+	sys_assets.Initialize(sys_ctx);
 
 	Vector<Entity> lights;
 
@@ -257,8 +264,11 @@ int main()
 	OpenHandle(skyboxpass).SetInt("skybox", 0);
 	NA_ASSERT(glGetError() == 0);
 
+	auto hMonet = AssetManager::LoadTexture("test/img/Monet.bmp");
+	auto htex_skybox = assets.GetTexture("default_skybox");
+
 	auto lightingpass = renderer::NewShader(renderer::ShaderFilePath{ "test/ubershaders/deferred-shading.vs", "test/ubershaders/deferred-shading.fs" }, macros);
-	sys_lighting.SetShader(lightingpass, postprocess);
+	sys_lighting.SetShader(lightingpass, postprocess, htex_skybox);
 
 	sys_renderable.SetRenderPassShader(renderer::RenderPass::kPostProc, postprocess, hbox_model, hentity, 5);
 	sys_renderable.SetRenderPassShader(renderer::RenderPass::kForward, geopass, hmodel, hentity, 5);
@@ -305,8 +315,7 @@ int main()
 		));
 	}
 	
-	AssetManager assets;
-	assets.ParseAssetsFromFile("./test/assets.yml");
+	
 	//auto teapot = assets.LoadModelToGPU("teapot", false);
 	auto teapot = assets.LoadModelToGPU("teapot", false);
 	auto eteapot = entity_manager.Create();
@@ -326,8 +335,6 @@ int main()
 		sys_renderable.Add(e, m.hMesh, r);
 		sys_material.Add(e);
 	}
-	// sys_renderable.Add(eteapot, teapot.meshes_[0].hMesh);
-	// sys_material.Add(eteapot);
 	
 	solids.push_back(entity_manager.Create()); // desktop
 	sys_renderable.Add(solids.back(), hcube, Transform{
@@ -364,8 +371,7 @@ int main()
 		// sys_material.GetEdit(solids.back()).diffuse = glm::vec3(colors[i * 3], colors[i * 3 + 1], colors[i * 3 + 2]);
 	}
 
-	auto hMonet = AssetManager::LoadTexture("test/img/Monet.bmp");
-	auto htex_skybox = assets.GetTexture("default_skybox");
+	
 
 	Vector<Entity> tmp;
 	bool gui_show_style_config = false;
@@ -385,7 +391,7 @@ int main()
 			);
 	}
 	
-
+	NA_ASSERT(glGetError() == 0);
 	while (renderer::IsAlive())
 	{
 
@@ -532,10 +538,12 @@ int main()
 				ImGui::EndMenuBar();
 			}
 			if (tmp.size()) {
-				ImGui::Text("Selected entity %d", tmp.back().index());
+				ImGui::Text("Selected entity %d", tmp.back().IsNil()? -1 : tmp.back().index());
 			}
 
 			sys_playback.OnGui(tmp);
+
+			sys_assets.OnGui(tmp);
 
 			if (ImGui::CollapsingHeader(sys_lighting.name())) {
 				sys_lighting.OnGui(lights);

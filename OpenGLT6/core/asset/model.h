@@ -49,7 +49,7 @@ public:
 	};
 
 	struct Options {
-		Options() {}
+		Options() : use_builtin(false) {}
 		Options(LoadMethod m) {
 			NormalMapMethod = m;
 			TangentAndBitangentMapMethod = m;
@@ -59,6 +59,7 @@ public:
 		LoadMethod NormalMapMethod = LoadMethod::kAuto;
 		LoadMethod TangentAndBitangentMapMethod = LoadMethod::kAuto;
 		LoadMethod TextureCoordMapMethod = LoadMethod::kAuto;
+		bool use_builtin = false;;
 	};
 
 	/** loads a model with supported ASSIMP extensions from file 
@@ -91,6 +92,10 @@ private:
 	void ProcessMesh(aiMesh* mesh, const aiScene* scene);
 
 	void ProcessMaterialTexture(Mesh* dst, const aiScene* scene, const aiMesh* mesh);
+
+	void LoadObj();
+
+	void LoadObjMesh();
 
 private:
 	glm::mat4 transform;

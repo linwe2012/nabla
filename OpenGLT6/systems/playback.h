@@ -28,7 +28,7 @@ public:
 		return "playback";
 	}
 
-	void Initialize([[maybe_unused]] SystemContext&);
+	void Initialize([[maybe_unused]] SystemContext&) override;
 	
 	bool IsRecording() {
 		return hidden_video_streamer_ != nullptr;

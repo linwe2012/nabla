@@ -240,6 +240,9 @@
     <ClCompile Include="OpenGLT6\systems\playback.cc">
       <Filter>Source Files\system</Filter>
     </ClCompile>
+    <ClCompile Include="OpenGLT6\systems\assets.cc">
+      <Filter>Source Files\system</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="openglt6\core\component.h">
@@ -255,9 +258,6 @@
       <Filter>Header Files\utils</Filter>
     </ClInclude>
     <ClInclude Include="OpenGLT6\components\skeleton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGLT6\systems\animation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="OpenGLT6\core\component-registry.h">
@@ -313,9 +313,6 @@
     </ClInclude>
     <ClInclude Include="OpenGLT6\core\renderer\shader.h">
       <Filter>Header Files\renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGLT6\utils\utils.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="OpenGLT6\core\asset\bootstrap.h">
       <Filter>Header Files\asset</Filter>
@@ -457,6 +454,15 @@
     </ClInclude>
     <ClInclude Include="OpenGLT6\systems\world.h">
       <Filter>Header Files\system</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\systems\animation.h">
+      <Filter>Header Files\system</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\systems\assets.h">
+      <Filter>Header Files\system</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\utils\utils.h">
+      <Filter>Header Files\utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

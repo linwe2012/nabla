@@ -11,18 +11,22 @@ void LightingSystem::Initialize([[maybe_unused]] SystemContext&) {
 }
 
 
-void LightingSystem::SetShader(renderer::ShaderHandle lightingpass, renderer::ShaderHandle postprocess) {
+void LightingSystem::SetShader(renderer::ShaderHandle lightingpass, renderer::ShaderHandle postprocess, MaterialHandle hskybox_texture) {
 	hshader_ = lightingpass;
 	hcamera_ = renderer::NewUniform(lightingpass, "viewPos", renderer::MaterialType::kVec3);
 	// hcamera_ = renderer::NewUniform(lightingpass, "the_fucking", renderer::MaterialType::kVec3);
 	hnum_point_ = renderer::NewUniform(lightingpass, "num_points", renderer::MaterialType::kInt);
 	hnum_spot_ = renderer::NewUniform(lightingpass, "num_spots", renderer::MaterialType::kInt);
+	// hskybox_ = renderer::NewUniform(lightingpass, "skybox", renderer::MaterialType::kInt);
+	//renderer::OpenHandle(hshader_).Use();
+	//renderer::OpenHandle(hshader_).SetInt("skybox", 0);
 
 	hpostprocess_ = postprocess;
 	hbox_proj_ = renderer::NewUniform(postprocess, "projection", renderer::MaterialType::kMat4);
 	hbox_view_ = renderer::NewUniform(postprocess, "view", renderer::MaterialType::kMat4);
 	hbox_model_ = renderer::NewUniform(postprocess, "model", renderer::MaterialType::kMat4);
 	hbox_lightcolor_ = renderer::NewUniform(postprocess, "lightColor", renderer::MaterialType::kVec3);
+	hskybox_texture_ = hskybox_texture;
 }
 
 
@@ -115,9 +119,12 @@ void LightingSystem::Update([[maybe_unused]]Clock& clock)
 	{
 		ScopedState deferred(RenderPass::kDeferred);
 		UseShader(hshader_);
+		// SetUniform(hskybox_, 0);
+		// UseTexture(hskybox_texture_);
 		SetUniform(hcamera_, camera_pos_);
 		SetUniform(hnum_point_, num_point_);
 		SetUniform(hnum_spot_, num_spot_);
+		
 	}
 
 

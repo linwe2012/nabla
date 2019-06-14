@@ -13,11 +13,11 @@ void AssetManager::ParseAssetsFromFile(const char* path)
 {
 	try {
 		root_ = YAML::LoadFile(path);
-		cwd_ = fs::absolute(path).parent_path();
+		cwd_ = fs::weakly_canonical(path).parent_path();
 
 		auto get_absolute = [this](YAML::Node node) -> std::string {
 			std::string rel = node.as<std::string>();
-			return fs::absolute(rel, cwd_).string();
+			return fs::weakly_canonical(cwd_ / rel).string();
 		};
 
 		auto mat_desc = root_["materials"];
@@ -34,7 +34,9 @@ void AssetManager::ParseAssetsFromFile(const char* path)
 			NA_LOG_WARN("no models descriptor in file: %s, is that intended?", path);
 		}
 		else {
+
 			std::string model_path = get_absolute(model_desc);
+			yaml_models_ = YAML::LoadFile(model_path);
 			ParseModelFromFile(model_path.c_str());
 		}
 
@@ -68,7 +70,7 @@ void AssetManager::ParseModelFromFile(const char* path)
 		ModelInfo model;
 
 #define MODEL_INFO_MAN(type, name)          \
-		if (it->second[#name].IsNull()) {   \
+		if (!it->second[#name].IsDefined() || it->second[#name].IsNull()) {   \
 			NA_LOG_ERROR("expect model field " #name " not null in %s", it->first.as<std::string>().c_str()); \
 			continue;                        \
 		}                                    \
@@ -77,7 +79,7 @@ void AssetManager::ParseModelFromFile(const char* path)
 		}
 
 #define MODEL_INFO_NOT(type, name)          \
-		if (it->second[#name].IsNull()) {   \
+		if (!it->second[#name].IsDefined() || it->second[#name].IsNull()) {   \
 			NA_LOG_INFO("model field " #name " is missing in %s", it->first.as<std::string>().c_str()); \
 		}                                    \
 		else {                               \
@@ -222,7 +224,7 @@ renderer::MaterialHandle AssetManager::GetTexture(const char* name)
 				NA_LOG_ERROR("Expected %s specifier for 3D image", name);
 				return false;
 			}
-			auto path = fs::absolute(nright.as<std::string>(), cwd_);
+			auto path = fs::weakly_canonical(cwd_ / nright.as<std::string>());
 			
 			if (!fs::exists(path)) {
 				NA_LOG_ERROR("Can't find file %s", path.c_str());

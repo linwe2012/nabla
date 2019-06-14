@@ -5,4 +5,15 @@ teapot:
 castle:
   bin: ./bin/castleA.fbx
   material: metal.silver
+
+
+chair:
+  bin: bin/Chair.obj
+
+handgun:
+  bin: bin/Handgun_obj.obj
+
+tree:
+  bin: bin/trees lo-poly.obj
+
   
