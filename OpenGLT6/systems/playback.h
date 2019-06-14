@@ -44,7 +44,7 @@ private:
 	int width_ = 0;
 	int height_ = 0;
 	void* hidden_video_streamer_ = nullptr;
-	
+	bool show_gui_ = false;
 };
 }
 #endif // !_NABLA_SYSTEM_PLAYBACK_H_

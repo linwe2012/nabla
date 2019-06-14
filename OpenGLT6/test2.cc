@@ -341,8 +341,8 @@ int main()
 	
 	solids.push_back(entity_manager.Create()); // desktop
 	sys_renderable.Add(solids.back(), hcube, Transform{
-		glm::vec3(0.0f, -0.8f, 0.0f),
-		glm::vec3(1.0f, 0.2f, 1.0f),
+		glm::vec3(0.0f, 0.0f, 0.0f),
+		glm::vec3(1.0f, -0.2f, 1.0f),
 		glm::quat()
 		});
 	sys_material.Add(solids.back());

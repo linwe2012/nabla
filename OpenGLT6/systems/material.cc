@@ -101,10 +101,10 @@ void MatrialSysterm::OnGui(const Vector<Entity>& actives)
 		//}
 		
 
-		// ImGui::ColorEdit3("Diffuse", &m.diffuse[0]);
-		// ImGui::DragFloat("Specular", &m.specular, 0.01f, -1.0f, 2.0f);
-		// 
-		// 
+		ImGui::ColorEdit3("Diffuse", &m.diffuse[0]);
+		ImGui::DragFloat("Specular", &m.specular, 0.01f, -1.0f, 2.0f);
+		
+		
 		ImGui::Text("Physically Based Rendering");
 		ImGui::ColorEdit3("Albedo", &m.albedo[0]);
 		ImGui::DragFloat("Metallic", &m.metallic, 0.01f, 0.0f, 1.0f);

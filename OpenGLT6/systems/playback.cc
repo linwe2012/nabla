@@ -231,7 +231,8 @@ void PlaybackSystem::OnGui(const Vector<Entity>& actives)
 	}
 	ImGui::PopStyleColor(3);
 	ImGui::PopID();
-
+	ImGui::SameLine();
+	ImGui::Checkbox("Gui", &show_gui_);
 }
 
 std::string GetTimeString() {
@@ -261,7 +262,7 @@ void PlaybackSystem::Update(Clock& clock)
 	}
 
 	{
-		renderer::ScopedState scope(renderer::RenderPass::kPostProc);
+		renderer::ScopedState scope(show_gui_ ? renderer::RenderPass::kSkybox : renderer::RenderPass::kPostProc);
 		renderer::ReadFromDefaultGBufferAttachment(-1, [this] {
 
 			if (!screenshot_button_ && !record_button_ && !IsRecording()) {
