@@ -64,7 +64,7 @@ struct VideoStreamer {
 		// outst->codecpar->bit_rate = c->bit_rate;
 		// c->time_base = AVRational{ 1, 25 };
 
-		c->bit_rate = 400000;
+		c->bit_rate = 4000000;
 		c->width = _width;                                        // resolution must be a multiple of two (1280x720),(1900x1080),(720x480)
 		c->height = _height;
 		c->time_base = AVRational{ 1, 60 };                                  // framerate numerator

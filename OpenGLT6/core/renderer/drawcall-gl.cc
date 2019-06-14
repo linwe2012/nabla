@@ -100,18 +100,24 @@ NA_DRAWCALL_IMPL(SwitchFrameBufferDrawCall) {
 	case nabla::renderer::SwitchFrameBufferDrawCall::kRenderOnFrameBuffer:
 		glBindFramebuffer(GL_FRAMEBUFFER, f.fbo);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		break;
-	case nabla::renderer::SwitchFrameBufferDrawCall::kSampleFromFrameBuffer:
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		ActivateShader(f.attached_shader);
-		// glDrawBuffers(f.attach_ids.size(), &f.attach_ids[0]);
 		for (auto t : f.attachments) {
 			glActiveTexture(GL_TEXTURE0 + cnt);
 			glBindTexture(GL_TEXTURE_2D, t);
 			glClearBufferfv(GL_COLOR, cnt, &f.clear_color[cnt].r);
 			++cnt;
 		}
+		break;
+	case nabla::renderer::SwitchFrameBufferDrawCall::kSampleFromFrameBuffer:
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		ActivateShader(f.attached_shader);
+		// glDrawBuffers(f.attach_ids.size(), &f.attach_ids[0]);
+		// for (auto t : f.attachments) {
+		// 	glActiveTexture(GL_TEXTURE0 + cnt);
+		// 	glBindTexture(GL_TEXTURE_2D, t);
+		// 	glClearBufferfv(GL_COLOR, cnt, &f.clear_color[cnt].r);
+		// 	++cnt;
+		// }
 		break;
 		
 	case nabla::renderer::SwitchFrameBufferDrawCall::kCopyFrameBufferToDefault:

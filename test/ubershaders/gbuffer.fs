@@ -31,8 +31,6 @@ uniform float AO;
 
 uniform vec3 Entity;
 
-
-
 void main()
 {    
     // store the fragment position vector in the first gbuffer texture

@@ -7,7 +7,7 @@ uniform sampler2D gNormal;
 uniform sampler2D gDiffuseSpec;
 uniform sampler2D gAlbedo;
 uniform sampler2D gMetaRoughAO;
-uniform sampler2D gPicker;
+uniform sampler2D gEntity;
 
 struct PointLight {
     vec3 Position;
@@ -225,8 +225,9 @@ void main()
         lighting += diffuse + specular;
     }
 
-
-    // FragColor = vec4(TexCoords, 0.0, 1.0);
+    
+   // FragColor = vec4(TexCoords, 0.0, 1.0);
     FragColor = vec4(lighting, 1.0); // +  vec4(texture(gPicker, TexCoords).rgb, 1.0) * 0.8;
+    // FragColor = vec4(lighting * 0.05, 0.01)  + vec4(e, 0.99);
     // FragColor = vec4(texture(gDiffuseSpec, TexCoords).rgb, 0);
 }

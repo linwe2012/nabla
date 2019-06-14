@@ -443,7 +443,7 @@ int main()
 
 		{
 			renderer::ScopedState scope(renderer::RenderPass::kForward);
-			renderer::ReadFromDefaultGBufferAttachment(5, [&tmp, &window] {
+			renderer::ReadFromDefaultGBufferAttachment(5, [&SCR_WIDTH, &SCR_HEIGHT, &tmp, &window] {
 				if (IsUserWorkingOnGui()) {
 					return;
 				}
@@ -451,7 +451,7 @@ int main()
 				if (left_button == GLFW_PRESS) {
 					double xpos, ypos;
 					glfwGetCursorPos(window, &xpos, &ypos);
-					auto pixel = renderer::ReadSolidPixel(xpos, ypos);
+					auto pixel = renderer::ReadSolidPixel(xpos, SCR_HEIGHT - ypos);
 					int i;
 					i = pixel.r + pixel.g * 256 + pixel.b * 256 * 256;
 					Entity e(i);
