@@ -10,7 +10,7 @@ template<typename T>
 class SparseMap {
 public:
 	
-	bool count(Entity e) { 
+	bool count(Entity e) const {
 		if (e.index() >= sparse_.size()) {
 			return false;
 		}
@@ -65,7 +65,7 @@ public:
 		Entity entity;
 	};
 
-	bool count(Entity e) {
+	bool count(Entity e) const {
 		if (e.index() >= sparse_.size()) {
 			return false;
 		}

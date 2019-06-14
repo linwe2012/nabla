@@ -232,6 +232,7 @@
     <ClInclude Include="OpenGLT6\systems\playback.h" />
     <ClInclude Include="OpenGLT6\systems\polygon.h" />
     <ClInclude Include="OpenGLT6\systems\renderable.h" />
+    <ClInclude Include="OpenGLT6\systems\world.h" />
     <ClInclude Include="OpenGLT6\third-party\include\glm.h" />
     <ClInclude Include="OpenGLT6\third-party\include\stb_image_impl.h" />
     <ClInclude Include="OpenGLT6\third-party\include\stb_image_write.h" />

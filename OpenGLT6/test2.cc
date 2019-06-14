@@ -17,6 +17,8 @@
 #include "systems/renderable.h"
 #include "systems/material.h"
 #include "systems/playback.h"
+#include "systems/collision.h"
+
 #include <glm/gtx/matrix_decompose.hpp>
 
 
@@ -207,10 +209,12 @@ int main()
 	LightingSystem sys_lighting;
 	MatrialSysterm sys_material;
 	PlaybackSystem sys_playback;
+	CollisionSystem sys_collision;
 	
 	sys_lighting.Initialize(sys_ctx);
 	sys_material.Initialize(sys_ctx);
 	sys_playback.Initialize(sys_ctx);
+	sys_collision.Initialize(sys_ctx);
 
 	Vector<Entity> lights;
 
@@ -310,6 +314,8 @@ int main()
 		eteapot
 	};
 
+	
+
 	for (auto& m : teapot.meshes_) {
 		auto e = entity_manager.Create();
 		solids.push_back(e);
@@ -364,6 +370,8 @@ int main()
 	Vector<Entity> tmp;
 	bool gui_show_style_config = false;
 	bool gui_show_style_open = false;
+	bool add_collision_button = false;
+	Entity add_collision_entity;
 
 	renderer::MeshHandle hmesh_skybox;
 	{
@@ -428,7 +436,7 @@ int main()
 		sys_lighting.Update(clock);
 		sys_material.Update(clock);
 		sys_playback.Update(clock);
-
+		sys_collision.Update(clock);
 		
 
 		GLFWwindow* window = static_cast<GLFWwindow*>(renderer::GetWindow());
@@ -523,12 +531,29 @@ int main()
 			
 				ImGui::EndMenuBar();
 			}
+			if (tmp.size()) {
+				ImGui::Text("Selected entity %d", tmp.back().index());
+			}
 
 			sys_playback.OnGui(tmp);
 
 			if (ImGui::CollapsingHeader(sys_lighting.name())) {
 				sys_lighting.OnGui(lights);
 			}
+			
+			if (tmp.size()) {
+
+				if (sys_collision.Has(tmp.back())) {
+					sys_collision.OnGui(tmp);
+				}
+				else {
+					add_collision_button = ImGui::Button("Add Collision");
+					if (add_collision_button) {
+						sys_collision.Add(tmp.back());
+					}
+				}
+			}
+			
 
 			int cnt = 0;
 			

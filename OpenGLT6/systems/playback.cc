@@ -199,7 +199,7 @@ struct VideoStreamer {
 	}
 };
 
-void PlaybackSystem::Initilize()
+void PlaybackSystem::Initialize(SystemContext&)
 {
 	if (!fs::exists("playback")) {
 		fs::create_directories("playback");

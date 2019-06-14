@@ -92,11 +92,20 @@ const std::shared_ptr<RenderableSystem::VertexData> RenderableSystem::GetVertice
 	auto mesh = renderer::OpenHandle(GetRenderable(e).hmesh);
 	glBindBuffer(GL_ARRAY_BUFFER, mesh.vbo);
 	void* data = glMapBufferRange(GL_ARRAY_BUFFER, 0, mesh.num_vertices * sizeof(glm::vec3), GL_MAP_READ_BIT);
+	NA_ASSERT(glGetError() == 0);
+
 	glm::vec3* vecs = reinterpret_cast<glm::vec3*>(data);
-	return std::shared_ptr<VertexData>(new VertexData{ vecs , mesh.num_vertices });
+	return std::shared_ptr<VertexData>(new VertexData{ vecs , mesh.num_vertices, mesh.vbo });
 }
 
 
 
+
+RenderableSystem::VertexData::~VertexData()
+{
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glUnmapBuffer(GL_ARRAY_BUFFER);
+	NA_ASSERT(glGetError() == 0);
+}
 
 }

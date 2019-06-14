@@ -1,13 +1,27 @@
 #include "collision.h"
 #include <algorithm>
+#include "editor/gui.h"
 
 namespace nabla {
-void CollisonSystem::Initialize(SystemContext& ctx)
+void CollisionSystem::Initialize(SystemContext& ctx)
 {
 	render = ctx.render;
 }
 
-void CollisonSystem::Update(Clock& clock)
+void CollisionSystem::OnGui(const Vector<Entity>& actives)
+{
+	for (auto active : actives) {
+		if (!Has(active)) {
+			continue;
+		}
+		auto& rigid = rigids_[active].component;
+		ImGui::DragFloat3("Velocity", &rigid.velocity.x, 0.2f);
+		ImGui::DragFloat3("Acceration", &rigid.accleration.x, 0.2f);
+		ImGui::DragFloat("Mass", &rigid.mass);
+	}
+}
+
+void CollisionSystem::Update(Clock& clock)
 {
 	// compute collision
 	for (auto& rigid_itr1 : rigids_) {
@@ -45,8 +59,11 @@ void CollisonSystem::Update(Clock& clock)
 
 }
 
-void CollisonSystem::Add(Entity e)
+void CollisionSystem::Add(Entity e)
 {
+	if (Has(e)) {
+		return;
+	}
 	RigidBody rigid;
 	rigid.velocity = glm::vec3(0.0f);
 	rigid.accleration = glm::vec3(0.0f);
@@ -58,24 +75,17 @@ void CollisonSystem::Add(Entity e)
 		rigid._min = glm::vec3(-1.0f);
 	}
 	else {
+		
 		glm::vec3* vertices = pvertices->positions;
 		size_t num_vertices = pvertices->num_vertices;
-		for (size_t i = 0; i < num_vertices; ++i) {
-			rigid._max.x = std::max(rigid._max.x, vertices[i].x);
-			rigid._max.y = std::max(rigid._max.y, vertices[i].y);
-			rigid._max.z = std::max(rigid._max.z, vertices[i].z);
-
-			rigid._min.x = std::max(rigid._min.x, vertices[i].x);
-			rigid._min.y = std::max(rigid._min.y, vertices[i].y);
-			rigid._min.z = std::max(rigid._min.z, vertices[i].z);
-		}
+		UpdateAABB(vertices, num_vertices, rigid._min, rigid._max);
 	}
 
 	rigids_.Add(e, rigid);
 }
 
 // predict if two AABBs will collide
-bool CollisonSystem::IsCollide(RigidBody r1, RigidBody r2, const glm::mat4& mat1, const glm::mat4& mat2)
+bool CollisionSystem::IsCollide(RigidBody r1, RigidBody r2, const glm::mat4& mat1, const glm::mat4& mat2)
 {
 	//transform to world coordinate
 	TransformAABB(r1._min, r1._max, mat1);
@@ -93,7 +103,7 @@ bool CollisonSystem::IsCollide(RigidBody r1, RigidBody r2, const glm::mat4& mat1
 }
 
 // compute velocity after collison
-void CollisonSystem::ComputeCollison(RigidBody& r1, RigidBody& r2, const glm::mat4& mat1, const glm::mat4& mat2)
+void CollisionSystem::ComputeCollison(RigidBody& r1, RigidBody& r2, const glm::mat4& mat1, const glm::mat4& mat2)
 {
 	// get center in world coordinate
 	glm::vec3 min1 = r1._min;
@@ -126,7 +136,7 @@ void CollisonSystem::ComputeCollison(RigidBody& r1, RigidBody& r2, const glm::ma
 }
 
 //transform AABB to world coordinate
-void CollisonSystem::TransformAABB(glm::vec3& min, glm::vec3& max, const glm::mat4& mat)
+void CollisionSystem::TransformAABB(glm::vec3& min, glm::vec3& max, const glm::mat4& mat)
 {
 	glm::vec3 v[8];
 	v[0] = glm::vec3(min.x, max.y, max.z);
@@ -147,6 +157,20 @@ void CollisonSystem::TransformAABB(glm::vec3& min, glm::vec3& max, const glm::ma
 	//reset AABB
 	ResetAABB(min, max);
 	UpdateAABB(v, 8, min, max);
+}
+
+// update AABB of a set of vertices
+
+void CollisionSystem::UpdateAABB(const glm::vec3* v, size_t num, glm::vec3& min, glm::vec3& max)
+{
+	for (size_t i = 0; i < num; i++) {
+		if (v[i].x < min.x) min.x = v[i].x;
+		if (v[i].y < min.y) min.y = v[i].y;
+		if (v[i].z < min.z) min.z = v[i].z;
+		if (v[i].x > max.x) max.x = v[i].x;
+		if (v[i].y > max.y) max.y = v[i].y;
+		if (v[i].z > max.z) max.z = v[i].z;
+	}
 }
 
 

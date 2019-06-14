@@ -6,18 +6,18 @@
 #include "renderable.h"
 
 namespace nabla {
-	class CollisonSystem : public ISystem {
+	class CollisionSystem : public ISystem {
 	public:
 		// called upon system first registered
 		void Initialize(SystemContext& ctx) override;
 
 		// activities on gui, note that you can actually do nothing
-		virtual void OnGui(const Vector<Entity>& actives) override {};
+		virtual void OnGui(const Vector<Entity>& actives) override;
 
 		// remove enitiy from system
 		virtual void Remove(Entity) override {};
 
-		virtual bool Has(Entity) const override {};
+		virtual bool Has(Entity e) const override { return rigids_.count(e); };
 
 		virtual void Update(Entity) override {};
 
@@ -44,17 +44,7 @@ namespace nabla {
 		void TransformAABB(glm::vec3& min, glm::vec3& max, const glm::mat4& mat);
 
 		// update AABB of a set of vertices
-		void UpdateAABB(const glm::vec3* v, size_t num, glm::vec3& min, glm::vec3& max)
-		{
-			for (size_t i = 0; i < num; i++) {
-				if (v[i].x < min.x) min.x = v[i].x;
-				if (v[i].y < min.y) min.y = v[i].y;
-				if (v[i].z < min.z) min.z = v[i].z;
-				if (v[i].x > max.x) max.x = v[i].x;
-				if (v[i].y > max.y) max.y = v[i].y;
-				if (v[i].z > max.z) max.z = v[i].z;
-			}
-		}
+		void UpdateAABB(const glm::vec3* v, size_t num, glm::vec3& min, glm::vec3& max);
 
 		// reset AABB
 		void ResetAABB(glm::vec3& min, glm::vec3& max)

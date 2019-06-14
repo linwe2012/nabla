@@ -80,6 +80,8 @@ public:
 	struct VertexData {
 		glm::vec3* positions;
 		size_t num_vertices;
+		uint32_t vbo;
+		~VertexData();
 	};
 
 	const std::shared_ptr<VertexData> GetVertices(Entity e);
