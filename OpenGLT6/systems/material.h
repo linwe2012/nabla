@@ -6,12 +6,12 @@
 
 namespace nabla {
 #define NA_BUILTIN_MATERIAL_SYS_LIST(V)\
-	V(diffuse,           Vec3,  (1.0f))   \
-	V(specular,          Float, (0.2f))\
-	V(albedo,            Vec3,  (0.0f)) \
-	V(metallic,          Float, (0.0f)) \
-	V(roughness,         Float, (0.0f)) \
-	V(ambient_occulsion, Float, (0.0f))
+	V(diffuse,           Vec3,  (0.0f))   \
+	V(specular,          Float, (0.0f))\
+	V(albedo,            Vec3,  (1.0f)) \
+	V(metallic,          Float, (1.0f)) \
+	V(roughness,         Float, (0.07f)) \
+	V(ambient_occulsion, Float, (0.9f))
 
 class MatrialSysterm : public ISystem {
 public:

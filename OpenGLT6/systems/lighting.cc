@@ -10,16 +10,21 @@ void LightingSystem::Initialize([[maybe_unused]] SystemContext&) {
 	max_spot_ = 32;
 }
 
-
+#define DBG_LIGHTING_ENABLE_REFLECT
 void LightingSystem::SetShader(renderer::ShaderHandle lightingpass, renderer::ShaderHandle postprocess, MaterialHandle hskybox_texture) {
 	hshader_ = lightingpass;
 	hcamera_ = renderer::NewUniform(lightingpass, "viewPos", renderer::MaterialType::kVec3);
 	// hcamera_ = renderer::NewUniform(lightingpass, "the_fucking", renderer::MaterialType::kVec3);
 	hnum_point_ = renderer::NewUniform(lightingpass, "num_points", renderer::MaterialType::kInt);
 	hnum_spot_ = renderer::NewUniform(lightingpass, "num_spots", renderer::MaterialType::kInt);
-	// hskybox_ = renderer::NewUniform(lightingpass, "skybox", renderer::MaterialType::kInt);
-	//renderer::OpenHandle(hshader_).Use();
-	//renderer::OpenHandle(hshader_).SetInt("skybox", 0);
+#ifdef DBG_LIGHTING_ENABLE_REFLECT
+	// hirradiance_ = renderer::NewUniform(lightingpass, "skybox", renderer::MaterialType::kInt);
+	renderer::OpenHandle(hshader_).Use();
+	renderer::OpenHandle(hshader_).SetInt("irradiancebox", 6);
+	renderer::OpenHandle(hshader_).SetInt("prefilterbox", 7);
+	renderer::OpenHandle(hshader_).SetInt("brdfLUT", 8);
+
+#endif // DBG_LIGHTING_ENABLE_REFLECT
 
 	hpostprocess_ = postprocess;
 	hbox_proj_ = renderer::NewUniform(postprocess, "projection", renderer::MaterialType::kMat4);
@@ -27,6 +32,7 @@ void LightingSystem::SetShader(renderer::ShaderHandle lightingpass, renderer::Sh
 	hbox_model_ = renderer::NewUniform(postprocess, "model", renderer::MaterialType::kMat4);
 	hbox_lightcolor_ = renderer::NewUniform(postprocess, "lightColor", renderer::MaterialType::kVec3);
 	hskybox_texture_ = hskybox_texture;
+	hibls_ = renderer::ComputeIBLMaps(hskybox_texture);
 }
 
 
@@ -119,8 +125,13 @@ void LightingSystem::Update([[maybe_unused]]Clock& clock)
 	{
 		ScopedState deferred(RenderPass::kDeferred);
 		UseShader(hshader_);
-		// SetUniform(hskybox_, 0);
-		// UseTexture(hskybox_texture_);
+#ifdef DBG_LIGHTING_ENABLE_REFLECT
+		// SetUniform(hirradiance_, 0);
+		UseTexture(hibls_.irradiance, 6);
+		//UseTexture(hskybox_texture_, 6);
+		UseTexture(hibls_.prefilter, 7);
+		UseTexture(hibls_.brdfLUT, 8);
+#endif // DBG_LIGHTING_ENABLE_REFLECT
 		SetUniform(hcamera_, camera_pos_);
 		SetUniform(hnum_point_, num_point_);
 		SetUniform(hnum_spot_, num_spot_);

@@ -1,17 +1,31 @@
 #include "drawcall.h"
+#include "core/config.h"
 
 namespace nabla {
 namespace renderer {
+namespace detail {
+static ShaderHandle current;
+static Shader current_shader;
+#ifdef NA_DEVELOPMENT
+static MaterialHeader last_material;
+static int material_id;
+
+static MaterialHeader last_cubic_texture;
+static int last_cubic_texture_id;
+
+static MaterialHeader last_2d_texture[12];
+static int last_2d_texture_id[12];
+#endif // NA_DEVELOPMENT
+}
 
 static Shader ActivateShader(ShaderHandle hshader) {
-	static ShaderHandle current;
-	static Shader current_shader;
-	if (current == hshader || hshader.IsNil()) return current_shader;
-	current_shader = OpenHandle(hshader);
-	current_shader.Use();
-	current = hshader;
+	
+	if (detail::current == hshader || hshader.IsNil()) return detail::current_shader;
+	detail::current_shader = OpenHandle(hshader);
+	detail::current_shader.Use();
+	detail::current = hshader;
 	assert(glGetError() == 0);
-	return current_shader;
+	return detail::current_shader;
 }
 
 NA_DRAWCALL_IMPL(UseShaderDrawCall) {
@@ -43,7 +57,10 @@ NA_DRAWCALL_IMPL(MaterialDrawCall) {
 	auto desc = GetMaterialDecriptor(md);
 	auto shader = ActivateShader(desc.hshader);
 	void* payload = reinterpret_cast<char*>(this) + offset_by_bytes;
-	int _degug_int;
+#ifdef NA_DEVELOPMENT
+	detail::last_material = desc;
+	detail::material_id = id;
+#endif
 	switch (desc.type)
 	{
 	case MaterialType::kFloat:
@@ -59,12 +76,20 @@ NA_DRAWCALL_IMPL(MaterialDrawCall) {
 		glUniformMatrix4fv(id, 1, GL_FALSE, (static_cast<float*>(payload)));
 		break;
 	case MaterialType::kSampler2D:
-		glActiveTexture(GL_TEXTURE0);
+		glActiveTexture(GL_TEXTURE0 + texture_id);
 		glBindTexture(GL_TEXTURE_2D, id);
+#ifdef NA_DEVELOPMENT
+		detail::last_2d_texture[0] = desc;
+		detail::last_2d_texture_id[0] = id;
+#endif
 		break;
 	case MaterialType::kSamplerCubic:
-		glActiveTexture(GL_TEXTURE0);
+		glActiveTexture(GL_TEXTURE0 + texture_id);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, id);
+#ifdef NA_DEVELOPMENT
+		detail::last_cubic_texture = desc;
+		detail::last_cubic_texture_id = id;
+#endif
 		break;
 	default:
 		//TODO: log error
@@ -73,8 +98,8 @@ NA_DRAWCALL_IMPL(MaterialDrawCall) {
 	int uu = glGetError();
 	assert(uu == 0);
 }
-unsigned int quadVAO = 0;
-unsigned int quadVBO;
+static unsigned int quadVAO = 0;
+static unsigned int quadVBO;
 
 FrameBufferHandle hactive_frame;
 
@@ -114,7 +139,7 @@ NA_DRAWCALL_IMPL(SwitchFrameBufferDrawCall) {
 	case nabla::renderer::SwitchFrameBufferDrawCall::kSampleFromFrameBuffer:
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		ActivateShader(f.attached_shader);
+		// ActivateShader(f.attached_shader);
 		// glDrawBuffers(f.attach_ids.size(), &f.attach_ids[0]);
 		// for (auto t : f.attachments) {
 		// 	glActiveTexture(GL_TEXTURE0 + cnt);
@@ -151,7 +176,7 @@ NA_DRAWCALL_IMPL(SwitchFrameBufferDrawCall) {
 		//assert(uu == 0);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		uu = glGetError();
-		//assert(uu == 0);
+		assert(uu == 0);
 		glBindVertexArray(0);
 		
 		// 2.5. copy content of geometry's depth buffer to default framebuffer's depth buffer

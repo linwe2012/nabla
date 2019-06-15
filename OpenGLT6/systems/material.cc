@@ -109,7 +109,7 @@ void MatrialSysterm::OnGui(const Vector<Entity>& actives)
 		ImGui::ColorEdit3("Albedo", &m.albedo[0]);
 		ImGui::DragFloat("Metallic", &m.metallic, 0.01f, 0.0f, 1.0f);
 		ImGui::DragFloat("Roughness", &m.roughness, 0.01f, 0.0f, 1.0f);
-		ImGui::DragFloat("Ambient Occulison", &m.ambient_occulsion, 0.1f);
+		ImGui::DragFloat("Ambient Occulison", &m.ambient_occulsion, 0.01f, 0.0f, 1.0f);
 	}
 }
 

@@ -279,7 +279,7 @@ int main()
 	for (int i = 0; i < 4; ++i) {
 		lights.push_back(entity_manager.Create());
 		sys_lighting.NewLight(lights.back(), LightingSystem::Light{
-		LightingSystem::Light::kPoint, hcube
+		LightingSystem::Light::kPoint, hcube, glm::vec3(0.2f)
 			});
 	}
 
@@ -290,7 +290,7 @@ int main()
 
 	//glEnable(GL_DEPTH_TEST);
 	Camera camera;
-
+	camera.BudgeCamera(0.0f, 0.8f, GLGH_SMOOTH_COS, 0.0f, 0.0f, 6.0f);
 	using renderer::OpenHandle;
 	float last_frame = glfwGetTime();
 	bool first_move = true;
@@ -299,7 +299,7 @@ int main()
 	InitGui();
 
 
-	Clock clock;
+	
 
 	renderer::detail::PrepareRenderContext__Temp();
 	NA_ASSERT(glGetError() == 0);
@@ -314,7 +314,7 @@ int main()
 			Attachment(TextureFormat::kRGB, "gEntity", glm::vec4(1.0f)),
 		};
 		renderer::SetDefaultGBuffer(renderer::NewGBuffer(
-			SCR_WIDTH, SCR_HEIGHT, lightingpass, textures
+			SCR_WIDTH, SCR_HEIGHT, lightingpass, postprocess, textures
 		));
 	}
 	
@@ -396,6 +396,8 @@ int main()
 	
 	bool mouse_last_pressed = false;
 	NA_ASSERT(glGetError() == 0);
+	Clock clock;
+	clock.Gensis();
 	while (renderer::IsAlive())
 	{
 
@@ -436,7 +438,7 @@ int main()
 			glm::vec4 we;
 			glm::decompose(view, whatev, quat, trans, whatev, we);
 			SetUniform(hskybox_view, glm::translate(glm::mat4(glm::mat3(view)), trans / 100.0f));
-			UseTexture(htex_skybox);
+			UseTexture(htex_skybox, 0);
 			DrawMesh(hmesh_skybox);
 		}
 

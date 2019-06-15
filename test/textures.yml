@@ -5,3 +5,4 @@ default_skybox:
   bottom: img/skybox/bottom.jpg
   front:  img/skybox/front.jpg
   back:   img/skybox/back.jpg
+

@@ -84,12 +84,15 @@ struct MaterialDrawCall {
 	NA_DRAWCALL(MaterialDrawCall);
 	using offset_t = uint32_t;
 	MaterialDrawCall(MaterialHandle _md, uint32_t _offset_by_bytes)
-		:md(_md), offset_by_bytes(_offset_by_bytes)
+		:md(_md), offset_by_bytes(_offset_by_bytes), texture_id(0)
 	{}
-
+	MaterialDrawCall(MaterialHandle _md, uint32_t _offset_by_bytes, uint32_t _texture_id)
+		:md(_md), offset_by_bytes(_offset_by_bytes), texture_id(_texture_id)
+	{}
 
 	MaterialHandle md;
 	uint32_t offset_by_bytes;
+	uint32_t texture_id;
 };
 
 struct FrameBufferAttachmentReaderDrawCall {

@@ -95,9 +95,14 @@ enum struct RenderPass : uint8_t {
 };
 
 enum TextureFormat {
+	kInavlid,
 	kRed = GL_RED,
 	kRGB = GL_RGB,
 	kRGBA = GL_RGBA,
+	kRG16F,
+	kRG,
+	kUchar,
+	kRGB16F,
 	kFloat,
 	kInt32,
 };
@@ -106,16 +111,22 @@ struct MaterialHeader {
 	RenderPass render_pass = RenderPass::kForward;
 	MaterialType type = MaterialType::kSampler2D;
 	ShaderHandle hshader;
+	uint32_t width;
+	uint32_t height;
 };
 
 
 MaterialHandle NewTexture(const unsigned char* data,
 	                      int width, int height,
-	                      TextureFormat format);
+	                      TextureFormat format,
+	                      TextureFormat source_format = TextureFormat::kInavlid, 
+	                      TextureFormat source_type = TextureFormat::kUchar);
 
 MaterialHandle NewTextureCubic(const Vector<unsigned char*>& data,
 	                        int width, int height,
-	                        TextureFormat format);
+	                        TextureFormat format, 
+	                        TextureFormat source_format = TextureFormat::kInavlid, 
+	                        TextureFormat source_type = TextureFormat::kUchar);
 
 std::string PreprocessShader(
 	std::istream& is,
@@ -216,6 +227,7 @@ struct FrameBuffer {
 	Vector<const char*> attachments_name;
 	Vector<glm::vec4> clear_color;
 	ShaderHandle attached_shader;
+	ShaderHandle blit_shader;
 };
 
 struct Attachment {
@@ -231,7 +243,7 @@ struct Attachment {
 
 
 // use default buffer
-FrameBufferHandle NewGBuffer(int width, int height, ShaderHandle attached_shader, const Vector<Attachment>& textures);
+FrameBufferHandle NewGBuffer(int width, int height, ShaderHandle attached_shader, ShaderHandle blit_shader, const Vector<Attachment>& textures);
 
 const FrameBuffer& OpenHandle(FrameBufferHandle);
 
@@ -242,15 +254,19 @@ struct InitConfig {
 	int fps_hint = 60;
 };
 
+void PrepareCapture();
 
 
+struct IBLMapComputResult {
+	MaterialHandle irradiance;
+	MaterialHandle prefilter;
+	MaterialHandle brdfLUT;
+};
+
+IBLMapComputResult ComputeIBLMaps(MaterialHandle skybox);
 
 
-
-
-
-
-
+void RestoreViewport();
 
 
 

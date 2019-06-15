@@ -70,6 +70,7 @@ void FrameBuffer::Create(int width, int height) {
 }*/
 
 static GLFWwindow* gDefaultWindow;
+InitConfig gCurrentCfg;
 
 void InitWindow(const InitConfig& cfg) {
 	glfwInit();
@@ -77,6 +78,7 @@ void InitWindow(const InitConfig& cfg) {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_REFRESH_RATE, cfg.fps_hint);
+	// glfwWindowHint(GLFW_SAMPLES, 4);
 #ifdef __APPLE__
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
 #endif
@@ -88,15 +90,19 @@ void InitWindow(const InitConfig& cfg) {
 		NA_LOG_FATAL("Failed to initialize GLAD");
 		return;
 	}
-
+	gCurrentCfg = cfg;
 	glfwSetFramebufferSizeCallback(glfwwin, []([[maybe_unused]] GLFWwindow * window, int width, int height) {
 		glViewport(0, 0, width, height);
+		gCurrentCfg.width = width;
+		gCurrentCfg.height = height;
 	});
 
 	glViewport(0, 0, cfg.width, cfg.height);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
-
+	glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+	// glDepthFunc(GL_LESS);
 	gDefaultWindow = glfwwin;
 }
 
@@ -127,6 +133,10 @@ void* GetWindow()
 {
 	
 	return gDefaultWindow;
+}
+
+void RestoreViewport() {
+	glViewport(0, 0, gCurrentCfg.width, gCurrentCfg.height);
 }
 
 std::tuple<int, int> GetWindowSize()

@@ -23,6 +23,8 @@ public:
 		Light() :Light(kPoint) {}
 		Light(Type t) : type(t) {}
 		Light(Type t, MeshHandle _hmesh) : type(t), hmesh(_hmesh) {}
+		Light(Type t, MeshHandle _hmesh, vec3 _color) 
+			: type(t), hmesh(_hmesh), color(_color){}
 
 		vec3 position = glm::vec3(1.0f);
 		vec3 color    = glm::vec3(0.0f);
@@ -42,7 +44,7 @@ public:
 
 		// describe light type, which may result in some feature disabled
 		Type type;
-		bool draw_mesh = true;
+		bool draw_mesh = false;
 		MeshHandle hmesh;
 		glm::vec3 mesh_scale = glm::vec3(0.125f);
 		std::string name;
@@ -117,7 +119,7 @@ private:
 	Vector<PointHandle> hpoint_;
 	Vector<SpotHandle> hspot_;
 	MaterialHandle hcamera_;
-	MaterialHandle hskybox_;
+	MaterialHandle hirradiance_;
 	MaterialHandle hskybox_texture_;
 	glm::vec3 camera_pos_;
 	glm::mat4 project_;
@@ -140,7 +142,7 @@ private:
 	MaterialHandle hbox_view_;
 	MaterialHandle hbox_model_;
 	MaterialHandle hbox_lightcolor_;
-	
+	renderer::IBLMapComputResult hibls_;
 };
 
 inline const LightingSystem::Light* LightingSystem::GetLight(Entity e) const {

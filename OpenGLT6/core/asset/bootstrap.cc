@@ -231,6 +231,7 @@ renderer::MaterialHandle AssetManager::GetTexture(const char* name)
 				return false;
 			}
 			paths.push_back(path.string());
+			return true;
 		};
 		if (!lmbd_3dtexture("right")) {
 			return renderer::MaterialHandle();

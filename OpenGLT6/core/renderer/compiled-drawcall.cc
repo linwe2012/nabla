@@ -143,7 +143,7 @@ void UseShader(ShaderHandle shader)
 	rc.resources.Construct<UseShaderDrawCall>(shader);
 }
 
-void UseTexture(MaterialHandle md)
+void UseTexture(MaterialHandle md, int id)
 {
 	{
 		auto type = GetMaterialDecriptor(md).type;
@@ -155,7 +155,7 @@ void UseTexture(MaterialHandle md)
 	cmd.offset = rc.ResourcesOffset();
 	cmd.sortkey.set_pass(rc.render_pass);
 	rc.commands.push_back(cmd);
-	MaterialDrawCall* mdc = rc.resources.Construct<MaterialDrawCall>(md, static_cast<MaterialDrawCall::offset_t>(0));
+	MaterialDrawCall* mdc = rc.resources.Construct<MaterialDrawCall>(md, static_cast<MaterialDrawCall::offset_t>(0), id);
 	(void)mdc;
 }
 

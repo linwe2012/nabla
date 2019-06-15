@@ -20,7 +20,7 @@ public:
 
 	MaterialHandle NewTexture(const unsigned char* data,
 		int width, int height,
-		TextureFormat format);
+		TextureFormat format, TextureFormat source_format, TextureFormat source_type = TextureFormat::kUchar);
 
 	MaterialHandle NewUniform(ShaderHandle target, const char* name, MaterialType type);
 
@@ -30,7 +30,8 @@ public:
 
 	uint32_t GetMaterialSize(MaterialHandle md);
 
-	MaterialHandle NewTextureCubic(const Vector<unsigned char*>& data, int width, int height, TextureFormat format);
+	MaterialHandle NewTextureCubic(const Vector<unsigned char*>& data, int width, int height, 
+		TextureFormat format, TextureFormat source_format, TextureFormat source_type = TextureFormat::kUchar);
 
 private:
 	Vector<MaterialHeader> headers_;
@@ -53,30 +54,55 @@ inline MaterialHeader MaterialManger::GetDecriptor(MaterialHandle mat) {
 	return headers_[mat.index()];
 }
 
+int GetGLFormat(TextureFormat f) {
+	switch (f)
+	{
+	case nabla::renderer::kRed: return GL_RED;
+	case nabla::renderer::kRGB: return GL_RGB;
+	case nabla::renderer::kRGBA: return GL_RGBA;
+	case nabla::renderer::kRG16F: return GL_RG16F;
+	case nabla::renderer::kRG: return GL_RG;
+	case nabla::renderer::kUchar: return GL_UNSIGNED_BYTE;
+	case nabla::renderer::kRGB16F: return GL_RGB16F;
+	case nabla::renderer::kFloat: return GL_FLOAT;
+	case nabla::renderer::kInt32: return GL_INT;
+	default:return 0;
+	}
+}
+
 MaterialHandle MaterialManger::NewTexture(const unsigned char* data,
 	                                      int width, int height,
-	                                      TextureFormat format) {
+	                                     TextureFormat format, 
+										 TextureFormat source_format,
+										 TextureFormat source_type) {
 	uint32_t id;
 	glGenTextures(1, &id);
 	if (id == 0) {
 		NA_LOG_ERROR("Unable to generate texture buffer");
 		return MaterialHandle::MakeNil();
 	}
+	
 
 	glBindTexture(GL_TEXTURE_2D, id);
 	
+	if(source_format == TextureFormat::kInavlid) {
+		source_format = format;
+	}
+
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // GL_LINEAR_MIPMAP_LINEAR
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GetGLFormat(format), width, height, 0, GetGLFormat(source_format), GetGLFormat(source_type), data);
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	NA_ASSERT(glGetError() == 0, "Invalid opengl cmd");
 	MaterialHeader header;
 	header.type = MaterialType::kSampler2D;
+	header.width = width;
+	header.height = height;
 	MaterialHandle md(headers_.size());
 	buffer_.push_back(id);
 	headers_.push_back(header);
@@ -84,7 +110,10 @@ MaterialHandle MaterialManger::NewTexture(const unsigned char* data,
 }
 
 //TODO: Support for other texture
-MaterialHandle MaterialManger::NewTextureCubic(const Vector<unsigned char*>& data, int width, int height, TextureFormat format) {
+MaterialHandle MaterialManger::NewTextureCubic(const Vector<unsigned char*>& data, int width, int height, 
+	                                           TextureFormat format, 
+	                                           TextureFormat source_format, 
+	                                           TextureFormat source_type) {
 	uint32_t id;
 	glGenTextures(1, &id);
 	if (id == 0) {
@@ -94,23 +123,46 @@ MaterialHandle MaterialManger::NewTextureCubic(const Vector<unsigned char*>& dat
 
 	glBindTexture(GL_TEXTURE_CUBE_MAP, id);
 
-	int cnt = 0;
-	for (auto datum : data) {
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + cnt,
-			0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, datum
-		);
-		++cnt;
+	int texture_format = GetGLFormat(format);
+
+	if (source_format == TextureFormat::kInavlid) {
+		source_format = format;
 	}
 
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	int src_format = GetGLFormat(source_format);
+	int src_type = GetGLFormat(source_type);
+
+	int cnt = 0;
+
+	if (data.size() == 0) {
+		for (; cnt < 6; ++cnt) {
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + cnt,
+				0, texture_format, width, height, 0, src_format, src_type, nullptr
+			);
+		}
+	}
+	else {
+		for (auto datum : data) {
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + cnt,
+				0, texture_format, width, height, 0, src_format, src_type, datum
+			);
+			++cnt;
+		}
+	}
+	
+
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
+	glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
 	NA_ASSERT(glGetError() == 0, "Invalid opengl cmd");
 	MaterialHeader header;
 	header.type = MaterialType::kSamplerCubic;
+	header.width = width;
+	header.height = height;
 	MaterialHandle md(headers_.size());
 	buffer_.push_back(id);
 	headers_.push_back(header);
@@ -166,14 +218,14 @@ inline uint32_t MaterialManger::GetMaterialSize(MaterialHandle md) {
 
 MaterialManger gMaterialManger(1024);
 
-MaterialHandle NewTexture(const unsigned char* data, int width, int height, TextureFormat format)
+MaterialHandle NewTexture(const unsigned char* data, int width, int height, TextureFormat format, TextureFormat source_format, TextureFormat source_type)
 {
-	return gMaterialManger.NewTexture(data, width, height, format);
+	return gMaterialManger.NewTexture(data, width, height, format, source_format, source_type);
 }
 
-MaterialHandle NewTextureCubic(const Vector<unsigned char*>& data, int width, int height, TextureFormat format)
+MaterialHandle NewTextureCubic(const Vector<unsigned char*>& data, int width, int height, TextureFormat format, TextureFormat source_format, TextureFormat source_type)
 {
-	return gMaterialManger.NewTextureCubic(data, width, height, format);
+	return gMaterialManger.NewTextureCubic(data, width, height, format, source_format, source_type);
 }
 
 MaterialHandle NewUniform(ShaderHandle target, const char* name, MaterialType type)
@@ -401,7 +453,7 @@ ShaderHandle NewShader(ShaderFilePath path,
 		return h;
 	}
 
-	gShaderBuffer.buffer[h.index()].CompileShader(ssc);
+	gShaderBuffer.buffer[h.index()].CompileShader(ssc, path);
 	return h;
 }
 
@@ -475,7 +527,7 @@ MeshBuffer OpenHandle(MeshHandle md) {
 /////////////////////////////////////////////////////
 static BufferManger<FrameBuffer, FrameBufferHandle, 16> gFrameBuffers;
 
-FrameBufferHandle NewGBuffer(int width, int height, ShaderHandle attached_shader, const Vector<Attachment>& textures)
+FrameBufferHandle NewGBuffer(int width, int height, ShaderHandle attached_shader, ShaderHandle blit_shader, const Vector<Attachment>& textures)
 {
 	FrameBufferHandle hframe = gFrameBuffers.NewHandle();
 	FrameBuffer g;
@@ -537,6 +589,7 @@ FrameBufferHandle NewGBuffer(int width, int height, ShaderHandle attached_shader
 	NA_ASSERT(glGetError() == 0);
 
 	g.attached_shader = attached_shader;
+	g.blit_shader = blit_shader;
 
 	gFrameBuffers.buffer[hframe.index()] = g;
 
@@ -548,8 +601,259 @@ const FrameBuffer& OpenHandle(FrameBufferHandle hf)
 	return gFrameBuffers.Open(hf);
 }
 
+struct CaptureFrameBuffer {
+	glm::mat4 captureProjection;
+	glm::mat4 captureViews[6];
+	unsigned int captureFBO;
+	unsigned int captureRBO;
+	bool prepared = false;
+};
+
+CaptureFrameBuffer gDefaultCaptureFrameBuffer;
+
+void PrepareCapture()
+{
+	auto& f = gDefaultCaptureFrameBuffer;
+	glGenFramebuffers(1, &f.captureFBO);
+	glGenRenderbuffers(1, &f.captureRBO);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, f.captureFBO);
+	glBindRenderbuffer(GL_RENDERBUFFER, f.captureRBO);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, 512, 512);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, f.captureRBO);
+
+	f.captureViews[0] = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+	f.captureViews[1] = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+	f.captureViews[2] = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+	f.captureViews[3] = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(0.0f, 0.0f, -1.0f));
+	f.captureViews[4] = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+	f.captureViews[5] = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+}
+void renderCube();
+void renderQuad();
+
+void ComputeIrradianceMap(MaterialHandle irradiance,
+	                      MaterialHandle skybox, 
+	                      ShaderHandle compute_shader) {
+	auto irr_id = OpenHandle(irradiance);
+	auto irr_header = GetMaterialDecriptor(irradiance);
+	auto id = OpenHandle(skybox);
+	auto& f = gDefaultCaptureFrameBuffer;
+	glBindFramebuffer(GL_FRAMEBUFFER, f.captureFBO);
+	glBindRenderbuffer(GL_RENDERBUFFER, f.captureRBO);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, irr_header.width, irr_header.height);
+	auto shader = OpenHandle(compute_shader);
+	shader.Use();
+	shader.SetInt("skybox", 0);
+	shader.SetMat4("projection", f.captureProjection);
+
+	
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, id);
+	glViewport(0, 0, irr_header.width, irr_header.height);
+	glBindFramebuffer(GL_FRAMEBUFFER, f.captureFBO);
+	for (unsigned int i = 0; i < 6; ++i)
+	{
+		shader.SetMat4("view", f.captureViews[i]);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, irr_id, 0);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		renderCube();
+	}
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+// pbr: run a quasi monte-carlo simulation on the environment lighting to create a prefilter (cube)map.
+// ----------------------------------------------------------------------------------------------------
+void ComputePrefilterMap(MaterialHandle prefilter, 
+	                     MaterialHandle skybox,
+	                     ShaderHandle compute_shader) {
+	auto& f = gDefaultCaptureFrameBuffer;
+	auto pre_filter_shader = OpenHandle(compute_shader);
+	auto pre_id = OpenHandle(prefilter);
+	pre_filter_shader.Use();
+	pre_filter_shader.SetInt("skybox", 0);
+	pre_filter_shader.SetMat4("projection", f.captureProjection);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, OpenHandle(skybox));
+
+	glBindFramebuffer(GL_FRAMEBUFFER, f.captureFBO);
+	unsigned int maxMipLevels = 5;
+	for (unsigned int mip = 0; mip < maxMipLevels; ++mip)
+	{
+		// reisze framebuffer according to mip-level size.
+		unsigned int mipWidth = 128 * std::pow(0.5, mip);
+		unsigned int mipHeight = 128 * std::pow(0.5, mip);
+		glBindRenderbuffer(GL_RENDERBUFFER, f.captureRBO);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, mipWidth, mipHeight);
+		glViewport(0, 0, mipWidth, mipHeight);
+
+		float roughness = (float)mip / (float)(maxMipLevels - 1);
+		pre_filter_shader.SetFloat("roughness", roughness);
+		for (unsigned int i = 0; i < 6; ++i)
+		{
+			pre_filter_shader.SetMat4("view", f.captureViews[i]);
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, pre_id, mip);
+
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			renderCube();
+		}
+	}
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void ComputeBrdfLUTTexture(MaterialHandle brdfLUT, ShaderHandle compute_shader) {
+
+	auto& f = gDefaultCaptureFrameBuffer;
+	auto header = GetMaterialDecriptor(brdfLUT);
+	glBindFramebuffer(GL_FRAMEBUFFER, f.captureFBO);
+	glBindRenderbuffer(GL_RENDERBUFFER, f.captureRBO);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, header.width, header.height);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, OpenHandle(brdfLUT), 0);
+
+	glViewport(0, 0, header.width, header.height);
+	OpenHandle(compute_shader).Use();
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	renderQuad();
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+IBLMapComputResult ComputeIBLMaps(MaterialHandle skybox) {
+	auto& f = gDefaultCaptureFrameBuffer;
+	IBLMapComputResult res;
+
+	if (f.prepared == false) {
+		PrepareCapture();
+	}
+	auto shader_irr = NewShader(ShaderFilePath{
+		"nabla/shaders/cubemap.vs",
+		"nabla/shaders/cubemap-irradiance-conv.fs"
+		});
+	res.irradiance = NewTextureCubic(Vector<unsigned char*>(), 32, 32, TextureFormat::kRGB16F, TextureFormat::kRGB, TextureFormat::kFloat);
+	ComputeIrradianceMap(res.irradiance, skybox, shader_irr);
+	NA_ASSERT(glGetError() == 0);
+	auto shader_prefilter = NewShader(ShaderFilePath{
+		"nabla/shaders/cubemap.vs",
+		"nabla/shaders/cubemap-prefilter.fs"
+		});
+	res.prefilter = NewTextureCubic(Vector<unsigned char*>(), 128, 128, TextureFormat::kRGB16F, TextureFormat::kRGB, TextureFormat::kFloat);
+	ComputePrefilterMap(res.prefilter, skybox, shader_prefilter);
+	NA_ASSERT(glGetError() == 0);
+	auto shader_brdf = NewShader(ShaderFilePath{
+		"nabla/shaders/brdf.vs",
+		"nabla/shaders/brdf.fs"
+		});
+	res.brdfLUT = NewTexture(nullptr, 32, 32, TextureFormat::kRG16F, TextureFormat::kRG, TextureFormat::kFloat);
+	ComputeBrdfLUTTexture(res.brdfLUT, shader_brdf);
+	RestoreViewport();
+	NA_ASSERT(glGetError() == 0);
+	return res;
+}
 
 
+// renderCube() renders a 1x1 3D cube in NDC.
+// -------------------------------------------------
+static unsigned int cubeVAO = 0;
+static unsigned int cubeVBO = 0;
+void renderCube()
+{
+	// initialize (if necessary)
+	if (cubeVAO == 0)
+	{
+		float vertices[] = {
+			// back face
+			-1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
+			 1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 1.0f, // top-right
+			 1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 0.0f, // bottom-right         
+			 1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 1.0f, // top-right
+			-1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
+			-1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 1.0f, // top-left
+			// front face
+			-1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f, 0.0f, // bottom-left
+			 1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f, 0.0f, // bottom-right
+			 1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f, 1.0f, // top-right
+			 1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f, 1.0f, // top-right
+			-1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f, 1.0f, // top-left
+			-1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f, 0.0f, // bottom-left
+			// left face
+			-1.0f,  1.0f,  1.0f, -1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-right
+			-1.0f,  1.0f, -1.0f, -1.0f,  0.0f,  0.0f, 1.0f, 1.0f, // top-left
+			-1.0f, -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-left
+			-1.0f, -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-left
+			-1.0f, -1.0f,  1.0f, -1.0f,  0.0f,  0.0f, 0.0f, 0.0f, // bottom-right
+			-1.0f,  1.0f,  1.0f, -1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-right
+			// right face
+			 1.0f,  1.0f,  1.0f,  1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-left
+			 1.0f, -1.0f, -1.0f,  1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-right
+			 1.0f,  1.0f, -1.0f,  1.0f,  0.0f,  0.0f, 1.0f, 1.0f, // top-right         
+			 1.0f, -1.0f, -1.0f,  1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-right
+			 1.0f,  1.0f,  1.0f,  1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-left
+			 1.0f, -1.0f,  1.0f,  1.0f,  0.0f,  0.0f, 0.0f, 0.0f, // bottom-left     
+			// bottom face
+			-1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, 0.0f, 1.0f, // top-right
+			 1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, 1.0f, 1.0f, // top-left
+			 1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f, 1.0f, 0.0f, // bottom-left
+			 1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f, 1.0f, 0.0f, // bottom-left
+			-1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f, 0.0f, 0.0f, // bottom-right
+			-1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, 0.0f, 1.0f, // top-right
+			// top face
+			-1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 1.0f, // top-left
+			 1.0f,  1.0f , 1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 0.0f, // bottom-right
+			 1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 1.0f, // top-right     
+			 1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 0.0f, // bottom-right
+			-1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 1.0f, // top-left
+			-1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 0.0f  // bottom-left        
+		};
+		glGenVertexArrays(1, &cubeVAO);
+		glGenBuffers(1, &cubeVBO);
+		// fill buffer
+		glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		// link vertex attributes
+		glBindVertexArray(cubeVAO);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindVertexArray(0);
+	}
+	// render Cube
+	glBindVertexArray(cubeVAO);
+	glDrawArrays(GL_TRIANGLES, 0, 36);
+	glBindVertexArray(0);
+}
+
+static unsigned int quadVAO = 0;
+static unsigned int quadVBO;
+void renderQuad()
+{
+	if (quadVAO == 0)
+	{
+		float quadVertices[] = {
+			// positions        // texture Coords
+			-1.0f,  1.0f, 0.0f, 0.0f, 1.0f,
+			-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+			 1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
+			 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+		};
+		// setup plane VAO
+		glGenVertexArrays(1, &quadVAO);
+		glGenBuffers(1, &quadVBO);
+		glBindVertexArray(quadVAO);
+		glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	}
+	glBindVertexArray(quadVAO);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	glBindVertexArray(0);
+}
 
 }
 }

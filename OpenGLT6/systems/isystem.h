@@ -20,7 +20,7 @@ public:
 	using minute = std::chrono::minutes;
 
 	void Gensis() {
-		begin_ = gensis_ = steady_clock::now();
+		last_ = begin_ = gensis_ = steady_clock::now();
 		total_frame_count_ = 0;
 	}
 

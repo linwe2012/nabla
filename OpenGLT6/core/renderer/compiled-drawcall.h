@@ -243,7 +243,7 @@ void DrawMesh(MeshHandle mesh, ShaderHandle shader = ShaderHandle::MakeNil());
 
 void UseShader(ShaderHandle shader);
 
-void UseTexture(MaterialHandle md);
+void UseTexture(MaterialHandle md, int id);
 
 void ReadFromDefaultGBufferAttachment(int id, std::function<void()> callback);
 
@@ -252,7 +252,6 @@ void FlushAllDrawCalls();
 
 void FlushAllDrawCallsWithNoExtraCommands();
 
-void RenderSkybox(MaterialHandle image);
 
 RenderContext* GetRenderContext();
 // RenderContext* GetRenderContext();

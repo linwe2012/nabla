@@ -1,5 +1,6 @@
 #ifndef _NABLA_CORE_CONFIG_H_
 #define _NABLA_CORE_CONFIG_H_
+#define NA_DEVELOPMENT
 #if 0
 #include "yaml-cpp/yaml.h"
 #include <string>

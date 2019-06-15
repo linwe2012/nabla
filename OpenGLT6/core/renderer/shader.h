@@ -81,6 +81,8 @@ has field whose size is larger than 4 bytes
 };
 
 struct ShaderFilePath {
+	ShaderFilePath()
+		: vertex(nullptr), fragment(nullptr) {}
 	ShaderFilePath(const char* vertexPath, const char* fragmentPath)
 		:vertex(vertexPath), fragment(fragmentPath) {}
 
@@ -124,7 +126,7 @@ public:
 	const char* ShaderType2String(GLenum type);
 
 
-	bool CompileShader(ShaderSourceCode ssc);
+	bool CompileShader(ShaderSourceCode ssc, ShaderFilePath sfp);
 
 	bool CompileShader(ShaderFilePath sfp);
 
@@ -213,6 +215,7 @@ private:
 	// utility function for checking shader compilation/linking errors.
 	// ------------------------------------------------------------------------
 	int CheckCompileErrors(GLuint shader, std::string type);
+	ShaderFilePath sfp_;
 };
 
 

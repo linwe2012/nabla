@@ -42,10 +42,8 @@ uniform int num_points; // point lights
 uniform int num_spots;
 
 uniform vec3 viewPos;
-// uniform samplerCube skybox;
-uniform samplerCube irradiancebox;
-uniform samplerCube prefilterbox;
-uniform sampler2D brdfLUT;
+uniform samplerCube skybox;
+
 /*
 vec3 getNormalFromMap(vec)
 {
@@ -104,11 +102,25 @@ vec3 fresnelSchlick(float cosTheta, vec3 F0)
     return F0 + (1.0 - F0) * pow(1.0 - cosTheta, 5.0);
 }
 
-vec3 fresnelSchlickRoughness(float cosTheta, vec3 F0, float roughness)
-{
-    return F0 + (max(vec3(1.0 - roughness), F0) - F0) * pow(1.0 - cosTheta, 5.0);
-}   
+vec3 getIrradiance(vec3 N){
+    const float PI = 3.14159265359;
+    float sampleDelta = 0.025;
+    float nrSamples = 0.0;
+    for(float phi = 0.0; phi < 2.0 * PI; phi += sampleDelta)
+    {
+        for(float theta = 0.0; theta < 0.5 * PI; theta += sampleDelta)
+        {
+            // spherical to cartesian (in tangent space)
+            vec3 tangentSample = vec3(sin(theta) * cos(phi),  sin(theta) * sin(phi), cos(theta));
+            // tangent space to world
+            vec3 sampleVec = tangentSample.x * right + tangentSample.y * up + tangentSample.z * N; 
 
+            irradiance += texture(environmentMap, sampleVec).rgb * cos(theta) * sin(theta);
+            nrSamples++;
+        }
+    }
+    irradiance = PI * irradiance * (1.0 / float(nrSamples));
+}
 
 void main()
 {             
@@ -125,14 +137,20 @@ void main()
     float AO = texture(gMetaRoughAO, TexCoords).b;
     vec3 lighting  = Diffuse * 0.1; // hard-coded ambient component
     vec3 viewDir  = normalize(viewPos - FragPos);
-    vec3 Reflect = reflect(-viewDir, Normal);
-
+    // vec3 viewDir  = normalize(the_fucking - FragPos);
+    
     // calculate reflectance at normal incidence; if dia-electric (like plastic) use F0 
     // of 0.04 and if it's a metal, use the albedo color as F0 (metallic workflow)    
     vec3 F0 = vec3(0.04); 
     F0 = mix(F0, Albedo, Metallic);
     // reflectance equation
     vec3 Lo = vec3(0.0);
+
+    vec3 sky_reflect = reflect(-viewDir, Normal);
+    vec4 sky_color = texture(skybox, sky_reflect).rgb;
+    
+    
+
 
     for(int i = 0; i < num_points; ++i) 
     {
@@ -170,28 +188,8 @@ void main()
         Lo += (kD * Albedo / PI + specular) * radiance * NdotL;  // note that we already multiplied the BRDF by the Fresnel (kS) so we won't multiply by kS again
     }
     {
-        // ambient lighting (we now use IBL as the ambient term)
-        vec3 F = fresnelSchlickRoughness(max(dot(Normal, viewDir), 0.0), F0, Roughness);
-        
-        vec3 kS = F;
-        vec3 kD = 1.0 - kS;
-        kD *= 1.0 - Metallic;
-        
-        vec3 irradiance = texture(irradiancebox, Normal).rgb;
-        vec3 diffuse     = irradiance * Albedo;
-
-        const float MAX_REFLECTION_LOD = 4.0;
-        vec3 prefilteredColor = textureLod(prefilterbox, Reflect,  Roughness * MAX_REFLECTION_LOD).rgb;
-        vec2 brdf  = texture(brdfLUT, vec2(max(dot(Normal, viewDir), 0.0), Roughness)).rg;
-        vec3 specular = prefilteredColor * (F * brdf.x + brdf.y);
-        vec3 ambient = (kD * diffuse + specular) * AO;
-
-        vec3  color = ambient + Lo;
-        // HDR tonemapping
-       // color = color / (color + vec3(1.0));
-        // gamma correct
-       // color = pow(color, vec3(1.0/2.2));
-        lighting += color;
+        vec3 ambient = vec3(0.03) * Albedo * AO;
+        lighting += ambient + Lo;
     }
 
 
@@ -253,7 +251,7 @@ void main()
 
     
     //FragColor = vec4(lighting, 1.0);
-    FragColor = vec4(lighting, 1.0); // +  vec4(texture(gPicker, TexCoords).rgb, 1.0) * 0.8;
+    FragColor = vec4(lighting, 1.0) * (1 - AO) + sky_color * AO; // +  vec4(texture(gPicker, TexCoords).rgb, 1.0) * 0.8;
     // FragColor = vec4(lighting * 0.05, 0.01)  + vec4(e, 0.99);
     // FragColor = vec4(texture(gDiffuseSpec, TexCoords).rgb, 0);
 }
