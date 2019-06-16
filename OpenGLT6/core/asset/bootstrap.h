@@ -58,6 +58,10 @@ namespace nabla {
 
 		fs::path cwd() { return cwd_; }
 
+		void BindMutex(std::mutex& m) {
+			render_mutex_ = &m;
+		}
+
 	private:
 		LoadedModel LoadModelToGPU(std::map<std::string, ModelInfo>::iterator gotcha, bool auto_shader, MaterialOverride matover = MaterialOverride());
 
@@ -68,7 +72,9 @@ namespace nabla {
 		std::map<std::string, ModelInfo> models_;
 		YAML::Node root_;
 		fs::path cwd_; /**< current working directory */
+		std::mutex* render_mutex_ = nullptr;
 	};
+	
 }
 
 #endif // !_NABLA_CORE_ASSET_BOOTSTRAP_H_

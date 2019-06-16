@@ -266,6 +266,8 @@ struct IBLMapComputResult {
 
 IBLMapComputResult ComputeIBLMaps(MaterialHandle skybox);
 
+void RenderCube();
+void RenderQuad();
 
 void RestoreViewport();
 

@@ -23,7 +23,7 @@ struct AssetsSystem::Data {
 
 	Map<std::string, Model> models;
 	void ParseFromYaml(YAML::Node, SystemContext& ctx);
-	void LoadOneModel(Model* _target);
+	void LoadOneModel(Model* _target, SystemContext& ctx);
 	bool use_builtin = false;
 };
 
@@ -41,7 +41,7 @@ void AssetsSystem::OnGui(const Vector<Entity>& actives)
 				ImGui::PushStyleColor(ImGuiCol_ButtonActive,  (ImVec4)ImColor::HSV(205.0f / 360.0f, 0.8f, 0.59f));
 				if (ImGui::Button(itr.first.c_str())) {
 					//TODO: Give a hint of path name
-					data_->LoadOneModel(&itr.second);
+					data_->LoadOneModel(&itr.second, *ctx_);
 					for (auto& mesh : itr.second.meshes) {
 						Transform transform;
 						glm::vec3 skew;
@@ -52,6 +52,9 @@ void AssetsSystem::OnGui(const Vector<Entity>& actives)
 				}
 				ImGui::PopStyleColor(3);
 			}
+			ImGui::TreePop();
+		}
+		if (ImGui::TreeNode("Textures")) {
 			ImGui::TreePop();
 		}
 	}
@@ -84,14 +87,14 @@ void AssetsSystem::Data::ParseFromYaml(YAML::Node m, SystemContext& ctx) {
 	}
 }
 
-void AssetsSystem::Data::LoadOneModel(Model* _target)
+void AssetsSystem::Data::LoadOneModel(Model* _target, SystemContext& ctx)
 {
 	Model& target = *_target;
 	if (target.meshes.size() == 0) {
 		ModelAsset model_asset;
 		ModelAsset::Options opts(ModelAsset::kCompute);
 		opts.use_builtin = use_builtin;
-		model_asset.LoadModel(target.bin, opts);
+		model_asset.LoadModel(target.bin, opts, ctx.status->render_job);
 		for (auto& mesh : model_asset.meshes()) {
 			target.meshes.push_back(
 				Data::Mesh{

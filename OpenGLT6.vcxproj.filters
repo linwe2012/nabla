@@ -246,6 +246,9 @@
     <ClCompile Include="OpenGLT6\core\input.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="OpenGLT6\systems\ocean.cc">
+      <Filter>Source Files\system</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="openglt6\core\component.h">
@@ -469,6 +472,9 @@
     </ClInclude>
     <ClInclude Include="OpenGLT6\core\input.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLT6\systems\ocean.h">
+      <Filter>Header Files\system</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

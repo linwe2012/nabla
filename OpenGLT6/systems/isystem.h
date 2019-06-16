@@ -3,7 +3,8 @@
 #include "containers/vector.h"
 #include "core/entity.h"
 #include <chrono>
-
+#include <thread>
+#include <mutex>
 
 
 namespace nabla {
@@ -92,10 +93,16 @@ class RenderableSystem;
 class EntityManager;
 class AssetManager;
 
+struct BootstrapStatus {
+	bool done = false;
+	std::mutex render_job;
+};
+
 struct SystemContext {
 	RenderableSystem* render;
 	EntityManager* entity_manager;
 	AssetManager* assets;
+	BootstrapStatus* status;
 };
 
 class ISystem {

@@ -295,7 +295,7 @@ LoadedModel AssetManager::LoadModelToGPU(std::map<std::string, ModelInfo>::itera
 
 	auto& info = gotcha->second;
 	ModelAsset model;
-	model.LoadModel(info.abs_path, ModelAsset::Options(ModelAsset::kCompute));
+	model.LoadModel(info.abs_path, ModelAsset::Options(ModelAsset::kCompute), *render_mutex_);
 	renderer::ShaderInfo shaderinfo;
 	const auto& meshes = model.meshes();
 	const auto material = GetMaterial(info.material.c_str());

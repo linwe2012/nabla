@@ -27,7 +27,7 @@ struct Light {
 	float quad;
 	float radius;
 };
-void renderQuad();
+void RenderQuad();
 void renderCube();
 
 int main()
@@ -170,7 +170,7 @@ int main()
 		glUniform3fv(OpenHandle(hcam_pos), 1, &camera.Position[0]);
 		glUniform1i(OpenHandle(num_lights), 1);
 
-		renderQuad();
+		RenderQuad();
 
 		if (display_box) {
 			// 2.5. copy content of geometry's depth buffer to default framebuffer's depth buffer
@@ -288,7 +288,7 @@ int main()
 
 unsigned int quadVAO = 0;
 unsigned int quadVBO;
-void renderQuad()
+void RenderQuad()
 {
 	if (quadVAO == 0)
 	{

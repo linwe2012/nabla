@@ -57,7 +57,7 @@ const Vector<Command>* RadixSort(Vector<Command> *cmds, uint64_t max ) {
 
 	return &a;
 }
-thread_local RenderContext tlsRenderContext;
+ /*thread_local*/ RenderContext tlsRenderContext;
 static RenderResource::resource_t* gResourceBuffer = nullptr;
 static Vector<Command> gDefaultCommands;
 static FrameBufferHandle gDefaultGBufferHandle;

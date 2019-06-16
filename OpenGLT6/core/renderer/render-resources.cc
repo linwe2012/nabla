@@ -629,8 +629,8 @@ void PrepareCapture()
 	f.captureViews[4] = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, -1.0f, 0.0f));
 	f.captureViews[5] = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, -1.0f, 0.0f));
 }
-void renderCube();
-void renderQuad();
+void RenderCube();
+void RenderQuad();
 
 void ComputeIrradianceMap(MaterialHandle irradiance,
 	                      MaterialHandle skybox, 
@@ -657,7 +657,7 @@ void ComputeIrradianceMap(MaterialHandle irradiance,
 		shader.SetMat4("view", f.captureViews[i]);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, irr_id, 0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		renderCube();
+		RenderCube();
 	}
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
@@ -695,7 +695,7 @@ void ComputePrefilterMap(MaterialHandle prefilter,
 			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, pre_id, mip);
 
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			renderCube();
+			RenderCube();
 		}
 	}
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -713,7 +713,7 @@ void ComputeBrdfLUTTexture(MaterialHandle brdfLUT, ShaderHandle compute_shader) 
 	glViewport(0, 0, header.width, header.height);
 	OpenHandle(compute_shader).Use();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	renderQuad();
+	RenderQuad();
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
@@ -751,11 +751,11 @@ IBLMapComputResult ComputeIBLMaps(MaterialHandle skybox) {
 }
 
 
-// renderCube() renders a 1x1 3D cube in NDC.
+// RenderCube() renders a 1x1 3D cube in NDC.
 // -------------------------------------------------
 static unsigned int cubeVAO = 0;
 static unsigned int cubeVBO = 0;
-void renderCube()
+void RenderCube()
 {
 	// initialize (if necessary)
 	if (cubeVAO == 0)
@@ -828,7 +828,7 @@ void renderCube()
 
 static unsigned int quadVAO = 0;
 static unsigned int quadVBO;
-void renderQuad()
+void RenderQuad()
 {
 	if (quadVAO == 0)
 	{

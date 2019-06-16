@@ -23,6 +23,7 @@
 
 #include <glm/gtx/matrix_decompose.hpp>
 
+#include <Windows.h>
 
 extern "C" {
 	_declspec(dllexport) DWORD NvOptimusEnablement = 0x00000001;
@@ -182,12 +183,15 @@ float skyboxVertices[] = {
 	 1.0f, -1.0f,  1.0f
 };
 
+
 int main()
 {
 	using namespace nabla;
+	BootstrapStatus bootstrap_status;
 
 	int SCR_WIDTH = 1200, SCR_HEIGHT = 600;
 	{
+		std::scoped_lock scope(bootstrap_status.render_job);
 		renderer::InitConfig cfg;
 		cfg.width = SCR_WIDTH;
 		cfg.height = SCR_HEIGHT;
@@ -196,20 +200,71 @@ int main()
 	GlobalServices.launch<ComponentRegistry>("ComponentRegistry");
 
 	AssetManager assets;
-	assets.ParseAssetsFromFile("./test/assets.yml");
 
 	EntityManager entity_manager;
 	RenderableSystem sys_renderable;
-	sys_renderable.Initialize(SystemContext{nullptr, nullptr});
-	SetRenderable(&sys_renderable);
-	SetEntityManager(&entity_manager);
+	renderer::detail::PrepareRenderContext__Temp();
+	NA_ASSERT(glGetError() == 0);
+
+	{
+		std::scoped_lock scope(bootstrap_status.render_job);
+		sys_renderable.Initialize(SystemContext{ nullptr, nullptr });
+		SetRenderable(&sys_renderable);
+		SetEntityManager(&entity_manager);
+	}
+	
 	SystemContext sys_ctx{
 		&sys_renderable,
 		&entity_manager,
 		&assets,
+		&bootstrap_status,
 	};
 
+	assets.BindMutex(bootstrap_status.render_job);
+	assets.ParseAssetsFromFile("./test/assets.yml");
 
+	//auto discarded_bootstrap = std::async([&bootstrap_status]() {
+	//	using namespace renderer;
+	//	renderer::ShaderHandle image_shader;
+	//	renderer::MaterialHandle image_model, image_itself;
+	//	renderer::Shader shader_itself;
+	//	{
+	//		std::scoped_lock scope(bootstrap_status.render_job);
+	//		image_shader = NewShader(
+	//			renderer::ShaderFilePath{ "nabla/shaders/image-2d.vs", "nabla/shaders/image-2d.fs" });
+	//		image_model = NewUniform(image_shader, "model", MaterialType::kMat4);
+	//		image_itself = NewUniform(image_shader, "image", MaterialType::kInt);
+	//		shader_itself = OpenHandle(image_shader);
+	//	}
+	//	
+	//	MaterialHandle image_nabla;
+	//	{
+	//		std::scoped_lock render(bootstrap_status.render_job);
+	//		image_nabla = AssetManager::LoadTexture("nabla/img/nabla.png");
+	//	}
+	//	while (!bootstrap_status.done)
+	//	{
+	//		auto endframe = std::chrono::steady_clock::now() + std::chrono::microseconds(32);
+	//		
+	//		
+	//		glm::mat4 model(1.0f);
+	//		model = glm::scale(model, glm::vec3(0.2f));
+	//		{
+	//			std::scoped_lock render(bootstrap_status.render_job);
+	//			shader_itself.Use();
+	//			shader_itself.SetMat4("model", model);
+	//			shader_itself.SetInt("image", 0);
+	//			glActiveTexture(GL_TEXTURE0);
+	//			glBindTexture(GL_TEXTURE0, OpenHandle(image_nabla));
+	//			OpenHandle(image_shader).Use();
+	//			RenderQuad();
+	//		}
+	//		
+	//		glfwPollEvents();
+	//		std::this_thread::sleep_until(endframe);
+	//	}
+	//});
+	
 	AnimationSystem sys_animation;
 
 	LightingSystem sys_lighting;
@@ -237,44 +292,83 @@ int main()
 	macros.insert("Diffuse");
 	macros.insert("Specular");
 
-	auto geopass = renderer::NewShader(renderer::ShaderFilePath{ "test/ubershaders/gbuffer.vs", "test/ubershaders/gbuffer.fs" }, macros);
-	sys_material.SetUpMaterialHandles(geopass, MatrialSysterm::Uniforms{});
+	renderer::ShaderHandle geopass, postprocess;
+	{
+		std::scoped_lock render(bootstrap_status.render_job);
+		geopass = renderer::NewShader(renderer::ShaderFilePath{ "test/ubershaders/gbuffer.vs", "test/ubershaders/gbuffer.fs" }, macros);
+		sys_material.SetUpMaterialHandles(geopass, MatrialSysterm::Uniforms{});
+	}
+	
+	renderer::MaterialHandle hproject, hview, hentity, hmodel;
+	{
+		std::scoped_lock render(bootstrap_status.render_job);
 
-	auto hdiffuse = renderer::NewUniform(geopass, "Diffuse", renderer::MaterialType::kVec3);
-	auto hspecular = renderer::NewUniform(geopass, "Specular", renderer::MaterialType::kFloat);
-	auto hmodel = renderer::NewUniform(geopass, "model", renderer::MaterialType::kMat4);
-	auto hview = renderer::NewUniform(geopass, "view", renderer::MaterialType::kMat4);
-	auto hproject = renderer::NewUniform(geopass, "projection", renderer::MaterialType::kMat4);
-	auto halbedo = renderer::NewUniform(geopass, "Albedo", renderer::MaterialType::kVec3);
-	auto hmetal = renderer::NewUniform(geopass, "Metallic", renderer::MaterialType::kFloat);
-	auto hrough = renderer::NewUniform(geopass, "Roughness", renderer::MaterialType::kFloat);
-	auto hao = renderer::NewUniform(geopass, "AO", renderer::MaterialType::kFloat);
-	auto hentity = renderer::NewUniform(geopass, "Entity", renderer::MaterialType::kVec3);
+		hproject = renderer::NewUniform(geopass, "projection", renderer::MaterialType::kMat4);
+		hview = renderer::NewUniform(geopass, "view", renderer::MaterialType::kMat4);
+		hentity = renderer::NewUniform(geopass, "Entity", renderer::MaterialType::kVec3);
+		hmodel = renderer::NewUniform(geopass, "model", renderer::MaterialType::kMat4);
+		// auto hdiffuse = renderer::NewUniform(geopass, "Diffuse", renderer::MaterialType::kVec3);
+		// auto hspecular = renderer::NewUniform(geopass, "Specular", renderer::MaterialType::kFloat);
+		// auto hmodel = renderer::NewUniform(geopass, "model", renderer::MaterialType::kMat4);
+		// auto halbedo = renderer::NewUniform(geopass, "Albedo", renderer::MaterialType::kVec3);
+		// auto hmetal = renderer::NewUniform(geopass, "Metallic", renderer::MaterialType::kFloat);
+		// auto hrough = renderer::NewUniform(geopass, "Roughness", renderer::MaterialType::kFloat);
+		// auto hao = renderer::NewUniform(geopass, "AO", renderer::MaterialType::kFloat);
+		// auto 
+	}
+
+	renderer::MaterialHandle hbox_proj, hbox_view, hbox_model, hbox_lightColor;
+	{
+		std::scoped_lock render(bootstrap_status.render_job);
+		postprocess = renderer::NewShader(renderer::ShaderFilePath{ "test/ubershaders/deferred-light-box.vs", "test/ubershaders/deferred-light-box.fs" }, macros);
+		hbox_proj = renderer::NewUniform(postprocess, "projection", renderer::MaterialType::kMat4);
+		hbox_view = renderer::NewUniform(postprocess, "view", renderer::MaterialType::kMat4);
+		hbox_model = renderer::NewUniform(postprocess, "model", renderer::MaterialType::kMat4);
+		hbox_lightColor = renderer::NewUniform(postprocess, "lightColor", renderer::MaterialType::kVec3);
+	}
+	
+	renderer::MeshHandle hcube;
+	{
+		std::scoped_lock render(bootstrap_status.render_job);
+		hcube = GetCubeMesh();
+	}
+
+	renderer::ShaderHandle skyboxpass;
+	renderer::MaterialHandle hskybox_proj, hskybox_view;
+	{
+		std::scoped_lock render(bootstrap_status.render_job);
+		skyboxpass = renderer::NewShader(renderer::ShaderFilePath{ "test/ubershaders/skybox.vs", "test/ubershaders/skybox.fs" }, macros);
+		hskybox_proj = renderer::NewUniform(skyboxpass, "projection", renderer::MaterialType::kMat4);
+		hskybox_view = renderer::NewUniform(skyboxpass, "view", renderer::MaterialType::kMat4);
+		OpenHandle(skyboxpass).Use();
+		OpenHandle(skyboxpass).SetInt("skybox", 0);
+		NA_ASSERT(glGetError() == 0);
+	}
+
+	
+	{
+		std::scoped_lock render(bootstrap_status.render_job);
+		auto hMonet = AssetManager::LoadTexture("test/img/Monet.bmp");
+	}
 
 
-	auto postprocess = renderer::NewShader(renderer::ShaderFilePath{ "test/ubershaders/deferred-light-box.vs", "test/ubershaders/deferred-light-box.fs" }, macros);
-	auto hbox_proj = renderer::NewUniform(postprocess, "projection", renderer::MaterialType::kMat4);
-	auto hbox_view = renderer::NewUniform(postprocess, "view", renderer::MaterialType::kMat4);
-	auto hbox_model = renderer::NewUniform(postprocess, "model", renderer::MaterialType::kMat4);
-	auto hbox_lightColor = renderer::NewUniform(postprocess, "lightColor", renderer::MaterialType::kVec3);
+	renderer::MaterialHandle htex_skybox;
+	{
+		std::scoped_lock render(bootstrap_status.render_job);
+		htex_skybox = assets.GetTexture("default_skybox");
+	}
 
-	auto hcube = GetCubeMesh();
+	renderer::ShaderHandle lightingpass;
+	{
+		std::scoped_lock render(bootstrap_status.render_job);
+		lightingpass = renderer::NewShader(renderer::ShaderFilePath{ "test/ubershaders/deferred-shading.vs", "test/ubershaders/deferred-shading.fs" }, macros);
+		sys_lighting.SetShader(lightingpass, postprocess, htex_skybox);
+		sys_renderable.SetRenderPassShader(renderer::RenderPass::kPostProc, postprocess, hbox_model, hentity, 5);
+		sys_renderable.SetRenderPassShader(renderer::RenderPass::kForward, geopass, hmodel, hentity, 5);
+	}
+	
 
-	auto skyboxpass = renderer::NewShader(renderer::ShaderFilePath{ "test/ubershaders/skybox.vs", "test/ubershaders/skybox.fs" }, macros);
-	auto hskybox_proj = renderer::NewUniform(skyboxpass, "projection", renderer::MaterialType::kMat4);
-	auto hskybox_view = renderer::NewUniform(skyboxpass, "view", renderer::MaterialType::kMat4);
-	OpenHandle(skyboxpass).Use();
-	OpenHandle(skyboxpass).SetInt("skybox", 0);
-	NA_ASSERT(glGetError() == 0);
-
-	auto hMonet = AssetManager::LoadTexture("test/img/Monet.bmp");
-	auto htex_skybox = assets.GetTexture("default_skybox");
-
-	auto lightingpass = renderer::NewShader(renderer::ShaderFilePath{ "test/ubershaders/deferred-shading.vs", "test/ubershaders/deferred-shading.fs" }, macros);
-	sys_lighting.SetShader(lightingpass, postprocess, htex_skybox);
-
-	sys_renderable.SetRenderPassShader(renderer::RenderPass::kPostProc, postprocess, hbox_model, hentity, 5);
-	sys_renderable.SetRenderPassShader(renderer::RenderPass::kForward, geopass, hmodel, hentity, 5);
+	
 
 	for (int i = 0; i < 4; ++i) {
 		lights.push_back(entity_manager.Create());
@@ -298,12 +392,9 @@ int main()
 
 	InitGui();
 
-
 	
-
-	renderer::detail::PrepareRenderContext__Temp();
-	NA_ASSERT(glGetError() == 0);
 	{
+		std::scoped_lock render(bootstrap_status.render_job);
 		using namespace renderer;
 		Vector<Attachment> textures{
 			Attachment(TextureFormat::kRGB, "gPosition"),
@@ -319,8 +410,8 @@ int main()
 	}
 	
 	
-	//auto teapot = assets.LoadModelToGPU("teapot", false);
-	auto teapot = assets.LoadModelToGPU("teapot", false);
+	LoadedModel teapot = assets.LoadModelToGPU("teapot", false);
+
 	auto eteapot = entity_manager.Create();
 	Vector<Entity> solids{
 		eteapot
@@ -385,6 +476,7 @@ int main()
 
 	renderer::MeshHandle hmesh_skybox;
 	{
+		std::scoped_lock render(bootstrap_status.render_job);
 		using namespace renderer;
 		Vector<LayoutInfo> layouts;
 		layouts.push_back(LayoutInfo::CreatePacked<glm::vec3>(0, 0));
@@ -397,10 +489,14 @@ int main()
 	
 	bool mouse_last_pressed = false;
 	NA_ASSERT(glGetError() == 0);
-	Clock clock;
-	clock.Gensis();
 	GLFWcursor* hand_cursor = glfwCreateStandardCursor(GLFW_HAND_CURSOR);
 
+	bootstrap_status.done = true;
+	//discarded_bootstrap.wait();
+
+	Clock clock;
+	clock.Gensis();
+	
 	while (renderer::IsAlive())
 	{
 

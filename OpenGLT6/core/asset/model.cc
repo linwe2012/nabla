@@ -19,10 +19,12 @@ using renderer::MemoryInfo;
 using Texture = renderer::MaterialHandle;
 
 
-void ModelAsset::LoadModel(const fs::path abs_path, Options opt) {
+void ModelAsset::LoadModel(const fs::path abs_path, Options opt, std::mutex& render_mutex) {
 	dir_ = abs_path;
 	std::string str = abs_path.string();
 	opt_ = opt;
+
+	render_mutex_ = &render_mutex;
 
 	if (opt.use_builtin) {
 		LoadObj(abs_path);
@@ -242,12 +244,15 @@ void ModelAsset::ProcessMesh(aiMesh* mesh, const aiScene* scene) {
 			indices.push_back(face.mIndices[j]);
 	}
 
-	m.h_mesh = renderer::NewMesh(MemoryInfo{ soup.begin(), soup.size() * sizeof(float) },
-		MemoryInfo{ indices.begin(), indices.size() * sizeof(unsigned int) },
-		layouts
-	);
+	{
+		std::scoped_lock render_lock(*render_mutex_);
+		m.h_mesh = renderer::NewMesh(MemoryInfo{ soup.begin(), soup.size() * sizeof(float) },
+			MemoryInfo{ indices.begin(), indices.size() * sizeof(unsigned int) },
+			layouts
+		);
 
-	ProcessMaterialTexture(&meshes_.back(), scene, mesh);
+		ProcessMaterialTexture(&meshes_.back(), scene, mesh);
+	}
 }
 
 

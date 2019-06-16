@@ -9,6 +9,7 @@
 
 #include "texture.h"
 
+#include <mutex>
 //TODO(L): Move that out!
 struct aiNode;
 struct aiScene;
@@ -67,13 +68,13 @@ public:
 	textures will be in gpu and vertices and others are still in cpu memory
 	@note path must be absolute or relative to program launching pos
 	*/
-	void LoadModel(const char* abs_path, Options opt) {
+	void LoadModel(const char* abs_path, Options opt, std::mutex& render_mutex) {
 		fs::path path = abs_path;
 
-		LoadModel(path, opt);
+		LoadModel(path, opt, render_mutex);
 	}
 
-	void LoadModel(const fs::path abs_path, Options opt);
+	void LoadModel(const fs::path abs_path, Options opt, std::mutex& render_mutex);
 
 	const Vector<Mesh>& meshes() {
 		return meshes_;
@@ -103,6 +104,7 @@ private:
 	Vector<Mesh> meshes_;
 	fs::path dir_;
 	Options opt_;
+	std::mutex* render_mutex_;
 };
 
 }

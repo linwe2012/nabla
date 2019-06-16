@@ -155,6 +155,7 @@
     <ClCompile Include="OpenGLT6\systems\collision.cc" />
     <ClCompile Include="OpenGLT6\systems\lighting.cc" />
     <ClCompile Include="OpenGLT6\systems\material.cc" />
+    <ClCompile Include="OpenGLT6\systems\ocean.cc" />
     <ClCompile Include="OpenGLT6\systems\playback.cc" />
     <ClCompile Include="OpenGLT6\systems\polygon.cc" />
     <ClCompile Include="OpenGLT6\systems\renderable.cc" />
@@ -233,6 +234,7 @@
     <ClInclude Include="OpenGLT6\systems\isystem.h" />
     <ClInclude Include="OpenGLT6\systems\lighting.h" />
     <ClInclude Include="OpenGLT6\systems\material.h" />
+    <ClInclude Include="OpenGLT6\systems\ocean.h" />
     <ClInclude Include="OpenGLT6\systems\playback.h" />
     <ClInclude Include="OpenGLT6\systems\polygon.h" />
     <ClInclude Include="OpenGLT6\systems\renderable.h" />
