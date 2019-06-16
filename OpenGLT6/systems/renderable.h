@@ -18,11 +18,18 @@ class RenderableSystem : public ISystem {
 	};
 public:
 	struct Renderable {
+		enum SelectFlag {
+			kNotSelected,
+			kSelected,
+			kLatestSelect,
+		};
 		Transform transform;
 		renderer::MeshHandle hmesh;
 		renderer::RenderPass pass = renderer::RenderPass::kForward;
 		Entity lookback;
 		std::string name;
+		bool hide = false;
+		char selected;
 	};
 	
 	void SetRenderPassShader(renderer::RenderPass pass, 
@@ -71,7 +78,7 @@ public:
 	//TODO
 	void Remove(Entity) override {}
 
-	void Initialize([[maybe_unused]]SystemContext&) override {}
+	void Initialize([[maybe_unused]] SystemContext&) override;
 
 	void Update(Entity) override {}
 
@@ -90,10 +97,15 @@ private:
 	
 	Vector<Entity::entity_t> sparse_;
 	Vector<Renderable> dense_;
+	Vector<Entity::entity_t> last_actives_;
 	Renderable invalid_;
-	
+	struct Data;
+	Data* data_;
 	Vector<RenderHandle_> render_handles_;
 	Vector<ISystem*> before_render_;
+	Transform combo_transform;
+	glm::vec4 latest_selected_color_ = glm::vec4(0.1f, 0.8f, 0.2f, 0.8f);
+	glm::vec4 prev_selected_color_ = glm::vec4(0.8f, 0.8f, 0.8f, 0.8f);
 };
 
 void SetRenderable(RenderableSystem* render);

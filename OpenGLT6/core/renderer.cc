@@ -102,6 +102,9 @@ void InitWindow(const InitConfig& cfg) {
 	glDepthFunc(GL_LEQUAL);
 	glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+	// glEnable(GL_BLEND);
+	// glBlendFunc(GL_ONE_MINUS_SRC_ALPHA, GL_SRC_ALPHA);
+	// glDisable(GL_POLYGON_OFFSET_FILL);
 	// glDepthFunc(GL_LESS);
 	gDefaultWindow = glfwwin;
 }

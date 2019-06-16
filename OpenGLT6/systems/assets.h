@@ -30,7 +30,7 @@ public:
 private:
 	SystemContext* ctx_ = nullptr;
 	struct Data;
-	Data* data_;
+	Data* data_ = nullptr;
 	// std::unique_ptr<Data> data_;
 };
 

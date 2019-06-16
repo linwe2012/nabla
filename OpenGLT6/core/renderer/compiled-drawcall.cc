@@ -212,6 +212,14 @@ void SetUniform<glm::vec3>(MaterialHandle md, glm::vec3 data) {
 }
 
 template<>
+void SetUniform<glm::vec4>(MaterialHandle md, glm::vec4 data)
+{
+	NA_LEAVE_IF((void)0, GetMaterialDecriptor(md).type != MaterialType::kVec4, "");
+	SetUniformHelper(md, data);
+	return;
+}
+
+template<>
 void SetUniform<glm::mat4>(MaterialHandle md, glm::mat4 data) {
 	NA_LEAVE_IF((void)0, GetMaterialDecriptor(md).type != MaterialType::kMat4, "");
 	SetUniformHelper(md, data);
@@ -270,10 +278,35 @@ ScopedState::ScopedState(SortKey::Step _render_state, RenderPass _render_pass)
 	tlsRenderContext.render_pass = _render_pass;
 }
 
+ScopedState::ScopedState(State state)
+{
+	auto& rc = tlsRenderContext;
+	last_state.render_pass = rc.render_pass;
+	last_state.render_step = rc.render_step;
+	
+	Command cmd;
+	is_state_changed = true;
+	cmd.offset = rc.ResourcesOffset();
+	cmd.sortkey.set_pass(rc.render_pass);
+	//cmd.sortkey.set_chstate(SortKey::Step::kStateChangeBegin);
+	rc.resources.Construct<StateDrawCall>(state);
+	rc.commands.push_back(cmd);
+}
+
 ScopedState::~ScopedState()
 {
+	if (is_state_changed) {
+		auto& rc = tlsRenderContext;
+		Command cmd;
+		cmd.offset = rc.ResourcesOffset();
+		cmd.sortkey.set_pass(rc.render_pass);
+		rc.resources.Construct<StateDrawCall>(State(0));
+		rc.commands.push_back(cmd);
+	}
+
 	tlsRenderContext.render_step = last_state.render_step;
 	tlsRenderContext.render_pass = last_state.render_pass;
+	
 }
 
 

@@ -57,6 +57,7 @@ public:
 	// Camera options
 	float MovementSpeed;
 	float MouseSensitivity;
+	float HandMoveSensitivity = 4.8f;
 	float Zoom;
 	//if the camera is moving back
 	bool MovingBack = false;
@@ -123,6 +124,10 @@ public:
 		
 		// Update Front, Right and Up Vectors using the updated Euler angles
 		updateCameraVectors();
+	}
+
+	void ProcessHandMovement(float xoffset, float yoffset, int width, int height) {
+		Position += glm::vec3(-xoffset / height * HandMoveSensitivity, -yoffset / width * HandMoveSensitivity, 0);
 	}
 
 	// Processes input received from a mouse scroll-wheel event. Only requires input on the vertical wheel-axis

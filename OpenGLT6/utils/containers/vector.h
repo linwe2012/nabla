@@ -116,6 +116,17 @@ public:
 		emplace_back(std::move(T(val)));
 	}
 
+	template<typename T, typename... Args>
+	void multi_push_back(const T& val, Args... args) {
+		push_back(val);
+		multi_push_back(args...);
+	}
+
+	template<typename T>
+	void multi_push_back(const T& val) {
+		push_back(val);
+	}
+
 	// directly construct, avoid move/copy-destruct
 	template<typename... Args>
 	void construct_back(Args... args) {
@@ -165,10 +176,10 @@ public:
 			if (position != nullptr) {
 				memcpy(new_pos + size_required, position, (end_ - position) * sizeof(T));
 			}
+			nabla::detail::SelectiveCopy<T>(new_pos, first, size_required);
 			if (begin() != nullptr) {
 				alloc_->deallocate(begin_, capacity());
 			}
-			nabla::detail::SelectiveCopy<T>(new_pos, first, size_required);
 			begin_ = new_begin;
 			end_ = new_end + size_required;
 			end_of_storage_ = begin_ + new_cap;

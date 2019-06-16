@@ -3,6 +3,13 @@
 #include "glm/gtc/matrix_transform.hpp"
 
 namespace nabla {
+struct RenderableSystem::Data {
+	renderer::ShaderHandle wired_shader;
+	renderer::MaterialHandle wired_projection;
+	renderer::MaterialHandle wired_model;
+	renderer::MaterialHandle wired_view;
+	renderer::MaterialHandle wired_color;
+};
 
 RenderableSystem* gptrRenderableSys = nullptr;
 EntityManager* gptrEntityManager = nullptr;
@@ -13,12 +20,27 @@ EntityManager* GetEntityManager() { return gptrEntityManager; }
 
 void RenderableSystem::OnGui(const Vector<Entity>& actives)
 {
+	Entity latest;
+	latest.MarkNil();
+	// last_actives_.clear();
+	
 	for (auto e : actives) {
 		if (!Has(e))
 			continue;
+		latest = e;
 		auto& rend = dense_[sparse_[e.index()]];
-		auto& r = rend.transform;
+		rend.selected = Renderable::kSelected;
+	}
 
+	if (latest.IsNil()) {
+		return;
+	}
+	auto& rend = dense_[sparse_[latest.index()]];
+	rend.selected = Renderable::kLatestSelect;
+
+	
+	if (ImGui::CollapsingHeader("Transform")) {
+		auto& r = rend.transform;
 		ImGui::DragFloat("Pos.x", &r.position.x, 0.02f);
 		ImGui::DragFloat("Pos.y", &r.position.y, 0.02f);
 		ImGui::DragFloat("Pos.z", &r.position.z, 0.02f);
@@ -31,7 +53,10 @@ void RenderableSystem::OnGui(const Vector<Entity>& actives)
 		ImGui::DragFloat("Scale.x", &r.scale.x, 0.02f);
 		ImGui::DragFloat("Scale.y", &r.scale.y, 0.02f);
 		ImGui::DragFloat("Scale.z", &r.scale.z, 0.02f);
+
+		ImGui::Checkbox("Hide", &rend.hide);
 	}
+	
 }
 
 void RenderableSystem::Update(Clock& clock) {
@@ -39,16 +64,22 @@ void RenderableSystem::Update(Clock& clock) {
 	
 	ShaderHandle hshader;
 	for (auto& r : dense_) {
+		if (r.hide) {
+			continue;
+		}
+
+
 		auto& info = render_handles_[(uint16_t)r.pass];
 		if (hshader != info.hshader_) {
 			hshader = info.hshader_;
 			UseShader(hshader);
 		}
+		
 		glm::mat4 model(1.0f);
 		model = glm::scale(model, r.transform.scale);
 		model = glm::mat4_cast(r.transform.quaternion) * model;
 		model = glm::translate(model, r.transform.position);
-
+		
 		for (auto sys : before_render_) {
 			sys->Update(r.lookback);
 		}
@@ -59,6 +90,21 @@ void RenderableSystem::Update(Clock& clock) {
 		SetUniform(info.hentity_, fentity);
 		SetUniform(info.hmodel_, model);
 		DrawMesh(r.hmesh);
+		if (r.selected) {
+			auto& d = *data_;
+			ScopedState post(RenderPass::kPostProc);
+			ScopedState state(State::Line);
+			UseShader(d.wired_shader);
+			SetUniform(d.wired_color, 
+				(r.selected == Renderable::kLatestSelect) ? 
+				latest_selected_color_ : prev_selected_color_
+			);
+			SetUniform(d.wired_projection, GetGlobalProjectionMatrix());
+			SetUniform(d.wired_view, GetGlobalViewMatrix());
+			SetUniform(d.wired_model, model);
+			DrawMesh(r.hmesh);
+		}
+		r.selected = Renderable::kNotSelected;
 	}
 }
 
@@ -81,6 +127,22 @@ const RenderableSystem::Renderable& RenderableSystem::GetRenderable(Entity e) co
 	NA_LEAVE_IF(invalid_, !Has(e), "No such entitiy");
 		
 	return dense_[sparse_[e.index()]];
+}
+
+
+void RenderableSystem::Initialize(SystemContext&)
+{
+	using namespace renderer;
+	data_ = new Data();
+	auto& d = *data_;
+	d.wired_shader = NewShader({
+		"nabla/shaders/select-wired.vs",
+		"nabla/shaders/select-wired.fs"
+		});
+	d.wired_projection = NewUniform(d.wired_shader, "projection", MaterialType::kMat4);
+	d.wired_view = NewUniform(d.wired_shader, "view", MaterialType::kMat4);
+	d.wired_model = NewUniform(d.wired_shader, "model", MaterialType::kMat4);
+	d.wired_color = NewUniform(d.wired_shader, "color", MaterialType::kVec4);
 }
 
 const std::shared_ptr<RenderableSystem::VertexData> RenderableSystem::GetVertices(Entity e)

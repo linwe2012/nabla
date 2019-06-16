@@ -83,6 +83,7 @@ enum struct MaterialType : uint8_t {
 	kFloat,
 	kMat4,
 	kVec3,
+	kVec4,
 	kInt,
 	kCount,
 };
@@ -268,9 +269,12 @@ IBLMapComputResult ComputeIBLMaps(MaterialHandle skybox);
 
 void RestoreViewport();
 
+void SetGlobalProjectionMatrix(glm::mat4 p);
+void SetGlobalViewMatrix(glm::mat4 p);
 
+glm::mat4 GetGlobalViewMatrix();
 
-
+glm::mat4 GetGlobalProjectionMatrix();
 
 //enum Type : uint32_t {
 	//	kNone,

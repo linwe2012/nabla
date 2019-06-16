@@ -56,13 +56,16 @@ public:
 			}
 			return true;
 		}
+		bool operator==(const UniqueObject& rhs) const {
+			return name == rhs.name && division == rhs.division;
+		}
 	};
 	
 private:
 	struct Data;
-	Data* data_;
-	Map<UniqueObject, Vector<renderer::MeshHandle> > objects_;
-	EntityManager* em_;
+	Data* data_ = nullptr;
+	Map<std::string, Vector<renderer::MeshHandle> > objects_;
+	EntityManager* em_ = nullptr;
 };
 
 

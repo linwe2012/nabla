@@ -743,7 +743,7 @@ IBLMapComputResult ComputeIBLMaps(MaterialHandle skybox) {
 		"nabla/shaders/brdf.vs",
 		"nabla/shaders/brdf.fs"
 		});
-	res.brdfLUT = NewTexture(nullptr, 32, 32, TextureFormat::kRG16F, TextureFormat::kRG, TextureFormat::kFloat);
+	res.brdfLUT = NewTexture(nullptr, 512, 512, TextureFormat::kRG16F, TextureFormat::kRG, TextureFormat::kFloat);
 	ComputeBrdfLUTTexture(res.brdfLUT, shader_brdf);
 	RestoreViewport();
 	NA_ASSERT(glGetError() == 0);
@@ -854,6 +854,28 @@ void renderQuad()
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	glBindVertexArray(0);
 }
+
+struct GlobalData {
+	glm::mat4 projection;
+	glm::mat4 view;
+};
+GlobalData gGlobalRenderData;
+
+void SetGlobalProjectionMatrix(glm::mat4 p) {
+	gGlobalRenderData.projection = p;
+}
+void SetGlobalViewMatrix(glm::mat4 p) {
+	gGlobalRenderData.view = p;
+}
+
+glm::mat4 GetGlobalViewMatrix() {
+	return gGlobalRenderData.view;
+}
+
+glm::mat4 GetGlobalProjectionMatrix() {
+	return gGlobalRenderData.projection;
+}
+
 
 }
 }

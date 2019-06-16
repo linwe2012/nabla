@@ -72,6 +72,9 @@ NA_DRAWCALL_IMPL(MaterialDrawCall) {
 	case MaterialType::kVec3:
 		glUniform3fv(id, 1, (static_cast<float*>(payload)));
 		break;
+	case MaterialType::kVec4:
+		glUniform4fv(id, 1, (static_cast<float*>(payload)));
+		break;
 	case MaterialType::kMat4:
 		glUniformMatrix4fv(id, 1, GL_FALSE, (static_cast<float*>(payload)));
 		break;
@@ -171,6 +174,7 @@ NA_DRAWCALL_IMPL(SwitchFrameBufferDrawCall) {
 			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 			
 		}
+		
 		glBindVertexArray(quadVAO);
 		//uu = glGetError();
 		//assert(uu == 0);
@@ -179,6 +183,7 @@ NA_DRAWCALL_IMPL(SwitchFrameBufferDrawCall) {
 		assert(uu == 0);
 		glBindVertexArray(0);
 		
+		ActivateShader(f.blit_shader);
 		// 2.5. copy content of geometry's depth buffer to default framebuffer's depth buffer
 		// ----------------------------------------------------------------------------------
 		glBindFramebuffer(GL_READ_FRAMEBUFFER, f.fbo);
@@ -197,11 +202,23 @@ NA_DRAWCALL_IMPL(SwitchFrameBufferDrawCall) {
 }
 
 NA_DRAWCALL_IMPL(StateDrawCall) {
-	if ((int)state | (int)State::DepthTest) {
-		glEnable(GL_DEPTH_TEST);
+	
+	if ((int)state & (int)State::DisableDepthTest) {
+		glDisable(GL_DEPTH_TEST);
+		
 	}
 	else {
-		glDisable(GL_DEPTH_TEST);
+		glEnable(GL_DEPTH_TEST);
+	}
+
+	if ((int)state & (int)State::Line) {
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glDisable(GL_POLYGON_OFFSET_FILL);
+	}
+	else  {
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glEnable(GL_POLYGON_OFFSET_FILL);
+		glPolygonOffset(1.0, 1.0);
 	}
 }
 

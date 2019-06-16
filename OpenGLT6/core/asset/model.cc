@@ -25,7 +25,7 @@ void ModelAsset::LoadModel(const fs::path abs_path, Options opt) {
 	opt_ = opt;
 
 	if (opt.use_builtin) {
-		LoadObj();
+		LoadObj(abs_path);
 		return;
 	}
 
@@ -287,14 +287,23 @@ void ModelAsset::ProcessMaterialTexture(Mesh* dst, const aiScene* scene, const a
 	ProcessMaterialTexturePass(dst->AmbientOcclusionMap, mat, BuiltinMaterial::kAmbientOcclusionMap, aiTextureType_LIGHTMAP, dir_);
 }
 
-void ModelAsset::LoadObj()
+void ModelAsset::LoadObj(const fs::path abs_path)
 {
-	if (true /* if has mesh */) {
-		// ...
+	std::string path = abs_path.string();
+	std::ifstream fin(path);
+	if (!fin.is_open()) {
+		std::cerr << "[load error]cannot open file\n";
+		return;
 	}
+
+	int points_cnt = 0;
+	while (!fin.eof() && fin.good()) {
+		LoadObjMesh(fin, &points_cnt);
+	}
+	fin.close();
 }
 
-void ModelAsset::LoadObjMesh()
+void ModelAsset::LoadObjMesh(std::ifstream& fin, int* points_cnt)
 {
 	Vector<float> soup;
 
@@ -308,13 +317,69 @@ void ModelAsset::LoadObjMesh()
 	Vector<glm::vec2> textCoords;
 	Vector<unsigned>  indices;
 
-	//... fill the vectors
+	int flag = -1;
+	glm::vec3 v;
+	std::string tmp;
+	int line_cnt = 0;
+	//Parsing text
+	while (!fin.eof() && fin.good()) {
+		fin >> tmp;
+		if (tmp == "v") {
+			if (flag == -1)
+				flag = 0;
+			if (flag == 1) {
+				(*points_cnt) += points.size();
+				fin.seekg(-1, std::ios::cur);
+				break;
+			}
+			fin >> v[0] >> v[1] >> v[2];
+			points.push_back(v);
+		}
+		else if (tmp == "vt") {
+			fin >> v[0] >> v[1] >> v[2];
+			textCoords.push_back(glm::vec2(v[0], v[1]));
+		}
+		else if (tmp == "vn") {
+			fin >> v[0] >> v[1] >> v[2];
+			normal.push_back(v);
+		}
+		else if (tmp == "g") {
+			flag = 1;
+		}
+		else if (tmp == "f") {
+			std::vector<std::string> vs(3);
+			fin >> vs[0] >> vs[1] >> vs[2];
+			glm::ivec3 iv;
+			if (sscanf(vs[0].c_str(), "%d/%d/%d", &iv[0], &iv[1], &iv[2]) == 3) {
+				glm::ivec3 p_idx, t_idx, n_idx;
+				for (int i = 0; i < 3; ++i)
+					sscanf(vs[i].c_str(), "%d/%d/%d", &p_idx[i], &t_idx[i], &n_idx[i]);
+				//t_idx -= texture_cnt;
+				//n_idx -= normal_cnt;
+				for (int i = 0; i < 3; ++i)
+					indices.push_back(p_idx[i] - (*points_cnt));
+			}
+			else {
+				glm::ivec3 p_idx, n_idx;
+				for (int i = 0; i < 3; ++i)
+					sscanf(vs[i].c_str(), "%d//%d", &p_idx[i], &n_idx[i]);
+				for (int i = 0; i < 3; ++i)
+					indices.push_back(p_idx[i] - (*points_cnt));
+			}
+		}
+		else
+			getline(fin, tmp);
+		++line_cnt;
+	}
+
+	tangents.resize(points.size(), { 0.0f,0.0f,0.0f });
+	bitangents.resize(points.size(), { 0.0f,0.0f,0.0f });
 
 	using namespace renderer;
 	Vector<LayoutInfo> layouts;
 	layouts.push_back(LayoutInfo::CreatePacked<glm::vec3>(0, soup.size() * sizeof(float)));
 	soup.insert(soup.end(), reinterpret_cast<float*>(points.begin()), reinterpret_cast<float*>(points.end()));
-	
+
 	layouts.push_back(LayoutInfo::CreatePacked<glm::vec3>(1, soup.size() * sizeof(float)));
 	soup.insert(soup.end(), reinterpret_cast<float*>(normal.begin()), reinterpret_cast<float*>(normal.end()));
 

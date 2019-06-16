@@ -93,9 +93,9 @@ private:
 
 	void ProcessMaterialTexture(Mesh* dst, const aiScene* scene, const aiMesh* mesh);
 
-	void LoadObj();
+	void LoadObj(const fs::path abs_path);
 
-	void LoadObjMesh();
+	void LoadObjMesh(std::ifstream& fin, int* points_cnt);
 
 private:
 	glm::mat4 transform;

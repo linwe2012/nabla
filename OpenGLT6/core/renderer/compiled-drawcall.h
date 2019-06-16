@@ -176,17 +176,20 @@ struct RenderState {
 	RenderState(SortKey::Step _render_step, RenderPass _render_pass)
 		:render_step(_render_step), render_pass(_render_pass), is_valid(true) {}
 	RenderState() : is_valid (false), render_step(SortKey::Step::kDrawCall), render_pass(RenderPass::kForward) {}
+	
 	SortKey::Step render_step;
 	RenderPass render_pass;
+	State state_machine;
 	bool is_valid;
 };
 
 struct ScopedState {
 
 	RenderState last_state;
-
+	bool is_state_changed = false;
 	ScopedState(RenderPass _render_pass);
 	ScopedState(SortKey::Step _render_step, RenderPass _render_pass);
+	ScopedState(State state);
 	~ScopedState();
 };
 
@@ -235,6 +238,9 @@ void SetUniform<int>(MaterialHandle md, int data);
 
 template <>
 void SetUniform<glm::vec3>(MaterialHandle md, glm::vec3 data);
+
+template <>
+void SetUniform<glm::vec4>(MaterialHandle md, glm::vec4 data);
 
 template <>
 void SetUniform<glm::mat4>(MaterialHandle md, glm::mat4 data);

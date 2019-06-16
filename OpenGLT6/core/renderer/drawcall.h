@@ -28,12 +28,13 @@ namespace nabla {
 namespace renderer {
 enum struct State : int {
 	Filled = 0x0, Line = 0x1,
-	DepthTest = 0x2
+	DisableDepthTest = 0x2
 };
 
 
 struct StateDrawCall {
 	NA_DRAWCALL(StateDrawCall);
+	StateDrawCall(State _state) : state(_state) {}
 	State state;
 };
 

@@ -380,6 +380,7 @@ int main()
 	bool gui_show_style_config = false;
 	bool gui_show_style_open = false;
 	bool add_collision_button = false;
+	bool camera_is_using_left_mouse = false;
 	Entity add_collision_entity;
 
 	renderer::MeshHandle hmesh_skybox;
@@ -398,6 +399,8 @@ int main()
 	NA_ASSERT(glGetError() == 0);
 	Clock clock;
 	clock.Gensis();
+	GLFWcursor* hand_cursor = glfwCreateStandardCursor(GLFW_HAND_CURSOR);
+
 	while (renderer::IsAlive())
 	{
 
@@ -414,6 +417,8 @@ int main()
 
 		SetUniform(hproject, projection);
 		SetUniform(hview, view);
+		SetGlobalProjectionMatrix(projection);
+		SetGlobalViewMatrix(view);
 
 		/*
 		SetUniform(hmodel, model);
@@ -437,7 +442,7 @@ int main()
 			glm::vec3 whatev;
 			glm::vec4 we;
 			glm::decompose(view, whatev, quat, trans, whatev, we);
-			SetUniform(hskybox_view, glm::translate(glm::mat4(glm::mat3(view)), trans / 100.0f));
+			SetUniform(hskybox_view, glm::translate(glm::mat4(glm::mat3(view)), trans / 200.0f));
 			UseTexture(htex_skybox, 0);
 			DrawMesh(hmesh_skybox);
 		}
@@ -455,8 +460,8 @@ int main()
 
 		{
 			renderer::ScopedState scope(renderer::RenderPass::kForward);
-			renderer::ReadFromDefaultGBufferAttachment(5, [&mouse_last_pressed, &SCR_WIDTH, &SCR_HEIGHT, &tmp, &window] {
-				if (IsUserWorkingOnGui()) {
+			renderer::ReadFromDefaultGBufferAttachment(5, [&camera_is_using_left_mouse, &mouse_last_pressed, &SCR_WIDTH, &SCR_HEIGHT, &tmp, &window] {
+				if (IsUserWorkingOnGui() || glfwGetKey(window, GLFW_KEY_LEFT_ALT) == GLFW_PRESS) {
 					return;
 				}
 
@@ -471,11 +476,31 @@ int main()
 					auto pixel = renderer::ReadSolidPixel(xpos, SCR_HEIGHT - ypos);
 					int i;
 					i = pixel.r + pixel.g * 256 + pixel.b * 256 * 256;
-					tmp.clear();
 					if (i >= 1.0f * 256 + 1.0f * 256 * 256) {
+						tmp.clear();
 						return;
 					}
+
 					Entity e(i);
+
+					if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) != GLFW_PRESS) {
+						
+						// if click on selected object
+						if (tmp.size() == 1) {
+							if (e == tmp[0]) {
+								tmp.clear();
+								return;
+							}
+						}
+						tmp.clear();
+					}
+					
+					for (auto& me : tmp) {
+						if (me == e) {
+							tmp.erase(&me, tmp.end());
+							break;
+						}
+					}
 					tmp.push_back(e);
 				}
 				else {
@@ -496,22 +521,40 @@ int main()
 		
 		if (!IsUserWorkingOnGui()) {
 			int left_button = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
+			int middle_button = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE);
+			double xpos, ypos;
+			glfwGetCursorPos(window, &xpos, &ypos);
+
+			float xoffset = static_cast<float>(xpos - last_x);
+			float yoffset = static_cast<float>(last_y - ypos);
 
 			if (left_button == GLFW_PRESS) {
-				double xpos, ypos;
-				glfwGetCursorPos(window, &xpos, &ypos);
+				
 				if (first_move != 0) {
-					float xoffset = static_cast<float>(xpos - last_x);
-					float yoffset = static_cast<float>(last_y - ypos);
+					if (xoffset != 0 && yoffset != 0) {
+						camera_is_using_left_mouse = true;
+					}
+
 					camera.ProcessMouseMovement(xoffset, yoffset);
 				}
-				last_x = static_cast<float>(xpos);
-				last_y = static_cast<float>(ypos);
+				
 				first_move = 1;
-
+				glfwSetCursor(window, NULL);
 			}
-			else
+			else if (middle_button == GLFW_PRESS) {
+				camera_is_using_left_mouse = false;
+				glfwSetCursor(window, hand_cursor);
+				camera.ProcessHandMovement(xoffset, yoffset, SCR_WIDTH, SCR_HEIGHT);
+			}
+			else {
+				camera_is_using_left_mouse = false;
 				first_move = 0;
+				glfwSetCursor(window, NULL);
+			}
+				
+
+			last_x = static_cast<float>(xpos);
+			last_y = static_cast<float>(ypos);
 		}
 
 
@@ -543,8 +586,9 @@ int main()
 				{
 					ImGui::MenuItem("(dummy menu)", NULL, false, false);
 					if(ImGui::BeginMenu("Camara")) {
-						ImGui::DragFloat("Move Speed", &camera.MovementSpeed, 0.01f);
+						ImGui::DragFloat("Move Speed", &camera.MovementSpeed, 0.1f);
 						ImGui::DragFloat("Mouse Sensitivity", &camera.MouseSensitivity, 0.001f);
+						ImGui::DragFloat("Hand Sensitivity", &camera.HandMoveSensitivity, 0.01f);
 						ImGui::EndMenu();
 					}
 					ImGui::MenuItem("Style", NULL, &gui_show_style_config);
@@ -592,11 +636,8 @@ int main()
 				}
 			}
 			
-			if (ImGui::TreeNode("Transform")) {
-				sys_renderable.OnGui(tmp);
-				ImGui::TreePop();
-				ImGui::Separator();
-			}
+
+			sys_renderable.OnGui(tmp);
 			
 			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", clock.GetLastFrameDuration() * 1000.0f, clock.GetLastFrameFps());
 			ImGui::End();

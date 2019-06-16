@@ -32,7 +32,7 @@ namespace nabla {
 
 	private:
 		SparseBindirectMap<RigidBody> rigids_;
-		RenderableSystem* render;
+		RenderableSystem* render = nullptr;
 
 		// predict if two AABBs will collide
 		bool IsCollide(RigidBody r1, RigidBody  r2, const glm::mat4& mat1, const glm::mat4& mat2);
