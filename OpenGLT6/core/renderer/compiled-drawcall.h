@@ -251,7 +251,7 @@ void UseShader(ShaderHandle shader);
 
 void UseTexture(MaterialHandle md, int id);
 
-void ReadFromDefaultGBufferAttachment(int id, std::function<void()> callback);
+void ReadFromDefaultGBufferAttachment(int id, const std::function<void()>& callback);
 
 // this should be called once per frame
 void FlushAllDrawCalls();

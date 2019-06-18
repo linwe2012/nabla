@@ -167,6 +167,7 @@ struct VideoStreamer {
 		}
 		auto itr = color.begin();
 		
+		// flip the frame
 		frame->data[0] += frame->linesize[0] * (height - 1);
 		frame->linesize[0] = -frame->linesize[0];
 
@@ -179,6 +180,7 @@ struct VideoStreamer {
 			}
 		}
 
+		// flip back
 		frame->linesize[0] = -frame->linesize[0];
 		frame->data[0] -= frame->linesize[0] * (frame->height - 1);
 
@@ -233,6 +235,26 @@ void PlaybackSystem::OnGui(const Vector<Entity>& actives)
 	ImGui::PopID();
 	ImGui::SameLine();
 	ImGui::Checkbox("Gui", &show_gui_);
+	static ImGuiComboFlags flags = 0;
+	const char* items[] = { "Default", "gPosition", "gNormal", "gDiffuseSpec", "gAlbedo", "gMetaRoughAO", "gEntity" };
+	
+	static const char* item_current = items[0];            // Here our selection is a single pointer stored outside the object.
+	if (ImGui::BeginCombo("Target", item_current, flags)) // The second parameter is the label previewed before opening the combo.
+	{
+		for (int n = 0; n < IM_ARRAYSIZE(items); n++)
+		{
+			bool is_selected = (item_current == items[n]);
+			if (ImGui::Selectable(items[n], is_selected)) {
+				target = n;
+				item_current = items[n];
+			}
+			if (is_selected) {
+				ImGui::SetItemDefaultFocus();   // Set the initial focus when opening the combo (scrolling + for keyboard navigation support in the upcoming navigation branch)
+			}
+		}
+		ImGui::EndCombo();
+	}
+
 }
 
 std::string GetTimeString() {
@@ -263,7 +285,7 @@ void PlaybackSystem::Update(Clock& clock)
 
 	{
 		renderer::ScopedState scope(show_gui_ ? renderer::RenderPass::kSkybox : renderer::RenderPass::kPostProc);
-		renderer::ReadFromDefaultGBufferAttachment(-1, [this] {
+		renderer::ReadFromDefaultGBufferAttachment(target - 1, [this] {
 
 			if (!screenshot_button_ && !record_button_ && !IsRecording()) {
 				return;

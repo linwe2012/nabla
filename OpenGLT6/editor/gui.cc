@@ -63,4 +63,13 @@ void EndGuiFrame()
 	renderer::NextFrame();
 }
 
+static void StdFunctionWrapper(void* func) {
+	auto f = (std::function<void()>*)func;
+	(*f)();
+	delete f;
+}
+
+
+
+
 }

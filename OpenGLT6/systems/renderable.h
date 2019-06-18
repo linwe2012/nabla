@@ -25,11 +25,14 @@ public:
 		};
 		Transform transform;
 		renderer::MeshHandle hmesh;
+		renderer::ShaderHandle shader;
 		renderer::RenderPass pass = renderer::RenderPass::kForward;
 		Entity lookback;
 		std::string name;
 		bool hide = false;
-		char selected;
+		char selected = kNotSelected;
+		renderer::MaterialHandle hentity;
+		renderer::MaterialHandle hmodel;
 	};
 	
 	void SetRenderPassShader(renderer::RenderPass pass, 
@@ -57,11 +60,14 @@ public:
 
 	void Update(Clock& clock) override;
 
+	void SetShader(Entity e, renderer::ShaderHandle shader, renderer::MaterialHandle hentity, renderer::MaterialHandle hmodel);
+
 	const char* name() const override { return "Renderable"; }
 
 	void Add(Entity, renderer::MeshHandle hmesh, Transform t = Transform(), renderer::RenderPass pass = renderer::RenderPass::kForward);
 
 	const Renderable& GetRenderable(Entity) const;
+	Renderable* GetRenderableEdit(Entity);
 
 	Transform* GetTransformEdit(Entity e) {
 		if (!Has(e)) {

@@ -3,6 +3,7 @@
 #include "isystem.h"
 #include "core/renderer.h"
 #include "containers/map.h"
+#include <array>
 
 namespace nabla {
 #define NA_BUILTIN_MATERIAL_SYS_LIST(V)\
@@ -54,12 +55,25 @@ public:
 		Vector<char> defaults;
 	};
 
+	struct PBRMaterial {
+		renderer::MaterialHandle albedo_map;
+		renderer::MaterialHandle metallic_map;
+		renderer::MaterialHandle roughness_map;
+		renderer::MaterialHandle ao_map;
+	};
+
 	struct Material {
 		using Vec3 = glm::vec3;
 		using Float = float;
 #define DEF_MAT(name, t, def) t name = t def;
-		NA_BUILTIN_MATERIAL_SYS_LIST(DEF_MAT)
+#define DEF_MAT_H(name, t, def) renderer::MaterialHandle h_##name;
+		NA_BUILTIN_MATERIAL_SYS_LIST(DEF_MAT);
+		// NA_BUILTIN_MATERIAL_SYS_LIST(DEF_MAT_H);
 #undef DEF_MAT
+
+		PBRMaterial pbr_map;
+
+		renderer::MaterialHandle texture;
 	};
 
 	void Update(Entity e) override;
@@ -75,6 +89,7 @@ public:
 	void RegisterMaterial(std::string scoped_name, MaterialPrototype proto);
 
 	void Add(Entity, Material material);
+
 	/*
 	Material& GetEdit(Entity e) {
 		NA_ASSERT(Has(e));
@@ -88,6 +103,10 @@ public:
 	void Initialize(SystemContext&) override;
 
 	void Add(Entity e) override { Add(e, Material()); }
+
+	void AttachTexture(Entity e, renderer::MaterialHandle t);
+
+	void AttachPBRTexture(Entity e, PBRMaterial pbrs);
 
 private:
 	// Material materials_;
@@ -117,6 +136,9 @@ private:
 	MaterialScope root_mat_scope_;
 	Map<std::string, Map<std::string, MaterialPrototype>> prototypes_;
 
+	struct Data;
+	Data* data_;
+	SystemContext* ctx_;
 };
 
 inline bool MatrialSysterm::Has(Entity e) const {

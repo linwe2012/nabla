@@ -16,20 +16,29 @@ in vec3 NormalMap;
 
 in vec2 TexCoords; //@ TexCoords
 
+uniform vec3 Entity;
+
 uniform sampler2D DiffuseMap; //@ DiffuseMap
 
 uniform sampler2D SpecularMap; //@ SpecularMap
 
+uniform sampler2D AlbedoMap; //@ AlbedoMap
+
+uniform sampler2D MetallicMap; //@ MetallicMap
+
+uniform sampler2D RoughnessMap; //@ RoughnessMap
+
+uniform sampler2D AOMap; //@ AOMap
+
 uniform vec3 Diffuse; //@ Diffuse
 uniform float Specular; //@ Specular
-uniform float Ambient;
 
-uniform vec3 Albedo;
-uniform float Metallic;
-uniform float Roughness;
-uniform float AO;
+uniform vec3 Albedo; //@ !AlbedoMap
+uniform float Metallic; //@ !MetallicMap
+uniform float Roughness; //@ !RoughnessMap
+uniform float AO; //@ !AOMap
 
-uniform vec3 Entity;
+
 
 void main()
 {    
@@ -48,10 +57,15 @@ void main()
     gDiffuseSpec.a = texture(SpecularMap, TexCoords).r; //@ SpecularMap && TexCoords
     gDiffuseSpec.a = Specular; //@ Specular
 
-    gAlbedo = Albedo;
-    gMetaRoughAO.r = Metallic;
-    gMetaRoughAO.g = Roughness;
-    gMetaRoughAO.b = AO;
+    gAlbedo = Albedo; //@ !AlbedoMap
+    gMetaRoughAO.r = Metallic; //@ !MetallicMap
+    gMetaRoughAO.g = Roughness;  //@ !RoughnessMap
+    gMetaRoughAO.b = AO; //@ !AOMap
+
+    gAlbedo = texture(AlbedoMap, TexCoords).rgb; //@ AlbedoMap
+    gMetaRoughAO.r = texture(MetallicMap, TexCoords).r; //@ MetallicMap
+    gMetaRoughAO.g = texture(RoughnessMap, TexCoords).r;  //@ RoughnessMap
+    gMetaRoughAO.b = texture(AOMap, TexCoords).r; //@ AOMap
 
     gEntity = Entity;
 }

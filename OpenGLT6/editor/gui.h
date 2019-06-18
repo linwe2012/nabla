@@ -17,6 +17,7 @@ void InitGui();
 void PrepareGuiFrame();
 bool IsUserWorkingOnGui();
 void EndGuiFrame();
+
 }
 
 #endif // !_NABLA_EDITOR_GUI_H_

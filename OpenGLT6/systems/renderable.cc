@@ -70,9 +70,16 @@ void RenderableSystem::Update(Clock& clock) {
 
 
 		auto& info = render_handles_[(uint16_t)r.pass];
-		if (hshader != info.hshader_) {
-			hshader = info.hshader_;
-			UseShader(hshader);
+		if (!r.shader.IsNil()) {
+			//if (hshader != r.shader) {
+				//hshader = r.shader;
+				UseShader(r.shader);
+			//}
+		}
+		else {//if (hshader != info.hshader_) {
+			// hshader = info.hshader_;
+
+			UseShader(info.hshader_);
 		}
 		
 		glm::mat4 model(1.0f);
@@ -87,8 +94,14 @@ void RenderableSystem::Update(Clock& clock) {
 		fentity.x = (r.lookback.index() & 0xFF) / ((float)255.0f);
 		fentity.y = ((r.lookback.index() & 0xFF00) >> 8) / ((float)255.0f);
 		fentity.z = ((r.lookback.index() & 0xFF0000) >> 16) / ((float)255.0f);
-		SetUniform(info.hentity_, fentity);
-		SetUniform(info.hmodel_, model);
+		if (r.shader.IsNil()) {
+			SetUniform(info.hentity_, fentity);
+			SetUniform(info.hmodel_, model);
+		}
+		else {
+			SetUniform(r.hentity, fentity);
+			SetUniform(r.hmodel, model);
+		}
 		DrawMesh(r.hmesh);
 		if (r.selected) {
 			auto& d = *data_;
@@ -108,6 +121,19 @@ void RenderableSystem::Update(Clock& clock) {
 	}
 }
 
+void RenderableSystem::SetShader(Entity e, renderer::ShaderHandle shader, renderer::MaterialHandle hentity, renderer::MaterialHandle hmodel)
+{
+	if (!Has(e)) {
+		return;
+	}
+	auto& r = dense_[sparse_[e.index()]];
+
+	r.shader = shader;
+	r.hentity = hentity;
+	r.hmodel = hmodel;
+
+}
+
 
 void RenderableSystem::Add(Entity e, renderer::MeshHandle hmesh, Transform t, renderer::RenderPass pass)
 {
@@ -117,6 +143,7 @@ void RenderableSystem::Add(Entity e, renderer::MeshHandle hmesh, Transform t, re
 	dense_.push_back(Renderable{
 		t,
 		hmesh,
+		renderer::ShaderHandle(),
 		pass,
 		e,
 		});
@@ -127,6 +154,14 @@ const RenderableSystem::Renderable& RenderableSystem::GetRenderable(Entity e) co
 	NA_LEAVE_IF(invalid_, !Has(e), "No such entitiy");
 		
 	return dense_[sparse_[e.index()]];
+}
+
+RenderableSystem::Renderable* RenderableSystem::GetRenderableEdit(Entity e)
+{
+	if (!Has(e)) {
+		return nullptr;
+	}
+	return &dense_[sparse_[e.index()]];
 }
 
 

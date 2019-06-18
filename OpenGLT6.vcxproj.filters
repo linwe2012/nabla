@@ -52,6 +52,15 @@
     <Filter Include="Source Files\system">
       <UniqueIdentifier>{77739840-0569-4a57-9632-cc200dc2dff3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\system\private">
+      <UniqueIdentifier>{85d7c5a9-501a-4387-a716-4f9a933c2404}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\system\private">
+      <UniqueIdentifier>{6549649f-3655-497e-9b45-39b9b97eccbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\debug">
+      <UniqueIdentifier>{49ba9754-5dd2-408e-8626-e108b0f5e420}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="openglt6\benchmark.cc">
@@ -248,6 +257,9 @@
     </ClCompile>
     <ClCompile Include="OpenGLT6\systems\ocean.cc">
       <Filter>Source Files\system</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLT6\systems\ocean\fft.cc">
+      <Filter>Source Files\system\private</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -476,5 +488,13 @@
     <ClInclude Include="OpenGLT6\systems\ocean.h">
       <Filter>Header Files\system</Filter>
     </ClInclude>
+    <ClInclude Include="OpenGLT6\systems\ocean\fft.h">
+      <Filter>Header Files\system\private</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="OpenGLT6\utils\vs-visualizers\vector.natvis">
+      <Filter>Resource Files\debug</Filter>
+    </Natvis>
   </ItemGroup>
 </Project>

@@ -98,7 +98,7 @@ struct MaterialDrawCall {
 
 struct FrameBufferAttachmentReaderDrawCall {
 	NA_DRAWCALL(FrameBufferAttachmentReaderDrawCall);
-	FrameBufferAttachmentReaderDrawCall(FrameBufferHandle hf, int _id, std::function<void()> cb)
+	FrameBufferAttachmentReaderDrawCall(FrameBufferHandle hf, int _id, const std::function<void()>& cb)
 		: hframe(hf), id(_id), callback(cb) {}
 
 	FrameBufferHandle hframe;
@@ -123,6 +123,14 @@ struct SwitchFrameBufferDrawCall {
 	FrameBufferHandle hframe;
 };
 
+struct UpdateMeshVertexDrawCall {
+	NA_DRAWCALL(UpdateMeshVertexDrawCall);
+
+	MeshHandle target;
+	int32_t data_offset; //< by bytes
+	uint32_t begin;
+	uint32_t end;
+};
 
 struct SolidPixel {
 	unsigned char r;

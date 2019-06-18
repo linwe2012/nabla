@@ -156,6 +156,7 @@
     <ClCompile Include="OpenGLT6\systems\lighting.cc" />
     <ClCompile Include="OpenGLT6\systems\material.cc" />
     <ClCompile Include="OpenGLT6\systems\ocean.cc" />
+    <ClCompile Include="OpenGLT6\systems\ocean\fft.cc" />
     <ClCompile Include="OpenGLT6\systems\playback.cc" />
     <ClCompile Include="OpenGLT6\systems\polygon.cc" />
     <ClCompile Include="OpenGLT6\systems\renderable.cc" />
@@ -235,6 +236,7 @@
     <ClInclude Include="OpenGLT6\systems\lighting.h" />
     <ClInclude Include="OpenGLT6\systems\material.h" />
     <ClInclude Include="OpenGLT6\systems\ocean.h" />
+    <ClInclude Include="OpenGLT6\systems\ocean\fft.h" />
     <ClInclude Include="OpenGLT6\systems\playback.h" />
     <ClInclude Include="OpenGLT6\systems\polygon.h" />
     <ClInclude Include="OpenGLT6\systems\renderable.h" />
@@ -280,6 +282,9 @@
     <ClInclude Include="OpenGLT6\utils\cppstring.h" />
     <ClInclude Include="OpenGLT6\utils\typeid.h" />
     <ClInclude Include="OpenGLT6\utils\utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="OpenGLT6\utils\vs-visualizers\vector.natvis" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

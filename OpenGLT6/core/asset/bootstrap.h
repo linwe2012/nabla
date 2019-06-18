@@ -56,6 +56,10 @@ namespace nabla {
 			return yaml_models_;
 		}
 
+		YAML::Node yaml_textures() {
+			return textures_;
+		}
+
 		fs::path cwd() { return cwd_; }
 
 		void BindMutex(std::mutex& m) {

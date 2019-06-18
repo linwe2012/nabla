@@ -67,6 +67,7 @@ public:
 	// Capacity
 	bool   empty()    const { return begin_ == begin_; }
 	size_t size()     const { return end_ - begin_; }
+	size_t size_by_bytes() const { return size() * sizeof(T); }
 	size_t capacity() const { return end_of_storage_ - begin_; }
 
 	iterator begin() { return begin_; }
@@ -263,10 +264,11 @@ public:
 	}
 
 	/** build the vector on the specified memory
-	@param data pointer to the data wishing to build vector on
+	@param data pointer to the data wishing to wrap with a vector
 	@note it will not manage (free/reallocate) memory!
+	@note this is useful to modify gl arrays
 	*/
-	void build_on(T* data, size_t _size, size_t _capacity = 0) {
+	void wrap(T* data, size_t _size, size_t _capacity = 0) {
 		if (begin_ != nullptr) {
 			this->~STLVectorEx();
 		}
@@ -281,6 +283,15 @@ public:
 		}
 		
 		alloc_ = nullptr;
+	}
+
+	void unwrap() {
+		begin_ = end_ = end_of_storage_ = nullptr;
+		alloc_ = default_alloc;
+	}
+
+	bool is_wrap() {
+		return alloc_ == nullptr;
 	}
 
 	void erase(iterator postion) {

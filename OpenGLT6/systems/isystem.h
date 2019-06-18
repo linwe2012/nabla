@@ -92,6 +92,7 @@ private:
 class RenderableSystem;
 class EntityManager;
 class AssetManager;
+class MatrialSysterm;
 
 struct BootstrapStatus {
 	bool done = false;
@@ -100,9 +101,11 @@ struct BootstrapStatus {
 
 struct SystemContext {
 	RenderableSystem* render;
+	MatrialSysterm* material;
 	EntityManager* entity_manager;
 	AssetManager* assets;
 	BootstrapStatus* status;
+	Clock* clock;
 };
 
 class ISystem {

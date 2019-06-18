@@ -253,7 +253,7 @@ void main()
 
     
     //FragColor = vec4(lighting, 1.0);
-    FragColor = vec4(lighting, 1.0); // +  vec4(texture(gPicker, TexCoords).rgb, 1.0) * 0.8;
+    FragColor = vec4(lighting, 1.0); //* 0.02 + vec4(Diffuse, 1.0) * 0.98; // +  vec4(texture(gPicker, TexCoords).rgb, 1.0) * 0.8;
     // FragColor = vec4(lighting * 0.05, 0.01)  + vec4(e, 0.99);
     // FragColor = vec4(texture(gDiffuseSpec, TexCoords).rgb, 0);
 }

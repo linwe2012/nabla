@@ -8,16 +8,18 @@ static constexpr float PI = 3.14159265358979323846f;
 namespace nabla {
 
 struct OceanParameters {
-	float g; // gravity
-	int N; // dimension -- N should be a power of 2
-	float A; // phillips spectrum parameter -- affects heights of waves (Amplitude)
-	glm::vec2 w; //direction of the wind
-	float length;				// length parameter
+	float g = 9.8f; // gravity
+	int N = 64; // dimension -- N should be a power of 2
+	float A = 0.0005f; // phillips spectrum parameter -- affects heights of waves (Amplitude)
+	glm::vec2 w = glm::vec2(32.0f, 32.0f); //direction of the wind
+	float length = 64.f;				// length parameter
+	float fog_decay = 160.0f;
+	glm::vec3 light_pos = glm::vec3(3.0f);
 
 	float Kx(int n_prime) const;
 	float Kz(int m_prime) const;
 	struct Data;
-	Data* data;
+	Data* data = nullptr;
 };
 
 class OceanSystem : public ISystem {
@@ -38,7 +40,7 @@ public:
 	virtual void Update(Entity) override {};
 
 	// called upon every frame
-	void Update(Clock& clock) override {};
+	void Update(Clock& clock) override;
 
 	const char* name() const override {
 		return "ocean";

@@ -15,6 +15,7 @@ static int last_cubic_texture_id;
 
 static MaterialHeader last_2d_texture[12];
 static int last_2d_texture_id[12];
+static int last_2d_texture_num[12];
 #endif // NA_DEVELOPMENT
 }
 
@@ -82,8 +83,8 @@ NA_DRAWCALL_IMPL(MaterialDrawCall) {
 		glActiveTexture(GL_TEXTURE0 + texture_id);
 		glBindTexture(GL_TEXTURE_2D, id);
 #ifdef NA_DEVELOPMENT
-		detail::last_2d_texture[0] = desc;
-		detail::last_2d_texture_id[0] = id;
+		detail::last_2d_texture[texture_id] = desc;
+		detail::last_2d_texture_id[texture_id] = id;
 #endif
 		break;
 	case MaterialType::kSamplerCubic:
@@ -144,12 +145,12 @@ NA_DRAWCALL_IMPL(SwitchFrameBufferDrawCall) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		// ActivateShader(f.attached_shader);
 		// glDrawBuffers(f.attach_ids.size(), &f.attach_ids[0]);
-		// for (auto t : f.attachments) {
-		// 	glActiveTexture(GL_TEXTURE0 + cnt);
-		// 	glBindTexture(GL_TEXTURE_2D, t);
+		//for (auto t : f.attachments) {
+		 	//glActiveTexture(GL_TEXTURE0 + cnt);
+		 	//glBindTexture(GL_TEXTURE_2D, t);
 		// 	glClearBufferfv(GL_COLOR, cnt, &f.clear_color[cnt].r);
 		// 	++cnt;
-		// }
+		//}
 		break;
 		
 	case nabla::renderer::SwitchFrameBufferDrawCall::kCopyFrameBufferToDefault:
@@ -173,6 +174,11 @@ NA_DRAWCALL_IMPL(SwitchFrameBufferDrawCall) {
 			glEnableVertexAttribArray(1);
 			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 			
+		}
+		ActivateShader(f.attached_shader);
+		for (auto t : f.attachments) {
+			glActiveTexture(GL_TEXTURE0 + cnt);
+			glBindTexture(GL_TEXTURE_2D, t);
 		}
 		
 		glBindVertexArray(quadVAO);

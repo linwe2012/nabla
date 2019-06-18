@@ -20,6 +20,7 @@
 #include "systems/collision.h"
 #include "systems/assets.h"
 #include "systems/polygon.h"
+#include "systems/ocean.h"
 
 #include <glm/gtx/matrix_decompose.hpp>
 
@@ -80,14 +81,14 @@ nabla::renderer::MeshHandle GetCubeMesh() {
 	using namespace nabla::renderer;
 	Vector<LayoutInfo> layouts;
 	layouts.push_back(LayoutInfo{
-		0, 3, LayoutInfo::kFloat, false, 8 * sizeof(float), 0
+		0, 3, LayoutInfo::kFloat, MaterialType::kVec3, false, 8 * sizeof(float), 0
 		});
 	layouts.push_back(LayoutInfo{
-		1, 3, LayoutInfo::kFloat, false, 8 * sizeof(float), 3 * sizeof(float)
+		1, 3, LayoutInfo::kFloat, MaterialType::kVec3, false, 8 * sizeof(float), 3 * sizeof(float)
 		});
 
 	layouts.push_back(LayoutInfo{
-		2, 2, LayoutInfo::kFloat, false, 8 * sizeof(float), 6 * sizeof(float)
+		2, 2, LayoutInfo::kFloat, MaterialType::kVec2, false, 8 * sizeof(float), 6 * sizeof(float)
 		});
 
 	return NewMesh(MemoryInfo{ vertices , sizeof(vertices) }, MemoryInfo{ nullptr, 0 }, layouts);
@@ -182,7 +183,7 @@ float skyboxVertices[] = {
 	-1.0f, -1.0f,  1.0f,
 	 1.0f, -1.0f,  1.0f
 };
-
+nabla::renderer::MeshHandle GetCubeIndexedMesh();
 
 int main()
 {
@@ -213,12 +214,20 @@ int main()
 		SetEntityManager(&entity_manager);
 	}
 	
+	Clock clock;
+
 	SystemContext sys_ctx{
 		&sys_renderable,
+		nullptr,
 		&entity_manager,
 		&assets,
 		&bootstrap_status,
+		&clock,
 	};
+
+	MatrialSysterm sys_material;
+	sys_material.Initialize(sys_ctx);
+	sys_ctx.material = &sys_material;
 
 	assets.BindMutex(bootstrap_status.render_job);
 	assets.ParseAssetsFromFile("./test/assets.yml");
@@ -268,18 +277,19 @@ int main()
 	AnimationSystem sys_animation;
 
 	LightingSystem sys_lighting;
-	MatrialSysterm sys_material;
+	
 	PlaybackSystem sys_playback;
 	CollisionSystem sys_collision;
 	PolygonSystem sys_polygon;
 	AssetsSystem sys_assets;
-	
+	OceanSystem sys_oceans;
+
 	sys_lighting.Initialize(sys_ctx);
-	sys_material.Initialize(sys_ctx);
 	sys_playback.Initialize(sys_ctx);
 	sys_collision.Initialize(sys_ctx);
 	sys_polygon.Initialize(sys_ctx);
 	sys_assets.Initialize(sys_ctx);
+	sys_oceans.Initialize(sys_ctx);
 
 	Vector<Entity> lights;
 
@@ -327,12 +337,14 @@ int main()
 		hbox_lightColor = renderer::NewUniform(postprocess, "lightColor", renderer::MaterialType::kVec3);
 	}
 	
-	renderer::MeshHandle hcube;
+	renderer::MeshHandle hcube, hindexed_cube;
 	{
 		std::scoped_lock render(bootstrap_status.render_job);
 		hcube = GetCubeMesh();
+		hindexed_cube = GetCubeIndexedMesh();
 	}
 
+	
 	renderer::ShaderHandle skyboxpass;
 	renderer::MaterialHandle hskybox_proj, hskybox_view;
 	{
@@ -431,9 +443,9 @@ int main()
 	}
 	
 	solids.push_back(entity_manager.Create()); // desktop
-	sys_renderable.Add(solids.back(), hcube, Transform{
+	sys_renderable.Add(solids.back(), hindexed_cube, Transform{
 		glm::vec3(0.0f, 0.0f, 0.0f),
-		glm::vec3(1.0f, -0.2f, 1.0f),
+		glm::vec3(1.0f, 0.2f, 1.0f),
 		glm::quat()
 		});
 	sys_material.Add(solids.back());
@@ -456,7 +468,7 @@ int main()
 	
 	for (int i = 0; i < 4; ++i) {
 		solids.push_back(entity_manager.Create()); // legs
-		sys_renderable.Add(solids.back(), hcube, Transform{
+		sys_renderable.Add(solids.back(), hindexed_cube, Transform{
 			glm::vec3(pos[i*2] *5.0f, -1.0f, pos[i * 2 + 1] * 5.0f),
 			glm::vec3(0.12f, 0.8f, 0.12f),
 			glm::quat()
@@ -494,7 +506,7 @@ int main()
 	bootstrap_status.done = true;
 	//discarded_bootstrap.wait();
 
-	Clock clock;
+	
 	clock.Gensis();
 	
 	while (renderer::IsAlive())
@@ -550,7 +562,7 @@ int main()
 		sys_material.Update(clock);
 		sys_playback.Update(clock);
 		sys_collision.Update(clock);
-		
+		sys_oceans.Update(clock);
 
 		GLFWwindow* window = static_cast<GLFWwindow*>(renderer::GetWindow());
 
@@ -735,6 +747,7 @@ int main()
 
 			sys_renderable.OnGui(tmp);
 			
+			sys_oceans.OnGui(tmp);
 			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", clock.GetLastFrameDuration() * 1000.0f, clock.GetLastFrameFps());
 			ImGui::End();
 		}
@@ -857,4 +870,116 @@ void renderCube()
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glBindVertexArray(0);
 }
+
+nabla::renderer::MeshHandle GetCubeIndexedMesh() {
+	constexpr float k = 0.8f;
+	float vertices[] = {
+		// vertex
+		1.0f, 1.0f, 1.0f,
+		1.0f, -1.0f, 1.0f,
+		-1.0f, -1.0f, 1.0f,
+		-1.0f, 1.0f, 1.0f,
+		1.0f, 1.0f, -1.0f,
+		1.0f, -1.0f, -1.0f,
+		-1.0f, -1.0f, -1.0f,
+		-1.0f, 1.0f, -1.0f,
+
+		// normal
+		1.0f, 1.0f, 1.0f,
+		1.0f, -1.0f, 1.0f,
+		-1.0f, -1.0f, 1.0f,
+		-1.0f, 1.0f, 1.0f,
+		1.0f, 1.0f, -1.0f,
+		1.0f, -1.0f, -1.0f,
+		-1.0f, -1.0f, -1.0f,
+		-1.0f, 1.0f, -1.0f,
+
+		// 1.0f, 1.0f, 1.0f,
+		// 0.0f, 0.0f, 1.0f,
+		// 0.0f, 0.0f, 1.0f,
+		// 0.0f, 0.0f, 1.0f,
+		//  0.0f, 0.0f, -1.0f,
+		//  0.0f, 0.0f, -1.0f,
+		//  0.0f, 0.0f, -1.0f,
+		//  0.0f, 0.0f, -1.0f,
+
+		 // tangent
+		 0.0f, 0.0f, 0.0f,
+		 0.0f, 0.0f, 0.0f,
+		 0.0f, 0.0f, 0.0f,
+		 0.0f, 0.0f, 0.0f,
+		 0.0f, 0.0f, 0.0f,
+		 0.0f, 0.0f, 0.0f,
+		 0.0f, 0.0f, 0.0f,
+		 0.0f, 0.0f, 0.0f,
+
+		 // bitangent
+		  0.0f, 0.0f, 0.0f,
+		  0.0f, 0.0f, 0.0f,
+		  0.0f, 0.0f, 0.0f,
+		  0.0f, 0.0f, 0.0f,
+		  0.0f, 0.0f, 0.0f,
+		  0.0f, 0.0f, 0.0f,
+		  0.0f, 0.0f, 0.0f,
+		  0.0f, 0.0f, 0.0f,
+
+		  // textcoord
+
+		 k * 1.0f,  k * 0.0f,
+		 k * 1.0f,  k * 0.0f,
+
+		 k * 0.0f, k * 1.0f,
+		 k * 0.0f, k * 0.0f,
+
+		 k * 1.0f,  k * 1.0f,
+		 k * 1.0f,  k * 1.0f,
+		 k * 0.0f, k * 0.0f,
+		 k * 0.0f, k * 1.0f,
+
+		 // k * 1.0f,  k * 1.0f,
+		 // k * 1.0f,  k * -1.0f,
+		 //
+		 // k * -1.0f, k * 1.0f,
+		 // k * -1.0f, k * -1.0f,
+
+	   //   k *  0.5f,  k * 0.5f,
+	   //   k * 0.5f,   k * -0.5f,
+	   //   k * -0.5f,  k * -0.5f,
+	   //   k * -0.5f,  k * 0.5f,
+
+	   // k * 1.0f,  k * 1.0f,
+	   //   k * 1.0f,  k * -1.0f,
+	   //
+	   //   k * -1.0f, k * 1.0f,
+	   //   k * -1.0f, k * -1.0f,
+	   //
+	   // k * 1.0f,  k * -1.0f,
+	   // k * 1.0f,  k * 1.0f,
+	   // k * -1.0f, k *  -1.0f,
+	   // k * -1.0f, k *  1.0f,
+	};
+
+	unsigned indices[] = {
+		0, 1, 2, 2, 3, 0,
+		6, 7, 4, 4, 5, 6,
+
+		1, 5, 4, 4, 0, 1,
+		0, 4, 7, 7, 3, 0,
+		2, 3, 7, 7, 6, 2,
+		2, 6, 5, 5, 1, 2,
+
+
+	};
+	using namespace nabla;
+	using namespace nabla::renderer;
+	Vector<LayoutInfo> layouts;
+	layouts.push_back(LayoutInfo::CreatePacked<glm::vec3>(0, 0));
+	layouts.push_back(LayoutInfo::CreatePacked<glm::vec3>(1, 24 * sizeof(float)));
+	layouts.push_back(LayoutInfo::CreatePacked<glm::vec3>(2, 48 * sizeof(float)));
+	layouts.push_back(LayoutInfo::CreatePacked<glm::vec3>(3, 72 * sizeof(float)));
+	layouts.push_back(LayoutInfo::CreatePacked<glm::vec2>(4, 96 * sizeof(float)));
+
+	return NewMesh(MemoryInfo{ vertices , sizeof(vertices) }, MemoryInfo{ indices, sizeof(indices) }, layouts);
+}
+
 #endif

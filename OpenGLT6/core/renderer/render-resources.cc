@@ -24,7 +24,7 @@ public:
 
 	MaterialHandle NewUniform(ShaderHandle target, const char* name, MaterialType type);
 
-	void DescribeHanlde(MaterialHandle md, RenderPass render_pass);
+	void DescribeHandle(MaterialHandle md, RenderPass render_pass);
 
 	uint32_t OpenHandle(MaterialHandle md);
 
@@ -100,6 +100,7 @@ MaterialHandle MaterialManger::NewTexture(const unsigned char* data,
 
 	NA_ASSERT(glGetError() == 0, "Invalid opengl cmd");
 	MaterialHeader header;
+	header.dbg_name = "2d_texture";
 	header.type = MaterialType::kSampler2D;
 	header.width = width;
 	header.height = height;
@@ -160,6 +161,7 @@ MaterialHandle MaterialManger::NewTextureCubic(const Vector<unsigned char*>& dat
 	glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
 	NA_ASSERT(glGetError() == 0, "Invalid opengl cmd");
 	MaterialHeader header;
+	header.dbg_name = "cubic_texture";
 	header.type = MaterialType::kSamplerCubic;
 	header.width = width;
 	header.height = height;
@@ -177,6 +179,7 @@ inline MaterialHandle MaterialManger::NewUniform(ShaderHandle target, const char
 		return MaterialHandle::MakeNil();
 	}
 	MaterialHeader header;
+	header.dbg_name = name;
 	header.type = type;
 	header.hshader = target;
 	// header.render_pass = 
@@ -186,7 +189,7 @@ inline MaterialHandle MaterialManger::NewUniform(ShaderHandle target, const char
 	return md;
 }
 
-inline void MaterialManger::DescribeHanlde(MaterialHandle md, RenderPass render_pass) {
+inline void MaterialManger::DescribeHandle(MaterialHandle md, RenderPass render_pass) {
 	headers_[md.index()].render_pass = render_pass;
 }
 
@@ -194,21 +197,29 @@ inline uint32_t MaterialManger::OpenHandle(MaterialHandle md) {
 	return buffer_[md.index()];
 }
 
-inline uint32_t MaterialManger::GetMaterialSize(MaterialHandle md) {
-	switch (GetDecriptor(md).type)
+inline uint32_t GetMaterialSizeByType(MaterialType t) {
+	switch (t)
 	{
+	case MaterialType::kInt:
 	case MaterialType::kFloat: // fall through
 	case MaterialType::kSamplerCubic:
 	case MaterialType::kSampler2D:
 		return sizeof uint32_t;
 
+	case MaterialType::kVec2:
+		return sizeof glm::vec2;
 	case MaterialType::kVec3:
 		return sizeof glm::vec3;
+	case MaterialType::kVec4:
+		return sizeof glm::vec4;
 	case MaterialType::kMat4:
 		return sizeof glm::mat4;
 	default:
 		return 0;
 	}
+}
+inline uint32_t MaterialManger::GetMaterialSize(MaterialHandle md) {
+	return GetMaterialSizeByType(GetDecriptor(md).type);
 }
 
 
@@ -487,18 +498,20 @@ MeshHandle NewMesh(MemoryInfo data, MemoryInfo indices, const Vector<LayoutInfo>
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, data.size_by_bytes, data.ptr, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, data.size_by_bytes, data.ptr, GL_DYNAMIC_DRAW);
 	
 	if (indices.ptr != nullptr) {
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size_by_bytes, indices.ptr, GL_STATIC_DRAW);
 	}
 
+	size_t size = 0;
 	for (const auto& ly : layouts) {
 		glVertexAttribPointer(ly.position, ly.count_per_vertex, 
 			ly.type, ly.normalized ? GL_TRUE : GL_FALSE, 
 			ly.stride_by_bytes, (void*)static_cast<size_t>(ly.first_element_offset_by_bytes));
 		glEnableVertexAttribArray(ly.position);
+		size += GetMaterialSizeByType(ly.material_type);
 	}
 
 	glBindVertexArray(0);
@@ -506,7 +519,9 @@ MeshHandle NewMesh(MemoryInfo data, MemoryInfo indices, const Vector<LayoutInfo>
 	gMeshBuffer.buffer[handle.index()].ebo = EBO;
 	gMeshBuffer.buffer[handle.index()].vao = VAO;
 	gMeshBuffer.buffer[handle.index()].vbo = VBO;
-	gMeshBuffer.buffer[handle.index()].num_vertices = data.size_by_bytes / sizeof(glm::vec3) / layouts.size();
+	gMeshBuffer.buffer[handle.index()].num_vertices = data.size_by_bytes / size;
+	gMeshBuffer.buffer[handle.index()].size_vbo = data.size_by_bytes;
+
 	if (indices.ptr != nullptr) {
 		gMeshBuffer.buffer[handle.index()].num_indices = indices.size_by_bytes / sizeof(unsigned int);
 	}
@@ -530,7 +545,7 @@ static BufferManger<FrameBuffer, FrameBufferHandle, 16> gFrameBuffers;
 FrameBufferHandle NewGBuffer(int width, int height, ShaderHandle attached_shader, ShaderHandle blit_shader, const Vector<Attachment>& textures)
 {
 	FrameBufferHandle hframe = gFrameBuffers.NewHandle();
-	FrameBuffer g;
+	FrameBuffer& g = gFrameBuffers.buffer[hframe.index()];
 	glGenFramebuffers(1, &g.fbo);
 	glBindFramebuffer(GL_FRAMEBUFFER, g.fbo);
 	g.width = width;
@@ -591,7 +606,7 @@ FrameBufferHandle NewGBuffer(int width, int height, ShaderHandle attached_shader
 	g.attached_shader = attached_shader;
 	g.blit_shader = blit_shader;
 
-	gFrameBuffers.buffer[hframe.index()] = g;
+	
 
 	return hframe;
 }

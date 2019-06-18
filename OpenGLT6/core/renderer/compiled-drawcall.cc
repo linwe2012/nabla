@@ -159,7 +159,7 @@ void UseTexture(MaterialHandle md, int id)
 	(void)mdc;
 }
 
-void ReadFromDefaultGBufferAttachment(int id, std::function<void()> callback)
+void ReadFromDefaultGBufferAttachment(int id, const std::function<void()>& callback)
 {
 	auto& rc = tlsRenderContext;
 	Command cmd;
@@ -256,9 +256,9 @@ void PrepareRenderContext(void *pointer, size_t size) {
 void PrepareRenderContext__Temp()
 {
 	if (gResourceBuffer == nullptr) {
-		gResourceBuffer = new RenderResource::resource_t[65536];
+		gResourceBuffer = new RenderResource::resource_t[65536 * 4];
 	}
-	tlsRenderContext.Reset(gResourceBuffer, 65536);
+	tlsRenderContext.Reset(gResourceBuffer, 65536 * 4);
 }
 
 

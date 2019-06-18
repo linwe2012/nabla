@@ -45,6 +45,7 @@ public:
 		// describe light type, which may result in some feature disabled
 		Type type;
 		bool draw_mesh = false;
+		bool removed = false;
 		MeshHandle hmesh;
 		glm::vec3 mesh_scale = glm::vec3(0.125f);
 		std::string name;
@@ -137,12 +138,14 @@ private:
 	ShaderHanlde hshader_;
 	renderer::ShaderHandle hpostprocess_;
 	renderer::RenderContext* rc_ = nullptr;
+	renderer::MeshHandle mesh_;
 
 	MaterialHandle hbox_proj_;
 	MaterialHandle hbox_view_;
 	MaterialHandle hbox_model_;
 	MaterialHandle hbox_lightcolor_;
 	renderer::IBLMapComputResult hibls_;
+	SystemContext* ctx_;
 };
 
 inline const LightingSystem::Light* LightingSystem::GetLight(Entity e) const {

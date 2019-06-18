@@ -1,13 +1,15 @@
 #include "lighting.h"
 #include "glm/gtc/matrix_transform.hpp"
 #include "editor/gui.h"
+#include "core/entity-manager.h"
 
 namespace nabla {
-void LightingSystem::Initialize([[maybe_unused]] SystemContext&) {
+void LightingSystem::Initialize(SystemContext& ctx) {
 	num_spot_ = 0;
 	num_point_ = 0;
 	max_point_ = 32;
 	max_spot_ = 32;
+	ctx_ = &ctx;
 }
 
 #define DBG_LIGHTING_ENABLE_REFLECT
@@ -17,6 +19,7 @@ void LightingSystem::SetShader(renderer::ShaderHandle lightingpass, renderer::Sh
 	// hcamera_ = renderer::NewUniform(lightingpass, "the_fucking", renderer::MaterialType::kVec3);
 	hnum_point_ = renderer::NewUniform(lightingpass, "num_points", renderer::MaterialType::kInt);
 	hnum_spot_ = renderer::NewUniform(lightingpass, "num_spots", renderer::MaterialType::kInt);
+
 #ifdef DBG_LIGHTING_ENABLE_REFLECT
 	// hirradiance_ = renderer::NewUniform(lightingpass, "skybox", renderer::MaterialType::kInt);
 	renderer::OpenHandle(hshader_).Use();
@@ -38,12 +41,18 @@ void LightingSystem::SetShader(renderer::ShaderHandle lightingpass, renderer::Sh
 
 // activities on gui, note that you can actually do nothing
 void LightingSystem::OnGui(const Vector<Entity>& actives) {
-	for (auto e : actives) {
-		auto p = lights_.find(e);
-		if (p == lights_.end()) {
-			continue;
-		}
-		
+
+	if (ImGui::Button("New Point")) {
+		NewLight(ctx_->entity_manager->Create(), Light(Light::kPoint, mesh_));
+	}
+
+	if (ImGui::Button("New Spot")) {
+		NewLight(ctx_->entity_manager->Create(), Light(Light::kSpot, mesh_));
+	}
+
+	for (auto& ll : lights_) {
+		auto p = &ll;
+
 		switch (p->second.type)
 		{
 		case Light::kPoint:
@@ -56,6 +65,14 @@ void LightingSystem::OnGui(const Vector<Entity>& actives) {
 			break;
 		}
 	}
+
+	/*
+	for (auto e : actives) {
+		auto p = lights_.find(e);
+		if (p == lights_.end()) {
+			continue;
+		}
+	}*/
 }
 
 void LightingSystem::DrawGuiPoint(Light& l)
@@ -73,6 +90,7 @@ void LightingSystem::DrawGuiPoint(Light& l)
 		if (l.draw_mesh) {
 			ImGui::DragFloat3("Scale", &l.mesh_scale[0], 0.1f);
 		}
+		l.removed = ImGui::Button("Delete");
 		ImGui::Checkbox("Show Box", &l.draw_mesh);
 		ImGui::TreePop();
 		ImGui::Separator();
@@ -98,6 +116,8 @@ void LightingSystem::DrawGuiSpot(Light& l)
 		ImGui::DragFloat("Outer Cutoff (Deg)", &l.outer_cutoff, 0.1f, 0.0f, 180.0f);
 
 		ImGui::InputText("Name", &l.name);
+		l.removed = ImGui::Button("Delete");
+
 		ImGui::Checkbox("Show Box", &l.draw_mesh);
 		if (l.draw_mesh) {
 			ImGui::DragFloat3("Scale", &l.mesh_scale[0], 0.1f);
@@ -127,6 +147,7 @@ void LightingSystem::Update([[maybe_unused]]Clock& clock)
 		UseShader(hshader_);
 #ifdef DBG_LIGHTING_ENABLE_REFLECT
 		// SetUniform(hirradiance_, 0);
+
 		UseTexture(hibls_.irradiance, 6);
 		//UseTexture(hskybox_texture_, 6);
 		UseTexture(hibls_.prefilter, 7);
@@ -141,6 +162,13 @@ void LightingSystem::Update([[maybe_unused]]Clock& clock)
 
 	int npoint = 0;
 	int nspot = 0;
+	for (auto i = lights_.begin(); i != lights_.end(); ++i) {
+		if (i->second.removed) {
+			ctx_->entity_manager->Destroy(i->first);
+			lights_.erase(i++);
+		}
+	}
+
 	for (const auto& lp : lights_) {
 		const auto& l = lp.second;
 		switch (l.type)
@@ -190,6 +218,9 @@ void LightingSystem::NewLight(Entity e, Light l) {
 		break;
 	default:
 		break;
+	}
+	if (!l.hmesh.IsNil()) {
+		mesh_ = l.hmesh;
 	}
 	lights_[e] = l;
 }

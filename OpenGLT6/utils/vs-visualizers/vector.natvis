@@ -1,0 +1,15 @@
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+<Type Name="nabla::STLVectorEx&lt;*&gt;">
+    <DisplayString Condition="begin_ == 0">empty</DisplayString>
+    <DisplayString>{{ size={end_ - begin_} }}</DisplayString>
+    <Expand>
+        <Item Name="[size]" ExcludeView="simple">end_ - begin_</Item>
+        <Item Name="[capacity]" ExcludeView="simple">end_of_storage_ - begin_</Item>
+        <Item Name="[wrapper]">alloc_==0</Item>
+        <ArrayItems>
+            <Size>end_ - begin_</Size>
+            <ValuePointer>begin_</ValuePointer>
+        </ArrayItems>
+    </Expand>
+</Type>
+</AutoVisualizer>

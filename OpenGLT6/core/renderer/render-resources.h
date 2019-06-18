@@ -82,6 +82,7 @@ enum struct MaterialType : uint8_t {
 	kSamplerCubic,
 	kFloat,
 	kMat4,
+	kVec2,
 	kVec3,
 	kVec4,
 	kInt,
@@ -109,6 +110,7 @@ enum TextureFormat {
 };
 
 struct MaterialHeader {
+	std::string dbg_name;
 	RenderPass render_pass = RenderPass::kForward;
 	MaterialType type = MaterialType::kSampler2D;
 	ShaderHandle hshader;
@@ -157,6 +159,7 @@ struct MeshBuffer {
 	uint32_t ebo;
 	uint32_t num_indices;
 	uint32_t num_vertices;
+	uint32_t size_vbo;
 };
 
 struct MemoryInfo {
@@ -179,6 +182,7 @@ struct LayoutInfo {
 			_position,
 			3,
 			kFloat,
+			MaterialType::kVec3,
 			false,
 			sizeof(glm::vec3),
 			_first_element_offset_by_bytes
@@ -191,18 +195,22 @@ struct LayoutInfo {
 			_position,
 			2,
 			kFloat,
+			MaterialType::kVec2,
 			false,
 			sizeof(glm::vec2),
 			_first_element_offset_by_bytes
+
 		};
 	}
 
 	uint32_t position;
 	uint32_t count_per_vertex; /**< e.g. if vec3, `type=kFloat; count_per_vertex=3`*/
 	Type type;
+	MaterialType material_type;
 	bool normalized;           /**< clamp to (0, 1) */
 	uint32_t stride_by_bytes;  /**< offset b/w vertex attribute, by bytes */
 	uint32_t first_element_offset_by_bytes;
+	
 };
 
 MeshHandle NewMesh(MemoryInfo data, MemoryInfo indices, const Vector<LayoutInfo>& layouts);
