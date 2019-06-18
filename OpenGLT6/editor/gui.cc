@@ -21,14 +21,14 @@ void InitGui() {
 	config.OversampleV = 6;
 	static const ImWchar icon_ranges[] = { 0, 255, 0 };
 	
-	io.Fonts->AddFontFromFileTTF("assets/fonts/Proxima-Nova-Reg.ttf", 16.0f, &config, nullptr);
+	io.Fonts->AddFontFromFileTTF("nabla/fonts/Proxima-Nova-Reg.ttf", 16.0f, &config, nullptr);
 	io.Fonts->AddFontDefault();
-	io.Fonts->AddFontFromFileTTF("assets/fonts/Proxima-Nova-Bold.ttf", 16.0f, nullptr, nullptr);
-	io.Fonts->AddFontFromFileTTF("assets/fonts/DroidSans.ttf", 16.0f, nullptr, nullptr);
-	io.Fonts->AddFontFromFileTTF("assets/fonts/Proxima-Nova-Thin.ttf", 18.0f, nullptr, nullptr);
-	io.Fonts->AddFontFromFileTTF("assets/fonts/GoogleSans-Medium.ttf", 18.0f, nullptr, nullptr);
-	io.Fonts->AddFontFromFileTTF("assets/fonts/ProggyTiny.ttf", 13.0f, nullptr, nullptr);
-	io.Fonts->AddFontFromFileTTF("assets/fonts/Roboto-Medium.ttf", 16.0f, nullptr, nullptr);
+	io.Fonts->AddFontFromFileTTF("nabla/fonts/Proxima-Nova-Bold.ttf", 16.0f, nullptr, nullptr);
+	io.Fonts->AddFontFromFileTTF("nabla/fonts/DroidSans.ttf", 16.0f, nullptr, nullptr);
+	io.Fonts->AddFontFromFileTTF("nabla/fonts/Proxima-Nova-Thin.ttf", 18.0f, nullptr, nullptr);
+	io.Fonts->AddFontFromFileTTF("nabla/fonts/GoogleSans-Medium.ttf", 18.0f, nullptr, nullptr);
+	io.Fonts->AddFontFromFileTTF("nabla/fonts/ProggyTiny.ttf", 13.0f, nullptr, nullptr);
+	io.Fonts->AddFontFromFileTTF("nabla/fonts/Roboto-Medium.ttf", 16.0f, nullptr, nullptr);
 	// io.Fonts->Build();
 
 	// Setup Platform/Renderer bindings

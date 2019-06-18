@@ -4,29 +4,37 @@
 namespace nabla {
 namespace renderer {
 namespace detail {
-static ShaderHandle current;
-static Shader current_shader;
-#ifdef NA_DEVELOPMENT
+
 static MaterialHeader last_material;
 static int material_id;
-
-static MaterialHeader last_cubic_texture;
-static int last_cubic_texture_id;
-
-static MaterialHeader last_2d_texture[12];
-static int last_2d_texture_id[12];
-static int last_2d_texture_num[12];
-#endif // NA_DEVELOPMENT
 }
+
+
+struct GLStateMachine {
+	ShaderHandle current_shader_handle;
+	Shader current_shader;
+
+#ifdef NA_DEVELOPMENT
+	MaterialHeader _2d_texture[32];
+	int _2d_texture_id[32];
+
+	MaterialHeader _cubic_texture[32];
+	int _cubic_texture_id[32];
+
+#endif // NA_DEVELOPMENT
+};
+
+static GLStateMachine state;
+
 
 static Shader ActivateShader(ShaderHandle hshader) {
 	
-	if (detail::current == hshader || hshader.IsNil()) return detail::current_shader;
-	detail::current_shader = OpenHandle(hshader);
-	detail::current_shader.Use();
-	detail::current = hshader;
+	if (state.current_shader_handle == hshader || hshader.IsNil()) return state.current_shader;
+	state.current_shader = OpenHandle(hshader);
+	state.current_shader.Use();
+	state.current_shader_handle = hshader;
 	assert(glGetError() == 0);
-	return detail::current_shader;
+	return state.current_shader;
 }
 
 NA_DRAWCALL_IMPL(UseShaderDrawCall) {
@@ -83,16 +91,16 @@ NA_DRAWCALL_IMPL(MaterialDrawCall) {
 		glActiveTexture(GL_TEXTURE0 + texture_id);
 		glBindTexture(GL_TEXTURE_2D, id);
 #ifdef NA_DEVELOPMENT
-		detail::last_2d_texture[texture_id] = desc;
-		detail::last_2d_texture_id[texture_id] = id;
+		state._2d_texture[texture_id] = desc;
+		state._2d_texture_id[texture_id] = id;
 #endif
 		break;
 	case MaterialType::kSamplerCubic:
 		glActiveTexture(GL_TEXTURE0 + texture_id);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, id);
 #ifdef NA_DEVELOPMENT
-		detail::last_cubic_texture = desc;
-		detail::last_cubic_texture_id = id;
+		state._cubic_texture[texture_id] = desc;
+		state._cubic_texture_id[texture_id] = id;
 #endif
 		break;
 	default:
@@ -122,6 +130,10 @@ NA_DRAWCALL_IMPL(FrameBufferAttachmentReaderDrawCall) {
 	callback();
 	int uu = glGetError();
 	assert(uu == 0);
+}
+
+NA_DRAWCALL_IMPL(InlineDrawCall) {
+	callback();
 }
 
 NA_DRAWCALL_IMPL(SwitchFrameBufferDrawCall) {

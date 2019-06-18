@@ -74,10 +74,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)/OpenGLT6;$(SolutionDir)/OpenGLT6/utils;$(SolutionDir)/OpenGLT6/third-party/include;</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;$(SolutionDir)/OpenGLT6/third-party/lib/win/x64</LibraryPath>
+    <ReferencePath>$(VC_ReferencesPath_x64);$(ProjectDir)nabla/dll/</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)/OpenGLT6;$(SolutionDir)/OpenGLT6/utils;$(SolutionDir)/OpenGLT6/third-party/include;</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;$(SolutionDir)/OpenGLT6/third-party/lib/win/x64</LibraryPath>
+    <ReferencePath>$(VC_ReferencesPath_x64);$(ProjectDir)nabla/dll/</ReferencePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

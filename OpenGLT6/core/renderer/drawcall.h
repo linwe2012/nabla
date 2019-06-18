@@ -132,6 +132,14 @@ struct UpdateMeshVertexDrawCall {
 	uint32_t end;
 };
 
+struct InlineDrawCall {
+	NA_DRAWCALL(InlineDrawCall);
+	InlineDrawCall(std::function<void()> cb)
+		: callback(cb) {}
+
+	std::function<void()> callback;
+};
+
 struct SolidPixel {
 	unsigned char r;
 	unsigned char g;
