@@ -1,0 +1,83 @@
+\hypertarget{class_camera}{}\section{Camera Class Reference}
+\label{class_camera}\index{Camera@{Camera}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_camera_adad6423186f3d7e4c461cff7274f2c87}\label{class_camera_adad6423186f3d7e4c461cff7274f2c87}} 
+{\bfseries Camera} (glm\+::vec3 position=glm\+::vec3(0.\+0f, 0.\+0f, 0.\+0f), glm\+::vec3 up=glm\+::vec3(0.\+0f, 1.\+0f, 0.\+0f), float yaw=\+Y\+A\+W, float pitch=\+P\+I\+T\+C\+H)
+\item 
+\mbox{\Hypertarget{class_camera_a3537fd723fdfb5fed73a084346270cf6}\label{class_camera_a3537fd723fdfb5fed73a084346270cf6}} 
+{\bfseries Camera} (float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch)
+\item 
+\mbox{\Hypertarget{class_camera_affa333055635aed96518c4c66be9a70c}\label{class_camera_affa333055635aed96518c4c66be9a70c}} 
+glm\+::mat4 {\bfseries Get\+View\+Matrix} ()
+\item 
+\mbox{\Hypertarget{class_camera_aebba33a8b281fe2598bcafc54a55d296}\label{class_camera_aebba33a8b281fe2598bcafc54a55d296}} 
+void {\bfseries Process\+Keyboard} (Camera\+\_\+\+Movement direction, float delta\+Time)
+\item 
+\mbox{\Hypertarget{class_camera_a656c2a8dc40150874f15bce47b789751}\label{class_camera_a656c2a8dc40150874f15bce47b789751}} 
+void {\bfseries Process\+Mouse\+Movement} (float xoffset, float yoffset, G\+Lboolean constrain\+Pitch=true)
+\item 
+\mbox{\Hypertarget{class_camera_ae5d2a8707ab3d82c13f47ac1e84549d8}\label{class_camera_ae5d2a8707ab3d82c13f47ac1e84549d8}} 
+void {\bfseries Process\+Hand\+Movement} (float xoffset, float yoffset, int width, int height)
+\item 
+\mbox{\Hypertarget{class_camera_a05d150f7dc98940d2dd62f686cc2efe3}\label{class_camera_a05d150f7dc98940d2dd62f686cc2efe3}} 
+void {\bfseries Process\+Mouse\+Scroll} (float yoffset)
+\item 
+\mbox{\Hypertarget{class_camera_a876ab8fb9a4f53c77ff16161f6890b5e}\label{class_camera_a876ab8fb9a4f53c77ff16161f6890b5e}} 
+void {\bfseries Pass\+Delta\+Time} (float delta\+Time)
+\item 
+\mbox{\Hypertarget{class_camera_a6698995d3bb7c7ef164676e255156d45}\label{class_camera_a6698995d3bb7c7ef164676e255156d45}} 
+void {\bfseries Budge\+Camera} (float delta\+Time, float time, int function=G\+L\+G\+H\+\_\+\+S\+M\+O\+O\+T\+H\+\_\+\+C\+OS, float toX=0.\+0f, float to\+Y=0.\+0f, float to\+Z=3.\+0f, float to\+Yaw=-\/90.\+0f, float to\+Pitch=-\/0.\+0f, float to\+Zoom=45.\+0f, bool constrain\+Pitch=true)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_camera_a9733b59f5340f6f1bca24d52a6679039}\label{class_camera_a9733b59f5340f6f1bca24d52a6679039}} 
+glm\+::vec3 {\bfseries Position}
+\item 
+\mbox{\Hypertarget{class_camera_ac95b3737115ffe9a6ff9128344d5b963}\label{class_camera_ac95b3737115ffe9a6ff9128344d5b963}} 
+glm\+::vec3 {\bfseries Front}
+\item 
+\mbox{\Hypertarget{class_camera_ad74c4a490bc8865e67e27a2036d0a72d}\label{class_camera_ad74c4a490bc8865e67e27a2036d0a72d}} 
+glm\+::vec3 {\bfseries Up}
+\item 
+\mbox{\Hypertarget{class_camera_a6624f9f4228f6299a3d4ccb81e28da0a}\label{class_camera_a6624f9f4228f6299a3d4ccb81e28da0a}} 
+glm\+::vec3 {\bfseries Right}
+\item 
+\mbox{\Hypertarget{class_camera_a340d30b833954b87fd016ce0e724c723}\label{class_camera_a340d30b833954b87fd016ce0e724c723}} 
+glm\+::vec3 {\bfseries World\+Up}
+\item 
+\mbox{\Hypertarget{class_camera_a1a1354a2bd2df7f18ef82924e671d241}\label{class_camera_a1a1354a2bd2df7f18ef82924e671d241}} 
+float {\bfseries Yaw}
+\item 
+\mbox{\Hypertarget{class_camera_af9c8f223bb06bb74fc77c586545e7e67}\label{class_camera_af9c8f223bb06bb74fc77c586545e7e67}} 
+float {\bfseries Pitch}
+\item 
+\mbox{\Hypertarget{class_camera_a63221392d762df6a74f45bc9d43a2f61}\label{class_camera_a63221392d762df6a74f45bc9d43a2f61}} 
+float {\bfseries Movement\+Speed}
+\item 
+\mbox{\Hypertarget{class_camera_a73e88844b31d5111eeb76327dfbb2d68}\label{class_camera_a73e88844b31d5111eeb76327dfbb2d68}} 
+float {\bfseries Mouse\+Sensitivity}
+\item 
+\mbox{\Hypertarget{class_camera_a555e527ab443c107a65333383dfd88cc}\label{class_camera_a555e527ab443c107a65333383dfd88cc}} 
+float {\bfseries Hand\+Move\+Sensitivity} = 4.\+8f
+\item 
+\mbox{\Hypertarget{class_camera_a2becf27d08eb7e6da9c597c73ea95b5d}\label{class_camera_a2becf27d08eb7e6da9c597c73ea95b5d}} 
+float {\bfseries Zoom}
+\item 
+\mbox{\Hypertarget{class_camera_ad3870c274e2e30851fc309c131903998}\label{class_camera_ad3870c274e2e30851fc309c131903998}} 
+bool {\bfseries Moving\+Back} = false
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 45 of file camera.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/leon/source/repos/nabla/\+Open\+G\+L\+T6/core/camera.\+h\end{DoxyCompactItemize}

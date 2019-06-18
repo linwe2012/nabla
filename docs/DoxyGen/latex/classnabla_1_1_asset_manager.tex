@@ -1,0 +1,59 @@
+\hypertarget{classnabla_1_1_asset_manager}{}\section{nabla\+::Asset\+Manager Class Reference}
+\label{classnabla_1_1_asset_manager}\index{nabla::AssetManager@{nabla::AssetManager}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structnabla_1_1_asset_manager_1_1_model_info}{Model\+Info}}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classnabla_1_1_asset_manager_ac006e5ed80a7aa65ed026b8d0db79d21}\label{classnabla_1_1_asset_manager_ac006e5ed80a7aa65ed026b8d0db79d21}} 
+void {\bfseries Parse\+Assets\+From\+File} (const char $\ast$path)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_asset_manager_a7cfb9db917ab4b569edc58fed45accde}\label{classnabla_1_1_asset_manager_a7cfb9db917ab4b569edc58fed45accde}} 
+void {\bfseries Parse\+Model\+From\+File} (const char $\ast$path)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_asset_manager_a48f22924f5c97c0bd203a0cb9a454ab8}\label{classnabla_1_1_asset_manager_a48f22924f5c97c0bd203a0cb9a454ab8}} 
+\mbox{\hyperlink{structnabla_1_1_loaded_model}{Loaded\+Model}} {\bfseries Load\+Model\+To\+G\+PU} (const char $\ast$model\+\_\+id\+\_\+str, bool auto\+\_\+shader=true)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_asset_manager_a256cd978937a96b2f1461abcf7c13727}\label{classnabla_1_1_asset_manager_a256cd978937a96b2f1461abcf7c13727}} 
+Y\+A\+M\+L\+::\+Node {\bfseries Get\+Material} (const char $\ast$name)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_asset_manager_abc17bc6b206bab07bc3c0117fe8a56dc}\label{classnabla_1_1_asset_manager_abc17bc6b206bab07bc3c0117fe8a56dc}} 
+\mbox{\hyperlink{classnabla_1_1renderer_1_1_handle}{renderer\+::\+Material\+Handle}} {\bfseries Get\+Texture} (const char $\ast$name)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_asset_manager_ab79838b53cf333310b81a07d42e0dcb8}\label{classnabla_1_1_asset_manager_ab79838b53cf333310b81a07d42e0dcb8}} 
+Y\+A\+M\+L\+::\+Node {\bfseries yaml\+\_\+models} ()
+\item 
+\mbox{\Hypertarget{classnabla_1_1_asset_manager_ae6afffe1a735aeda5596ab2c17ca95f0}\label{classnabla_1_1_asset_manager_ae6afffe1a735aeda5596ab2c17ca95f0}} 
+Y\+A\+M\+L\+::\+Node {\bfseries yaml\+\_\+textures} ()
+\item 
+\mbox{\Hypertarget{classnabla_1_1_asset_manager_a3ccfd1a85e9024c258081e2877ccb935}\label{classnabla_1_1_asset_manager_a3ccfd1a85e9024c258081e2877ccb935}} 
+fs\+::path {\bfseries cwd} ()
+\item 
+\mbox{\Hypertarget{classnabla_1_1_asset_manager_a9fe25228503b97e4e7c35ce0f40f36bd}\label{classnabla_1_1_asset_manager_a9fe25228503b97e4e7c35ce0f40f36bd}} 
+void {\bfseries Bind\+Mutex} (std\+::mutex \&m)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classnabla_1_1_asset_manager_a5644a198547e2fcccb4a93b42d0a9724}\label{classnabla_1_1_asset_manager_a5644a198547e2fcccb4a93b42d0a9724}} 
+static \mbox{\hyperlink{classnabla_1_1renderer_1_1_handle}{renderer\+::\+Material\+Handle}} {\bfseries Load\+Texture} (const char $\ast$path)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_asset_manager_a939bf55d2e1d35fc07f42416d504ae64}\label{classnabla_1_1_asset_manager_a939bf55d2e1d35fc07f42416d504ae64}} 
+static \mbox{\hyperlink{classnabla_1_1renderer_1_1_handle}{renderer\+::\+Material\+Handle}} {\bfseries Load\+Texture} (const char $\ast$path, const char $\ast$p2)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 28 of file bootstrap.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/leon/source/repos/nabla/\+Open\+G\+L\+T6/core/asset/bootstrap.\+h\item 
+C\+:/\+Users/leon/source/repos/nabla/\+Open\+G\+L\+T6/core/asset/bootstrap.\+cc\end{DoxyCompactItemize}

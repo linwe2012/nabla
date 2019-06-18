@@ -1,0 +1,210 @@
+\hypertarget{classnabla_1_1_s_t_l_vector_ex}{}\section{nabla\+::S\+T\+L\+Vector\+Ex$<$ T, Alloc $>$ Class Template Reference}
+\label{classnabla_1_1_s_t_l_vector_ex}\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+
+
+{\ttfamily \#include $<$vector.\+h$>$}
+
+Inheritance diagram for nabla\+::S\+T\+L\+Vector\+Ex$<$ T, Alloc $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classnabla_1_1_s_t_l_vector_ex}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a6af5809443fb78a0fe7321ff93e2ad4c}\label{classnabla_1_1_s_t_l_vector_ex_a6af5809443fb78a0fe7321ff93e2ad4c}} 
+using {\bfseries value\+\_\+type} = T
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a1a55b1145a1d99efca09cce9b2eac20f}\label{classnabla_1_1_s_t_l_vector_ex_a1a55b1145a1d99efca09cce9b2eac20f}} 
+using {\bfseries allocator\+\_\+type} = Alloc
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a288a7552f71d4e0cbeb12e6a6d5e7fd3}\label{classnabla_1_1_s_t_l_vector_ex_a288a7552f71d4e0cbeb12e6a6d5e7fd3}} 
+using {\bfseries size\+\_\+type} = std\+::size\+\_\+t
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a17cbfc53d4b35559911b1ef501629da4}\label{classnabla_1_1_s_t_l_vector_ex_a17cbfc53d4b35559911b1ef501629da4}} 
+using {\bfseries difference\+\_\+type} = std\+::ptrdiff\+\_\+t
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a6adf5d87234352c139af2d48f4787ed5}\label{classnabla_1_1_s_t_l_vector_ex_a6adf5d87234352c139af2d48f4787ed5}} 
+using {\bfseries reference} = value\+\_\+type \&
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a396f1267c3ea9874a98905cad4137af3}\label{classnabla_1_1_s_t_l_vector_ex_a396f1267c3ea9874a98905cad4137af3}} 
+using {\bfseries pointer} = T $\ast$
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a66d8e0fc1681c6b0809319057c890f1e}\label{classnabla_1_1_s_t_l_vector_ex_a66d8e0fc1681c6b0809319057c890f1e}} 
+using {\bfseries const\+\_\+pointer} = const T $\ast$
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a4bd3bc9bbe369d76e958f3180c22f40b}\label{classnabla_1_1_s_t_l_vector_ex_a4bd3bc9bbe369d76e958f3180c22f40b}} 
+using {\bfseries iterator} = pointer
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_adcb967e567513c3b02b9ea58da10c54d}\label{classnabla_1_1_s_t_l_vector_ex_adcb967e567513c3b02b9ea58da10c54d}} 
+using {\bfseries const\+\_\+iterator} = const\+\_\+pointer
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_afde528e33bdf0672764cc4047609461f}\label{classnabla_1_1_s_t_l_vector_ex_afde528e33bdf0672764cc4047609461f}} 
+reference {\bfseries operator\mbox{[}$\,$\mbox{]}} (size\+\_\+t pos)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a79cab881aa996c3a2bc38cadbb5bd0f8}\label{classnabla_1_1_s_t_l_vector_ex_a79cab881aa996c3a2bc38cadbb5bd0f8}} 
+const reference {\bfseries operator\mbox{[}$\,$\mbox{]}} (size\+\_\+t pos) const
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_af54fc79021cf621afaa365fb8e32606a}\label{classnabla_1_1_s_t_l_vector_ex_af54fc79021cf621afaa365fb8e32606a}} 
+{\bfseries S\+T\+L\+Vector\+Ex} (\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{S\+T\+L\+Vector\+Ex}} \&\&rhs) noexcept
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a9b384c76cce66b063d1c5349fbcf2210}\label{classnabla_1_1_s_t_l_vector_ex_a9b384c76cce66b063d1c5349fbcf2210}} 
+{\bfseries S\+T\+L\+Vector\+Ex} (Alloc $\ast$alloc) noexcept
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_abd416a0904ed0cefaedcd4c22b7a9818}\label{classnabla_1_1_s_t_l_vector_ex_abd416a0904ed0cefaedcd4c22b7a9818}} 
+{\bfseries S\+T\+L\+Vector\+Ex} (std\+::initializer\+\_\+list$<$ T $>$ init)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a806b14a4669228eac919caa37fcf9b75}\label{classnabla_1_1_s_t_l_vector_ex_a806b14a4669228eac919caa37fcf9b75}} 
+{\bfseries S\+T\+L\+Vector\+Ex} (const \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{S\+T\+L\+Vector\+Ex}} \&rhs)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a4f7dc09d999e0d82fae18a2d7fb4c1e8}\label{classnabla_1_1_s_t_l_vector_ex_a4f7dc09d999e0d82fae18a2d7fb4c1e8}} 
+bool {\bfseries empty} () const
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a1b4a4d968613137772046331b1264e1f}\label{classnabla_1_1_s_t_l_vector_ex_a1b4a4d968613137772046331b1264e1f}} 
+size\+\_\+t {\bfseries size} () const
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_ae9b5a1aae10abfb18a922b58a47c35b0}\label{classnabla_1_1_s_t_l_vector_ex_ae9b5a1aae10abfb18a922b58a47c35b0}} 
+size\+\_\+t {\bfseries size\+\_\+by\+\_\+bytes} () const
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a44ff1b69309686b9b3f1ea125982b078}\label{classnabla_1_1_s_t_l_vector_ex_a44ff1b69309686b9b3f1ea125982b078}} 
+size\+\_\+t {\bfseries capacity} () const
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a01d7928bf1a4aa33e6e147df5c9a2f63}\label{classnabla_1_1_s_t_l_vector_ex_a01d7928bf1a4aa33e6e147df5c9a2f63}} 
+iterator {\bfseries begin} ()
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_ad7749220f425a7c8393c2896aa47e029}\label{classnabla_1_1_s_t_l_vector_ex_ad7749220f425a7c8393c2896aa47e029}} 
+iterator {\bfseries end} ()
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_aa921d1f28239e84f121f25687ab0973b}\label{classnabla_1_1_s_t_l_vector_ex_aa921d1f28239e84f121f25687ab0973b}} 
+const\+\_\+iterator {\bfseries begin} () const
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a9de34c829ca66533ccabff15fb62f06f}\label{classnabla_1_1_s_t_l_vector_ex_a9de34c829ca66533ccabff15fb62f06f}} 
+const\+\_\+iterator {\bfseries end} () const
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a300a87f98ace411fc3ce084ca232339c}\label{classnabla_1_1_s_t_l_vector_ex_a300a87f98ace411fc3ce084ca232339c}} 
+void {\bfseries swap} (\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{S\+T\+L\+Vector\+Ex}} \&rhs) noexcept
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_aadefb048d6aebd038536785fe4abe486}\label{classnabla_1_1_s_t_l_vector_ex_aadefb048d6aebd038536785fe4abe486}} 
+const \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{S\+T\+L\+Vector\+Ex}} \& {\bfseries operator=} (const \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{S\+T\+L\+Vector\+Ex}} \&rhs)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a4114f4e98459edfe441d878c995e6468}\label{classnabla_1_1_s_t_l_vector_ex_a4114f4e98459edfe441d878c995e6468}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{S\+T\+L\+Vector\+Ex}} \&rhs) const noexcept
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a66394a10b1e5e1a5bbe0cfa6198a48f8}\label{classnabla_1_1_s_t_l_vector_ex_a66394a10b1e5e1a5bbe0cfa6198a48f8}} 
+void {\bfseries emplace\+\_\+back} (T \&\&val)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a8fde5302f3fc7dd24a77b24c4acb9ecb}\label{classnabla_1_1_s_t_l_vector_ex_a8fde5302f3fc7dd24a77b24c4acb9ecb}} 
+void {\bfseries push\+\_\+back} (T \&\&val)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_aec687a6f3ef7bec21be3c86e389bc7d2}\label{classnabla_1_1_s_t_l_vector_ex_aec687a6f3ef7bec21be3c86e389bc7d2}} 
+void {\bfseries push\+\_\+back} (const T \&val)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a5116db066e963666e7a6c57dd56a7267}\label{classnabla_1_1_s_t_l_vector_ex_a5116db066e963666e7a6c57dd56a7267}} 
+{\footnotesize template$<$typename T , typename... Args$>$ }\\void {\bfseries multi\+\_\+push\+\_\+back} (const T \&val, Args... args)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a4c3b6e3a9226d0f6ec09f7ec1782d946}\label{classnabla_1_1_s_t_l_vector_ex_a4c3b6e3a9226d0f6ec09f7ec1782d946}} 
+{\footnotesize template$<$typename T $>$ }\\void {\bfseries multi\+\_\+push\+\_\+back} (const T \&val)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_ae5e9ce3a418acdf40c871090e443efb5}\label{classnabla_1_1_s_t_l_vector_ex_ae5e9ce3a418acdf40c871090e443efb5}} 
+{\footnotesize template$<$typename... Args$>$ }\\void {\bfseries construct\+\_\+back} (Args... args)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_abc8284cabd99f5a4ba0fc971e98630ab}\label{classnabla_1_1_s_t_l_vector_ex_abc8284cabd99f5a4ba0fc971e98630ab}} 
+iterator {\bfseries insert} (iterator position, const value\+\_\+type \&val)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a8cd6e298cb36c571bf67a0d5933097fa}\label{classnabla_1_1_s_t_l_vector_ex_a8cd6e298cb36c571bf67a0d5933097fa}} 
+void {\bfseries insert} (iterator position, const\+\_\+iterator first, const\+\_\+iterator last)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_abc4120d95527b1e5758ee5f3f37efd8d}\label{classnabla_1_1_s_t_l_vector_ex_abc4120d95527b1e5758ee5f3f37efd8d}} 
+void {\bfseries reserve} (size\+\_\+t new\+\_\+size)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a10dd4b919ac2413d9e4c5c87a70adf6b}\label{classnabla_1_1_s_t_l_vector_ex_a10dd4b919ac2413d9e4c5c87a70adf6b}} 
+size\+\_\+t {\bfseries size\+\_\+at\+\_\+least} (size\+\_\+t count, const T \&value)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a5c67e1289e13c47ca12bfc0df7f4d746}\label{classnabla_1_1_s_t_l_vector_ex_a5c67e1289e13c47ca12bfc0df7f4d746}} 
+void {\bfseries resize} (size\+\_\+t count)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a86b60bb70244ff2cdcefb10617cc2ec7}\label{classnabla_1_1_s_t_l_vector_ex_a86b60bb70244ff2cdcefb10617cc2ec7}} 
+void {\bfseries resize} (size\+\_\+t count, const T \&value)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a262bd3464db2aff36aa6bb90dbf5e7ec}\label{classnabla_1_1_s_t_l_vector_ex_a262bd3464db2aff36aa6bb90dbf5e7ec}} 
+void {\bfseries clear} ()
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a4fd7e56ad9f737416be66a7556052fc7}\label{classnabla_1_1_s_t_l_vector_ex_a4fd7e56ad9f737416be66a7556052fc7}} 
+reference {\bfseries back} ()
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a19db49ea48b8867641ac20722516a7a0}\label{classnabla_1_1_s_t_l_vector_ex_a19db49ea48b8867641ac20722516a7a0}} 
+void {\bfseries pop\+\_\+back} ()
+\item 
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a8be72171d8b6128e38d0810b27b622d8}{ignore\+\_\+last}} ()
+\item 
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex_a5f3945f5d23d03285551521b69c961fc}{wrap}} (T $\ast$data, size\+\_\+t \+\_\+size, size\+\_\+t \+\_\+capacity=0)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_ad48fa767f6d8ea38eeae6a701ac164c3}\label{classnabla_1_1_s_t_l_vector_ex_ad48fa767f6d8ea38eeae6a701ac164c3}} 
+void {\bfseries unwrap} ()
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_aec5a21ff75c8076de45e93bb3fcccb13}\label{classnabla_1_1_s_t_l_vector_ex_aec5a21ff75c8076de45e93bb3fcccb13}} 
+bool {\bfseries is\+\_\+wrap} ()
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_ac1a432e5fbeed32ba95a7449afbaaf35}\label{classnabla_1_1_s_t_l_vector_ex_ac1a432e5fbeed32ba95a7449afbaaf35}} 
+void {\bfseries erase} (iterator postion)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a0234752a3c044126c3f8fbd5a08c0c13}\label{classnabla_1_1_s_t_l_vector_ex_a0234752a3c044126c3f8fbd5a08c0c13}} 
+void {\bfseries erase} (iterator first, iterator last)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$\newline
+class nabla\+::\+S\+T\+L\+Vector\+Ex$<$ T, Alloc $>$}
+
+This vector is an modified version, conforming part of S\+TL standard It must accept a pointer to allocator, and will not be responsible for destroying allocator This is N\+OT thread safe \begin{DoxyNote}{Note}
+This vector does N\+OT owns allocator and it will N\+E\+V\+ER destroy it\textquotesingle{}s allocator 
+\end{DoxyNote}
+
+
+Definition at line 23 of file vector.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a8be72171d8b6128e38d0810b27b622d8}\label{classnabla_1_1_s_t_l_vector_ex_a8be72171d8b6128e38d0810b27b622d8}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!ignore\_last@{ignore\_last}}
+\index{ignore\_last@{ignore\_last}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{ignore\_last()}{ignore\_last()}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::ignore\+\_\+last (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+ignore the last element w/o destroying it 
+
+Definition at line 260 of file vector.\+h.
+
+\mbox{\Hypertarget{classnabla_1_1_s_t_l_vector_ex_a5f3945f5d23d03285551521b69c961fc}\label{classnabla_1_1_s_t_l_vector_ex_a5f3945f5d23d03285551521b69c961fc}} 
+\index{nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}!wrap@{wrap}}
+\index{wrap@{wrap}!nabla::STLVectorEx$<$ T, Alloc $>$@{nabla::STLVectorEx$<$ T, Alloc $>$}}
+\subsubsection{\texorpdfstring{wrap()}{wrap()}}
+{\footnotesize\ttfamily template$<$typename T, typename Alloc = std\+::allocator$<$\+T$>$$>$ \\
+void \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{nabla\+::\+S\+T\+L\+Vector\+Ex}}$<$ T, Alloc $>$\+::wrap (\begin{DoxyParamCaption}\item[{T $\ast$}]{data,  }\item[{size\+\_\+t}]{\+\_\+size,  }\item[{size\+\_\+t}]{\+\_\+capacity = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+build the vector on the specified memory 
+\begin{DoxyParams}{Parameters}
+{\em data} & pointer to the data wishing to wrap with a vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+it will not manage (free/reallocate) memory! 
+
+this is useful to modify gl arrays 
+\end{DoxyNote}
+
+
+Definition at line 271 of file vector.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/leon/source/repos/nabla/\+Open\+G\+L\+T6/utils/containers/vector.\+h\end{DoxyCompactItemize}

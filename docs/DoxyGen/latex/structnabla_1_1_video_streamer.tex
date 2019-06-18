@@ -1,0 +1,65 @@
+\hypertarget{structnabla_1_1_video_streamer}{}\section{nabla\+::Video\+Streamer Struct Reference}
+\label{structnabla_1_1_video_streamer}\index{nabla::VideoStreamer@{nabla::VideoStreamer}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structnabla_1_1_video_streamer_abe75acee2d79e0b2bfbae9fdb0a595ad}\label{structnabla_1_1_video_streamer_abe75acee2d79e0b2bfbae9fdb0a595ad}} 
+bool {\bfseries Init} (const char $\ast$file\+\_\+name, int \+\_\+width, int \+\_\+height)
+\item 
+\mbox{\Hypertarget{structnabla_1_1_video_streamer_a56a14b9f8b148003e209e00b69e6da3d}\label{structnabla_1_1_video_streamer_a56a14b9f8b148003e209e00b69e6da3d}} 
+bool {\bfseries Encode\+Pass} (A\+V\+Frame $\ast$\+\_\+frame)
+\item 
+\mbox{\Hypertarget{structnabla_1_1_video_streamer_aa8e09c105d0158efc3dde577526f9d53}\label{structnabla_1_1_video_streamer_aa8e09c105d0158efc3dde577526f9d53}} 
+bool {\bfseries Encode} (const \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{Vector}}$<$ \mbox{\hyperlink{structnabla_1_1renderer_1_1_solid_pixel}{renderer\+::\+Solid\+Pixel}} $>$ \&color)
+\item 
+\mbox{\Hypertarget{structnabla_1_1_video_streamer_abcd47ba7f90535b199f04deddab4ec08}\label{structnabla_1_1_video_streamer_abcd47ba7f90535b199f04deddab4ec08}} 
+void {\bfseries End} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structnabla_1_1_video_streamer_a4f76ccb6cac76890e9181f2430137f7d}\label{structnabla_1_1_video_streamer_a4f76ccb6cac76890e9181f2430137f7d}} 
+A\+V\+Codec $\ast$ {\bfseries codec} = nullptr
+\item 
+\mbox{\Hypertarget{structnabla_1_1_video_streamer_ae31fc54aea349734a6a5c8b3a04be823}\label{structnabla_1_1_video_streamer_ae31fc54aea349734a6a5c8b3a04be823}} 
+A\+V\+Codec\+Context $\ast$ {\bfseries c} = nullptr
+\item 
+\mbox{\Hypertarget{structnabla_1_1_video_streamer_a152610d504fd9b33c56af957c5db86ce}\label{structnabla_1_1_video_streamer_a152610d504fd9b33c56af957c5db86ce}} 
+A\+V\+Frame $\ast$ {\bfseries frame}
+\item 
+\mbox{\Hypertarget{structnabla_1_1_video_streamer_a7f44efc19414867d4c09c0360f5ee65f}\label{structnabla_1_1_video_streamer_a7f44efc19414867d4c09c0360f5ee65f}} 
+A\+V\+Frame $\ast$ {\bfseries yuv\+\_\+frame}
+\item 
+\mbox{\Hypertarget{structnabla_1_1_video_streamer_a5eae4362cd1d3cff6d3b0b3ea20bf774}\label{structnabla_1_1_video_streamer_a5eae4362cd1d3cff6d3b0b3ea20bf774}} 
+A\+V\+Format\+Context $\ast$ {\bfseries outctx}
+\item 
+\mbox{\Hypertarget{structnabla_1_1_video_streamer_a74c844fe15241459b86a81175e8c170a}\label{structnabla_1_1_video_streamer_a74c844fe15241459b86a81175e8c170a}} 
+A\+V\+Stream $\ast$ {\bfseries outst}
+\item 
+\mbox{\Hypertarget{structnabla_1_1_video_streamer_a90246d1ed4377def355e2e874e198208}\label{structnabla_1_1_video_streamer_a90246d1ed4377def355e2e874e198208}} 
+int {\bfseries width}
+\item 
+\mbox{\Hypertarget{structnabla_1_1_video_streamer_aa3829c3053160af5319edb5a0f242a2f}\label{structnabla_1_1_video_streamer_aa3829c3053160af5319edb5a0f242a2f}} 
+int {\bfseries height}
+\item 
+\mbox{\Hypertarget{structnabla_1_1_video_streamer_a95acdf30b5fb244ae9b50e9c53f57899}\label{structnabla_1_1_video_streamer_a95acdf30b5fb244ae9b50e9c53f57899}} 
+int {\bfseries cnt} = 0
+\item 
+\mbox{\Hypertarget{structnabla_1_1_video_streamer_a5bd1b577141e586eac80cb88de6d5220}\label{structnabla_1_1_video_streamer_a5bd1b577141e586eac80cb88de6d5220}} 
+uint8\+\_\+t {\bfseries tail} \mbox{[}4\mbox{]} = \{ 0, 0, 1, 0xb7 \}
+\item 
+\mbox{\Hypertarget{structnabla_1_1_video_streamer_a4a97e58bf5c4b656eb9e41de7346bc72}\label{structnabla_1_1_video_streamer_a4a97e58bf5c4b656eb9e41de7346bc72}} 
+Sws\+Context $\ast$ {\bfseries sws\+\_\+rgb2yuv}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 20 of file playback.\+cc.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/leon/source/repos/nabla/\+Open\+G\+L\+T6/systems/playback.\+cc\end{DoxyCompactItemize}

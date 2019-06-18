@@ -1,0 +1,76 @@
+\hypertarget{classnabla_1_1_matrial_systerm}{}\section{nabla\+::Matrial\+Systerm Class Reference}
+\label{classnabla_1_1_matrial_systerm}\index{nabla::MatrialSysterm@{nabla::MatrialSysterm}}
+Inheritance diagram for nabla\+::Matrial\+Systerm\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classnabla_1_1_matrial_systerm}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structnabla_1_1_matrial_systerm_1_1_data}{Data}}
+\item 
+struct \mbox{\hyperlink{structnabla_1_1_matrial_systerm_1_1_material}{Material}}
+\item 
+struct \mbox{\hyperlink{structnabla_1_1_matrial_systerm_1_1_material_prototype}{Material\+Prototype}}
+\item 
+struct \mbox{\hyperlink{structnabla_1_1_matrial_systerm_1_1_p_b_r_material}{P\+B\+R\+Material}}
+\item 
+struct \mbox{\hyperlink{structnabla_1_1_matrial_systerm_1_1_uniforms}{Uniforms}}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classnabla_1_1_matrial_systerm_a652fe36f309e55f23eb8e07472687142}\label{classnabla_1_1_matrial_systerm_a652fe36f309e55f23eb8e07472687142}} 
+void {\bfseries Update} (\mbox{\hyperlink{structnabla_1_1_entity}{Entity}} e) override
+\item 
+\mbox{\Hypertarget{classnabla_1_1_matrial_systerm_a0cf78a10d4da9c4bf1fc1ad9521303c1}\label{classnabla_1_1_matrial_systerm_a0cf78a10d4da9c4bf1fc1ad9521303c1}} 
+bool {\bfseries Has} (\mbox{\hyperlink{structnabla_1_1_entity}{Entity}} e) const override
+\item 
+\mbox{\Hypertarget{classnabla_1_1_matrial_systerm_abc5dc7a56029b088bc0957159008582d}\label{classnabla_1_1_matrial_systerm_abc5dc7a56029b088bc0957159008582d}} 
+void {\bfseries On\+Gui} (const \mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{Vector}}$<$ \mbox{\hyperlink{structnabla_1_1_entity}{Entity}} $>$ \&actives) override
+\item 
+\mbox{\Hypertarget{classnabla_1_1_matrial_systerm_a935893db7737571b9c718c80ce9c8479}\label{classnabla_1_1_matrial_systerm_a935893db7737571b9c718c80ce9c8479}} 
+const char $\ast$ {\bfseries name} () const override
+\item 
+\mbox{\Hypertarget{classnabla_1_1_matrial_systerm_a05b373779c473979ec124e712024c099}\label{classnabla_1_1_matrial_systerm_a05b373779c473979ec124e712024c099}} 
+void {\bfseries Set\+Up\+Material\+Handles} (\mbox{\hyperlink{classnabla_1_1renderer_1_1_handle}{renderer\+::\+Shader\+Handle}} shader, \mbox{\hyperlink{structnabla_1_1_matrial_systerm_1_1_uniforms}{Uniforms}} names)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_matrial_systerm_a3ab0c89f3a800e30f3593325a57cf704}\label{classnabla_1_1_matrial_systerm_a3ab0c89f3a800e30f3593325a57cf704}} 
+void {\bfseries Register\+Material} (std\+::string scoped\+\_\+name, \mbox{\hyperlink{structnabla_1_1_matrial_systerm_1_1_material_prototype}{Material\+Prototype}} proto)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_matrial_systerm_aca1557c2a74647d7e1c077e9549cc6e7}\label{classnabla_1_1_matrial_systerm_aca1557c2a74647d7e1c077e9549cc6e7}} 
+void {\bfseries Add} (\mbox{\hyperlink{structnabla_1_1_entity}{Entity}}, \mbox{\hyperlink{structnabla_1_1_matrial_systerm_1_1_material}{Material}} material)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_matrial_systerm_ae327fe7f9c741f1118cad7f2b66c708a}\label{classnabla_1_1_matrial_systerm_ae327fe7f9c741f1118cad7f2b66c708a}} 
+void {\bfseries Remove} (\mbox{\hyperlink{structnabla_1_1_entity}{Entity}}) override
+\item 
+\mbox{\Hypertarget{classnabla_1_1_matrial_systerm_a9ed69308419a04583d6276965bdb5520}\label{classnabla_1_1_matrial_systerm_a9ed69308419a04583d6276965bdb5520}} 
+void {\bfseries Update} (\mbox{\hyperlink{classnabla_1_1_clock}{Clock}} \&clock) override
+\item 
+\mbox{\Hypertarget{classnabla_1_1_matrial_systerm_ace79f2576ae8c8821ba153eb0b1fee35}\label{classnabla_1_1_matrial_systerm_ace79f2576ae8c8821ba153eb0b1fee35}} 
+void {\bfseries Initialize} (\mbox{\hyperlink{structnabla_1_1_system_context}{System\+Context}} \&) override
+\item 
+\mbox{\Hypertarget{classnabla_1_1_matrial_systerm_a352df0818f45c65778bdd4fa7c65bd23}\label{classnabla_1_1_matrial_systerm_a352df0818f45c65778bdd4fa7c65bd23}} 
+void {\bfseries Add} (\mbox{\hyperlink{structnabla_1_1_entity}{Entity}} e) override
+\item 
+\mbox{\Hypertarget{classnabla_1_1_matrial_systerm_a26330d88a9446b7db84f22980e7f25bc}\label{classnabla_1_1_matrial_systerm_a26330d88a9446b7db84f22980e7f25bc}} 
+void {\bfseries Attach\+Texture} (\mbox{\hyperlink{structnabla_1_1_entity}{Entity}} e, \mbox{\hyperlink{classnabla_1_1renderer_1_1_handle}{renderer\+::\+Material\+Handle}} t)
+\item 
+\mbox{\Hypertarget{classnabla_1_1_matrial_systerm_a96d00f84cfb75e847336e21fb5ae1abf}\label{classnabla_1_1_matrial_systerm_a96d00f84cfb75e847336e21fb5ae1abf}} 
+void {\bfseries Attach\+P\+B\+R\+Texture} (\mbox{\hyperlink{structnabla_1_1_entity}{Entity}} e, \mbox{\hyperlink{structnabla_1_1_matrial_systerm_1_1_p_b_r_material}{P\+B\+R\+Material}} pbrs)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 17 of file material.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/leon/source/repos/nabla/\+Open\+G\+L\+T6/systems/material.\+h\item 
+C\+:/\+Users/leon/source/repos/nabla/\+Open\+G\+L\+T6/systems/material.\+cc\end{DoxyCompactItemize}

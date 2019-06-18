@@ -1,0 +1,155 @@
+\hypertarget{structnabla_1_1renderer_1_1_sort_key}{}\section{nabla\+::renderer\+::Sort\+Key Struct Reference}
+\label{structnabla_1_1renderer_1_1_sort_key}\index{nabla::renderer::SortKey@{nabla::renderer::SortKey}}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{structnabla_1_1renderer_1_1_sort_key_ae0121b7c60133bb8c0bf82785307f53a}{Step}} \{ \newline
+{\bfseries k\+State\+Change\+Begin}, 
+{\bfseries k\+Activate\+Shader}, 
+{\bfseries k\+Bind\+Param}, 
+{\bfseries k\+Draw\+Call}, 
+\newline
+{\bfseries k\+State\+Change\+End}, 
+{\bfseries k\+State\+Change\+Begin}, 
+{\bfseries k\+Activate\+Shader}, 
+{\bfseries k\+Bind\+Param}, 
+\newline
+{\bfseries k\+Draw\+Call}, 
+{\bfseries k\+State\+Change\+End}
+ \}
+\item 
+enum \mbox{\hyperlink{structnabla_1_1renderer_1_1_sort_key_ae0121b7c60133bb8c0bf82785307f53a}{Step}} \{ \newline
+{\bfseries k\+State\+Change\+Begin}, 
+{\bfseries k\+Activate\+Shader}, 
+{\bfseries k\+Bind\+Param}, 
+{\bfseries k\+Draw\+Call}, 
+\newline
+{\bfseries k\+State\+Change\+End}, 
+{\bfseries k\+State\+Change\+Begin}, 
+{\bfseries k\+Activate\+Shader}, 
+{\bfseries k\+Bind\+Param}, 
+\newline
+{\bfseries k\+Draw\+Call}, 
+{\bfseries k\+State\+Change\+End}
+ \}
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_a52072fa2e4b8a22b9dc3ce8c578ffb0c}\label{structnabla_1_1renderer_1_1_sort_key_a52072fa2e4b8a22b9dc3ce8c578ffb0c}} 
+enum \{ {\bfseries k\+Depth\+Max} = U\+I\+N\+T16\+\_\+\+M\+AX
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_a30f8c793c0882f3d9c35dc3dbc76aff9}\label{structnabla_1_1renderer_1_1_sort_key_a30f8c793c0882f3d9c35dc3dbc76aff9}} 
+bool {\bfseries operator$<$} (const \mbox{\hyperlink{structnabla_1_1renderer_1_1_sort_key}{Sort\+Key}} \&rhs) const
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_ade4dedf6bbffd6f454f8388a9cad2b59}\label{structnabla_1_1renderer_1_1_sort_key_ade4dedf6bbffd6f454f8388a9cad2b59}} 
+bool {\bfseries operator$>$} (const \mbox{\hyperlink{structnabla_1_1renderer_1_1_sort_key}{Sort\+Key}} \&rhs) const
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_a4cef30a4e06d2aad8361ea95a54cec2b}\label{structnabla_1_1renderer_1_1_sort_key_a4cef30a4e06d2aad8361ea95a54cec2b}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{structnabla_1_1renderer_1_1_sort_key}{Sort\+Key}} \&rhs) const
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_adcbd1ba3ae15c1fb3ede644dcc20b138}\label{structnabla_1_1renderer_1_1_sort_key_adcbd1ba3ae15c1fb3ede644dcc20b138}} 
+bool {\bfseries operator!=} (const \mbox{\hyperlink{structnabla_1_1renderer_1_1_sort_key}{Sort\+Key}} \&rhs) const
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_ad55f2c54979b0e2fac38daa09d7a3fa3}\label{structnabla_1_1renderer_1_1_sort_key_ad55f2c54979b0e2fac38daa09d7a3fa3}} 
+void {\bfseries set\+\_\+depth} (uint16\+\_\+t depth)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_a53f111f89d7b64fa667c78bf54fed6b2}\label{structnabla_1_1renderer_1_1_sort_key_a53f111f89d7b64fa667c78bf54fed6b2}} 
+void {\bfseries set\+\_\+target} (uint16\+\_\+t handle\+\_\+id)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_af9d1cbe98d9fda189a63ac33954989dc}\label{structnabla_1_1renderer_1_1_sort_key_af9d1cbe98d9fda189a63ac33954989dc}} 
+void {\bfseries set\+\_\+pass} (Render\+Pass rp)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_a449922d734c0a141d2085f79cf00ad4d}\label{structnabla_1_1renderer_1_1_sort_key_a449922d734c0a141d2085f79cf00ad4d}} 
+void {\bfseries set\+\_\+chstate} (\mbox{\hyperlink{structnabla_1_1renderer_1_1_sort_key_ae0121b7c60133bb8c0bf82785307f53a}{Step}} state)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_ab28771d25172506723651981b25b3190}\label{structnabla_1_1renderer_1_1_sort_key_ab28771d25172506723651981b25b3190}} 
+{\footnotesize template$<$int high, int low$>$ }\\void {\bfseries set\+\_\+bits} (uint64\+\_\+t key)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_ab6e749520edd46b032d0af5cb98b1262}\label{structnabla_1_1renderer_1_1_sort_key_ab6e749520edd46b032d0af5cb98b1262}} 
+{\footnotesize template$<$int high, int low$>$ }\\uint64\+\_\+t {\bfseries get\+\_\+bits} ()
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_a30f8c793c0882f3d9c35dc3dbc76aff9}\label{structnabla_1_1renderer_1_1_sort_key_a30f8c793c0882f3d9c35dc3dbc76aff9}} 
+bool {\bfseries operator$<$} (const \mbox{\hyperlink{structnabla_1_1renderer_1_1_sort_key}{Sort\+Key}} \&rhs) const
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_ade4dedf6bbffd6f454f8388a9cad2b59}\label{structnabla_1_1renderer_1_1_sort_key_ade4dedf6bbffd6f454f8388a9cad2b59}} 
+bool {\bfseries operator$>$} (const \mbox{\hyperlink{structnabla_1_1renderer_1_1_sort_key}{Sort\+Key}} \&rhs) const
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_a4cef30a4e06d2aad8361ea95a54cec2b}\label{structnabla_1_1renderer_1_1_sort_key_a4cef30a4e06d2aad8361ea95a54cec2b}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{structnabla_1_1renderer_1_1_sort_key}{Sort\+Key}} \&rhs) const
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_adcbd1ba3ae15c1fb3ede644dcc20b138}\label{structnabla_1_1renderer_1_1_sort_key_adcbd1ba3ae15c1fb3ede644dcc20b138}} 
+bool {\bfseries operator!=} (const \mbox{\hyperlink{structnabla_1_1renderer_1_1_sort_key}{Sort\+Key}} \&rhs) const
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_ad55f2c54979b0e2fac38daa09d7a3fa3}\label{structnabla_1_1renderer_1_1_sort_key_ad55f2c54979b0e2fac38daa09d7a3fa3}} 
+void {\bfseries set\+\_\+depth} (uint16\+\_\+t depth)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_a53f111f89d7b64fa667c78bf54fed6b2}\label{structnabla_1_1renderer_1_1_sort_key_a53f111f89d7b64fa667c78bf54fed6b2}} 
+void {\bfseries set\+\_\+target} (uint16\+\_\+t handle\+\_\+id)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_ab4c7a01627a9cce10597d27ee16e9f04}\label{structnabla_1_1renderer_1_1_sort_key_ab4c7a01627a9cce10597d27ee16e9f04}} 
+void {\bfseries set\+\_\+pass\+\_\+low\+\_\+priority} (bool ifbeg)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_af9d1cbe98d9fda189a63ac33954989dc}\label{structnabla_1_1renderer_1_1_sort_key_af9d1cbe98d9fda189a63ac33954989dc}} 
+void {\bfseries set\+\_\+pass} (Render\+Pass rp)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_a449922d734c0a141d2085f79cf00ad4d}\label{structnabla_1_1renderer_1_1_sort_key_a449922d734c0a141d2085f79cf00ad4d}} 
+void {\bfseries set\+\_\+chstate} (\mbox{\hyperlink{structnabla_1_1renderer_1_1_sort_key_ae0121b7c60133bb8c0bf82785307f53a}{Step}} state)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_ab28771d25172506723651981b25b3190}\label{structnabla_1_1renderer_1_1_sort_key_ab28771d25172506723651981b25b3190}} 
+{\footnotesize template$<$int high, int low$>$ }\\void {\bfseries set\+\_\+bits} (uint64\+\_\+t key)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_ab6e749520edd46b032d0af5cb98b1262}\label{structnabla_1_1renderer_1_1_sort_key_ab6e749520edd46b032d0af5cb98b1262}} 
+{\footnotesize template$<$int high, int low$>$ }\\uint64\+\_\+t {\bfseries get\+\_\+bits} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_a9f379b6a99977f65f7a6e950bd0957f9}\label{structnabla_1_1renderer_1_1_sort_key_a9f379b6a99977f65f7a6e950bd0957f9}} 
+{\footnotesize template$<$int high, int low$>$ }\\static constexpr uint64\+\_\+t {\bfseries get\+\_\+bitmask} ()
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_a9f379b6a99977f65f7a6e950bd0957f9}\label{structnabla_1_1renderer_1_1_sort_key_a9f379b6a99977f65f7a6e950bd0957f9}} 
+{\footnotesize template$<$int high, int low$>$ }\\static constexpr uint64\+\_\+t {\bfseries get\+\_\+bitmask} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_a794eaacb6718584c3b6d2110cbca1c0e}\label{structnabla_1_1renderer_1_1_sort_key_a794eaacb6718584c3b6d2110cbca1c0e}} 
+uint64\+\_\+t {\bfseries sortkey} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 12 of file compiled-\/drawcall.\+h.
+
+
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_ae0121b7c60133bb8c0bf82785307f53a}\label{structnabla_1_1renderer_1_1_sort_key_ae0121b7c60133bb8c0bf82785307f53a}} 
+\index{nabla::renderer::SortKey@{nabla::renderer::SortKey}!Step@{Step}}
+\index{Step@{Step}!nabla::renderer::SortKey@{nabla::renderer::SortKey}}
+\subsubsection{\texorpdfstring{Step}{Step}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{structnabla_1_1renderer_1_1_sort_key_ae0121b7c60133bb8c0bf82785307f53a}{nabla\+::renderer\+::\+Sort\+Key\+::\+Step}}}
+
+$\vert$$<$-\/---depth bit-\/---$>$$\vert$ (M\+SB) (48) (32) (16) (L\+SB) 00000000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 $^\wedge$$\vert$$<$-\/---depth bit-\/---$>$$\vert$ $\vert$$<$-\/---target id-\/---$>$$\vert$ $^\wedge$$^\wedge$$^\wedge$$^\wedge$ $\vert$ $\vert$ +-\/--- 1\+: deferred 0\+: forward render +-\/--- change state bit 
+
+Definition at line 21 of file compiled-\/drawcall.\+h.
+
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_sort_key_ae0121b7c60133bb8c0bf82785307f53a}\label{structnabla_1_1renderer_1_1_sort_key_ae0121b7c60133bb8c0bf82785307f53a}} 
+\index{nabla::renderer::SortKey@{nabla::renderer::SortKey}!Step@{Step}}
+\index{Step@{Step}!nabla::renderer::SortKey@{nabla::renderer::SortKey}}
+\subsubsection{\texorpdfstring{Step}{Step}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{structnabla_1_1renderer_1_1_sort_key_ae0121b7c60133bb8c0bf82785307f53a}{nabla\+::renderer\+::\+Sort\+Key\+::\+Step}}}
+
+$\vert$$<$-\/---depth bit-\/---$>$$\vert$ (M\+SB) (48) (32) (16) (L\+SB) 00000000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 $\vert$ $^\wedge$$\vert$$^\wedge$ $\vert$$<$-\/---depth bit-\/---$>$$\vert$ $\vert$$<$-\/---target id-\/---$>$$\vert$ $^\wedge$$^\wedge$$^\wedge$$^\wedge$ $\vert$ $\vert$ $\vert$ $\vert$ +---Render Pass Low Priority Bit +-\/--- change state bit $\vert$ +---Render Pass 
+
+Definition at line 23 of file compiled-\/drawcall.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/leon/source/repos/nabla/\+Open\+G\+L\+T6/core/obsolete/compiled-\/drawcall.\+h\end{DoxyCompactItemize}

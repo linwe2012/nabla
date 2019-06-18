@@ -1,0 +1,106 @@
+\hypertarget{structnabla_1_1renderer_1_1_render_resource}{}\section{nabla\+::renderer\+::Render\+Resource Struct Reference}
+\label{structnabla_1_1renderer_1_1_render_resource}\index{nabla::renderer::RenderResource@{nabla::renderer::RenderResource}}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_aa86c2403353449f1169c2a752fdacdb5}\label{structnabla_1_1renderer_1_1_render_resource_aa86c2403353449f1169c2a752fdacdb5}} 
+enum \{ {\bfseries k\+Align} = sizeof(resource\+\_\+t)
+ \}
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_a9d9b6cf5013e00019db0a159534f7698}\label{structnabla_1_1renderer_1_1_render_resource_a9d9b6cf5013e00019db0a159534f7698}} 
+enum \{ {\bfseries k\+Align} = sizeof(resource\+\_\+t)
+ \}
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_a1d690df5fc3d6699ccd45839d2a17b79}\label{structnabla_1_1renderer_1_1_render_resource_a1d690df5fc3d6699ccd45839d2a17b79}} 
+using {\bfseries resource\+\_\+t} = uint64\+\_\+t
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_a1d690df5fc3d6699ccd45839d2a17b79}\label{structnabla_1_1renderer_1_1_render_resource_a1d690df5fc3d6699ccd45839d2a17b79}} 
+using {\bfseries resource\+\_\+t} = uint64\+\_\+t
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_a2b44e394e21cc1137d53473fd9ec9b5a}\label{structnabla_1_1renderer_1_1_render_resource_a2b44e394e21cc1137d53473fd9ec9b5a}} 
+{\bfseries Render\+Resource} (void $\ast$buffer\+\_\+, size\+\_\+t size\+\_\+by\+\_\+bytes)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_a3c3e8175471df971d9d4f59c5dffd497}\label{structnabla_1_1renderer_1_1_render_resource_a3c3e8175471df971d9d4f59c5dffd497}} 
+void {\bfseries Set\+Buffer} (void $\ast$buffer\+\_\+, size\+\_\+t size\+\_\+by\+\_\+bytes)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_ae12fa2d84dc4f4fc155389bd61d860a9}\label{structnabla_1_1renderer_1_1_render_resource_ae12fa2d84dc4f4fc155389bd61d860a9}} 
+void {\bfseries Write\+Raw} (void $\ast$data, size\+\_\+t size\+\_\+by\+\_\+char)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_abf11641c88ed79df4baf47b58a413114}\label{structnabla_1_1renderer_1_1_render_resource_abf11641c88ed79df4baf47b58a413114}} 
+void {\bfseries Reset} (void $\ast$new\+\_\+buffer, size\+\_\+t size\+\_\+by\+\_\+bytes)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_aff470546a7c42223b3f4b05eb267b3c7}\label{structnabla_1_1renderer_1_1_render_resource_aff470546a7c42223b3f4b05eb267b3c7}} 
+{\footnotesize template$<$typename T $>$ }\\void {\bfseries Write} (T \&\&data)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_a5757b9bd5f4375120193451b22e9973e}\label{structnabla_1_1renderer_1_1_render_resource_a5757b9bd5f4375120193451b22e9973e}} 
+{\footnotesize template$<$typename T , typename... Args$>$ }\\T $\ast$ {\bfseries Construct} (Args... args)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_a845730d3edb4873c22416001613f3414}\label{structnabla_1_1renderer_1_1_render_resource_a845730d3edb4873c22416001613f3414}} 
+{\footnotesize template$<$typename T , typename... Args$>$ }\\void {\bfseries List\+Ctor} (Args... args)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_a54372b5c20565878b6c889b7022478e3}\label{structnabla_1_1renderer_1_1_render_resource_a54372b5c20565878b6c889b7022478e3}} 
+size\+\_\+t {\bfseries Offset} ()
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_a185c401ce30a0a447517de6896181fd4}\label{structnabla_1_1renderer_1_1_render_resource_a185c401ce30a0a447517de6896181fd4}} 
+void $\ast$ {\bfseries Get\+Current\+Address} ()
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_a7dd77e80081c6e012806e4f05c992cc5}\label{structnabla_1_1renderer_1_1_render_resource_a7dd77e80081c6e012806e4f05c992cc5}} 
+{\footnotesize template$<$typename T $>$ }\\T $\ast$ {\bfseries Get\+Offset} (size\+\_\+t off)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_a2b44e394e21cc1137d53473fd9ec9b5a}\label{structnabla_1_1renderer_1_1_render_resource_a2b44e394e21cc1137d53473fd9ec9b5a}} 
+{\bfseries Render\+Resource} (void $\ast$buffer\+\_\+, size\+\_\+t size\+\_\+by\+\_\+bytes)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_a3c3e8175471df971d9d4f59c5dffd497}\label{structnabla_1_1renderer_1_1_render_resource_a3c3e8175471df971d9d4f59c5dffd497}} 
+void {\bfseries Set\+Buffer} (void $\ast$buffer\+\_\+, size\+\_\+t size\+\_\+by\+\_\+bytes)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_ae12fa2d84dc4f4fc155389bd61d860a9}\label{structnabla_1_1renderer_1_1_render_resource_ae12fa2d84dc4f4fc155389bd61d860a9}} 
+void {\bfseries Write\+Raw} (void $\ast$data, size\+\_\+t size\+\_\+by\+\_\+char)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_abf11641c88ed79df4baf47b58a413114}\label{structnabla_1_1renderer_1_1_render_resource_abf11641c88ed79df4baf47b58a413114}} 
+void {\bfseries Reset} (void $\ast$new\+\_\+buffer, size\+\_\+t size\+\_\+by\+\_\+bytes)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_aff470546a7c42223b3f4b05eb267b3c7}\label{structnabla_1_1renderer_1_1_render_resource_aff470546a7c42223b3f4b05eb267b3c7}} 
+{\footnotesize template$<$typename T $>$ }\\void {\bfseries Write} (T \&\&data)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_a5757b9bd5f4375120193451b22e9973e}\label{structnabla_1_1renderer_1_1_render_resource_a5757b9bd5f4375120193451b22e9973e}} 
+{\footnotesize template$<$typename T , typename... Args$>$ }\\T $\ast$ {\bfseries Construct} (Args... args)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_a845730d3edb4873c22416001613f3414}\label{structnabla_1_1renderer_1_1_render_resource_a845730d3edb4873c22416001613f3414}} 
+{\footnotesize template$<$typename T , typename... Args$>$ }\\void {\bfseries List\+Ctor} (Args... args)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_a54372b5c20565878b6c889b7022478e3}\label{structnabla_1_1renderer_1_1_render_resource_a54372b5c20565878b6c889b7022478e3}} 
+size\+\_\+t {\bfseries Offset} ()
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_a185c401ce30a0a447517de6896181fd4}\label{structnabla_1_1renderer_1_1_render_resource_a185c401ce30a0a447517de6896181fd4}} 
+void $\ast$ {\bfseries Get\+Current\+Address} ()
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_a7dd77e80081c6e012806e4f05c992cc5}\label{structnabla_1_1renderer_1_1_render_resource_a7dd77e80081c6e012806e4f05c992cc5}} 
+{\footnotesize template$<$typename T $>$ }\\T $\ast$ {\bfseries Get\+Offset} (size\+\_\+t off)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_a7fc1eb4b85f84cc0821dc8408b35dd72}\label{structnabla_1_1renderer_1_1_render_resource_a7fc1eb4b85f84cc0821dc8408b35dd72}} 
+void $\ast$ {\bfseries buffer}
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_aab737ce7a097d1a8636d0c22195e2aa5}\label{structnabla_1_1renderer_1_1_render_resource_aab737ce7a097d1a8636d0c22195e2aa5}} 
+resource\+\_\+t $\ast$ {\bfseries next}
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_resource_a27d2ea179a5eef59a2b3a099fb212b7a}\label{structnabla_1_1renderer_1_1_render_resource_a27d2ea179a5eef59a2b3a099fb212b7a}} 
+resource\+\_\+t $\ast$ {\bfseries end\+\_\+of\+\_\+storage}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 85 of file compiled-\/drawcall.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/leon/source/repos/nabla/\+Open\+G\+L\+T6/core/obsolete/compiled-\/drawcall.\+h\end{DoxyCompactItemize}

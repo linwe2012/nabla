@@ -1,0 +1,74 @@
+\hypertarget{structnabla_1_1renderer_1_1_render_context}{}\section{nabla\+::renderer\+::Render\+Context Struct Reference}
+\label{structnabla_1_1renderer_1_1_render_context}\index{nabla::renderer::RenderContext@{nabla::renderer::RenderContext}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_context_a1c795d361b8c37a1562bbd3fcd6e4799}\label{structnabla_1_1renderer_1_1_render_context_a1c795d361b8c37a1562bbd3fcd6e4799}} 
+{\bfseries Render\+Context} (void $\ast$buffer\+\_\+, size\+\_\+t size\+\_\+by\+\_\+bytes)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_context_a26ace0789685f75a7ce1ad238db2527a}\label{structnabla_1_1renderer_1_1_render_context_a26ace0789685f75a7ce1ad238db2527a}} 
+bool {\bfseries Isinitialized} ()
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_context_a48448254fbc4f314be6fc4a9378d823a}\label{structnabla_1_1renderer_1_1_render_context_a48448254fbc4f314be6fc4a9378d823a}} 
+{\footnotesize template$<$typename T , typename... Resources$>$ }\\void {\bfseries Add\+Cmd} (\mbox{\hyperlink{structnabla_1_1renderer_1_1_command}{Command}} cmd, Resources... src)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_context_ae8b846b65f2929193a4215508745502a}\label{structnabla_1_1renderer_1_1_render_context_ae8b846b65f2929193a4215508745502a}} 
+void {\bfseries Reset} (void $\ast$new\+\_\+resource, size\+\_\+t size\+\_\+by\+\_\+bytes)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_context_a3257f257313a859cc7e3c7d715079d9d}\label{structnabla_1_1renderer_1_1_render_context_a3257f257313a859cc7e3c7d715079d9d}} 
+size\+\_\+t {\bfseries Resources\+Offset} ()
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_context_a162bdd6549e67b41aa01a840051846ad}\label{structnabla_1_1renderer_1_1_render_context_a162bdd6549e67b41aa01a840051846ad}} 
+\mbox{\hyperlink{classnabla_1_1renderer_1_1_smart_context}{Smart\+Context}} {\bfseries New\+Target} (\mbox{\hyperlink{classnabla_1_1renderer_1_1_handle}{Mesh\+Handle}} hmesh)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_context_a1c795d361b8c37a1562bbd3fcd6e4799}\label{structnabla_1_1renderer_1_1_render_context_a1c795d361b8c37a1562bbd3fcd6e4799}} 
+{\bfseries Render\+Context} (void $\ast$buffer\+\_\+, size\+\_\+t size\+\_\+by\+\_\+bytes)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_context_a26ace0789685f75a7ce1ad238db2527a}\label{structnabla_1_1renderer_1_1_render_context_a26ace0789685f75a7ce1ad238db2527a}} 
+bool {\bfseries Isinitialized} ()
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_context_a48448254fbc4f314be6fc4a9378d823a}\label{structnabla_1_1renderer_1_1_render_context_a48448254fbc4f314be6fc4a9378d823a}} 
+{\footnotesize template$<$typename T , typename... Resources$>$ }\\void {\bfseries Add\+Cmd} (\mbox{\hyperlink{structnabla_1_1renderer_1_1_command}{Command}} cmd, Resources... src)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_context_ae8b846b65f2929193a4215508745502a}\label{structnabla_1_1renderer_1_1_render_context_ae8b846b65f2929193a4215508745502a}} 
+void {\bfseries Reset} (void $\ast$new\+\_\+resource, size\+\_\+t size\+\_\+by\+\_\+bytes)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_context_a3257f257313a859cc7e3c7d715079d9d}\label{structnabla_1_1renderer_1_1_render_context_a3257f257313a859cc7e3c7d715079d9d}} 
+size\+\_\+t {\bfseries Resources\+Offset} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_context_a1ea5e52dd7d1609b309efa5e39f01f7b}\label{structnabla_1_1renderer_1_1_render_context_a1ea5e52dd7d1609b309efa5e39f01f7b}} 
+\mbox{\hyperlink{classnabla_1_1_s_t_l_vector_ex}{Vector}}$<$ \mbox{\hyperlink{structnabla_1_1renderer_1_1_command}{Command}} $>$ {\bfseries commands}
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_context_aac36ced9018458cd311290963051309e}\label{structnabla_1_1renderer_1_1_render_context_aac36ced9018458cd311290963051309e}} 
+\mbox{\hyperlink{structnabla_1_1renderer_1_1_render_resource}{Render\+Resource}} {\bfseries resources}
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_context_a386de39564b09cf905e08f14772b63fe}\label{structnabla_1_1renderer_1_1_render_context_a386de39564b09cf905e08f14772b63fe}} 
+bool {\bfseries initialized}
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_context_adc6502c7bf729327769c5ac1e9cde76f}\label{structnabla_1_1renderer_1_1_render_context_adc6502c7bf729327769c5ac1e9cde76f}} 
+uint16\+\_\+t {\bfseries base} = 10
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_context_aa1eda97a8f81d2563a5ae3e48f33d54e}\label{structnabla_1_1renderer_1_1_render_context_aa1eda97a8f81d2563a5ae3e48f33d54e}} 
+uint16\+\_\+t {\bfseries tid} = base
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_context_ab1f692080e2e4d2c5fb0ecc74c6d32bf}\label{structnabla_1_1renderer_1_1_render_context_ab1f692080e2e4d2c5fb0ecc74c6d32bf}} 
+\mbox{\hyperlink{structnabla_1_1renderer_1_1_sort_key_ae0121b7c60133bb8c0bf82785307f53a}{Sort\+Key\+::\+Step}} {\bfseries render\+\_\+step} = Sort\+Key\+::\+Step\+::k\+Draw\+Call
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_render_context_a71a4102700dd51f0600b4b794406f0b4}\label{structnabla_1_1renderer_1_1_render_context_a71a4102700dd51f0600b4b794406f0b4}} 
+Render\+Pass {\bfseries render\+\_\+pass} = Render\+Pass\+::\+K\+Forward
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 177 of file compiled-\/drawcall.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/leon/source/repos/nabla/\+Open\+G\+L\+T6/core/obsolete/compiled-\/drawcall.\+h\end{DoxyCompactItemize}

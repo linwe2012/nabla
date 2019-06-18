@@ -1,0 +1,71 @@
+\hypertarget{structnabla_1_1renderer_1_1_shader_info}{}\section{nabla\+::renderer\+::Shader\+Info Struct Reference}
+\label{structnabla_1_1renderer_1_1_shader_info}\index{nabla::renderer::ShaderInfo@{nabla::renderer::ShaderInfo}}
+
+
+{\ttfamily \#include $<$shader.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_shader_info_a7c0e0662b2426420c94f29325190db99}\label{structnabla_1_1renderer_1_1_shader_info_a7c0e0662b2426420c94f29325190db99}} 
+enum {\bfseries Default\+Flags} \+: int \{ {\bfseries k\+None}, 
+{\bfseries k\+Num\+Builtin\+Flags}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_shader_info_aa678bc33dfbb644110b2e8d3c19f943a}\label{structnabla_1_1renderer_1_1_shader_info_aa678bc33dfbb644110b2e8d3c19f943a}} 
+constexpr bool {\bfseries bit} (int position)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_shader_info_abfdc948ee83d4435e1e8f5850f88f068}\label{structnabla_1_1renderer_1_1_shader_info_abfdc948ee83d4435e1e8f5850f88f068}} 
+void {\bfseries set\+\_\+bit} (int position)
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_shader_info_a74fb9f077de0e7740f5d62209e72c531}\label{structnabla_1_1renderer_1_1_shader_info_a74fb9f077de0e7740f5d62209e72c531}} 
+void {\bfseries clear\+\_\+bit} (int position)
+\item 
+bool \mbox{\hyperlink{structnabla_1_1renderer_1_1_shader_info_abff5bebbb55efb91846b6580f194d67d}{operator$<$}} (const \mbox{\hyperlink{structnabla_1_1renderer_1_1_shader_info}{Shader\+Info}} \&rhs) const
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_shader_info_a843e261198770d9984bce64e8153b516}\label{structnabla_1_1renderer_1_1_shader_info_a843e261198770d9984bce64e8153b516}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{structnabla_1_1renderer_1_1_shader_info}{Shader\+Info}} \&rhs) const
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_shader_info_ac0e85f1cc04cc39b922ab0b7dc3f72f7}\label{structnabla_1_1renderer_1_1_shader_info_ac0e85f1cc04cc39b922ab0b7dc3f72f7}} 
+bool {\bfseries operator!=} (const \mbox{\hyperlink{structnabla_1_1renderer_1_1_shader_info}{Shader\+Info}} \&rhs) const
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_shader_info_a67d03374e25de6a2692ee6467b994fcd}\label{structnabla_1_1renderer_1_1_shader_info_a67d03374e25de6a2692ee6467b994fcd}} 
+constexpr size\+\_\+t {\bfseries Get\+Num\+Bits} ()
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_shader_info_af9f913a202e5290ed3c920f64381af18}\label{structnabla_1_1renderer_1_1_shader_info_af9f913a202e5290ed3c920f64381af18}} 
+size\+\_\+t {\bfseries Get\+Uniform\+Size\+Of\+Builtins} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_shader_info_ad3f01b754f920d46a4d814e97bc2e050}\label{structnabla_1_1renderer_1_1_shader_info_ad3f01b754f920d46a4d814e97bc2e050}} 
+uint64\+\_\+t {\bfseries bit1} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+current is a 64 bit bitset, could be expanded to 128 or higher 
+
+Definition at line 33 of file shader.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structnabla_1_1renderer_1_1_shader_info_abff5bebbb55efb91846b6580f194d67d}\label{structnabla_1_1renderer_1_1_shader_info_abff5bebbb55efb91846b6580f194d67d}} 
+\index{nabla::renderer::ShaderInfo@{nabla::renderer::ShaderInfo}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!nabla::renderer::ShaderInfo@{nabla::renderer::ShaderInfo}}
+\subsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool nabla\+::renderer\+::\+Shader\+Info\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structnabla_1_1renderer_1_1_shader_info}{Shader\+Info}} \&}]{rhs }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+This is intended for std\+::map 
+
+Definition at line 65 of file shader.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/leon/source/repos/nabla/\+Open\+G\+L\+T6/core/renderer/shader.\+h\end{DoxyCompactItemize}
