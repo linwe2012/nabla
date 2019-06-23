@@ -46,7 +46,7 @@ namespace nabla {
 		void TransformAABB(glm::vec3& min, glm::vec3& max, const glm::mat4& mat);
 
 		// update AABB of a set of vertices
-		void UpdateAABB(const glm::vec3* v, size_t num, glm::vec3& min, glm::vec3& max);
+		void UpdateAABB(const glm::vec3* v, int num, glm::vec3& min, glm::vec3& max);
 
 		// reset AABB
 		void ResetAABB(glm::vec3& min, glm::vec3& max)

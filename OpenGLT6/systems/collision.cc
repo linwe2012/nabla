@@ -2,6 +2,10 @@
 #include <algorithm>
 #include "editor/gui.h"
 
+#include <iostream>
+#include <ostream>
+using namespace std;
+
 namespace nabla {
 void CollisionSystem::Initialize(SystemContext& ctx)
 {
@@ -26,8 +30,8 @@ void CollisionSystem::Update(Clock& clock)
 	float t = clock.GetLastFrameDurationFloat();
 	// compute collision
 	auto sz = rigids_.size();
-	for (size_t i = 0; i < sz; ++i) {
-		for (size_t j = i + 1; j < sz; ++j) {
+	for (int i = 0; i < sz; ++i) {
+		for (int j = i + 1; j < sz; ++j) {
 			auto& rigid_itr1 = rigids_[i];
 			auto& rigid_itr2 = rigids_[j];
 			Transform* trans1 = render->GetTransformEdit(rigid_itr1.entity);
@@ -37,14 +41,19 @@ void CollisionSystem::Update(Clock& clock)
 			}
 			glm::mat4 mat1 = glm::mat4(1.0f);
 			glm::mat4 mat2 = glm::mat4(1.0f);
-			mat1 = glm::translate(mat1, trans1->position);
-			mat2 = glm::translate(mat2, trans2->position);
 			mat1 = glm::scale(mat1, trans1->scale);
 			mat2 = glm::scale(mat2, trans2->scale);
+			mat1 = glm::mat4_cast(trans1->quaternion) * mat1;
+			mat2 = glm::mat4_cast(trans2->quaternion) * mat2;
+			mat1 = glm::translate(mat1, trans1->position);
+			mat2 = glm::translate(mat2, trans2->position);
 
 			// if collide
-			if (IsCollide(t, rigid_itr1.component, rigid_itr2.component, mat1, mat2)) {
-				ComputeCollison(rigid_itr1.component, rigid_itr2.component, mat1, mat2);
+			for (int i = 0; i < 5; i++) {
+				if (IsCollide(t + 0.2 * i * t, rigid_itr1.component, rigid_itr2.component, mat1, mat2)) {
+					ComputeCollison(rigid_itr1.component, rigid_itr2.component, mat1, mat2);
+					break;
+				}
 			}
 		}
 	}
@@ -55,7 +64,7 @@ void CollisionSystem::Update(Clock& clock)
 		}
 
 		bool flag = x < 0;
-		x = x* x - drag;
+		x = x * x - drag;
 		return flag ? -sqrt(x) : sqrt(x);
 	};
 
@@ -99,7 +108,7 @@ void CollisionSystem::Add(Entity e, RigidBody rigid)
 	}
 	else {
 		glm::vec3* vertices = pvertices->positions;
-		size_t num_vertices = pvertices->num_vertices;
+		int num_vertices = pvertices->num_vertices;
 		UpdateAABB(vertices, num_vertices, rigid._min, rigid._max);
 	}
 
@@ -113,11 +122,10 @@ bool CollisionSystem::IsCollide(float t, RigidBody r1, RigidBody r2, const glm::
 	TransformAABB(r1._min, r1._max, mat1);
 	TransformAABB(r2._min, r2._max, mat2);
 
-	float dt = t;
-	r1._max += r1.velocity * dt;
-	r1._min += r1.velocity * dt;
-	r2._max += r2.velocity * dt;
-	r2._min += r2.velocity * dt;
+	r1._max += r1.velocity * t;
+	r1._min += r1.velocity * t;
+	r2._max += r2.velocity * t;
+	r2._min += r2.velocity * t;
 
 	return ((r1._min.x >= r2._min.x && r1._min.x <= r2._max.x) || (r2._min.x >= r1._min.x && r2._min.x <= r1._max.x))
 		&& ((r1._min.y >= r2._min.y && r1._min.y <= r2._max.y) || (r2._min.y >= r1._min.y && r2._min.y <= r1._max.y))
@@ -182,10 +190,9 @@ void CollisionSystem::TransformAABB(glm::vec3& min, glm::vec3& max, const glm::m
 }
 
 // update AABB of a set of vertices
-
-void CollisionSystem::UpdateAABB(const glm::vec3* v, size_t num, glm::vec3& min, glm::vec3& max)
+void CollisionSystem::UpdateAABB(const glm::vec3* v, int num, glm::vec3& min, glm::vec3& max)
 {
-	for (size_t i = 0; i < num; i++) {
+	for (int i = 0; i < num; i++) {
 		if (v[i].x < min.x) min.x = v[i].x;
 		if (v[i].y < min.y) min.y = v[i].y;
 		if (v[i].z < min.z) min.z = v[i].z;
