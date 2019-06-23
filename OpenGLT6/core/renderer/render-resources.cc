@@ -873,6 +873,7 @@ void RenderQuad()
 struct GlobalData {
 	glm::mat4 projection;
 	glm::mat4 view;
+	glm::vec3 view_pos;
 };
 GlobalData gGlobalRenderData;
 
@@ -889,6 +890,14 @@ glm::mat4 GetGlobalViewMatrix() {
 
 glm::mat4 GetGlobalProjectionMatrix() {
 	return gGlobalRenderData.projection;
+}
+
+void SetGlobalViewPos(glm::vec3 p) {
+	gGlobalRenderData.view_pos = p;
+}
+glm::vec3 GetGlobalViewPos()
+{
+	return gGlobalRenderData.view_pos;
 }
 
 

@@ -3,6 +3,7 @@
 
 #include "isystem.h"
 #include "glm.h"
+#include "core/renderer.h"
 static constexpr float PI = 3.14159265358979323846f;
 
 namespace nabla {
@@ -14,7 +15,7 @@ struct OceanParameters {
 	glm::vec2 w = glm::vec2(32.0f, 32.0f); //direction of the wind
 	float length = 64.f;				// length parameter
 	float fog_decay = 160.0f;
-	glm::vec3 light_pos = glm::vec3(3.0f);
+	glm::vec3 light_pos = glm::vec3(3.0f, 3.0f, 20.0f);
 
 	float Kx(int n_prime) const;
 	float Kz(int m_prime) const;
@@ -45,6 +46,8 @@ public:
 	const char* name() const override {
 		return "ocean";
 	}
+
+	void BindSkybox(renderer::MaterialHandle skybox);
 
 private:
 

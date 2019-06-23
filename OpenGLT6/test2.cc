@@ -506,7 +506,18 @@ int main()
 	bootstrap_status.done = true;
 	//discarded_bootstrap.wait();
 
-	
+	Entity user = entity_manager.Create(); 
+	RigidBody rigid;
+	rigid.velocity = glm::vec3(0.0f);
+	rigid.accleration = glm::vec3(0.0f);
+	rigid.mass = 0.8f;
+	rigid.drag = 0.5f;
+	Transform trans;
+	trans.scale = glm::vec3(0.1f);
+	sys_renderable.Add(user, hcube, trans);
+	sys_collision.Add(user, rigid);
+
+	sys_oceans.BindSkybox(htex_skybox);
 	clock.Gensis();
 	
 	while (renderer::IsAlive())
@@ -527,7 +538,7 @@ int main()
 		SetUniform(hview, view);
 		SetGlobalProjectionMatrix(projection);
 		SetGlobalViewMatrix(view);
-
+		SetGlobalViewPos(camera.Position);
 		/*
 		SetUniform(hmodel, model);
 		
@@ -563,6 +574,8 @@ int main()
 		sys_playback.Update(clock);
 		sys_collision.Update(clock);
 		sys_oceans.Update(clock);
+
+		sys_renderable.GetTransformEdit(user)->position = camera.Position;
 
 		GLFWwindow* window = static_cast<GLFWwindow*>(renderer::GetWindow());
 

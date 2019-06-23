@@ -284,6 +284,7 @@
     <ClInclude Include="OpenGLT6\utils\cppstring.h" />
     <ClInclude Include="OpenGLT6\utils\typeid.h" />
     <ClInclude Include="OpenGLT6\utils\utils.h" />
+    <ClInclude Include="ssao.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="OpenGLT6\utils\vs-visualizers\vector.natvis" />

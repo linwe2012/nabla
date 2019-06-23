@@ -5,9 +5,11 @@ in vec3 light_vector;
 in vec3 halfway_vector;
 in vec2 tex_coord;
 in float fog_factor;
-
+in vec3 position;
+uniform vec3 view_pos;
 // uniform sampler2D water;
 out vec4 fragColor;
+uniform samplerCube skybox;
 
 void main (void) {
 	//fragColor = vec4(1.0, 1.0, 1.0, 1.0);
@@ -39,6 +41,11 @@ void main (void) {
 			vec4(0.0, 0.0, 0.0, 0.0));
 
 	fragColor = fragColor * (1.0-fog_factor) + vec4(0.25, 0.75, 0.65, 1.0) * (fog_factor);
+	vec3 view_dir = normalize(position - view_pos);
+	float fresenl = max(dot(-view_dir, normal_vector), 0.0);
+	fresenl = pow(1-fresenl, 4.0);
 
+	fragColor.rgb = texture(skybox, normal_vector).rgb * (fresenl) + fragColor.rgb * (1-fresenl);
 	fragColor.a = 1.0;
+
 }

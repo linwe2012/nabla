@@ -5,3 +5,4 @@ Debug
 playback
 **/*.dll
 x64
+**/DoxyGen

@@ -2,7 +2,6 @@
 #include "ocean/fft.h"
 
 #include "editor/gui.h"
-#include "core/renderer.h"
 
 #include <complex>
 #include <thread>
@@ -53,9 +52,13 @@ struct OceanSystem::Data {
 	MaterialHandle hlight_pos;
 	MaterialHandle hfog_decay;
 	MaterialHandle water_texture; //< TODO
+	MaterialHandle hskybox_texture;
+	MaterialHandle hview_pos;
 
 	float total_cnt_ = 1.0f;
 	int cnt = 0;
+
+	bool display = true;
 
 	void MakeSpace(OceanParameters& op);
 
@@ -420,6 +423,12 @@ void OceanSystem::Initialize(SystemContext&)
 	d.hmodel = NewUniform(d.hshader, "model", MaterialType::kMat4);
 	d.hlight_pos = NewUniform(d.hshader, "light_position", MaterialType::kVec3);
 	d.hfog_decay = NewUniform(d.hshader, "fog_decay", MaterialType::kFloat);
+	d.hview_pos = NewUniform(d.hshader, "view_pos", MaterialType::kVec3);
+	NA_ASSERT(glGetError() == 0);
+	//d.hskybox = NewUniform(d.hshader, "skybox", MaterialType::kInt);
+	OpenHandle(d.hshader).Use();
+	OpenHandle(d.hshader).SetInt("skybox", 0);
+	NA_ASSERT(glGetError() == 0);
 
 	d.active_ocean = new OceanParameters;
 	auto& p = *d.active_ocean;
@@ -461,6 +470,8 @@ void OceanSystem::Initialize(SystemContext&)
 			{ p.data->indices.begin(), p.data->indices.size_by_bytes() },
 			layouts);
 	}
+
+	
 	
 	p.data->fft = new FFT;
 	p.data->fft->Init(p.N);
@@ -471,6 +482,7 @@ void OceanSystem::OnGui(const Vector<Entity>& actives)
 	auto& o = *data_->active_ocean;
 	auto& d = *data_;
 	if (ImGui::CollapsingHeader("Ocean")) {
+		ImGui::Checkbox("Display Ocean", &d.display);
 		ImGui::Text("Avg render frames: %.1f", d.total_cnt_);
 		ImGui::DragFloat("Length", &o.length);
 		ImGui::DragFloat3("Light Pos", &o.light_pos.x);
@@ -484,6 +496,10 @@ void OceanSystem::Update(Clock& clock)
 {
 	auto& d = *data_;
 	auto& o = *d.active_ocean;
+	if (!d.display) {
+		return;
+	}
+
 	static std::future<void> promise;
 
 	if (!promise.valid()) {
@@ -509,6 +525,8 @@ void OceanSystem::Update(Clock& clock)
 
 		SetUniform(d.hlight_pos, o.light_pos);
 		SetUniform(d.hfog_decay, o.fog_decay);
+		SetUniform(d.hview_pos, GetGlobalViewPos());
+		UseTexture(d.hskybox_texture, 0);
 		for (int j = 0; j < 20; j++) {
 			for (int i = 0; i < 20; i++) {
 				model = glm::scale(glm::mat4(1.0f), glm::vec3(5.f, 5.f, 5.f));
@@ -519,6 +537,12 @@ void OceanSystem::Update(Clock& clock)
 		}
 	}
 	
+}
+
+void OceanSystem::BindSkybox(renderer::MaterialHandle skybox)
+{
+	auto& d = *data_;
+	d.hskybox_texture = skybox;
 }
 
 

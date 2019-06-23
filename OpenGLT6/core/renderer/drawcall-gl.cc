@@ -133,6 +133,7 @@ NA_DRAWCALL_IMPL(FrameBufferAttachmentReaderDrawCall) {
 }
 
 NA_DRAWCALL_IMPL(InlineDrawCall) {
+	state.current_shader_handle = ShaderHandle();
 	callback();
 }
 

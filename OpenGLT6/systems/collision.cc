@@ -15,18 +15,21 @@ void CollisionSystem::OnGui(const Vector<Entity>& actives)
 			continue;
 		}
 		auto& rigid = rigids_[active].component;
-		ImGui::DragFloat3("Velocity", &rigid.velocity.x, 0.2f);
-		ImGui::DragFloat3("Acceration", &rigid.accleration.x, 0.2f);
+		ImGui::DragFloat3("Velocity", &rigid.velocity.x, 0.05f);
+		ImGui::DragFloat3("Acceration", &rigid.accleration.x, 0.05f);
 		ImGui::DragFloat("Mass", &rigid.mass);
 	}
 }
 
 void CollisionSystem::Update(Clock& clock)
 {
+	float t = clock.GetLastFrameDurationFloat();
 	// compute collision
-	for (auto& rigid_itr1 : rigids_) {
-		for (auto& rigid_itr2 : rigids_) {
-			if (rigid_itr1.entity == rigid_itr2.entity) continue;
+	auto sz = rigids_.size();
+	for (size_t i = 0; i < sz; ++i) {
+		for (size_t j = i + 1; j < sz; ++j) {
+			auto& rigid_itr1 = rigids_[i];
+			auto& rigid_itr2 = rigids_[j];
 			Transform* trans1 = render->GetTransformEdit(rigid_itr1.entity);
 			Transform* trans2 = render->GetTransformEdit(rigid_itr2.entity);
 			if (trans1 == nullptr || trans2 == nullptr) {
@@ -40,11 +43,21 @@ void CollisionSystem::Update(Clock& clock)
 			mat2 = glm::scale(mat2, trans2->scale);
 
 			// if collide
-			if (IsCollide(rigid_itr1.component, rigid_itr2.component, mat1, mat2)) {
+			if (IsCollide(t, rigid_itr1.component, rigid_itr2.component, mat1, mat2)) {
 				ComputeCollison(rigid_itr1.component, rigid_itr2.component, mat1, mat2);
 			}
 		}
 	}
+
+	auto compute_drag = [t](float x, float drag) ->float {
+		if (abs(x) < 0.00001f) {
+			return 0.f;
+		}
+
+		bool flag = x < 0;
+		x = x* x - drag;
+		return flag ? -sqrt(x) : sqrt(x);
+	};
 
 	// update rigids
 	for (auto& rigid_itr : rigids_) {
@@ -54,7 +67,10 @@ void CollisionSystem::Update(Clock& clock)
 		}
 		RigidBody& rigid = rigid_itr.component;
 
-		trans->position += rigid.velocity * clock.GetLastFrameDurationFloat();
+		rigid.velocity -= rigid.velocity * rigid.drag * t;
+		rigid.velocity += rigid.accleration * t;
+
+		trans->position += rigid.velocity * t;
 	}
 
 }
@@ -68,6 +84,13 @@ void CollisionSystem::Add(Entity e)
 	rigid.velocity = glm::vec3(0.0f);
 	rigid.accleration = glm::vec3(0.0f);
 	rigid.mass = 1.0f;
+	rigid.drag = 0.5f;
+
+	Add(e, rigid);
+}
+
+void CollisionSystem::Add(Entity e, RigidBody rigid)
+{
 	auto pvertices = render->GetVertices(e);
 	if (!pvertices) {
 		NA_LOG_WARN("Entity has no tranform component, will use a default bounding box instead");
@@ -75,7 +98,6 @@ void CollisionSystem::Add(Entity e)
 		rigid._min = glm::vec3(-1.0f);
 	}
 	else {
-		
 		glm::vec3* vertices = pvertices->positions;
 		size_t num_vertices = pvertices->num_vertices;
 		UpdateAABB(vertices, num_vertices, rigid._min, rigid._max);
@@ -85,21 +107,21 @@ void CollisionSystem::Add(Entity e)
 }
 
 // predict if two AABBs will collide
-bool CollisionSystem::IsCollide(RigidBody r1, RigidBody r2, const glm::mat4& mat1, const glm::mat4& mat2)
+bool CollisionSystem::IsCollide(float t, RigidBody r1, RigidBody r2, const glm::mat4& mat1, const glm::mat4& mat2)
 {
 	//transform to world coordinate
 	TransformAABB(r1._min, r1._max, mat1);
 	TransformAABB(r2._min, r2._max, mat2);
 
-	float dt = 0.2;
+	float dt = t;
 	r1._max += r1.velocity * dt;
 	r1._min += r1.velocity * dt;
 	r2._max += r2.velocity * dt;
 	r2._min += r2.velocity * dt;
 
-	return !((r1._max.x < r2._max.x) || (r2._max.x < r1._min.x)
-		|| (r1._max.y < r2._max.y) || (r2._max.y < r1._min.y)
-		|| (r1._max.z < r2._max.z) || (r2._max.z < r1._min.z));
+	return ((r1._min.x >= r2._min.x && r1._min.x <= r2._max.x) || (r2._min.x >= r1._min.x && r2._min.x <= r1._max.x))
+		&& ((r1._min.y >= r2._min.y && r1._min.y <= r2._max.y) || (r2._min.y >= r1._min.y && r2._min.y <= r1._max.y))
+		&& ((r1._min.z >= r2._min.z && r1._min.z <= r2._max.z) || (r2._min.z >= r1._min.z && r2._min.z <= r1._max.z));
 }
 
 // compute velocity after collison

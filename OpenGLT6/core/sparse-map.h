@@ -86,6 +86,10 @@ public:
 		return dense_[sparse_[e.index()]];
 	}
 
+	T& operator[](size_t i) {
+		return dense_[i];
+	}
+
 	const T& operator[](Entity e) const {
 		return dense_[sparse_[e.index()]];
 	}

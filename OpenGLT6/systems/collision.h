@@ -30,12 +30,14 @@ namespace nabla {
 			return "polygon";
 		}
 
+		void Add(Entity, RigidBody);
+
 	private:
 		SparseBindirectMap<RigidBody> rigids_;
 		RenderableSystem* render = nullptr;
 
 		// predict if two AABBs will collide
-		bool IsCollide(RigidBody r1, RigidBody  r2, const glm::mat4& mat1, const glm::mat4& mat2);
+		bool IsCollide(float t, RigidBody r1, RigidBody  r2, const glm::mat4& mat1, const glm::mat4& mat2);
 
 		// compute velocity after collison
 		void ComputeCollison(RigidBody& r1, RigidBody& r2, const glm::mat4& mat1, const glm::mat4& mat2);

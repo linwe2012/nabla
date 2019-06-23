@@ -281,10 +281,13 @@ void RestoreViewport();
 
 void SetGlobalProjectionMatrix(glm::mat4 p);
 void SetGlobalViewMatrix(glm::mat4 p);
+void SetGlobalViewPos(glm::vec3 p);
 
 glm::mat4 GetGlobalViewMatrix();
 
 glm::mat4 GetGlobalProjectionMatrix();
+
+glm::vec3 GetGlobalViewPos();
 
 //enum Type : uint32_t {
 	//	kNone,
