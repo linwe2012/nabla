@@ -240,6 +240,10 @@ void MatrialSysterm::OnGui(const Vector<Entity>& actives)
 		}
 		else {
 			ImGui::Text("Physically Based Rendering -- Using Texture");
+			if (ImGui::Button("Delete")) {
+				ctx_->render->SetShader(e, ShaderHandle(), MaterialHandle(), MaterialHandle());
+				dense_[sparse_[e.index()]].pbr_map.albedo_map = MaterialHandle();
+			}
 		}
 		
 	}

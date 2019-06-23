@@ -20,8 +20,9 @@ static HashMap<ShaderInfo, Shader, ShaderInfoHasher> gShaderInfos;
 /** constructor generates the shader on the fly
 @return true if shader successfully compiled
 */
-bool Shader::CompileShader(ShaderSourceCode ssc, ShaderFilePath _sfp)
+bool Shader::CompileShader(ShaderSourceCode ssc, ShaderFilePath _sfp, Set<std::string> _macros)
 {
+	macros = _macros;
 	sfp_ = _sfp;
 	// shader Program
 	ID = glCreateProgram();

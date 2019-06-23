@@ -464,7 +464,7 @@ ShaderHandle NewShader(ShaderFilePath path,
 		return h;
 	}
 
-	gShaderBuffer.buffer[h.index()].CompileShader(ssc, path);
+	gShaderBuffer.buffer[h.index()].CompileShader(ssc, path, macros);
 	return h;
 }
 

@@ -11,6 +11,7 @@
 #include <sstream>
 #include <iostream>
 #include "containers/vector.h"
+#include "containers/set.h"
 
 namespace nabla {
 namespace renderer {
@@ -126,7 +127,7 @@ public:
 	const char* ShaderType2String(GLenum type);
 
 
-	bool CompileShader(ShaderSourceCode ssc, ShaderFilePath sfp);
+	bool CompileShader(ShaderSourceCode ssc, ShaderFilePath sfp, Set<std::string> _macros);
 
 	bool CompileShader(ShaderFilePath sfp);
 
@@ -211,6 +212,8 @@ public:
 			glUniformMatrix4fv(uniform_model, 1, GL_FALSE, &mat[0][0]);
 		}
 	}
+
+	Set<std::string> macros;
 private:
 	// utility function for checking shader compilation/linking errors.
 	// ------------------------------------------------------------------------
