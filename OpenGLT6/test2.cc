@@ -515,7 +515,10 @@ int main()
 	Transform trans;
 	trans.scale = glm::vec3(0.1f);
 	sys_renderable.Add(user, hcube, trans);
-	sys_collision.Add(user, rigid);
+	// sys_collision.Add(user, rigid);
+
+	bool last_camera_collision = false;
+	bool enable_camera_collision = false;
 
 	sys_oceans.BindSkybox(htex_skybox);
 	clock.Gensis();
@@ -724,6 +727,16 @@ int main()
 			}
 			else {
 				ImGui::Text("Selected entity Nil");
+			}
+			ImGui::Checkbox("Camera Collision", &enable_camera_collision);
+			if (enable_camera_collision != last_camera_collision) {
+				if (enable_camera_collision) {
+					sys_collision.Add(user, rigid);
+				}
+				else {
+					sys_collision.Remove(user);
+				}
+				last_camera_collision = enable_camera_collision;
 			}
 
 			sys_playback.OnGui(tmp);
