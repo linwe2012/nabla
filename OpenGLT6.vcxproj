@@ -234,6 +234,7 @@
     <ClInclude Include="OpenGLT6\systems\animation.h" />
     <ClInclude Include="OpenGLT6\systems\assets.h" />
     <ClInclude Include="OpenGLT6\systems\collision.h" />
+    <ClInclude Include="OpenGLT6\systems\easy-animation.h" />
     <ClInclude Include="OpenGLT6\systems\isystem.h" />
     <ClInclude Include="OpenGLT6\systems\lighting.h" />
     <ClInclude Include="OpenGLT6\systems\material.h" />

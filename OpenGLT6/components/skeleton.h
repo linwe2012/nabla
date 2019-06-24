@@ -34,13 +34,20 @@ class Sampler {
 
 struct AnimatableComponent {
 	float (*sampler)(float) = nullptr;
-	glm::vec3 scale = glm::vec3(1.0f);
+	glm::vec3 scale = glm::vec3(0.0f);
 	glm::vec3 translate = glm::vec3(0.0f);
+	glm::vec3 euler = glm::vec3(0.0f);
 	glm::vec3 rotate_axis = glm::vec3(1.0f);
+	void RepeatReverse() {
+		translate = -translate;
+		euler = -euler;
+	}
+
 	float rad = 0.0f;
 	float time = 0.0f;
-	bool repeat : 1;
-	bool active : 1;
+	float time_used = 0.0f;
+	bool repeat;
+	bool active;
 };
 
 

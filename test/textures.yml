@@ -14,18 +14,18 @@ seville: img/textures/seville.jpg
 flame: img/textures/flame.jfif
 wood: img/textures/wood.jpg
 
-bamboo:
-  pbr: true 
-  albedo: img/pbr/bamboo-wood-semigloss-albedo.png
-  ao: img/pbr/bamboo-wood-semigloss-ao.png
-  metal: img/pbr/bamboo-wood-semigloss-metal.png
-  normal: img/pbr/bamboo-wood-semigloss-normal.png
-  roughness: img/pbr/bamboo-wood-semigloss-roughness.png
-
-worn paint:
-  pbr: true 
-  albedo: img/pbr/wornpaintedcement-albedo.png
-  ao: img/pbr/wornpaintedcement-ao.png
-  metal: img/pbr/wornpaintedcement-metalness.png
-  normal: img/pbr/wornpaintedcement-norrmal.png
-  roughness: img/pbr/wornpaintedcement-roughness.png
+# bamboo:
+#   pbr: true 
+#   albedo: img/pbr/bamboo-wood-semigloss-albedo.png
+#   ao: img/pbr/bamboo-wood-semigloss-ao.png
+#   metal: img/pbr/bamboo-wood-semigloss-metal.png
+#   normal: img/pbr/bamboo-wood-semigloss-normal.png
+#   roughness: img/pbr/bamboo-wood-semigloss-roughness.png
+# 
+# worn paint:
+#   pbr: true 
+#   albedo: img/pbr/wornpaintedcement-albedo.png
+#   ao: img/pbr/wornpaintedcement-ao.png
+#   metal: img/pbr/wornpaintedcement-metalness.png
+#   normal: img/pbr/wornpaintedcement-norrmal.png
+#   roughness: img/pbr/wornpaintedcement-roughness.png

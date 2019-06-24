@@ -21,6 +21,7 @@
 #include "systems/assets.h"
 #include "systems/polygon.h"
 #include "systems/ocean.h"
+#include "systems/easy-animation.h"
 
 #include <glm/gtx/matrix_decompose.hpp>
 
@@ -278,6 +279,7 @@ int main()
 
 	LightingSystem sys_lighting;
 	
+	EasyAnimationSystem sys_ezanimate;
 	PlaybackSystem sys_playback;
 	CollisionSystem sys_collision;
 	PolygonSystem sys_polygon;
@@ -290,6 +292,7 @@ int main()
 	sys_polygon.Initialize(sys_ctx);
 	sys_assets.Initialize(sys_ctx);
 	sys_oceans.Initialize(sys_ctx);
+	sys_ezanimate.Initialize(sys_ctx);
 
 	Vector<Entity> lights;
 
@@ -519,7 +522,7 @@ int main()
 
 	bool last_camera_collision = false;
 	bool enable_camera_collision = false;
-
+	bool ctrl_d_pressed = false;
 	sys_oceans.BindSkybox(htex_skybox);
 	clock.Gensis();
 	
@@ -577,6 +580,7 @@ int main()
 		sys_playback.Update(clock);
 		sys_collision.Update(clock);
 		sys_oceans.Update(clock);
+		sys_ezanimate.Update(clock);
 
 		sys_renderable.GetTransformEdit(user)->position = camera.Position;
 
@@ -697,6 +701,21 @@ int main()
 		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 			camera.BudgeCamera(0.0f, 0.5f);
 
+		if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+			if (!ctrl_d_pressed) {
+				ctrl_d_pressed = true;
+				for (auto e : tmp) {
+					if (sys_renderable.Has(e)) {
+						auto& d = sys_renderable.GetRenderable(e);
+
+						sys_renderable.Add(entity_manager.Create(), d.hmesh, d.transform);
+					}
+				}
+			}
+		}
+		else {
+			ctrl_d_pressed = false;
+		}
 
 		camera.PassDeltaTime(clock.GetLastFrameDurationFloat());
 
@@ -769,8 +788,8 @@ int main()
 					}
 				}
 			}
-			
 
+			sys_ezanimate.OnGui(tmp);
 			sys_renderable.OnGui(tmp);
 			
 			sys_oceans.OnGui(tmp);

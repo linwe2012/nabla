@@ -494,6 +494,9 @@
     <ClInclude Include="ssao.h">
       <Filter>Header Files\system</Filter>
     </ClInclude>
+    <ClInclude Include="OpenGLT6\systems\easy-animation.h">
+      <Filter>Header Files\system</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="OpenGLT6\utils\vs-visualizers\vector.natvis">

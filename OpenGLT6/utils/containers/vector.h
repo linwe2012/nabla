@@ -251,6 +251,11 @@ public:
 		return *(end_ - 1);
 	}
 
+	const reference back() const {
+		NA_ASSERT(size() > 0, "size of vertex must be larger than 0");
+		return *(end_ - 1);
+	}
+
 	void pop_back() {
 		NA_ASSERT(size() > 0, "size of vertex must be larger than 0");
 		detail::SelectiveDestroy<T>(--end_);

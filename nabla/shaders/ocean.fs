@@ -42,10 +42,17 @@ void main (void) {
 
 	fragColor = fragColor * (1.0-fog_factor) + vec4(0.25, 0.75, 0.65, 1.0) * (fog_factor);
 	vec3 view_dir = normalize(position - view_pos);
-	float fresenl = max(dot(-view_dir, normal_vector), 0.0);
-	fresenl = pow(1-fresenl, 4.0);
+	float distance_ratio = 	min( 1.0, log( 1.0 / length( view_dir ) * 3000.0 + 1.0 ) );
+	distance_ratio *= distance_ratio;
+	distance_ratio = distance_ratio * 0.7 + 0.3;
 
-	fragColor.rgb = texture(skybox, normal_vector).rgb * (fresenl) + fragColor.rgb * (1-fresenl);
+	vec3 fresenl_normal = ( distance_ratio * normal_vector + vec3( 0.0, 1.0 - distance_ratio, 0.0 ) ) * 0.5;
+	fresenl_normal = normalize(fresenl_normal);
+
+	float fresenl = max(dot(-view_dir, fresenl_normal), 0.0);
+	fresenl = pow(1.0-fresenl, 2.0);
+
+	fragColor.rgb = texture(skybox, normal_vector).rgb * (fresenl) + fragColor.rgb * (1.0-fresenl);
 	fragColor.a = 1.0;
 
 }
