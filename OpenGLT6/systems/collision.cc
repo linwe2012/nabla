@@ -49,12 +49,14 @@ void CollisionSystem::Update(Clock& clock)
 			mat2 = glm::translate(mat2, trans2->position);
 
 			// if collide
-			for (int i = 0; i < 5; i++) {
-				if (IsCollide(t + 0.2 * i * t, rigid_itr1.component, rigid_itr2.component, mat1, mat2)) {
-					ComputeCollison(rigid_itr1.component, rigid_itr2.component, mat1, mat2);
-					break;
-				}
-			}
+			if (IsCollide(0, rigid_itr1.component, rigid_itr2.component, mat1, mat2)) 
+				ComputeCollison(rigid_itr1.component, rigid_itr2.component, mat1, mat2);
+			//for (int i = 0; i < 5; i++) {
+			//	if (IsCollide(t + 0.2 * i * t, rigid_itr1.component, rigid_itr2.component, mat1, mat2)) {
+			//		ComputeCollison(rigid_itr1.component, rigid_itr2.component, mat1, mat2);
+			//		break;
+			//	}
+			//}
 		}
 	}
 
