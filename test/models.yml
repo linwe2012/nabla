@@ -10,10 +10,34 @@ castle:
 chair:
   bin: bin/Chair.obj
 
-handgun:
-  bin: bin/Handgun_obj.obj
+# handgun:
+#   bin: bin/handgun_maya.obj
 
 tree:
   bin: bin/trees lo-poly.obj
 
-  
+# Temple:
+#  bin: bin/Temple.obj
+
+Babab:
+  bin: bin/babab.obj
+
+# door:
+#   bin: bin/door.obj
+# 
+# wall:
+#  bin: bin/wall.obj
+
+robot:
+  bin: bin/robot.obj
+
+# rocket:
+#   bin: bin/racheta alba.obj
+# 
+# apple:
+#   bin: bin/apple obj.obj
+# robot:
+#   bin: bin/robot_zamin.obj
+# 
+# USB:
+#   bin: bin/USB obj.obj

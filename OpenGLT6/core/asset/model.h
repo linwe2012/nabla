@@ -94,11 +94,13 @@ private:
 
 	void ProcessMaterialTexture(Mesh* dst, const aiScene* scene, const aiMesh* mesh);
 
-	void LoadObj(const fs::path abs_path);
-
-	void LoadObjMesh(std::ifstream& fin, int* points_cnt);
+	// void LoadObj(const fs::path abs_path);
+	// 
+	// void LoadObjMesh(std::ifstream& fin, int* points_cnt,int*, int*);
 
 private:
+	struct Vertex	{		glm::vec3 pos;		glm::vec3 nor;		glm::vec2 tex;	};	void LoadObj(const fs::path abs_path);	void LoadObjMesh(std::ifstream& fin, int* points_cnt, int* texture_cnt, int* normal_cnt);
+	
 	glm::mat4 transform;
 	glm::mat4 parent_transform = glm::mat4(1.0f);
 	Vector<Mesh> meshes_;

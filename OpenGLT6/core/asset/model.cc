@@ -1,4 +1,4 @@
-#include "model.h"
+﻿#include "model.h"
 
 #pragma warning( push )
 #pragma warning( disable: 26495 )
@@ -76,7 +76,7 @@ void ModelAsset::ProcessNode(aiNode* node, const aiScene* scene, int hierachy) {
 	for (unsigned int i = 0; i < node->mNumMeshes; i++)
 	{
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-		
+
 		ProcessMesh(mesh, scene);
 	}
 
@@ -110,20 +110,20 @@ void ModelAsset::ProcessMesh(aiMesh* mesh, const aiScene* scene) {
 
 	m.has_position = true;
 	cnt += sz_vec3;
-	
+
 	{
 		auto beg = reinterpret_cast<glm::vec3*>(mesh->mVertices);
 		auto end = beg + mesh->mNumVertices;
 		m.Position.insert(m.Position.end(), beg, end);
 	}
-	
+
 
 	Vector<float> soup;
 	soup.reserve(cnt * mesh->mNumVertices);
-	
+
 
 	{
-		
+
 		auto size = static_cast<uint32_t>(sizeof(float) * (soup.end() - soup.begin()));
 		layouts.push_back(LayoutInfo::CreatePacked<glm::vec3>(id++, size));
 		auto beg = reinterpret_cast<float*>(mesh->mVertices);
@@ -143,7 +143,7 @@ void ModelAsset::ProcessMesh(aiMesh* mesh, const aiScene* scene) {
 		case LoadMethod::kIgnore:
 			break;
 		case LoadMethod::kCompute: // fall through
-		case LoadMethod::kAuto: 
+		case LoadMethod::kAuto:
 			if (!mesh->HasNormals()) {
 				break;
 			}
@@ -163,7 +163,7 @@ void ModelAsset::ProcessMesh(aiMesh* mesh, const aiScene* scene) {
 		}
 	}
 
-	 {
+	{
 		auto size = static_cast<uint32_t>(sizeof(float) * (soup.end() - soup.begin()));
 		auto beg = reinterpret_cast<float*>(mesh->mTangents);
 		auto end = beg + mesh->mNumVertices * sz_vec3;
@@ -202,7 +202,7 @@ void ModelAsset::ProcessMesh(aiMesh* mesh, const aiScene* scene) {
 		}
 	}
 
-	 {
+	{
 		auto size = static_cast<uint32_t>(sizeof(float) * (soup.end() - soup.begin()));
 
 		m.has_tex_coords = false;
@@ -230,11 +230,11 @@ void ModelAsset::ProcessMesh(aiMesh* mesh, const aiScene* scene) {
 		default:
 			break;
 		}
-	 }
+	}
 
-	
+
 	Vector<uint32_t> indices;
-	
+
 	// now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
 	for (unsigned int i = 0; i < mesh->mNumFaces; i++)
 	{
@@ -260,10 +260,10 @@ void ModelAsset::ProcessMesh(aiMesh* mesh, const aiScene* scene) {
 	@param[in] dst the destination to be written to
 */
 void ProcessMaterialTexturePass(Texture& dst,
-	                            const aiMaterial* materials,
-	                            BuiltinMaterial material_type,
-	                            int ai_type,
-                                const fs::path dir)
+	const aiMaterial* materials,
+	BuiltinMaterial material_type,
+	int ai_type,
+	const fs::path dir)
 {
 	aiTextureType type = static_cast<aiTextureType>(ai_type);
 	int n_tex = materials->GetTextureCount(type);
@@ -292,6 +292,7 @@ void ModelAsset::ProcessMaterialTexture(Mesh* dst, const aiScene* scene, const a
 	ProcessMaterialTexturePass(dst->AmbientOcclusionMap, mat, BuiltinMaterial::kAmbientOcclusionMap, aiTextureType_LIGHTMAP, dir_);
 }
 
+
 void ModelAsset::LoadObj(const fs::path abs_path)
 {
 	std::string path = abs_path.string();
@@ -302,13 +303,16 @@ void ModelAsset::LoadObj(const fs::path abs_path)
 	}
 
 	int points_cnt = 0;
-	while (!fin.eof() && fin.good()) {
-		LoadObjMesh(fin, &points_cnt);
+	int normal_cnt = 0;
+	int texture_cnt = 0;
+	while (!fin.eof()) {
+		LoadObjMesh(fin, &points_cnt, &texture_cnt, &normal_cnt);
 	}
 	fin.close();
+
 }
 
-void ModelAsset::LoadObjMesh(std::ifstream& fin, int* points_cnt)
+void ModelAsset::LoadObjMesh(std::ifstream& fin, int* points_cnt, int* texture_cnt, int* normal_cnt)
 {
 	Vector<float> soup;
 
@@ -321,64 +325,102 @@ void ModelAsset::LoadObjMesh(std::ifstream& fin, int* points_cnt)
 	Vector<glm::vec3> bitangents; // fill in zeros
 	Vector<glm::vec2> textCoords;
 	Vector<unsigned>  indices;
+	Vector<glm::vec3> points_idx;
+	Vector<glm::vec3> normal_idx;
+	Vector<glm::vec2> textCoords_idx;
+	std::vector<Vertex> vertices;
 
 	int flag = -1;
 	glm::vec3 v;
 	std::string tmp;
-	int line_cnt = 0;
 	//Parsing text
-	while (!fin.eof() && fin.good()) {
+	while (!fin.eof()) {
 		fin >> tmp;
 		if (tmp == "v") {
 			if (flag == -1)
 				flag = 0;
 			if (flag == 1) {
-				(*points_cnt) += points.size();
+				(*points_cnt) += points_idx.size();
+				(*normal_cnt) += normal_idx.size();
+				(*texture_cnt) += textCoords_idx.size();
 				fin.seekg(-1, std::ios::cur);
 				break;
 			}
 			fin >> v[0] >> v[1] >> v[2];
-			points.push_back(v);
+			points_idx.push_back(v);
 		}
 		else if (tmp == "vt") {
-			fin >> v[0] >> v[1] >> v[2];
-			textCoords.push_back(glm::vec2(v[0], v[1]));
+			fin >> v[0] >> v[1];
+			textCoords_idx.push_back(glm::vec2(v[0], v[1]));
+			getline(fin, tmp);
 		}
 		else if (tmp == "vn") {
 			fin >> v[0] >> v[1] >> v[2];
-			normal.push_back(v);
+			normal_idx.push_back(v);
 		}
 		else if (tmp == "g") {
 			flag = 1;
 		}
 		else if (tmp == "f") {
+			flag = 1;
 			std::vector<std::string> vs(3);
 			fin >> vs[0] >> vs[1] >> vs[2];
 			glm::ivec3 iv;
+
 			if (sscanf(vs[0].c_str(), "%d/%d/%d", &iv[0], &iv[1], &iv[2]) == 3) {
 				glm::ivec3 p_idx, t_idx, n_idx;
 				for (int i = 0; i < 3; ++i)
 					sscanf(vs[i].c_str(), "%d/%d/%d", &p_idx[i], &t_idx[i], &n_idx[i]);
-				//t_idx -= texture_cnt;
-				//n_idx -= normal_cnt;
-				for (int i = 0; i < 3; ++i)
-					indices.push_back(p_idx[i] - (*points_cnt));
+				p_idx -= *points_cnt;
+				t_idx -= *texture_cnt;
+				n_idx -= *normal_cnt;
+				for (int i = 0; i < 3; ++i) {
+					Vertex v;
+					v.pos = points_idx[p_idx[i] - 1];
+					v.tex = textCoords_idx[t_idx[i] - 1];
+					if (n_idx[i] != 0) {
+						v.nor = normal_idx[n_idx[i] - 1];
+					}
+					else {
+						v.nor = glm::normalize(v.pos);
+					}
+
+					vertices.push_back(v);
+				}
 			}
-			else {
+			else if (sscanf(vs[0].c_str(), "%d/%d/%d", &iv[0], &iv[1], &iv[2]) == 2) {
 				glm::ivec3 p_idx, n_idx;
 				for (int i = 0; i < 3; ++i)
 					sscanf(vs[i].c_str(), "%d//%d", &p_idx[i], &n_idx[i]);
-				for (int i = 0; i < 3; ++i)
-					indices.push_back(p_idx[i] - (*points_cnt));
+				p_idx -= *points_cnt;
+				n_idx -= *normal_cnt;
+				for (int i = 0; i < 3; ++i) {
+					Vertex v;
+					v.pos = points_idx[p_idx[i] - 1];
+					v.tex = glm::vec2(0);
+					if (n_idx[i] != 0) {
+						v.nor = normal_idx[n_idx[i] - 1];
+					}
+					else {
+						v.nor = glm::normalize(v.pos);
+					}
+					vertices.push_back(v);
+				}
 			}
 		}
 		else
 			getline(fin, tmp);
-		++line_cnt;
 	}
 
-	tangents.resize(points.size(), { 0.0f,0.0f,0.0f });
-	bitangents.resize(points.size(), { 0.0f,0.0f,0.0f });
+	for (int i = 0; i < vertices.size(); i++) {
+		glm::vec3 v = { 0.0f,0.0f,0.0f };
+		tangents.push_back(v);
+		bitangents.push_back(v);
+		points.push_back(vertices[i].pos);
+		normal.push_back(vertices[i].nor);
+		textCoords.push_back(vertices[i].tex);
+		indices.push_back(i);
+	}
 
 	using namespace renderer;
 	Vector<LayoutInfo> layouts;
@@ -403,9 +445,7 @@ void ModelAsset::LoadObjMesh(std::ifstream& fin, int* points_cnt)
 		MemoryInfo{ indices.begin(), indices.size() * sizeof(unsigned) }, // indices
 		layouts
 	);
+
 }
-
-
-
 
 }

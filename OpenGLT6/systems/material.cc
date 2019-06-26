@@ -225,6 +225,10 @@ void MatrialSysterm::OnGui(const Vector<Entity>& actives)
 		}
 		else {
 			ImGui::Text("Using diffuse texture");
+			if (ImGui::Button("Delete")) {
+				ctx_->render->SetShader(e, ShaderHandle(), MaterialHandle(), MaterialHandle());
+				m.texture = MaterialHandle();
+			}
 		}
 		
 		ImGui::DragFloat("Specular", &m.specular, 0.01f, -1.0f, 2.0f);

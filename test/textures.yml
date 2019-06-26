@@ -13,6 +13,7 @@ asphalt: img/textures/asphalt.jfif
 seville: img/textures/seville.jpg
 flame: img/textures/flame.jfif
 wood: img/textures/wood.jpg
+wood 2: img/textures/wood.jfif
 
 # bamboo:
 #   pbr: true 
